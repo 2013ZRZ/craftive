@@ -1,0 +1,4 @@
+Language: Cpp
+BasedOnStyle: LLVM
+UseTab: ForIndentation
+IndentWidth: 4
