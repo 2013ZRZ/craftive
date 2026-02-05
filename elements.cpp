@@ -16,37 +16,45 @@ Block::Block() {
 Block::Block(const unsigned short back) {
     setBlk("null", back);
 }
-Block::Block(const str &blk_) {
+Block::Block(const std::string &blk_) {
     setBlk(blk_);
 }
-Block::Block(const str &blk_, const str &id_, const str &kit_, const str &name_) {
+Block::Block(const std::string &blk_,
+             const std::string &id_,
+             const std::string &kit_,
+             const std::string &name_) {
     setBlk(blk_);
     setID(id_);
     setKit(kit_);
     setName(name_);
 }
-Block::Block(
-    const str &blk_, const unsigned short back, const str &id_, const str &kit_, const str &name_) {
+Block::Block(const std::string   &blk_,
+             const unsigned short back,
+             const std::string   &id_,
+             const std::string   &kit_,
+             const std::string   &name_) {
     setBlk(blk_, back);
     setID(id_);
     setKit(kit_);
     setName(name_);
 }
-Block::Block(const json &j) {
+template <typename T>
+    requires(!std::convertible_to<T, std::string> && std::convertible_to<T, json>)
+Block(const T &j) {
     fromJson(j);
 }
-Block::Block(const json &j, const str &kit_) {
+Block::Block(const json &j, const std::string &kit_) {
     fromJson(j);
     setKit(kit_);
 }
 
-str Block::getBlk() const & {
+std::string Block::getBlk() const & {
     return blk;
 }
-void Block::setBlk(const str &blk_) {
+void Block::setBlk(const std::string &blk_) {
     blk = (blk_ == "null" ? "  " : blk_);
 }
-void Block::setBlk(const str &blk_, const unsigned short back) {
+void Block::setBlk(const std::string &blk_, const unsigned short back) {
     if (back > 255) {
         throw errcode(0x0003);
     } else {
@@ -65,10 +73,10 @@ void Block::setBack(const unsigned short back) {
     }
 }
 
-str Block::getID() const & {
+std::string Block::getID() const & {
     return id;
 }
-void Block::setID(const str &id_) {
+void Block::setID(const std::string &id_) {
     if (id_.empty())
         throw errcode(0x0001);
     else if (!isValidID(id_))
@@ -77,10 +85,10 @@ void Block::setID(const str &id_) {
         id = id_;
 }
 
-str Block::getKit() const & {
+std::string Block::getKit() const & {
     return kit;
 }
-void Block::setKit(const str &kit_) {
+void Block::setKit(const std::string &kit_) {
     if (kit_.empty())
         throw errcode(0x0001);
     else if (!isValidID(kit_))
@@ -89,16 +97,16 @@ void Block::setKit(const str &kit_) {
         kit = kit_;
 }
 
-str Block::getName() const & {
+std::string Block::getName() const & {
     return name;
 }
-void Block::setName(const str &name_) {
+void Block::setName(const std::string &name_) {
     name = name_;
 }
 
 void Block::fromJson(const json &j) {
     setBlk(j.value("blk", "null"));
-    setName(j.at("name").template get<str>());
+    setName(j.at("name").template get<std::string>());
     setID(j.value("id", randomID()));
 }
 json Block::toJson() const & {
@@ -111,30 +119,34 @@ LBlock::LBlock(const size_t w, const size_t h) {
     setW(w);
     setH(h);
 }
-LBlock::LBlock(const size_t w, const size_t h, const str &id_, const str &kit_, const str &name_) {
+LBlock::LBlock(const size_t       w,
+               const size_t       h,
+               const std::string &id_,
+               const std::string &kit_,
+               const std::string &name_) {
     setW(w);
     setH(h);
     setID(id_);
     setKit(kit_);
     setName(name_);
 }
-LBlock::LBlock(const size_t  w,
-               const size_t  h,
-               const BlockT &lblk_,
-               const str    &id_,
-               const str    &kit_,
-               const str    &name_) {
-    setW(w);
-    setH(h);
+LBlock::LBlock(const BlockT      &lblk_,
+               const std::string &id_,
+               const std::string &kit_,
+               const std::string &name_) {
+    setW(lblk_.empty() ? 0 : lblk_[0].size());
+    setH(lblk_.size());
     setLblk(lblk_);
     setID(id_);
     setKit(kit_);
     setName(name_);
 }
-LBlock::LBlock(const json &j) {
+template <typename T>
+    requires(!std::convertible_to<T, std::string> && std::convertible_to<T, json>)
+LBlock::LBlock(const T &j) {
     fromJson(j);
 }
-LBlock::LBlock(const json &j, const str &kit_) {
+LBlock::LBlock(const json &j, const std::string &kit_) {
     fromJson(j);
     setKit(kit_);
 }
@@ -184,7 +196,7 @@ void LBlock::fromJson(const json &j) {
             throw errcode(0x0006);
         setW(j.at("blks")[r].size());
         for (size_t c = 0; c < j.at("blks")[0].size(); c++) {
-            setPos(r, c, Block(j.at("blks")[r][c].template get<str>()));
+            setPos(r, c, Block(j.at("blks")[r][c].template get<std::string>()));
         }
     }
 }
@@ -202,14 +214,14 @@ json LBlock::toJson() const & {
 }
 
 // Definition in Kit
-Kit::Kit(const str &path) {
+Kit::Kit(const std::string &path) {
     fromFile(path);
 }
 
-str Kit::getAuthor() const & {
+std::string Kit::getAuthor() const & {
     return author;
 }
-void Kit::setAuthor(const str &author_) {
+void Kit::setAuthor(const std::string &author_) {
     author = author_;
 }
 
@@ -245,10 +257,10 @@ void Kit::ClearLblks() {
     lblks.clear();
 }
 
-str Kit::getID() const & {
+std::string Kit::getID() const & {
     return id;
 }
-void Kit::setID(const str &id_) {
+void Kit::setID(const std::string &id_) {
     if (id_.empty())
         throw errcode(0x0001);
     else if (!isValidID(id_))
@@ -257,10 +269,10 @@ void Kit::setID(const str &id_) {
         id = id_;
 }
 
-str Kit::getName() const & {
+std::string Kit::getName() const & {
     return name;
 }
-void Kit::setName(const str &name_) {
+void Kit::setName(const std::string &name_) {
     name = name_;
 }
 
@@ -294,7 +306,7 @@ json Kit::toJson() const & {
     return j;
 }
 
-void Kit::fromFile(const str &path) {
+void Kit::fromFile(const std::string &path) {
     std::ifstream ifs(path);
     if (!ifs)
         throw errcode(strerror(errno));
@@ -302,7 +314,7 @@ void Kit::fromFile(const str &path) {
     ifs >> j;
     fromJson(j);
 }
-void Kit::toFile(const str &path) {
+void Kit::toFile(const std::string &path) {
     std::ofstream ofs(path);
     ofs << std::setw(4) << toJson() << std::endl;
 }
