@@ -1,11 +1,11 @@
 #pragma once
 
-#include <cctype>
-#include <ctime>
-#include <random>
 #include <stdexcept>
 #include <string>
 #include <unordered_map>
+
+bool        isValidID(const std::string &id);
+std::string randomID();
 
 const std::unordered_map<unsigned short, std::string> errtable{
     {0x0001, "0x0001 Empty ID"},
@@ -19,26 +19,3 @@ class errcode : public std::runtime_error {
     errcode(const unsigned short code) : std::runtime_error(errtable.at(code)) {}
     errcode(const std::string &msg) : std::runtime_error("0x0000 Extern Error: " + msg) {}
 };
-
-bool isValidID(const std::string &id) {
-    for (const auto it : id) {
-        if (!isalnum(it) && it != '_')
-            return false;
-    }
-    return true;
-}
-
-std::string randomID() {
-    std::random_device rd;
-    std::string        o;
-    std::mt19937_64    r(time(nullptr) + rd());
-    for (int i = 0; i < 50; i++) {
-        unsigned r_ = r() % 26;
-        if (r_ < 25) {
-            o.push_back((char)'a' + r_);
-        } else {
-            o.push_back('_');
-        }
-    }
-    return o;
-}

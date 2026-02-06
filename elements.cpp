@@ -38,11 +38,6 @@ Block::Block(const std::string   &blk_,
     setKit(kit_);
     setName(name_);
 }
-template <typename T>
-    requires(!std::convertible_to<T, std::string> && std::convertible_to<T, json>)
-Block(const T &j) {
-    fromJson(j);
-}
 Block::Block(const json &j, const std::string &kit_) {
     fromJson(j);
     setKit(kit_);
@@ -140,11 +135,6 @@ LBlock::LBlock(const BlockT      &lblk_,
     setID(id_);
     setKit(kit_);
     setName(name_);
-}
-template <typename T>
-    requires(!std::convertible_to<T, std::string> && std::convertible_to<T, json>)
-LBlock::LBlock(const T &j) {
-    fromJson(j);
 }
 LBlock::LBlock(const json &j, const std::string &kit_) {
     fromJson(j);
