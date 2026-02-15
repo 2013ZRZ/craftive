@@ -123,10 +123,10 @@ LBlock::LBlock(const size_t       w,
     setKit(_kit);
     setName(_name);
 }
-LBlock::LBlock(const BlockT      &_lblk,
-               const std::string &_id,
-               const std::string &_kit,
-               const std::string &_name) {
+LBlock::LBlock(const std::vector<std::vector<Block>> &_lblk,
+               const std::string                     &_id,
+               const std::string                     &_kit,
+               const std::string                     &_name) {
     setW(_lblk.empty() ? 0 : _lblk[0].size());
     setH(_lblk.size());
     setLblk(_lblk);
@@ -139,10 +139,10 @@ LBlock::LBlock(const json &j, const std::string &_kit) {
     setKit(_kit);
 }
 
-BlockT LBlock::getLblk() const & {
+std::vector<std::vector<Block>> LBlock::getLblk() const & {
     return lblk;
 }
-void LBlock::setLblk(const BlockT &_lblk) {
+void LBlock::setLblk(const std::vector<std::vector<Block>> &_lblk) {
     lblk = _lblk;
 }
 
@@ -170,7 +170,7 @@ size_t LBlock::getH() const {
     return lblk.size();
 }
 void LBlock::setH(const size_t h) {
-    lblk.resize(h, BlockV(getW()));
+    lblk.resize(h, std::vector<Block>(getW()));
 }
 
 void LBlock::fromJson(const json &j) {
@@ -214,7 +214,7 @@ void Kit::setAuthor(const std::string &_author) {
     author = _author;
 }
 
-BlockV Kit::getBlks() const & {
+std::vector<Block> Kit::getBlks() const & {
     return blks;
 }
 void Kit::AddToBlks(const Block &blk) {
@@ -230,7 +230,7 @@ void Kit::ClearBlks() {
     blks.clear();
 }
 
-LBlockV Kit::getLblks() const & {
+std::vector<LBlock> Kit::getLblks() const & {
     return lblks;
 }
 void Kit::AddToLblks(const LBlock &lblk) {

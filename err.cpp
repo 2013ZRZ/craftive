@@ -28,14 +28,20 @@ std::string randomID() {
     return o;
 }
 
-CrtExcept::CrtExcept(const unsigned short code) {
-    std::ostringstream oss;
-    oss << "0x" << std::uppercase << std::hex << std::setw(4) << std::setfill('0') << code;
-    msg = oss.str() + " " + errtable.at(code);
-}
+CrtExcept::CrtExcept(const unsigned short _code) : code(_code) {}
 
-CrtExcept::CrtExcept(const std::string &_msg) : msg("0x0000 Extern Error: " + _msg) {}
+CrtExcept::CrtExcept(const std::string &_msg) : msg(_("0x0000 Extern Error: ") + _msg) {}
 
 const char *CrtExcept::what() const noexcept {
-    return msg.c_str();
+    if (_what.empty()) {
+        std::ostringstream oss;
+        oss << "0x" << std::uppercase << std::hex << std::setw(4) << std::setfill('0') << code;
+        oss << " " << _(std::string(errmsgs[code - 1]).c_str());
+        _what = oss.str();
+    }
+    return _what.c_str();
+}
+
+unsigned short CrtExcept::which() const noexcept {
+    return code;
 }
