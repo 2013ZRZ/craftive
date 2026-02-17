@@ -1,5 +1,4 @@
 #include "elements.hpp"
-#include "err.hpp"
 #include <fstream>
 #include <sstream>
 
@@ -15,6 +14,9 @@ Block::Block(const unsigned short back) {
 }
 Block::Block(const std::string &_blk) {
     setBlk(_blk);
+}
+Block::Block(const std::string &_blk, const unsigned short back) {
+    setBlk(_blk, back);
 }
 Block::Block(const std::string &_blk,
              const std::string &_id,
@@ -48,7 +50,7 @@ void Block::setBlk(const std::string &_blk) {
 }
 void Block::setBlk(const std::string &_blk, const unsigned short back) {
     if (back > 255) {
-        throw CrtExcept(0x0003);
+        throw CrtExcept(0x0003, _("from Block::setBlk()"));
     } else {
         std::ostringstream oss;
         oss << back;
@@ -57,11 +59,11 @@ void Block::setBlk(const std::string &_blk, const unsigned short back) {
 }
 void Block::setBack(const unsigned short back) {
     if (back > 255) {
-        throw CrtExcept(0x0003);
+        throw CrtExcept(0x0003, _("from Block::setBack()"));
     } else {
-        std::stringstream ss;
-        ss << back;
-        blk = "\033[48;5;" + ss.str() + "m" + blk + "\033[0m";
+        std::ostringstream oss;
+        oss << back;
+        blk = "\033[48;5;" + oss.str() + "m" + blk + "\033[0m";
     }
 }
 
@@ -70,9 +72,9 @@ std::string Block::getID() const & {
 }
 void Block::setID(const std::string &_id) {
     if (_id.empty())
-        throw CrtExcept(0x0001);
+        id = randomID();
     else if (!isValidID(_id))
-        throw CrtExcept(0x0002);
+        throw CrtExcept(0x0002, _("from Block::setID()"));
     else
         id = _id;
 }
@@ -82,9 +84,9 @@ std::string Block::getKit() const & {
 }
 void Block::setKit(const std::string &_kit) {
     if (_kit.empty())
-        throw CrtExcept(0x0001);
+        kit = randomID();
     else if (!isValidID(_kit))
-        throw CrtExcept(0x0002);
+        throw CrtExcept(0x0002, _("from Block::setKit()"));
     else
         kit = _kit;
 }
@@ -98,8 +100,8 @@ void Block::setName(const std::string &_name) {
 
 void Block::fromJson(const json &j) {
     setBlk(j.value("blk", "null"));
-    setName(j.at("name").template get<std::string>());
     setID(j.value("id", randomID()));
+    setName(j.value("name", id));
 }
 json Block::toJson() const & {
     json j{{"blk", getBlk()}, {"id", getID()}, {"name", getName()}};
@@ -148,12 +150,12 @@ void LBlock::setLblk(const std::vector<std::vector<Block>> &_lblk) {
 
 Block LBlock::getPos(const size_t r, const size_t c) const & {
     if (r >= lblk.size() || c >= lblk[0].size())
-        throw CrtExcept(0x0005);
+        throw CrtExcept(0x0005, _("from LBlock::getPos()"));
     return lblk[r][c];
 }
 void LBlock::setPos(const size_t r, const size_t c, const Block &blk) {
     if (r >= lblk.size() || c >= lblk[0].size())
-        throw CrtExcept(0x0005);
+        throw CrtExcept(0x0005, _("from LBlock::setPos()"));
     lblk[r][c] = blk;
 }
 
@@ -175,18 +177,20 @@ void LBlock::setH(const size_t h) {
 
 void LBlock::fromJson(const json &j) {
     if (!j.at("blks").is_array())
-        throw CrtExcept(0x0006);
+        throw CrtExcept(0x0006, _("from LBlock::fromJson()"));
     setH(j.at("blks").size());
     for (size_t r = 0; r < j.at("blks").size(); r++) {
         if (!j.at("blks")[r].is_array())
-            throw CrtExcept(0x0006);
+            throw CrtExcept(0x0006, _("from LBlock::fromJson()"));
         if (j.at("blks")[r].size() != j.at("blks")[0].size())
-            throw CrtExcept(0x0006);
+            throw CrtExcept(0x0006, _("from LBlock::fromJson()"));
         setW(j.at("blks")[r].size());
         for (size_t c = 0; c < j.at("blks")[0].size(); c++) {
             setPos(r, c, Block(j.at("blks")[r][c].template get<std::string>()));
         }
     }
+    setID(j.value("id", randomID()));
+    setName(j.value("name", id));
 }
 json LBlock::toJson() const & {
     std::vector<std::vector<json>> lblk_json;
@@ -224,7 +228,7 @@ void Kit::DelFromBlks(const size_t i) {
     if (i < blks.size())
         blks.erase(blks.begin() + i);
     else
-        throw CrtExcept(0x0004);
+        throw CrtExcept(0x0004, _("from Kit::DelFromBlks()"));
 }
 void Kit::ClearBlks() {
     blks.clear();
@@ -240,7 +244,7 @@ void Kit::DelFromLblks(const size_t i) {
     if (i < lblks.size())
         lblks.erase(lblks.begin() + i);
     else
-        throw CrtExcept(0x0004);
+        throw CrtExcept(0x0004, _("from Kit::DelFromLBlks()"));
 }
 void Kit::ClearLblks() {
     lblks.clear();
@@ -251,9 +255,9 @@ std::string Kit::getID() const & {
 }
 void Kit::setID(const std::string &_id) {
     if (_id.empty())
-        throw CrtExcept(0x0001);
+        id = randomID();
     else if (!isValidID(_id))
-        CrtExcept(0x0002);
+        CrtExcept(0x0002, _("from Kit::setID()"));
     else
         id = _id;
 }

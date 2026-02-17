@@ -1,5 +1,6 @@
 #pragma once
 
+#include "err.hpp"
 #include <concepts>
 #include <cstddef>
 #include <nlohmann/json.hpp>
@@ -21,6 +22,7 @@ class Block {
     Block();
     Block(const unsigned short back);
     Block(const std::string &_blk);
+    Block(const std::string &_blk, const unsigned short back);
     Block(const std::string &_blk,
           const std::string &_id,
           const std::string &_kit,
@@ -42,9 +44,9 @@ class Block {
     void        setBlk(const std::string &_blk, const unsigned short back);
     void        setBack(const unsigned short back);
     std::string getID() const &;
-    void        setID(const std::string &_id);
+    void        setID(const std::string &_id = randomID());
     std::string getKit() const &;
-    void        setKit(const std::string &_kit);
+    void        setKit(const std::string &_kit = randomID());
     std::string getName() const &;
     void        setName(const std::string &_name);
     void        fromJson(const json &j);

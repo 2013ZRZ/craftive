@@ -13,12 +13,12 @@ bool isValidID(const std::string &id) {
     return true;
 }
 
-std::string randomID() {
+std::string randomID(unsigned len) {
     std::random_device rd;
     std::string        o;
     std::mt19937_64    r(time(nullptr) + rd());
-    for (int i = 0; i < 50; i++) {
-        unsigned _r = r() % 26;
+    for (unsigned i = 0; i < len; i++) {
+        unsigned short _r = r() % 26;
         if (_r < 25) {
             o.push_back((char)'a' + _r);
         } else {
@@ -28,20 +28,25 @@ std::string randomID() {
     return o;
 }
 
-CrtExcept::CrtExcept(const unsigned short _code) : code(_code) {}
+CrtExcept::CrtExcept(const unsigned short _code, const char *_detail)
+    : code(_code), detail(_detail) {}
 
-CrtExcept::CrtExcept(const std::string &_msg) : msg(_("0x0000 Extern Error: ") + _msg) {}
+CrtExcept::CrtExcept(const char *_detail) : CrtExcept(0x0000, _detail) {}
+
+const char *CrtExcept::how() const noexcept {
+    return detail;
+}
 
 const char *CrtExcept::what() const noexcept {
-    if (_what.empty()) {
-        std::ostringstream oss;
-        oss << "0x" << std::uppercase << std::hex << std::setw(4) << std::setfill('0') << code;
-        oss << " " << _(std::string(errmsgs[code - 1]).c_str());
-        _what = oss.str();
-    }
-    return _what.c_str();
+    return _(errmsgs[code]);
 }
 
 unsigned short CrtExcept::which() const noexcept {
     return code;
+}
+
+std::string CrtExcept::whichStr() const {
+    std::ostringstream oss;
+    oss << "0x" << std::uppercase << std::hex << std::setw(4) << std::setfill('0') << code;
+    return oss.str();
 }
