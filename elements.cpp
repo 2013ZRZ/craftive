@@ -73,7 +73,7 @@ std::string Block::getID() const & {
 void Block::setID(const std::string &_id) {
     if (_id.empty())
         id = randomID();
-    else if (!isValidID(_id))
+    else if (isInvalidID(_id))
         throw CrtExcept(0x0002, _("from Block::setID()"));
     else
         id = _id;
@@ -85,7 +85,7 @@ std::string Block::getKit() const & {
 void Block::setKit(const std::string &_kit) {
     if (_kit.empty())
         kit = randomID();
-    else if (!isValidID(_kit))
+    else if (isInvalidID(_kit))
         throw CrtExcept(0x0002, _("from Block::setKit()"));
     else
         kit = _kit;
@@ -256,7 +256,7 @@ std::string Kit::getID() const & {
 void Kit::setID(const std::string &_id) {
     if (_id.empty())
         id = randomID();
-    else if (!isValidID(_id))
+    else if (isInvalidID(_id))
         CrtExcept(0x0002, _("from Kit::setID()"));
     else
         id = _id;

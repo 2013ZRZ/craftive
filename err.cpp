@@ -5,12 +5,12 @@
 #include <random>
 #include <sstream>
 
-bool isValidID(const std::string &id) {
+bool isInvalidID(const std::string &id) {
     for (const auto it : id) {
         if (!isalnum(it) && it != '_')
-            return false;
+            return true;
     }
-    return true;
+    return false;
 }
 
 std::string randomID(unsigned len) {

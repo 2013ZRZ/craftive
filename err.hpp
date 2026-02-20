@@ -6,7 +6,7 @@
 
 #define UNKNOWNERR "0xFFFF Unknown error"
 
-bool        isValidID(const std::string &id);
+bool        isInvalidID(const std::string &id);
 std::string randomID(unsigned len = 50);
 
 constexpr const char *errmsgs[] = {[0x0000] = "Extern Error",
