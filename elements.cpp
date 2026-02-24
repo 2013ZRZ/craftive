@@ -6,13 +6,13 @@ using json = nlohmann::json;
 
 // Definitions in Block
 
-Block::Block() {
+Block::Block() noexcept {
     setBlk("null");
 }
 Block::Block(const unsigned short back) {
     setBlk("null", back);
 }
-Block::Block(const std::string &_blk) {
+Block::Block(const std::string &_blk) noexcept {
     setBlk(_blk);
 }
 Block::Block(const std::string &_blk, const unsigned short back) {
@@ -37,15 +37,18 @@ Block::Block(const std::string   &_blk,
     setKit(_kit);
     setName(_name);
 }
+Block::Block(const std::same_as<json> auto &j) {
+	fromJson(j);
+}
 Block::Block(const json &j, const std::string &_kit) {
     fromJson(j);
     setKit(_kit);
 }
 
-std::string Block::getBlk() const & {
+std::string Block::getBlk() const & noexcept {
     return blk.empty() ? "  " : blk;
 }
-void Block::setBlk(const std::string &_blk) {
+void Block::setBlk(const std::string &_blk) noexcept {
     blk = (_blk == "null" ? "  " : _blk);
 }
 void Block::setBlk(const std::string &_blk, const unsigned short back) {
@@ -67,7 +70,7 @@ void Block::setBack(const unsigned short back) {
     }
 }
 
-std::string Block::getID() const & {
+std::string Block::getID() const & noexcept {
     return id;
 }
 void Block::setID(const std::string &_id) {
@@ -79,7 +82,7 @@ void Block::setID(const std::string &_id) {
         id = _id;
 }
 
-std::string Block::getKit() const & {
+std::string Block::getKit() const & noexcept {
     return kit;
 }
 void Block::setKit(const std::string &_kit) {
@@ -91,10 +94,10 @@ void Block::setKit(const std::string &_kit) {
         kit = _kit;
 }
 
-std::string Block::getName() const & {
+std::string Block::getName() const & noexcept {
     return name;
 }
-void Block::setName(const std::string &_name) {
+void Block::setName(const std::string &_name) noexcept {
     name = _name;
 }
 
@@ -136,15 +139,18 @@ LBlock::LBlock(const std::vector<std::vector<Block>> &_lblk,
     setKit(_kit);
     setName(_name);
 }
+LBlock::LBlock(const std::same_as<json> auto &j) {
+	fromJson(j);
+}
 LBlock::LBlock(const json &j, const std::string &_kit) {
     fromJson(j);
     setKit(_kit);
 }
 
-std::vector<std::vector<Block>> LBlock::getLblk() const & {
+std::vector<std::vector<Block>> LBlock::getLblk() const & noexcept {
     return lblk;
 }
-void LBlock::setLblk(const std::vector<std::vector<Block>> &_lblk) {
+void LBlock::setLblk(const std::vector<std::vector<Block>> &_lblk) noexcept {
     lblk = _lblk;
 }
 
@@ -159,7 +165,7 @@ void LBlock::setPos(const size_t r, const size_t c, const Block &blk) {
     lblk[r][c] = blk;
 }
 
-size_t LBlock::getW() const {
+size_t LBlock::getW() const noexcept {
     return lblk.empty() ? 0 : lblk[0].size();
 }
 void LBlock::setW(const size_t w) {
@@ -168,7 +174,7 @@ void LBlock::setW(const size_t w) {
     }
 }
 
-size_t LBlock::getH() const {
+size_t LBlock::getH() const noexcept {
     return lblk.size();
 }
 void LBlock::setH(const size_t h) {
@@ -211,14 +217,14 @@ Kit::Kit(const std::string &path) {
     fromFile(path);
 }
 
-std::string Kit::getAuthor() const & {
+std::string Kit::getAuthor() const & noexcept {
     return author;
 }
-void Kit::setAuthor(const std::string &_author) {
+void Kit::setAuthor(const std::string &_author) noexcept {
     author = _author;
 }
 
-std::vector<Block> Kit::getBlks() const & {
+std::vector<Block> Kit::getBlks() const & noexcept {
     return blks;
 }
 void Kit::AddToBlks(const Block &blk) {
@@ -230,11 +236,11 @@ void Kit::DelFromBlks(const size_t i) {
     else
         throw CrtExcept(0x0004, _("from Kit::DelFromBlks()"));
 }
-void Kit::ClearBlks() {
+void Kit::ClearBlks() noexcept {
     blks.clear();
 }
 
-std::vector<LBlock> Kit::getLblks() const & {
+std::vector<LBlock> Kit::getLblks() const & noexcept {
     return lblks;
 }
 void Kit::AddToLblks(const LBlock &lblk) {
@@ -246,11 +252,11 @@ void Kit::DelFromLblks(const size_t i) {
     else
         throw CrtExcept(0x0004, _("from Kit::DelFromLBlks()"));
 }
-void Kit::ClearLblks() {
+void Kit::ClearLblks() noexcept {
     lblks.clear();
 }
 
-std::string Kit::getID() const & {
+std::string Kit::getID() const & noexcept {
     return id;
 }
 void Kit::setID(const std::string &_id) {
@@ -262,10 +268,10 @@ void Kit::setID(const std::string &_id) {
         id = _id;
 }
 
-std::string Kit::getName() const & {
+std::string Kit::getName() const & noexcept {
     return name;
 }
-void Kit::setName(const std::string &_name) {
+void Kit::setName(const std::string &_name) noexcept {
     name = _name;
 }
 
