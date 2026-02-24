@@ -15,7 +15,7 @@ constexpr const char *errmsgs[] = {[0x0000] = "Extern Error",
                                    [0x0003] =
                                        "Invalid color code; type `help --color-code` for more info",
                                    [0x0004] = "No such element in this kit",
-                                   [0x0005] = "Invalid position",
+                                   [0x0005] = "Invalid location in this large-block",
                                    [0x0006] = "Failed to parse JSON"};
 
 // Craftive Exceptions
