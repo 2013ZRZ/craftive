@@ -1,3 +1,4 @@
-#include <libintl.h>
+#define _(msgid) gettext(msgid)
+#define _N(msgid) ngettext(msgid)
 
-#define _(str) gettext(str)
+void localizeInit();

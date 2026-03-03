@@ -18,34 +18,26 @@ std::string randomID(unsigned len) {
     std::string        o;
     std::mt19937_64    r(time(nullptr) + rd());
     for (unsigned i = 0; i < len; i++) {
-        unsigned short _r = r() % 26;
-        if (_r < 25) {
-            o.push_back((char)'a' + _r);
-        } else {
-            o.push_back('_');
-        }
+        uint8_t _r = r() % 63;
+        if (_r < 26)
+            o.push_back((char)'a' + _r); // 0 ~ 25 : 'a' ~ 'z'
+        else if (_r < 52)
+            o.push_back((char)'A' + _r - 26); // 26 ~ 51 : 'A' ~ 'Z'
+        else if (_r < 62)
+            o.push_back((char)'0' + _r - 52); // 52 ~ 61 : '0' ~ '9'
+        else
+            o.push_back('_'); // 62 : '_'
     }
     return o;
 }
 
-CrtExcept::CrtExcept(const unsigned short _code, const char *_detail)
-    : code(_code), detail(_detail) {}
+const std::string &CrtExcept::how() const noexcept { return detail; }
 
-CrtExcept::CrtExcept(const char *_detail) : CrtExcept(0x0000, _detail) {}
+const char *CrtExcept::what() const noexcept { return _(errmsgs[code]); }
 
-const char *CrtExcept::how() const noexcept {
-    return detail;
-}
+uint16_t CrtExcept::which() const noexcept { return code; }
 
-const char *CrtExcept::what() const noexcept {
-    return _(errmsgs[code]);
-}
-
-unsigned short CrtExcept::which() const noexcept {
-    return code;
-}
-
-std::string CrtExcept::whichStr() const {
+const std::string CrtExcept::whichStr() const {
     std::ostringstream oss;
     oss << "0x" << std::uppercase << std::hex << std::setw(4) << std::setfill('0') << code;
     return oss.str();
