@@ -16,7 +16,8 @@ constexpr const char *errmsgs[] = {"Extern Error",
                                    "Invalid color code",
                                    "No such element in this kit",
                                    "Invalid location in this large-block",
-                                   "Failed to parse JSON"};
+                                   "Failed to parse JSON",
+                                   "Invalid large-block; it should be a rectangle"};
 
 // Craftive Exceptions
 class CrtExcept : public std::exception {

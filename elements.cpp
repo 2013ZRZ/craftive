@@ -166,7 +166,7 @@ void LBlock::setLblk(const UCCV2 &_lblk) {
         for (size_t r = 0; r < _lblk.size(); r++)
             if (_lblk[r].size() != _lblk[0].size())
                 throw CrtExcept(
-                    0x0006, _("from LBlock::setLblk(); the length of Row {} is different"), r + 1);
+                    0x0007, _("from LBlock::setLblk(); the length of Row {} is different"), r + 1);
     lblk = _lblk;
 }
 
