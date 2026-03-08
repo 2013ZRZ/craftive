@@ -1,9 +1,8 @@
 #include "err.hpp"
 #include <cctype>
 #include <ctime>
-#include <iomanip>
+#include <format>
 #include <random>
-#include <sstream>
 
 bool isInvalidID(const std::string &id) {
     for (const auto it : id) {
@@ -37,8 +36,4 @@ const char *CrtExcept::what() const noexcept { return _(errmsgs[code]); }
 
 uint16_t CrtExcept::which() const noexcept { return code; }
 
-const std::string CrtExcept::whichStr() const {
-    std::ostringstream oss;
-    oss << "0x" << std::uppercase << std::hex << std::setw(4) << std::setfill('0') << code;
-    return oss.str();
-}
+const std::string CrtExcept::whichStr() const { return "0x" + std::format("{:04X}", code); }

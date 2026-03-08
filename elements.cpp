@@ -6,21 +6,13 @@ using json = nlohmann::json;
 
 // Definitions in rgb
 
-rgb::rgb() : r(0), g(0), b(0) {}
+rgb::rgb() noexcept : r(0), g(0), b(0) {}
 
-rgb::rgb(uint8_t _r, uint8_t _g, uint8_t _b) : r(_r), g(_g), b(_b) {}
+rgb::rgb(uint8_t _r, uint8_t _g, uint8_t _b) noexcept : r(_r), g(_g), b(_b) {}
 
-std::string rgb::toB() const {
-    std::ostringstream oss;
-    oss << "\033[48;2;" << r << ";" << g << ";" << b << "m";
-    return oss.str();
-}
+std::string rgb::toB() const { return std::format("\033[48;2;{};{};{}m", r, g, b); }
 
-std::string rgb::toF() const {
-    std::ostringstream oss;
-    oss << "\033[38;2;" << r << ";" << g << ";" << b << "m";
-    return oss.str();
-}
+std::string rgb::toF() const { return std::format("\033[38;2;{};{};{}m", r, g, b); }
 
 
 // Definitions in Ucc
@@ -53,23 +45,16 @@ const std::string &Ucc::toStr() const {
         std::string _c =
             std::filesystem::path(std::wstring(1, c)).string(); // Convert c(wchar_t) to std::string
         if (hasB) {
-            if (hasF) {
-                std::ostringstream oss;
-                oss << b.toB() << f.toF() << _c << "\033[0m";
-                str = oss.str();
-            } else {
-                std::ostringstream oss;
-                oss << b.toB() << _c << "\033[0m";
-                str = oss.str();
-            }
+            if (hasF)
+                str = std::format("{}{}{}\033[0m", b.toB(), f.toF(), _c);
+            else
+                str = std::format("{}{}\033[0m", b.toB(), _c);
+
         } else {
-            if (hasF) {
-                std::ostringstream oss;
-                oss << f.toF() << _c << "\033[0m";
-                str = oss.str();
-            } else {
+            if (hasF)
+                str = std::format("{}{}\033[0m", f.toF(), _c);
+            else
                 str = _c;
-            }
         }
     }
     return str;
@@ -174,7 +159,16 @@ LBlock::LBlock(const json &j, const std::string &_kit) {
     setKit(_kit);
 }
 
-void LBlock::setLblk(const UCCV2 &_lblk) { lblk = _lblk; }
+const UCCV2 &LBlock::getLblk() const noexcept { return lblk; }
+
+void LBlock::setLblk(const UCCV2 &_lblk) {
+    if (!_lblk.empty())
+        for (size_t r = 0; r < _lblk.size(); r++)
+            if (_lblk[r].size() != _lblk[0].size())
+                throw CrtExcept(
+                    0x0006, _("from LBlock::setLblk(); the length of Row {} is different"), r + 1);
+    lblk = _lblk;
+}
 
 std::string LBlock::getLine(const size_t r) const {
     if (r >= lblk.size())
@@ -211,12 +205,10 @@ void LBlock::fromJson(const json &j) {
     lblk.resize(j.at("blks").size());
     for (size_t r = 0; r < j.at("blks").size(); r++) {
         if (!j.at("blks")[r].is_array())
-            throw CrtExcept(0x0006, _("from LBlock::fromJson(); Row {:z} isn't an array"), r);
+            throw CrtExcept(0x0006, _("from LBlock::fromJson(); Row {} isn't an array"), r + 1);
         if (j.at("blks")[r].size() != j.at("blks")[0].size())
             throw CrtExcept(
-                0x0006,
-                _("from LBlock::fromJson(); the length of Row {:z} is different from the others"),
-                r);
+                0x0006, _("from LBlock::fromJson(); the length of Row {} is different"), r + 1);
         for (size_t c = 0; c < j.at("blks")[0].size(); c++) {
             lblk[r].resize(j.at("blks")[r].size());
             setPos(r, c, Ucc(j.at("blks")[r][c].template get<std::string>()));

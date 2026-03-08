@@ -5,6 +5,7 @@
 #include <cstdint>
 #include <format>
 #include <string>
+#include <string_view>
 
 bool        isInvalidID(const std::string &id);
 std::string randomID(unsigned len = 50);
@@ -25,13 +26,13 @@ class CrtExcept : public std::exception {
 
   public:
     CrtExcept(const uint16_t _code, const std::string &_detail, auto &&...args)
-        : code(_code),
-          detail(std::vformat(_detail,
-                              std::make_format_args(std::forward<decltype(args)>(args)...))) {}
+        : code(_code), detail(std::vformat(_detail, std::make_format_args(args...))) {}
 
     template <typename T>
     CrtExcept(T &&_detail, auto &&...args)
-        requires(std::same_as<std::decay_t<T>, char *>)
+        requires(std::same_as<std::decay_t<T>, char *> ||
+                 std::same_as<std::decay_t<T>, std::string> ||
+                 std::same_as<std::decay_t<T>, std::string_view>)
         : CrtExcept(0x0000, _detail, args...) {}
 
     const std::string &how() const noexcept;   // Return the value of detail

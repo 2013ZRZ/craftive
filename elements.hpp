@@ -2,7 +2,6 @@
 
 #include "err.hpp"
 #include <concepts>
-#include <cstddef>
 #include <filesystem>
 #include <nlohmann/json.hpp>
 #include <vector>
@@ -19,8 +18,8 @@ struct rgb {
     uint8_t g;
     uint8_t b;
 
-    rgb();
-    rgb(uint8_t _r, uint8_t _g, uint8_t _b);
+    rgb() noexcept;
+    rgb(uint8_t _r, uint8_t _g, uint8_t _b) noexcept;
     std::string toB() const; // to ANSI escape code for background color
     std::string toF() const; // to ANSI escape code for foreground color
 };
@@ -34,11 +33,11 @@ struct rgb {
  *  Ucc(L'囧', rgb(255, 0, 0), rgb(255, 255, 0)).toStr()
  */
 struct Ucc {
-    wchar_t             c;           // Character
+    wchar_t             c;            // Character
     bool                hasB = false; // Whether it has background color
-    rgb                 b;           // Background Color
+    rgb                 b;            // Background Color
     bool                hasF = false; // Whether it has foreground color
-    rgb                 f;           // Foreground Color
+    rgb                 f;            // Foreground Color
     mutable std::string str;
 
     Ucc() = default;
@@ -114,16 +113,17 @@ class LBlock : public Element {
     explicit LBlock(const std::same_as<json> auto &j);
     LBlock(const json &j, const std::string &_kit);
 
-    void        setLblk(const UCCV2 &_lblk);
-    std::string getLine(const size_t r) const;
-    const Ucc  &getPos(const size_t r, const size_t c) const;
-    void        setPos(const size_t r, const size_t c, const Ucc &blk);
-    size_t      getW() const;
-    void        setW(const size_t _w);
-    size_t      getH() const;
-    void        setH(const size_t _h);
-    void        fromJson(const json &j) override;
-    json        toJson() const override;
+    const UCCV2 &getLblk() const noexcept;
+    void         setLblk(const UCCV2 &_lblk);
+    std::string  getLine(const size_t r) const;
+    const Ucc   &getPos(const size_t r, const size_t c) const;
+    void         setPos(const size_t r, const size_t c, const Ucc &blk);
+    size_t       getW() const;
+    void         setW(const size_t _w);
+    size_t       getH() const;
+    void         setH(const size_t _h);
+    void         fromJson(const json &j) override;
+    json         toJson() const override;
 }; // class LBlock
 
 // Where stores data of blocks and large-blocks.
