@@ -1,17 +1,8 @@
 #pragma once
 
-#include "err.hpp"
-#include <concepts>
+#include "crtutils.hpp"
 #include <filesystem>
-#include <nlohmann/json.hpp>
 #include <vector>
-
-#define BLOCKV std::vector<Block>
-#define LBLOCKV std::vector<LBlock>
-#define UCCV std::vector<Ucc>
-#define UCCV2 std::vector<std::vector<Ucc>>
-
-using json = nlohmann::json;
 
 struct rgb {
     uint8_t r;
@@ -20,102 +11,90 @@ struct rgb {
 
     rgb() noexcept;
     rgb(uint8_t _r, uint8_t _g, uint8_t _b) noexcept;
-    std::string toB() const; // to ANSI escape code for background color
-    std::string toF() const; // to ANSI escape code for foreground color
+    void fromJson(const json &j);
+    json toJson() const;
 };
 
-/** @brief Unicode character with background or foreground color.
+/** Unicode Colored Character
+ *
+ *  @brief Unicode character with background or foreground color.
  *
  *  Examples:
- *  Ucc(L'🤔').toStr()
- *  Ucc().cb(L'🤔', rgb(255, 0, 0).toStr()
- *  Ucc().cf(L'囧', rgb(255, 255, 0).toStr()
- *  Ucc(L'囧', rgb(255, 0, 0), rgb(255, 255, 0)).toStr()
+ *  Ucc(U'🤔')
+ *  Ucc().cb(U'🤔', rgb(255, 0, 0)
+ *  Ucc().cf(U'囧', rgb(255, 255, 0)
+ *  Ucc(U'囧', rgb(255, 0, 0), rgb(255, 255, 0))
  */
 struct Ucc {
-    wchar_t             c;            // Character
-    bool                hasB = false; // Whether it has background color
-    rgb                 b;            // Background Color
-    bool                hasF = false; // Whether it has foreground color
-    rgb                 f;            // Foreground Color
-    mutable std::string str;
+    char32_t c;            // Character
+    bool     hasB = false; // Whether it has background color
+    rgb      b;            // Background Color
+    bool     hasF = false; // Whether it has foreground color
+    rgb      f;            // Foreground Color
 
     Ucc() = default;
-    Ucc(const wchar_t _c) noexcept;
-    Ucc(const std::string &_str) noexcept;
-    Ucc(const wchar_t _c, const rgb _b, const rgb _f) noexcept;
-    Ucc               &cb(const wchar_t _c, const rgb _b) noexcept;
-    Ucc               &cf(const wchar_t _c, const rgb _f) noexcept;
-    const std::string &toStr() const;
+    Ucc(const char32_t _c) noexcept;
+    Ucc(const is_json auto &j);
+    Ucc(const char32_t _c, const rgb _b, const rgb _f) noexcept;
+    Ucc        &cb(const char32_t _c, const rgb _b) noexcept;
+    Ucc        &cf(const char32_t _c, const rgb _f) noexcept;
+    void        fromJson(const json &j);
+    json        toJson() const;
+    std::string operator()() const; // Get the character as std::string
 };
+
+using UccV  = std::vector<Ucc>;
+using UccV2 = std::vector<std::vector<Ucc>>;
 
 class Element {
   protected:
     std::string id;
-    std::string kit;
     std::string name;
 
   public:
     const std::string &getID() const noexcept;
     void               setID(const std::string &_id = randomID());
-    const std::string &getKit() const noexcept;
-    void               setKit(const std::string &_kit = randomID());
     const std::string &getName() const noexcept;
     void               setName(const std::string &_name) noexcept;
     virtual void       fromJson(const json &j) = 0;
     virtual json       toJson() const          = 0;
+    bool               operator==(const Element &other) const noexcept;
 };
 
 class Block : public Element {
   private:
     Ucc blk;
 
-  protected:
-    std::string id;
-    std::string kit;
-    std::string name;
-
   public:
     Block() = default;
     explicit Block(const Ucc &_blk) noexcept;
-    Block(const Ucc         &_blk,
-          const std::string &_id,
-          const std::string &_kit,
-          const std::string &_name);
-    explicit Block(const std::same_as<json> auto &j);
-    Block(const json &j, const std::string &_kit);
+    Block(const Ucc &_blk, const std::string &_id, const std::string &_name);
+    explicit Block(const is_json auto &j);
 
-    const std::string &getBlk() const noexcept;
-    void               setBlk(const Ucc &_blk) noexcept;
-    void               fromJson(const json &j) override;
-    json               toJson() const override;
+    const Ucc &getBlk() const noexcept;
+    void       setBlk(const Ucc &_blk) noexcept;
+    void       fromJson(const json &j) override;
+    json       toJson() const override;
 }; // class Block
+
+using BlockV = std::vector<Block>;
 
 // Large block (a rectangular combination of blocks).
 class LBlock : public Element {
   private:
-    UCCV2  lblk;
+    UccV2  lblk;
     size_t w;
     size_t h; // w and h are for printing
 
   public:
     LBlock() = default;
     LBlock(const size_t w, const size_t h);
-    LBlock(const size_t       w,
-           const size_t       h,
-           const std::string &_id,
-           const std::string &_kit,
-           const std::string &_name);
-    LBlock(const UCCV2       &_lblk,
-           const std::string &_id,
-           const std::string &_kit,
-           const std::string &_name);
-    explicit LBlock(const std::same_as<json> auto &j);
-    LBlock(const json &j, const std::string &_kit);
+    LBlock(const size_t w, const size_t h, const std::string &_id, const std::string &_name);
+    LBlock(const UccV2 &_lblk, const std::string &_id, const std::string &_name);
+    explicit LBlock(const is_json auto &j);
 
-    const UCCV2 &getLblk() const noexcept;
-    void         setLblk(const UCCV2 &_lblk);
-    std::string  getLine(const size_t r) const;
+    const UccV2 &getLblk() const noexcept;
+    void         setLblk(const UccV2 &_lblk);
     const Ucc   &getPos(const size_t r, const size_t c) const;
     void         setPos(const size_t r, const size_t c, const Ucc &blk);
     size_t       getW() const;
@@ -126,14 +105,17 @@ class LBlock : public Element {
     json         toJson() const override;
 }; // class LBlock
 
+using LBlockV = std::vector<LBlock>;
+
 // Where stores data of blocks and large-blocks.
 class Kit final {
   private:
     std::string author;
-    BLOCKV      blks;
-    LBLOCKV     lblks;
+    BlockV      blks;
+    LBlockV     lblks;
     std::string id;
     std::string name;
+    std::string des;
 
   public:
     Kit() = default;
@@ -141,9 +123,9 @@ class Kit final {
 
     const std::string &getAuthor() const noexcept;
     void               setAuthor(const std::string &_author) noexcept;
-    const BLOCKV      &getBlks() const noexcept;
+    const BlockV      &getBlks() const noexcept;
     void               clearBlks() noexcept;
-    const LBLOCKV     &getLblks() const noexcept;
+    const LBlockV     &getLblks() const noexcept;
     void               clearLblks() noexcept;
     void               operator+=(const Block &blk);
     void               operator+=(const LBlock &lblk);
@@ -152,6 +134,8 @@ class Kit final {
     void               setID(const std::string &_id);
     const std::string &getName() const noexcept;
     void               setName(const std::string &_name) noexcept;
+    const std::string &getDes() const noexcept;
+    void               setDes(const std::string &_des) noexcept;
     void               fromJson(const json &j);
     json               toJson() const;
     void               fromFile(const std::filesystem::path &path);

@@ -5,6 +5,7 @@ AccessModifierOffset: -2
 AlignAfterOpenBracket: Align
 AlignConsecutiveAssignments: true
 AlignConsecutiveDeclarations: true
+AlignConsecutiveMacros: AcrossEmptyLinesAndComments
 AlignEscapedNewlines: Left
 AlignOperands: Align
 AlignTrailingComments: true
@@ -24,6 +25,7 @@ ConstructorInitializerIndentWidth:  4
 ContinuationIndentWidth: 4
 FixNamespaceComments: true
 IndentCaseLabels: false
+IndentPPDirectives: BeforeHash
 IndentWidth: 4
 MaxEmptyLinesToKeep: 3
 SortIncludes: true

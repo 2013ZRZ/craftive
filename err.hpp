@@ -1,43 +1,34 @@
 #pragma once
 
+#include "crtutils.hpp"
 #include "localize.hpp"
-#include <concepts>
 #include <cstdint>
-#include <format>
-#include <string>
-#include <string_view>
-
-bool        isInvalidID(const std::string &id);
-std::string randomID(unsigned len = 50);
 
 constexpr const char *errmsgs[] = {"Extern Error",
                                    "Empty ID",
                                    "The ID includes invalid character(s)",
-                                   "Invalid color code",
+                                   "Invalid unicode colored character",
                                    "No such element in this kit",
                                    "Invalid location in this large-block",
                                    "Failed to parse JSON",
-                                   "Invalid large-block; it should be a rectangle"};
+                                   "Invalid large-block; it should be a rectangle",
+                                   "Invalid RGB color"};
 
 // Craftive Exceptions
 class CrtExcept : public std::exception {
   private:
-    uint16_t          code; // Error Code (0x0000 ~ 0xFFFF)
+    const uint16_t    code; // Error Code (0x0000 ~ 0xFFFF)
     const std::string detail;
 
   public:
-    CrtExcept(const uint16_t _code, const std::string &_detail, auto &&...args)
+    CrtExcept(const uint16_t _code, const is_string auto &_detail, auto &&...args)
         : code(_code), detail(std::vformat(_detail, std::make_format_args(args...))) {}
 
-    template <typename T>
-    CrtExcept(T &&_detail, auto &&...args)
-        requires(std::same_as<std::decay_t<T>, char *> ||
-                 std::same_as<std::decay_t<T>, std::string> ||
-                 std::same_as<std::decay_t<T>, std::string_view>)
+    CrtExcept(const is_string auto &_detail, auto &&...args)
         : CrtExcept(0x0000, _detail, args...) {}
 
-    const std::string &how() const noexcept;   // Return the value of detail
-    const char        *what() const noexcept;  // Return the value of errmsgs[code]
-    uint16_t           which() const noexcept; // Return the value of code
-    const std::string  whichStr() const;       // Return the std::string version of code
+    const std::string &how() const noexcept;           // Return the value of detail
+    const char        *what() const noexcept override; // Return the value of errmsgs[code]
+    const uint16_t     which() const noexcept;         // Return the value of code
+    const std::string  whichStr() const;               // Return the std::string version of code
 };

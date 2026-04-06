@@ -1,7 +1,6 @@
 #include "elements.hpp"
+#include "err.hpp"
 #include <fstream>
-
-using json = nlohmann::json;
 
 
 // Definitions in rgb
@@ -10,21 +9,29 @@ rgb::rgb() noexcept : r(0), g(0), b(0) {}
 
 rgb::rgb(uint8_t _r, uint8_t _g, uint8_t _b) noexcept : r(_r), g(_g), b(_b) {}
 
-std::string rgb::toB() const { return std::format("\033[48;2;{};{};{}m", r, g, b); }
+void rgb::fromJson(const json &j) {
+    if (!j.is_array())
+        throw CrtExcept(0x0008,
+                        _("from rgb::fromJson(); the RGB color in the json object isn't an array"));
+    if (j.size() != 3)
+        throw CrtExcept(0x0008, _("from rgb::fromJson(); incorrect number of color channels"));
+    r = j[0].get<uint8_t>();
+    g = j[1].get<uint8_t>();
+    b = j[2].get<uint8_t>();
+}
 
-std::string rgb::toF() const { return std::format("\033[38;2;{};{};{}m", r, g, b); }
-
+json rgb::toJson() const { return json{r, g, b}; }
 
 // Definitions in Ucc
 
-Ucc::Ucc(const wchar_t _c) noexcept : c(_c), hasB(false), hasF(false) {}
+Ucc::Ucc(const char32_t _c) noexcept : c(_c), hasB(false), hasF(false) {}
 
-Ucc::Ucc(const std::string &_str) noexcept : str(_str) {}
-
-Ucc::Ucc(const wchar_t _c, const rgb _b, const rgb _f) noexcept
+Ucc::Ucc(const char32_t _c, const rgb _b, const rgb _f) noexcept
     : c(_c), hasB(true), b(_b), hasF(true), f(_f) {}
 
-Ucc &Ucc::cb(const wchar_t _c, const rgb _b) noexcept {
+Ucc::Ucc(const is_json auto &j) { fromJson(j); }
+
+Ucc &Ucc::cb(const char32_t _c, const rgb _b) noexcept {
     c    = _c;
     hasB = true;
     b    = _b;
@@ -32,7 +39,7 @@ Ucc &Ucc::cb(const wchar_t _c, const rgb _b) noexcept {
     return *this;
 }
 
-Ucc &Ucc::cf(const wchar_t _c, const rgb _f) noexcept {
+Ucc &Ucc::cf(const char32_t _c, const rgb _f) noexcept {
     c    = _c;
     hasB = false;
     hasF = true;
@@ -40,25 +47,39 @@ Ucc &Ucc::cf(const wchar_t _c, const rgb _f) noexcept {
     return *this;
 }
 
-const std::string &Ucc::toStr() const {
-    if (str.empty()) {
-        std::string _c =
-            std::filesystem::path(std::wstring(1, c)).string(); // Convert c(wchar_t) to std::string
-        if (hasB) {
-            if (hasF)
-                str = std::format("{}{}{}\033[0m", b.toB(), f.toF(), _c);
-            else
-                str = std::format("{}{}\033[0m", b.toB(), _c);
-
-        } else {
-            if (hasF)
-                str = std::format("{}{}\033[0m", f.toF(), _c);
-            else
-                str = _c;
-        }
+void Ucc::fromJson(const json &j) {
+    if (!j.is_object())
+        throw CrtExcept(
+            0x0006,
+            _("from Ucc::fromJson(); the unicode colored character's json isn't an object"));
+    std::string _c = j.at("c").get<std::string>();
+    if (_c.size() > sizeof(char32_t))
+        throw CrtExcept(
+            0x0003,
+            "from Ucc::fromJson(); the string to parse is {} and it has too many characters",
+            _c);
+    c = s2u32s(_c)[0];
+    if (j.find("b") != j.end()) {
+        hasB = true;
+        b.fromJson(j["b"]);
     }
-    return str;
+    if (j.find("f") != j.end()) {
+        hasF = true;
+        f.fromJson(j["f"]);
+    }
 }
+
+json Ucc::toJson() const {
+    json j;
+    j["c"] = u32s2s(std::u32string(1, c));
+    if (hasB)
+        j["b"] = b.toJson();
+    if (hasF)
+        j["f"] = f.toJson();
+    return j;
+}
+
+std::string Ucc::operator()() const { return u32s2s(std::u32string(1, c)); }
 
 
 // Definitions in Element
@@ -72,96 +93,68 @@ void Element::setID(const std::string &_id) {
         id = _id;
 }
 
-const std::string &Element::getKit() const noexcept { return kit; }
-
-void Element::setKit(const std::string &_kit) {
-    if (isInvalidID(_kit))
-        throw CrtExcept(0x0002, _("from Element::setKit()"));
-    else
-        kit = _kit;
-}
-
 const std::string &Element::getName() const noexcept { return name; }
 
 void Element::setName(const std::string &_name) noexcept { name = _name; }
+
+bool Element::operator==(const Element &other) const noexcept { return id == other.getID(); }
 
 
 // Definitions in Block
 
 Block::Block(const Ucc &_blk) noexcept { setBlk(_blk); }
 
-Block::Block(const Ucc         &_blk,
-             const std::string &_id,
-             const std::string &_kit,
-             const std::string &_name) {
+Block::Block(const Ucc &_blk, const std::string &_id, const std::string &_name) {
     setBlk(_blk);
     setID(_id);
-    setKit(_kit);
     setName(_name);
 }
 
-Block::Block(const std::same_as<json> auto &j) { fromJson(j); }
+Block::Block(const is_json auto &j) { fromJson(j); }
 
-Block::Block(const json &j, const std::string &_kit) {
-    fromJson(j);
-    setKit(_kit);
-}
-
-const std::string &Block::getBlk() const noexcept { return blk.toStr(); }
+const Ucc &Block::getBlk() const noexcept { return blk; }
 
 void Block::setBlk(const Ucc &_blk) noexcept { blk = _blk; }
 
 void Block::fromJson(const json &j) {
-    setBlk(Ucc(j.at("blk").template get<std::string>()));
+    setBlk(Ucc(j.at("blk")));
     setID(j.value("id", randomID()));
     setName(j.value("name", id));
 }
 
 json Block::toJson() const {
-    json j{{"blk", getBlk()}, {"id", getID()}, {"name", getName()}};
+    json j{{"blk", getBlk().toJson()}, {"id", getID()}, {"name", getName()}};
     return j;
 }
 
 
 // Definitions in LBlock
 
-LBlock::LBlock(const size_t w, const size_t h) {
-    setW(w);
-    setH(h);
+LBlock::LBlock(const size_t _w, const size_t _h) {
+    setW(_w);
+    setH(_h);
 }
 
-LBlock::LBlock(const size_t       w,
-               const size_t       h,
-               const std::string &_id,
-               const std::string &_kit,
-               const std::string &_name) {
-    setW(w);
-    setH(h);
+LBlock::LBlock(const size_t _w, const size_t _h, const std::string &_id, const std::string &_name) {
+    setW(_w);
+    setH(_h);
     setID(_id);
-    setKit(_kit);
     setName(_name);
 }
 
-LBlock::LBlock(const UCCV2       &_lblk,
-               const std::string &_id,
-               const std::string &_kit,
-               const std::string &_name) {
+LBlock::LBlock(const UccV2 &_lblk, const std::string &_id, const std::string &_name) {
     setLblk(_lblk);
+    setW(_lblk.empty() ? 0 : _lblk[0].size());
+    setH(_lblk.size());
     setID(_id);
-    setKit(_kit);
     setName(_name);
 }
 
-LBlock::LBlock(const std::same_as<json> auto &j) { fromJson(j); }
+LBlock::LBlock(const is_json auto &j) { fromJson(j); }
 
-LBlock::LBlock(const json &j, const std::string &_kit) {
-    fromJson(j);
-    setKit(_kit);
-}
+const UccV2 &LBlock::getLblk() const noexcept { return lblk; }
 
-const UCCV2 &LBlock::getLblk() const noexcept { return lblk; }
-
-void LBlock::setLblk(const UCCV2 &_lblk) {
+void LBlock::setLblk(const UccV2 &_lblk) {
     if (!_lblk.empty())
         for (size_t r = 0; r < _lblk.size(); r++)
             if (_lblk[r].size() != _lblk[0].size())
@@ -170,22 +163,14 @@ void LBlock::setLblk(const UCCV2 &_lblk) {
     lblk = _lblk;
 }
 
-std::string LBlock::getLine(const size_t r) const {
-    if (r >= lblk.size())
-        throw CrtExcept(0x0005, _("from LBlock::getLine()"));
-    std::string l;
-    for (auto &i : lblk[r]) { l += i.toStr(); }
-    return l;
-}
-
 const Ucc &LBlock::getPos(const size_t r, const size_t c) const {
-    if (r >= lblk.size() || c >= lblk[0].size())
+    if (r >= lblk.size() || c >= (lblk.empty() ? 0 : lblk[0].size()))
         throw CrtExcept(0x0005, _("from LBlock::getPos()"));
     return lblk[r][c];
 }
 
 void LBlock::setPos(const size_t r, const size_t c, const Ucc &blk) {
-    if (r >= lblk.size() || c >= lblk[0].size())
+    if (r >= lblk.size() || c >= (lblk.empty() ? 0 : lblk[0].size()))
         throw CrtExcept(0x0005, _("from LBlock::setPos()"));
     lblk[r][c] = blk;
 }
@@ -211,23 +196,25 @@ void LBlock::fromJson(const json &j) {
                 0x0006, _("from LBlock::fromJson(); the length of Row {} is different"), r + 1);
         for (size_t c = 0; c < j.at("blks")[0].size(); c++) {
             lblk[r].resize(j.at("blks")[r].size());
-            setPos(r, c, Ucc(j.at("blks")[r][c].template get<std::string>()));
+            setPos(r, c, Ucc(j.at("blks")[r][c]));
         }
     }
+    setW(j.value("w", lblk.empty() ? 0 : lblk[0].size()));
+    setH(j.value("h", lblk.size()));
     setID(j.value("id", randomID()));
     setName(j.value("name", id));
 }
 
 json LBlock::toJson() const {
-    std::vector<std::vector<std::string>> lblk_json;
+    std::vector<std::vector<json>> lblk_json;
     lblk_json.resize(lblk.size());
     for (size_t r = 0; r < lblk.size(); r++) {
         lblk_json[r].resize(lblk.empty() ? 0 : lblk[0].size());
         for (size_t c = 0; c < (lblk.empty() ? 0 : lblk[0].size()); c++) {
-            lblk_json[r][c] = lblk[r][c].toStr();
+            lblk_json[r][c] = lblk[r][c].toJson();
         }
     }
-    json j{{"blks", lblk_json}, {"id", getID()}, {"name", getName()}};
+    json j{{"blks", lblk_json}, {"w", getW()}, {"h", getH()}, {"id", getID()}, {"name", getName()}};
     return j;
 }
 
@@ -240,11 +227,11 @@ const std::string &Kit::getAuthor() const noexcept { return author; }
 
 void Kit::setAuthor(const std::string &_author) noexcept { author = _author; }
 
-const BLOCKV &Kit::getBlks() const noexcept { return blks; }
+const BlockV &Kit::getBlks() const noexcept { return blks; }
 
 void Kit::clearBlks() noexcept { blks.clear(); }
 
-const LBLOCKV &Kit::getLblks() const noexcept { return lblks; }
+const LBlockV &Kit::getLblks() const noexcept { return lblks; }
 
 void Kit::clearLblks() noexcept { lblks.clear(); }
 
@@ -276,33 +263,66 @@ const std::string &Kit::getName() const noexcept { return name; }
 
 void Kit::setName(const std::string &_name) noexcept { name = _name; }
 
+const std::string &Kit::getDes() const noexcept { return des; }
+
+void Kit::setDes(const std::string &_des) noexcept { des = _des; }
+
 void Kit::fromJson(const json &j) {
     setAuthor(j.value("author", _("Unknown")));
     setID(j.value("id", randomID()));
     setName(j.value("name", _("Empty Name")));
-    for (const json &blk : j.at("blks")) { *this += Block(blk, id); }
-    for (const json &lblk : j.at("lblks")) { *this += LBlock(lblk, id); }
+    setDes(j.value("des", _("Empty")));
+    if (j.find("blks") != j.end())
+        for (const json &blk : j["blks"]) *this += Block(blk);
+    if (j.find("lblks") != j.end())
+        for (const json &lblk : j["lblks"]) *this += LBlock(lblk);
 }
 
 json Kit::toJson() const {
-    std::vector<json> blks_json;
-    std::vector<json> lblks_json;
-    blks_json.reserve(blks.size());
-    for (const auto &i : blks) { blks_json.emplace_back(i.toJson()); }
-    lblks_json.reserve(lblks.size());
-    for (const auto &i : lblks) { lblks_json.emplace_back(i.toJson()); }
-    json j{{"author", getAuthor()},
-           {"id", getID()},
-           {"name", getName()},
-           {"blks", blks_json},
-           {"lblks", lblks_json}};
-    return j;
+    if (blks.empty()) {
+        if (lblks.empty())
+            return json{
+                {"author", getAuthor()}, {"id", getID()}, {"name", getName()}, {"des", getDes()}};
+        else {
+            std::vector<json> lblks_json;
+            lblks_json.reserve(lblks.size());
+            for (const auto &i : lblks) lblks_json.emplace_back(i.toJson());
+            return json{{"author", getAuthor()},
+                        {"id", getID()},
+                        {"name", getName()},
+                        {"des", getDes()},
+                        {"lblks", lblks_json}};
+        }
+    } else {
+        std::vector<json> blks_json;
+        blks_json.reserve(blks.size());
+        for (const auto &i : blks) blks_json.emplace_back(i.toJson());
+        if (lblks.empty())
+            return json{{"author", getAuthor()},
+                        {"id", getID()},
+                        {"name", getName()},
+                        {"des", getDes()},
+                        {"blks", blks_json}};
+        else {
+            std::vector<json> lblks_json;
+            lblks_json.reserve(lblks.size());
+            for (const auto &i : lblks) lblks_json.emplace_back(i.toJson());
+            return json{{"author", getAuthor()},
+                        {"id", getID()},
+                        {"name", getName()},
+                        {"des", getDes()},
+                        {"blks", blks_json},
+                        {"lblks", lblks_json}};
+        }
+    }
 }
 
 void Kit::fromFile(const std::filesystem::path &path) {
     std::ifstream ifs(path);
     if (!ifs)
-        throw CrtExcept(strerror(errno));
+        throw CrtExcept("from Kit::fromFile(); failed to open the kit file at {} ({})",
+                        path.string(),
+                        strerror(errno));
     json j;
     ifs >> j;
     fromJson(j);
