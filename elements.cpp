@@ -118,7 +118,10 @@ void Block::setBlk(const Ucc &_blk) noexcept { blk = _blk; }
 
 void Block::fromJson(const json &j) {
     setBlk(Ucc(j.at("blk")));
-    setID(j.value("id", randomID()));
+    if (j.find("id") != j.end())
+        setID(j.at("id").get<std::string>());
+    else
+        throw CrtExcept(0x0001, _("from Block::fromJson()"));
     setName(j.value("name", id));
 }
 
@@ -131,21 +134,21 @@ json Block::toJson() const {
 // Definitions in LBlock
 
 LBlock::LBlock(const size_t _w, const size_t _h) {
-    setW(_w);
-    setH(_h);
+    lblk.resize(_h);
+    w.resize(_h);
+    for (auto &i : lblk) i.resize(_w);
 }
 
 LBlock::LBlock(const size_t _w, const size_t _h, const std::string &_id, const std::string &_name) {
-    setW(_w);
-    setH(_h);
+    lblk.resize(_h);
+    w.resize(_h);
+    for (auto &i : lblk) i.resize(_w);
     setID(_id);
     setName(_name);
 }
 
 LBlock::LBlock(const UccV2 &_lblk, const std::string &_id, const std::string &_name) {
     setLblk(_lblk);
-    setW(_lblk.empty() ? 0 : _lblk[0].size());
-    setH(_lblk.size());
     setID(_id);
     setName(_name);
 }
@@ -155,12 +158,8 @@ LBlock::LBlock(const is_json auto &j) { fromJson(j); }
 const UccV2 &LBlock::getLblk() const noexcept { return lblk; }
 
 void LBlock::setLblk(const UccV2 &_lblk) {
-    if (!_lblk.empty())
-        for (size_t r = 0; r < _lblk.size(); r++)
-            if (_lblk[r].size() != _lblk[0].size())
-                throw CrtExcept(
-                    0x0007, _("from LBlock::setLblk(); the length of Row {} is different"), r + 1);
     lblk = _lblk;
+    w.resize(lblk.size());
 }
 
 const Ucc &LBlock::getPos(const size_t r, const size_t c) const {
@@ -175,33 +174,39 @@ void LBlock::setPos(const size_t r, const size_t c, const Ucc &blk) {
     lblk[r][c] = blk;
 }
 
-size_t LBlock::getW() const { return w; }
+size_t LBlock::getW(const size_t r) const {
+    if (r < w.size())
+        return w[r];
+    else
+        throw CrtExcept(0x0005, _("from LBlock::getW()"));
+}
 
-void LBlock::setW(const size_t _w) { w = _w; }
+auto LBlock::getFullW() const -> const std::vector<size_t> & { return w; }
 
-size_t LBlock::getH() const { return h; }
-
-void LBlock::setH(const size_t _h) { h = _h; }
+void LBlock::setW(const size_t r, const size_t _w) {
+    if (r < w.size())
+        w[r] = _w;
+    else
+        throw CrtExcept(0x0005, _("from LBlock::setW()"));
+}
 
 void LBlock::fromJson(const json &j) {
-    if (!j.at("blks").is_array())
-        throw CrtExcept(
-            0x0006, _("from LBlock::fromJson(); the \"blks\" in the json object isn't an array"));
-    lblk.resize(j.at("blks").size());
-    for (size_t r = 0; r < j.at("blks").size(); r++) {
+    if (!j.at("lblk").is_array())
+        throw CrtExcept(0x0006, _("from LBlock::fromJson(); the \"lblk\" isn't an array"));
+    lblk.resize(j.at("lblk").size());
+    w.resize(j.at("lblk").size());
+    for (size_t r = 0; r < j.at("lblk").size(); r++) {
         if (!j.at("blks")[r].is_array())
             throw CrtExcept(0x0006, _("from LBlock::fromJson(); Row {} isn't an array"), r + 1);
-        if (j.at("blks")[r].size() != j.at("blks")[0].size())
-            throw CrtExcept(
-                0x0006, _("from LBlock::fromJson(); the length of Row {} is different"), r + 1);
         for (size_t c = 0; c < j.at("blks")[0].size(); c++) {
             lblk[r].resize(j.at("blks")[r].size());
             setPos(r, c, Ucc(j.at("blks")[r][c]));
         }
     }
-    setW(j.value("w", lblk.empty() ? 0 : lblk[0].size()));
-    setH(j.value("h", lblk.size()));
-    setID(j.value("id", randomID()));
+    if (j.find("id") != j.end())
+        setID(j.at("id").get<std::string>());
+    else
+        throw CrtExcept(0x0001, _("from LBlock::fromJson()"));
     setName(j.value("name", id));
 }
 
@@ -214,7 +219,7 @@ json LBlock::toJson() const {
             lblk_json[r][c] = lblk[r][c].toJson();
         }
     }
-    json j{{"blks", lblk_json}, {"w", getW()}, {"h", getH()}, {"id", getID()}, {"name", getName()}};
+    json j{{"blks", lblk_json}, {"w", getFullW()}, {"id", getID()}, {"name", getName()}};
     return j;
 }
 
@@ -269,8 +274,11 @@ void Kit::setDes(const std::string &_des) noexcept { des = _des; }
 
 void Kit::fromJson(const json &j) {
     setAuthor(j.value("author", _("Unknown")));
-    setID(j.value("id", randomID()));
-    setName(j.value("name", _("Empty Name")));
+    if (j.find("id") != j.end())
+        setID(j.at("id").get<std::string>());
+    else
+        throw CrtExcept(0x0001, _("from Block::fromJson()"));
+    setName(j.value("name", id));
     setDes(j.value("des", _("Empty")));
     if (j.find("blks") != j.end())
         for (const json &blk : j["blks"]) *this += Block(blk);
@@ -327,6 +335,7 @@ void Kit::fromFile(const std::filesystem::path &path) {
     ifs >> j;
     fromJson(j);
 }
+
 void Kit::toFile(const std::filesystem::path &path, const unsigned tabsize) {
     std::ofstream ofs(path);
     ofs << std::setw(tabsize) << toJson() << std::endl;

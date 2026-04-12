@@ -30,5 +30,5 @@ class CrtExcept : public std::exception {
     const std::string &how() const noexcept;           // Return the value of detail
     const char        *what() const noexcept override; // Return the value of errmsgs[code]
     const uint16_t     which() const noexcept;         // Return the value of code
-    const std::string  whichStr() const;               // Return the std::string version of code
+    const std::string  whichStr() const;               // Return the value of code as std::string
 };

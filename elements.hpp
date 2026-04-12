@@ -19,6 +19,8 @@ struct rgb {
  *
  *  @brief Unicode character with background or foreground color.
  *
+ *  U'\t' means a null character.
+ *
  *  Examples:
  *  Ucc(U'🤔')
  *  Ucc().cb(U'🤔', rgb(255, 0, 0)
@@ -53,7 +55,7 @@ class Element {
 
   public:
     const std::string &getID() const noexcept;
-    void               setID(const std::string &_id = randomID());
+    void               setID(const std::string &_id);
     const std::string &getName() const noexcept;
     void               setName(const std::string &_name) noexcept;
     virtual void       fromJson(const json &j) = 0;
@@ -82,9 +84,8 @@ using BlockV = std::vector<Block>;
 // Large block (a rectangular combination of blocks).
 class LBlock : public Element {
   private:
-    UccV2  lblk;
-    size_t w;
-    size_t h; // w and h are for printing
+    UccV2               lblk;
+    std::vector<size_t> w; // for printing for each row
 
   public:
     LBlock() = default;
@@ -97,10 +98,9 @@ class LBlock : public Element {
     void         setLblk(const UccV2 &_lblk);
     const Ucc   &getPos(const size_t r, const size_t c) const;
     void         setPos(const size_t r, const size_t c, const Ucc &blk);
-    size_t       getW() const;
-    void         setW(const size_t _w);
-    size_t       getH() const;
-    void         setH(const size_t _h);
+    size_t       getW(const size_t r) const;
+    auto         getFullW() const -> const std::vector<size_t> &;
+    void         setW(const size_t r, const size_t _w);
     void         fromJson(const json &j) override;
     json         toJson() const override;
 }; // class LBlock
