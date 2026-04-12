@@ -4,6 +4,7 @@
 #include <ctime>
 #include <iconv.h>
 #include <random>
+#include <regex>
 
 bool isInvalidID(const std::string &id) {
     for (const auto it : id) {
@@ -12,6 +13,10 @@ bool isInvalidID(const std::string &id) {
     }
     return false;
 }
+
+static const std::regex emailre("^\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$");
+
+bool isInvalidEmail(const std::string &email) { return std::regex_match(email, emailre); }
 
 std::string randomID(unsigned len) {
     std::random_device rd;

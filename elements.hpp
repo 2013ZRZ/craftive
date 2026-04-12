@@ -2,6 +2,8 @@
 
 #include "crtutils.hpp"
 #include <filesystem>
+#include <memory>
+#include <variant>
 #include <vector>
 
 struct rgb {
@@ -13,7 +15,7 @@ struct rgb {
     rgb(uint8_t _r, uint8_t _g, uint8_t _b) noexcept;
     void fromJson(const json &j);
     json toJson() const;
-};
+}; // struct rgb
 
 /** Unicode Colored Character
  *
@@ -43,12 +45,13 @@ struct Ucc {
     void        fromJson(const json &j);
     json        toJson() const;
     std::string operator()() const; // Get the character as std::string
-};
+}; // struct Ucc
 
 using UccV  = std::vector<Ucc>;
 using UccV2 = std::vector<std::vector<Ucc>>;
 
-class Element {
+
+class BasicCrtClass {
   protected:
     std::string id;
     std::string name;
@@ -60,10 +63,10 @@ class Element {
     void               setName(const std::string &_name) noexcept;
     virtual void       fromJson(const json &j) = 0;
     virtual json       toJson() const          = 0;
-    bool               operator==(const Element &other) const noexcept;
-};
+    bool               operator==(const BasicCrtClass &other) const noexcept;
+}; // class BasicCrtClass
 
-class Block : public Element {
+class Block : public BasicCrtClass {
   private:
     Ucc blk;
 
@@ -82,7 +85,7 @@ class Block : public Element {
 using BlockV = std::vector<Block>;
 
 // Large block (a rectangular combination of blocks).
-class LBlock : public Element {
+class LBlock : public BasicCrtClass {
   private:
     UccV2               lblk;
     std::vector<size_t> w; // for printing for each row
@@ -99,7 +102,7 @@ class LBlock : public Element {
     const Ucc   &getPos(const size_t r, const size_t c) const;
     void         setPos(const size_t r, const size_t c, const Ucc &blk);
     size_t       getW(const size_t r) const;
-    auto         getFullW() const -> const std::vector<size_t> &;
+    auto         getFullW() const noexcept -> const std::vector<size_t> &;
     void         setW(const size_t r, const size_t _w);
     void         fromJson(const json &j) override;
     json         toJson() const override;
@@ -107,37 +110,43 @@ class LBlock : public Element {
 
 using LBlockV = std::vector<LBlock>;
 
-// Where stores data of blocks and large-blocks.
-class Kit final {
-  private:
+class BasicProduct : public BasicCrtClass {
+  protected:
     std::string author;
-    BlockV      blks;
-    LBlockV     lblks;
-    std::string id;
-    std::string name;
     std::string des;
+    uint32_t    price;
+
+  public:
+    const std::string &getAuthor() const noexcept;
+    void               setAuthor(const std::string &_author);
+    const std::string &getDes() const noexcept;
+    void               setDes(const std::string &_des) noexcept;
+    uint32_t           getPrice() const noexcept;
+    void               setPrice(uint32_t _price) noexcept;
+    virtual void       fromFile(const std::filesystem::path &path)                           = 0;
+    virtual void       toFile(const std::filesystem::path &path, const unsigned tabsize = 4) = 0;
+}; // class BasicProduct
+
+// Where stores data of blocks and large-blocks.
+class Kit : public BasicProduct {
+  private:
+    BlockV  blks;
+    LBlockV lblks;
 
   public:
     Kit() = default;
     explicit Kit(const std::filesystem::path &path);
 
-    const std::string &getAuthor() const noexcept;
-    void               setAuthor(const std::string &_author) noexcept;
-    const BlockV      &getBlks() const noexcept;
-    void               clearBlks() noexcept;
-    const LBlockV     &getLblks() const noexcept;
-    void               clearLblks() noexcept;
-    void               operator+=(const Block &blk);
-    void               operator+=(const LBlock &lblk);
-    void               operator-=(const std::string &_id);
-    const std::string &getID() const noexcept;
-    void               setID(const std::string &_id);
-    const std::string &getName() const noexcept;
-    void               setName(const std::string &_name) noexcept;
-    const std::string &getDes() const noexcept;
-    void               setDes(const std::string &_des) noexcept;
-    void               fromJson(const json &j);
-    json               toJson() const;
-    void               fromFile(const std::filesystem::path &path);
-    void               toFile(const std::filesystem::path &path, const unsigned tabsize = 4);
+    const BlockV  &getBlks() const noexcept;
+    void           clearBlks() noexcept;
+    const LBlockV &getLblks() const noexcept;
+    void           clearLblks() noexcept;
+    void           operator+=(const Block &blk);
+    void           operator+=(const LBlock &lblk);
+    void           operator-=(const std::string &_id);
+    auto           operator[](const std::string &_id) -> const std::variant<Block, LBlock>;
+    void           fromJson(const json &j) override;
+    json           toJson() const override;
+    void           fromFile(const std::filesystem::path &path) override;
+    void           toFile(const std::filesystem::path &path, const unsigned tabsize = 4) override;
 }; // class Kit

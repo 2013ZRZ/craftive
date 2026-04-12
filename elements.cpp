@@ -1,6 +1,8 @@
 #include "elements.hpp"
+#include "crtutils.hpp"
 #include "err.hpp"
 #include <fstream>
+#include <variant>
 
 
 // Definitions in rgb
@@ -82,22 +84,24 @@ json Ucc::toJson() const {
 std::string Ucc::operator()() const { return u32s2s(std::u32string(1, c)); }
 
 
-// Definitions in Element
+// Definitions in BasicCrtClass
 
-const std::string &Element::getID() const noexcept { return id; }
+const std::string &BasicCrtClass::getID() const noexcept { return id; }
 
-void Element::setID(const std::string &_id) {
+void BasicCrtClass::setID(const std::string &_id) {
     if (isInvalidID(_id))
-        throw CrtExcept(0x0002, _("from Element::setID()"));
+        throw CrtExcept(0x0002, _("from BasicCrtClass::setID()"));
     else
         id = _id;
 }
 
-const std::string &Element::getName() const noexcept { return name; }
+const std::string &BasicCrtClass::getName() const noexcept { return name; }
 
-void Element::setName(const std::string &_name) noexcept { name = _name; }
+void BasicCrtClass::setName(const std::string &_name) noexcept { name = _name; }
 
-bool Element::operator==(const Element &other) const noexcept { return id == other.getID(); }
+bool BasicCrtClass::operator==(const BasicCrtClass &other) const noexcept {
+    return id == other.getID();
+}
 
 
 // Definitions in Block
@@ -181,7 +185,7 @@ size_t LBlock::getW(const size_t r) const {
         throw CrtExcept(0x0005, _("from LBlock::getW()"));
 }
 
-auto LBlock::getFullW() const -> const std::vector<size_t> & { return w; }
+auto LBlock::getFullW() const noexcept -> const std::vector<size_t> & { return w; }
 
 void LBlock::setW(const size_t r, const size_t _w) {
     if (r < w.size())
@@ -223,14 +227,33 @@ json LBlock::toJson() const {
     return j;
 }
 
+// Definitions in BasicProduct
+
+const std::string &BasicProduct::getAuthor() const noexcept { return author; }
+
+void BasicProduct::setAuthor(const std::string &_author) {
+    if (isInvalidEmail(_author))
+        throw CrtExcept(
+            0x0000,
+            _("from BasicProduct::setAuthor(); the string is \"{}\" and it isn't a valid "
+              "email address"),
+            _author);
+    else
+        author = _author;
+}
+
+const std::string &BasicProduct::getDes() const noexcept { return des; }
+
+void BasicProduct::setDes(const std::string &_des) noexcept { des = _des; }
+
+uint32_t BasicProduct::getPrice() const noexcept { return price; }
+
+void BasicProduct::setPrice(uint32_t _price) noexcept { price = _price; }
+
 
 // Definitions in Kit
 
 Kit::Kit(const std::filesystem::path &path) { fromFile(path); }
-
-const std::string &Kit::getAuthor() const noexcept { return author; }
-
-void Kit::setAuthor(const std::string &_author) noexcept { author = _author; }
 
 const BlockV &Kit::getBlks() const noexcept { return blks; }
 
@@ -249,28 +272,24 @@ void Kit::operator-=(const std::string &_id) {
     auto erased_lblks =
         std::erase_if(lblks, [&_id](const LBlock &lblk) { return lblk.getID() == _id; });
     if (erased_blks == 0 && erased_lblks == 0)
-        throw CrtExcept(0x0004,
-                        _("from Kit::operator-=; no matching ID in both blocks and large-blocks"));
+        throw CrtExcept(
+            0x0004,
+            _("from Kit::operator-=; no one's id is \"{}\" in both blocks and large-blocks"),
+            _id);
 }
 
-const std::string &Kit::getID() const noexcept { return id; }
-
-void Kit::setID(const std::string &_id) {
-    if (_id.empty())
-        id = randomID();
-    else if (isInvalidID(_id))
-        CrtExcept(0x0002, _("from Kit::setID()"));
-    else
-        id = _id;
+auto Kit::operator[](const std::string &_id) -> const std::variant<Block, LBlock> {
+    for (const auto &i : blks)
+        if (i.getID() == _id)
+            return i;
+    for (const auto &i : lblks)
+        if (i.getID() == _id)
+            return i;
+    throw CrtExcept(
+        0x0004,
+        _("from Kit::operator[]; no one's id is \"{}\" in both blocks and large-blocks"),
+        _id);
 }
-
-const std::string &Kit::getName() const noexcept { return name; }
-
-void Kit::setName(const std::string &_name) noexcept { name = _name; }
-
-const std::string &Kit::getDes() const noexcept { return des; }
-
-void Kit::setDes(const std::string &_des) noexcept { des = _des; }
 
 void Kit::fromJson(const json &j) {
     setAuthor(j.value("author", _("Unknown")));

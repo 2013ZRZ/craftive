@@ -11,7 +11,7 @@ constexpr const char *errmsgs[] = {"Extern Error",
                                    "No such element in this kit",
                                    "Invalid location in this large-block",
                                    "Failed to parse JSON",
-                                   "Invalid large-block; it should be a rectangle",
+                                   "Invalid email address",
                                    "Invalid RGB color"};
 
 // Craftive Exceptions

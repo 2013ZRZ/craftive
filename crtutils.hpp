@@ -7,6 +7,7 @@
 using json = nlohmann::json;
 
 bool           isInvalidID(const std::string &id);
+bool           isInvalidEmail(const std::string &email);
 std::string    randomID(unsigned len = 50);
 std::u32string s2u32s(const std::string &s);    // string -> u32string
 std::string    u32s2s(const std::u32string &s); // u32string -> string
