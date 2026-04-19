@@ -14,9 +14,13 @@ bool isInvalidID(const std::string &id) {
     return false;
 }
 
+namespace EmailIdentifierDetail {
 static const std::regex emailre("^\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$");
+}
 
-bool isInvalidEmail(const std::string &email) { return std::regex_match(email, emailre); }
+bool isInvalidEmail(const std::string &email) {
+    return !std::regex_match(email, EmailIdentifierDetail::emailre);
+}
 
 std::string randomID(unsigned len) {
     std::random_device rd;

@@ -91,6 +91,8 @@ const std::string &BasicCrtClass::getID() const noexcept { return id; }
 void BasicCrtClass::setID(const std::string &_id) {
     if (isInvalidID(_id))
         throw CrtExcept(0x0002, _("from BasicCrtClass::setID()"));
+    else if (_id.empty())
+        throw CrtExcept(0x0001, _("from BasicCrtClass::setID()"));
     else
         id = _id;
 }
@@ -164,6 +166,7 @@ const UccV2 &LBlock::getLblk() const noexcept { return lblk; }
 void LBlock::setLblk(const UccV2 &_lblk) {
     lblk = _lblk;
     w.resize(lblk.size());
+    for (size_t i = 0; i < w.size(); i++) w[i] = lblk[i].size();
 }
 
 const Ucc &LBlock::getPos(const size_t r, const size_t c) const {
@@ -200,13 +203,16 @@ void LBlock::fromJson(const json &j) {
     lblk.resize(j.at("lblk").size());
     w.resize(j.at("lblk").size());
     for (size_t r = 0; r < j.at("lblk").size(); r++) {
-        if (!j.at("blks")[r].is_array())
+        if (!j.at("lblk")[r].is_array())
             throw CrtExcept(0x0006, _("from LBlock::fromJson(); Row {} isn't an array"), r + 1);
-        for (size_t c = 0; c < j.at("blks")[0].size(); c++) {
-            lblk[r].resize(j.at("blks")[r].size());
-            setPos(r, c, Ucc(j.at("blks")[r][c]));
+        for (size_t c = 0; c < j.at("lblk")[0].size(); c++) {
+            lblk[r].resize(j.at("lblk")[r].size());
+            setPos(r, c, Ucc(j.at("lblk")[r][c]));
         }
     }
+    if (!j.at("w").is_array())
+        throw CrtExcept(0x0006, _("from LBlock::fromJson(); the \"w\" isn't an array"));
+    for (size_t i = 0; i < j.at("w").size(); i++) w[i] = j.at("w")[i].get<size_t>();
     if (j.find("id") != j.end())
         setID(j.at("id").get<std::string>());
     else
@@ -223,8 +229,7 @@ json LBlock::toJson() const {
             lblk_json[r][c] = lblk[r][c].toJson();
         }
     }
-    json j{{"blks", lblk_json}, {"w", getFullW()}, {"id", getID()}, {"name", getName()}};
-    return j;
+    return json{{"lblk", lblk_json}, {"w", getFullW()}, {"id", getID()}, {"name", getName()}};
 }
 
 // Definitions in BasicProduct
@@ -234,7 +239,7 @@ const std::string &BasicProduct::getAuthor() const noexcept { return author; }
 void BasicProduct::setAuthor(const std::string &_author) {
     if (isInvalidEmail(_author))
         throw CrtExcept(
-            0x0000,
+            0x0007,
             _("from BasicProduct::setAuthor(); the string is \"{}\" and it isn't a valid "
               "email address"),
             _author);

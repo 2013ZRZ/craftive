@@ -2,7 +2,6 @@
 
 #include "crtutils.hpp"
 #include <filesystem>
-#include <memory>
 #include <variant>
 #include <vector>
 
@@ -117,6 +116,7 @@ class BasicProduct : public BasicCrtClass {
     uint32_t    price;
 
   public:
+    BasicProduct() = default;
     const std::string &getAuthor() const noexcept;
     void               setAuthor(const std::string &_author);
     const std::string &getDes() const noexcept;
