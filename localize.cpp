@@ -1,55 +1,51 @@
 #include "localize.hpp"
-#include <clocale>
-#include <filesystem>
-#include <string>
-
-#if defined(_WIN32)
-	#include <windows.h>
-#elif defined(__APPLE__)
-	#include <mach-o/dyld.h>
-#endif
+#include <QtCore/QDir>
+#include <QtCore/QFileInfo>
+#include <QtCore/QLibraryInfo>
+#include <QtCore/QString>
 
 void localizeInit() {
-	setlocale(LC_ALL, "");
-	bindtextdomain(
-		"craftive",
-		[&] -> std::string {
-			#ifdef _CRAFTIVE_DEBUG
-				#ifdef _CRAFTIVE_DEBUGGING_LOCALES_DIR
-					return _CRAFTIVE_DEBUGGING_LOCALES_DIR;
-				#else
-					return (std::filesystem::current_path() / "locales").string();
-				#endif
-			#else
-				#if defined(_WIN32) || defined(__APPLE__)
-					std::filesystem::path epath;
-					#if defined(_WIN32)
-						wchar_t wpath[MAX_PATH]{};
-						GetModuleFileNameW(nullptr, wpath, MAX_PATH);
-						epath = wpath;
-					#elif defined(__APPLE__)
-						char path[PATH_MAX];
-						auto size = sizeof(path);
-						_NSGetExecutablePath(path, &size);
-						epath = path;
-					#endif
-					if (epath.empty())
-					#if defined(_WIN32)
-						return (std::filesystem::current_path() / "locales").string();
-					#else
-						return "/usr/share/locale";
-					#endif
-					auto dir = epath.parent_path();
-					#if defined(__APPLE__)
-						dir = dir.parent_path() / "Resources";
-					#endif
-					return (dir / "locales").string();
-				#else
-					return "/usr/share/locale";
-				#endif
-			#endif
-		}().c_str()
-	);
-	bind_textdomain_codeset("craftive", "UTF-8");
-	textdomain("craftive");
+    auto app = QApplication::instance();
+    if (!app)
+        return;
+
+    QString translationsDir;
+#ifdef _CRAFTIVE_DEBUG
+#ifdef _CRAFTIVE_DEBUGGING_LOCALES_DIR
+    translationsDir = QString::fromUtf8(_CRAFTIVE_DEBUGGING_LOCALES_DIR);
+#else
+    translationsDir = QDir::currentPath() + "/locales";
+#endif
+#else
+#if defined(_WIN32) || defined(__APPLE__)
+    QString   execPath = QApplication::applicationFilePath();
+    QFileInfo fi{execPath};
+    QDir      dir = fi.absoluteDir();
+#if defined(_WIN32)
+    translationsDir = dir.absolutePath() + "/locales";
+#elif defined(__APPLE__)
+    dir.cdUp();
+    translationsDir = dir.absolutePath() + "/Resources/locales";
+#endif
+#else
+    translationsDir = "/usr/share/locale";
+#endif
+#endif
+
+    QTranslator *qtTranslator = new QTranslator{app};
+    if (qtTranslator->load("qt_" + QLocale::system().name(),
+                           QLibraryInfo::path(QLibraryInfo::TranslationsPath)))
+        app->installTranslator(qtTranslator);
+    else
+        delete qtTranslator;
+    QTranslator *appTranslator = new QTranslator{app};
+    QString      localeName    = QLocale::system().name();
+    if (appTranslator->load("craftive_" + localeName, translationsDir))
+        app->installTranslator(appTranslator);
+    else {
+        delete appTranslator;
+        appTranslator = new QTranslator(app);
+        if (appTranslator->load("craftive_en_US", translationsDir))
+            app->installTranslator(appTranslator);
+    }
 }

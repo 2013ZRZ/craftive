@@ -1,6 +1,6 @@
-#include <libintl.h>
+#include <QtCore/QTranslator>
+#include <QtWidgets/QApplication>
 
-#define _(msgid)  gettext(msgid)
-#define _N(msgid) ngettext(msgid)
+#define tr QApplication::tr // Translate
 
 void localizeInit();

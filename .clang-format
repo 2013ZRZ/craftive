@@ -24,11 +24,10 @@ ColumnLimit: 100
 ConstructorInitializerIndentWidth:  4
 ContinuationIndentWidth: 4
 FixNamespaceComments: true
-IndentCaseLabels: false
-IndentPPDirectives: BeforeHash
+IndentCaseLabels: true
 IndentWidth: 4
 MaxEmptyLinesToKeep: 3
 SortIncludes: true
-SortUsingDeclarations: false
+SortUsingDeclarations: true
 Standard: Auto
 UseTab: Never

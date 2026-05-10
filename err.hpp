@@ -12,13 +12,14 @@ constexpr const char *errmsgs[] = {"Extern Error",
                                    "Invalid location in this large-block",
                                    "Failed to parse JSON",
                                    "Invalid email address",
-                                   "Invalid RGB color"};
+                                   "Invalid RGB color",
+                                   "Empty author"};
 
 // Craftive Exceptions
 class CrtExcept : public std::exception {
   private:
-    const uint16_t    code; // Error Code (0x0000 ~ 0xFFFF)
-    const std::string detail;
+    const uint16_t code; // Error Code (0x0000 ~ 0xFFFF)
+    const QString  detail;
 
   public:
     CrtExcept(const uint16_t _code, const is_string auto &_detail, auto &&...args)
@@ -27,8 +28,8 @@ class CrtExcept : public std::exception {
     CrtExcept(const is_string auto &_detail, auto &&...args)
         : CrtExcept(0x0000, _detail, args...) {}
 
-    const std::string &how() const noexcept;           // Return the value of detail
-    const char        *what() const noexcept override; // Return the value of errmsgs[code]
-    const uint16_t     which() const noexcept;         // Return the value of code
-    const std::string  whichStr() const;               // Return the value of code as std::string
+    const QString &how() const noexcept;           // Return the value of detail
+    const char    *what() const noexcept override; // Return the value of errmsgs[code]
+    const uint16_t which() const noexcept;         // Return the value of code
+    const QString  whichStr() const;               // Return the value of code as QString
 };
