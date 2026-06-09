@@ -1,10 +1,10 @@
 #include "crtutils.hpp"
+#include <QtCore/QRegularExpression>
 #include <ctime>
 #include <random>
-#include <regex>
 
-bool isInvalidID(const QStringView &id) {
-    for (const auto it : id.toString().toStdString()) {
+bool isInvalidID(const QString &id) {
+    for (const auto it : id.toStdString()) {
         if (!isalnum(it) && it != '_')
             return true;
     }
@@ -12,11 +12,12 @@ bool isInvalidID(const QStringView &id) {
 }
 
 namespace EmailIdentifierDetail {
-static const std::regex emailre("^\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$");
+static const QRegularExpression emailre{
+    "\\A\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*\\z"};
 }
 
-bool isInvalidEmail(const QStringView &email) {
-    return !std::regex_match(email.toString().toStdString(), EmailIdentifierDetail::emailre);
+bool isInvalidEmail(const QString &email) {
+    return !EmailIdentifierDetail::emailre.match(email).hasMatch();
 }
 
 QString randomID(uint8_t len) {
@@ -35,10 +36,4 @@ QString randomID(uint8_t len) {
             o += '_'; // 62 : '_'
     }
     return o;
-}
-
-QString char32ToQString(const char32_t &c) {
-    char32_t alignedChar;
-    std::memcpy(&alignedChar, &c, sizeof(char32_t));
-    return QString::fromUcs4(&alignedChar, 1);
 }

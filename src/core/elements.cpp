@@ -1,7 +1,12 @@
 #include "elements.hpp"
+#include "QtCore/qdebug.h"
+#include "QtCore/qfiledevice.h"
+#include "QtCore/qstringconverter_base.h"
 #include "crtutils.hpp"
 #include "err.hpp"
-#include <fstream>
+#include <QtCore/QFile>
+#include <QtCore/QStringConverter>
+#include <QtCore/QTextStream>
 
 
 // Definitions in rgb
@@ -33,8 +38,14 @@ Ucc::Ucc(const char32_t _c, const rgb _b, const rgb _f) noexcept
 
 Ucc::Ucc(const char32_t _c, Mode cm, const rgb color) noexcept : c(_c) {
     switch (cm) {
-        case Mode::b: hasB = true; b = color;
-        case Mode::f: hasF = true; f = color;
+        case Mode::b:
+            hasB = true;
+            b    = color;
+            break;
+        case Mode::f:
+            hasF = true;
+            f    = color;
+            break;
     }
 }
 
@@ -64,7 +75,7 @@ void Ucc::fromJson(const json &j) {
 
 json Ucc::toJson() const {
     json j;
-    j["c"] = char32ToQString(c);
+    j["c"] = (*this)();
     if (hasB)
         j["b"] = b.toJson();
     if (hasF)
@@ -72,7 +83,7 @@ json Ucc::toJson() const {
     return j;
 }
 
-QString Ucc::operator()() const { return char32ToQString(c); }
+QString Ucc::operator()() const { return QString::fromUcs4(&c, 1); }
 
 
 // Definitions in BasicCrtClass
@@ -263,10 +274,6 @@ const QString &BasicProduct::getDes() const noexcept { return des; }
 
 void BasicProduct::setDes(const QString &_des) noexcept { des = _des; }
 
-uint32_t BasicProduct::getPrice() const noexcept { return price; }
-
-void BasicProduct::setPrice(uint32_t _price) noexcept { price = _price; }
-
 
 // Definitions in Kit
 
@@ -344,19 +351,31 @@ json Kit::toJson() const {
 }
 
 void Kit::fromFile(const QString &path) {
-    std::ifstream ifs(path.toStdString());
-    if (!ifs)
+    QFile file{path};
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
         throw CrtExcept(tr("from Kit::fromFile(); failed to open the kit file at {} ({})"),
                         path,
-                        strerror(errno));
-    json j;
-    ifs >> j;
-    fromJson(j);
+                        file.errorString());
+    QTextStream in{&file};
+    in.setEncoding(QStringConverter::Utf8);
+    try {
+        fromJson(json::parse(in.readAll()));
+    } catch (const json::parse_error &e) {
+        throw CrtExcept(0x0006, tr("from Kit::fromFile() ({})"), e.what());
+    }
+    file.close();
 }
 
-void Kit::toFile(const QString &path, const uint8_t tabsize) {
-    std::ofstream ofs(path.toStdString());
-    ofs << std::setw(tabsize) << toJson() << std::endl;
+void Kit::toFile(const QString &path, const uint8_t indent) {
+    QFile file{path};
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+        throw CrtExcept(tr("from Kit::toFile(); failed to open the kit file at {} ({})"),
+                        path,
+                        file.errorString());
+    QTextStream out{&file};
+    out.setEncoding(QStringConverter::Utf8);
+    out << QString::fromStdString(toJson().dump(indent));
+    file.close();
 }
 
 
