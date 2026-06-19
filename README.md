@@ -1,8 +1,8 @@
-<div style="text-align:center">
+<div align="center">
     <img src="assets/images/logo.svg" width="100" height="100">
     <h1>Craftive</h1>
 
-![Craft your world with your creativity](https://readme-typing-svg.demolab.com?font=JetBrains+Mono&duration=2000&color=FFFFFF&center=true&multiline=true&repeat=false&width=400&height=60&lines=Craft+your+world;with+your+creativity)
+![Craft your world with your creativity](https://readme-typing-svg.demolab.com?font=JetBrains+Mono&duration=2000&color=B6C7EA&center=true&multiline=true&repeat=false&width=400&height=60&lines=Craft+your+world;with+your+creativity)
 
 ![License](https://img.shields.io/badge/License-BSD_3--Clause-green?style=for-the-badge)
 ![GitHub Repo Stars](https://img.shields.io/github/stars/2013ZRZ/craftive?logo=github&style=for-the-badge&color=yellow)
