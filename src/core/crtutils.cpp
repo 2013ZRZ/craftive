@@ -75,6 +75,6 @@ QString randomID(uint8_t len) {
 QString separateElemID(const QString &s, bool part) {
     auto list = s.split(u'/');
     if (list.size() != 2)
-        throw CrtExcept(0x000C, QCoreApplication::tr("from separateElemID(); The ID is {}"), s);
+        throw CrtExcept(0x000C, QCoreApplication::tr("from separateElemID(); The ID is %1"), s);
     return list[part];
 }

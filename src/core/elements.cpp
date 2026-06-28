@@ -58,7 +58,7 @@ void Ucc::fromJson(const json &j) {
     if (_c.size() > sizeof(char32_t))
         throw CrtExcept(
             0x0003,
-            tr("from Ucc::fromJson(); the string to parse is {} and it has too many characters"),
+            tr("from Ucc::fromJson(); the string to parse is %1 and it has too many characters"),
             _c);
     c = _c.toStdU32String()[0];
     if (j.find("b") != j.end()) {
@@ -189,7 +189,7 @@ const Ucc &LBlock::getPos(const size_t r, const size_t c) const {
     if (r >= lblk.size() || c >= (lblk.empty() ? 0 : lblk[r].size()))
         throw CrtExcept(
             0x0005,
-            tr("from LBlock::getPos(); the required position is ({},{}), but it's out of range"),
+            tr("from LBlock::getPos(); the required position is (%1,%2), but it's out of range"),
             r,
             c);
     return lblk[r][c];
@@ -199,7 +199,7 @@ void LBlock::setPos(const size_t r, const size_t c, const Ucc &blk) {
     if (r >= lblk.size() || c >= (lblk.empty() ? 0 : lblk[r].size()))
         throw CrtExcept(
             0x0005,
-            tr("from LBlock::setPos(); the required position is ({},{}), but it's out of range"),
+            tr("from LBlock::setPos(); the required position is (%1,%2), but it's out of range"),
             r,
             c);
     lblk[r][c] = blk;
@@ -212,7 +212,7 @@ size_t LBlock::getW(const size_t r) const {
         return lblk[r].size();
     else
         throw CrtExcept(0x0005,
-                        tr("from LBlock::getW(); the required row number is {}, but there's only "
+                        tr("from LBlock::getW(); the required row number is %1, but there's only "
                            "%n row(s) in this large-block",
                            nullptr,
                            lblk.size()),
@@ -239,7 +239,7 @@ void LBlock::fromJson(const json &j) {
     w.resize(j.at("lblk").size());
     for (size_t r{}; r < j.at("lblk").size(); r++) {
         if (!j.at("lblk")[r].is_array())
-            throw CrtExcept(0x0006, tr("from LBlock::fromJson(); Row {} isn't an array"), r + 1);
+            throw CrtExcept(0x0006, tr("from LBlock::fromJson(); Row %1 isn't an array"), r + 1);
         for (size_t c{}; c < j.at("lblk")[0].size(); c++) {
             lblk[r].resize(j.at("lblk")[r].size());
             setPos(r, c, Ucc{j.at("lblk")[r][c]});
@@ -275,7 +275,7 @@ void BasicProduct::setAuthor(const QString &_author) {
     if (isInvalidEmail(_author))
         throw CrtExcept(
             0x0007,
-            tr("from BasicProduct::setAuthor(); the string is \"{}\" and it isn't a valid "
+            tr("from BasicProduct::setAuthor(); the string is \"%1\" and it isn't a valid "
                "email address"),
             _author);
     else
@@ -290,7 +290,8 @@ void BasicProduct::fromFile(const QString &path) {
     QFile file{path};
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
         throw CrtExcept(
-            tr("from BasicProduct::fromFile(); failed to open the product file at {} ({})"),
+            0x0000,
+            tr("from BasicProduct::fromFile(); failed to open the product file at %1 (%2)"),
             path,
             file.errorString());
     QTextStream in{&file};
@@ -298,7 +299,7 @@ void BasicProduct::fromFile(const QString &path) {
     try {
         fromJson(json::parse(in.readAll()));
     } catch (const json::parse_error &e) {
-        throw CrtExcept(0x0006, tr("from BasicProduct::fromFile() ({})"), e.what());
+        throw CrtExcept(0x0006, tr("from BasicProduct::fromFile() (%1)"), e.what());
     }
     file.close();
 }
@@ -307,7 +308,8 @@ void BasicProduct::toFile(const QString &path, const uint8_t indent) {
     QFile file{path};
     if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
         throw CrtExcept(
-            tr("from BasicProduct::toFile(); failed to open the product file at {} ({})"),
+            0x0000,
+            tr("from BasicProduct::toFile(); failed to open the product file at %1 (%2)"),
             path,
             file.errorString());
     QTextStream out{&file};
@@ -340,7 +342,7 @@ void Kit::operator-=(const QString &_id) {
     if (erased_blks == 0 && erased_lblks == 0)
         throw CrtExcept(
             0x0004,
-            tr("from Kit::operator-=; no one's id is \"{}\" in both blocks and large-blocks"),
+            tr("from Kit::operator-=; no one's id is \"%1\" in both blocks and large-blocks"),
             _id);
 }
 
@@ -363,7 +365,7 @@ auto Kit::operator[](const QString &_id) -> const std::variant<Block, LBlock> {
             return i;
     throw CrtExcept(
         0x0004,
-        tr("from Kit::operator[]; no one's id is \"{}\" in both blocks and large-blocks"),
+        tr("from Kit::operator[]; no one's id is \"%1\" in both blocks and large-blocks"),
         _id);
 }
 
@@ -383,7 +385,7 @@ void Kit::fromJson(const json &j) {
     else
         throw CrtExcept(
             0x0009,
-            tr("from Kit::fromJson(); couldn't find \"author\" in the json of Kit {} (ID: {})"),
+            tr("from Kit::fromJson(); couldn't find \"author\" in the json of Kit %1 (ID: %2)"),
             name,
             id);
 
@@ -394,7 +396,7 @@ void Kit::fromJson(const json &j) {
     else
         throw CrtExcept(
             0x000D,
-            tr("from Kit::fromJson(); couldn't find \"ver\" in the json of Kit {} (ID: {})"),
+            tr("from Kit::fromJson(); couldn't find \"ver\" in the json of Kit %1 (ID: %2)"),
             name,
             id);
 
@@ -434,7 +436,7 @@ const Ucc Map::operator[](const size_t r, const size_t c) {
     if (r > data.size() || c > data.empty() ? 0 : data[r].size())
         throw CrtExcept(
             0x0009,
-            tr("from Map::operator[]; the required position is ({},{}), but it's out of range"),
+            tr("from Map::operator[]; the required position is (%1,%2), but it's out of range"),
             r,
             c);
     if (data[r][c].index()) {                             // is QSharedPointer<LBlock>
@@ -461,7 +463,7 @@ template <> auto Map::get<0>(const size_t r, const size_t c) {
     if (r > data.size() || c > data.empty() ? 0 : data[r].size())
         throw CrtExcept(
             0x0009,
-            tr("from Map::get<0>(); the required position is ({},{}), but it's out of range"),
+            tr("from Map::get<0>(); the required position is (%1,%2), but it's out of range"),
             r,
             c);
     return std::get<0>(data[r][c]) == nullptr ? Block{} : *std::get<0>(data[r][c]);
@@ -471,7 +473,7 @@ template <> auto Map::get<1>(const size_t r, const size_t c) {
     if (r > data.size() || c > data.empty() ? 0 : data[r].size())
         throw CrtExcept(
             0x0009,
-            tr("from Map::get<1>(); the required position is ({},{}), but it's out of range"),
+            tr("from Map::get<1>(); the required position is (%1,%2), but it's out of range"),
             r,
             c);
     if (std::get<1>(data[r][c]) != nullptr) // is at the upper left corner
@@ -504,7 +506,7 @@ void Map::fromJson(const json &j) {
     else
         throw CrtExcept(
             0x0009,
-            tr("from Map::fromJson(); couldn't find \"author\" in the json of Map {} (ID: {})"),
+            tr("from Map::fromJson(); couldn't find \"author\" in the json of Map %1 (ID: %2)"),
             name,
             id);
 
@@ -515,29 +517,29 @@ void Map::fromJson(const json &j) {
     else
         throw CrtExcept(
             0x000D,
-            tr("from Map::fromJson(); couldn't find \"ver\" in the json of Kit {} (ID: {})"),
+            tr("from Map::fromJson(); couldn't find \"ver\" in the json of Map %1 (ID: %2)"),
             name,
             id);
 
     if (j.find("data") == j.end())
         throw CrtExcept(
             0x000A,
-            tr("from Map::fromJson(); couldn't find \"data\" in the json of Map {} (ID: {})"),
+            tr("from Map::fromJson(); couldn't find \"data\" in the json of Map %1 (ID: %2)"),
             name,
             id);
 
     if (!j["data"].is_array())
         throw CrtExcept(
             0x0006,
-            tr("from Map::fromJson(); \"data\" in the json of Map {} (ID: {}) isn't an array"),
+            tr("from Map::fromJson(); \"data\" in the json of Map %1 (ID: %2) isn't an array"),
             name,
             id);
 
     for (size_t r{}; r < j["data"].size(); r++) {
         if (!j["data"][r].is_array())
             throw CrtExcept(0x0006,
-                            tr("from Map::fromJson(); Row {} in \"data\" in the json of Map {} "
-                               "(ID: {}) isn't an array"),
+                            tr("from Map::fromJson(); Row %1 in \"data\" in the json of Map %2 "
+                               "(ID: %3) isn't an array"),
                             r,
                             name,
                             id);
@@ -545,8 +547,8 @@ void Map::fromJson(const json &j) {
             if (!j["data"][r][c].is_string())
                 throw CrtExcept(
                     0x0006,
-                    tr("from Map::fromJson(); ({},{})'s ID in \"data\" in the json of Map {} "
-                       "(ID: {}) isn't a string"),
+                    tr("from Map::fromJson(); (%1,%2)'s ID in \"data\" in the json of Map %3 "
+                       "(ID: %4) isn't a string"),
                     r,
                     c,
                     name,
@@ -567,9 +569,9 @@ void Map::fromJson(const json &j) {
             }
             if (!found)
                 throw CrtExcept(0x000B,
-                                tr("from Map::fromJson(); couldn't find the kit (ID: {}) where "
-                                   "contains ({},{}) in the json of Map {} "
-                                   "(ID: {}), please load this kit and try again"),
+                                tr("from Map::fromJson(); couldn't find the kit (ID: %1) where "
+                                   "contains (%2,%3) in the json of Map %4 "
+                                   "(ID: %5), please load this kit and try again"),
                                 separateElemID(j["data"][r][c].get<QString>(), 0),
                                 r,
                                 c,

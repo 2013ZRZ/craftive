@@ -194,7 +194,7 @@ class Map : public BasicProduct {
         if (r > data.size() || c > data.empty() ? 0 : data[r].size())
             throw CrtExcept(
                 0x0009,
-                tr("from Map::set(); the required position is ({},{}), but it's out of range"),
+                tr("from Map::set(); the required position is (%1,%2), but it's out of range"),
                 r,
                 c);
         data[r][c] = QSharedPointer<T>{&element};

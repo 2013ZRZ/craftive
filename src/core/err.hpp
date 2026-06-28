@@ -20,19 +20,17 @@ constexpr const char *errmsgs[] = {"Extern Error",
                                    "Empty product version"};
 
 // Craftive Exceptions
-class CrtExcept : public std::exception {
+class CrtExcept {
   private:
     const uint16_t code; // Error Code (0x0000 ~ 0xFFFF)
     const QString  detail;
 
   public:
-    CrtExcept(const uint16_t _code, const isStr auto &_detail, auto &&...args)
-        : code(_code), detail(std::vformat(_detail, std::make_format_args(args...))) {}
+    CrtExcept(const uint16_t _code, const QString &_detail, auto &&...args)
+        : code(_code), detail(_detail.arg(args...)) {}
 
-    CrtExcept(const isStr auto &_detail, auto &&...args) : CrtExcept(0x0000, _detail, args...) {}
-
-    const QString &how() const noexcept;           // Return the value of detail
-    const char    *what() const noexcept override; // Return the value of errmsgs[code]
-    const uint16_t which() const noexcept;         // Return the value of code
-    const QString  whichStr() const;               // Return the value of code as QString
+    const QString &how() const noexcept;   // Return the value of detail
+    const QString  what() const noexcept;  // Return the value of errmsgs[code]
+    const uint16_t which() const noexcept; // Return the value of code
+    const QString  whichStr() const;       // Return the value of code as QString
 };
