@@ -556,7 +556,7 @@ void Map::fromJson(const json &j) {
             bool found{false};
             for (size_t i{}; i < CoreStatus::instance().loadedKits.size(); i++) {
                 if (CoreStatus::instance().loadedKits[i]->getID() ==
-                    separateElemID(j["data"][r][c].get<QString>(), 0)) {
+                    separateElemID(j["data"][r][c].get<QString>()).kit) {
                     CoreStatus::instance()
                         .loadedKits[i]
                         ->operator[](j["data"][r][c].get<QString>())
@@ -570,7 +570,7 @@ void Map::fromJson(const json &j) {
                                 tr("from Map::fromJson(); couldn't find the kit (ID: %1) where "
                                    "contains (%2,%3) in the json of Map %4 "
                                    "(ID: %5), please load this kit and try again"),
-                                separateElemID(j["data"][r][c].get<QString>(), 0),
+                                separateElemID(j["data"][r][c].get<QString>()).kit,
                                 r,
                                 c,
                                 name,

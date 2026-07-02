@@ -10,12 +10,6 @@
 using json = nlohmann::json;
 
 template <typename T>
-concept isStr =
-    std::same_as<std::decay_t<T>, char *> || std::same_as<std::decay_t<T>, std::string> ||
-    std::same_as<std::decay_t<T>, std::string_view> || std::same_as<std::decay_t<T>, QChar *> ||
-    std::same_as<std::decay_t<T>, QString> || std::same_as<std::decay_t<T>, QStringView>;
-
-template <typename T>
 concept isJson = std::same_as<std::decay_t<T>, json>;
 
 struct Version {
@@ -37,10 +31,13 @@ bool    isInvalidElemID(const QString &id);
 bool    isInvalidEmail(const QString &email);
 QString randomID(uint8_t len = 50);
 
-/** @param s    element ID like "kit/elem"
- *  @param part 0 for kit or 1 for elem
- */
-QString separateElemID(const QString &s, bool part);
+namespace IDSeparatorDetail {
+struct SeparatedElemID {
+    QString kit, elem;
+};
+} // namespace IDSeparatorDetail
+
+auto separateElemID(const QString &s) -> IDSeparatorDetail::SeparatedElemID;
 
 NLOHMANN_JSON_NAMESPACE_BEGIN
 template <> struct adl_serializer<QString> {

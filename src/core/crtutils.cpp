@@ -72,9 +72,9 @@ QString randomID(uint8_t len) {
     return o;
 }
 
-QString separateElemID(const QString &s, bool part) {
+auto separateElemID(const QString &s) -> IDSeparatorDetail::SeparatedElemID {
     auto list = s.split(u'/');
     if (list.size() != 2)
         throw CrtExcept(0x000C, QCoreApplication::tr("from separateElemID(); The ID is %1"), s);
-    return list[part];
+    return IDSeparatorDetail::SeparatedElemID{.kit = list[0], .elem = list[1]};
 }
