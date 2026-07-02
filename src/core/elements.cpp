@@ -269,6 +269,8 @@ json LBlock::toJson() const {
 
 // Definitions in BasicProduct
 
+BasicProduct::BasicProduct(const QString &path) { fromFile(path); }
+
 const QString &BasicProduct::getAuthor() const noexcept { return author; }
 
 void BasicProduct::setAuthor(const QString &_author) {
@@ -322,7 +324,7 @@ void BasicProduct::toFile(const QString &path, const uint8_t indent) {
 
 // Definitions in Kit
 
-Kit::Kit(const QString &path) { fromFile(path); }
+// Kit::Kit(const QString &path) { fromFile(path); }
 
 const BlockL &Kit::getBlks() const noexcept { return blks; }
 
@@ -426,8 +428,6 @@ json Kit::toJson() const {
 
 // Definitions in Map
 
-Map::Map(const QString &path) { fromFile(path); }
-
 const MapDataType &Map::getData() const noexcept { return data; }
 
 void Map::setData(const MapDataType &_data) noexcept { data = _data; }
@@ -439,7 +439,7 @@ const Ucc Map::operator[](const size_t r, const size_t c) {
             tr("from Map::operator[]; the required position is (%1,%2), but it's out of range"),
             r,
             c);
-    if (data[r][c].index()) {                             // is QSharedPointer<LBlock>
+    if (data[r][c].index() == 1) {                        // is QSharedPointer<LBlock>
         if (std::get<1>(data[r][c]) != nullptr)           // is at the upper left corner
             return std::get<1>(data[r][c])->getPos(0, 0); // getPos directly
         else {
@@ -557,12 +557,10 @@ void Map::fromJson(const json &j) {
             for (size_t i{}; i < CoreStatus::instance().loadedKits.size(); i++) {
                 if (CoreStatus::instance().loadedKits[i]->getID() ==
                     separateElemID(j["data"][r][c].get<QString>(), 0)) {
-                    auto placeholder = CoreStatus::instance().loadedKits[i]->operator[](
-                        j["data"][r][c].get<QString>());
-                    if (placeholder.index() == 0)
-                        set(r, c, std::get<0>(placeholder));
-                    else
-                        set(r, c, std::get<1>(placeholder));
+                    CoreStatus::instance()
+                        .loadedKits[i]
+                        ->operator[](j["data"][r][c].get<QString>())
+                        .visit([&](auto &&arg) { set(r, c, arg); });
                     found = true;
                     break;
                 }

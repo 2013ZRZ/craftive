@@ -5,10 +5,7 @@
 #include "localize.hpp"
 #include <QtCore/QSharedPointer>
 #include <concepts>
-#include <type_traits>
 #include <variant>
-
-struct CoreStatus;
 
 struct rgb {
     uint8_t r;
@@ -51,6 +48,7 @@ struct Ucc {
     Ucc(const char32_t _c, Mode cm, const rgb color) noexcept;
     Ucc(const char32_t _c, const rgb _b, const rgb _f) noexcept;
     Ucc(const isJson auto &j);
+
     void    fromJson(const json &j);
     json    toJson() const;
     QString operator()() const; // Get the character as QString
@@ -137,6 +135,8 @@ class BasicProduct : public BasicCrtClass {
 
   public:
     BasicProduct() = default;
+    explicit BasicProduct(const QString &path);
+
     const QString &getAuthor() const noexcept;
     void           setAuthor(const QString &_author);
     const QString &getDes() const noexcept;
@@ -155,7 +155,6 @@ class Kit : public BasicProduct {
 
   public:
     Kit() = default;
-    explicit Kit(const QString &path);
 
     const BlockL  &getBlks() const noexcept;
     void           clearBlks() noexcept;
@@ -177,9 +176,7 @@ class Map : public BasicProduct {
     MapDataType data; // nullptr: null(0) / filled by a large-block(1)
 
   public:
-    Map()  = default;
-    ~Map() = default;
-    explicit Map(const QString &path);
+    Map() = default;
 
     const MapDataType     &getData() const noexcept;
     void                   setData(const MapDataType &_data) noexcept;

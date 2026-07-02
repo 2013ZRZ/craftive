@@ -6,4 +6,4 @@ const QString CrtExcept::what() const noexcept { return QCoreApplication::tr(err
 
 const uint16_t CrtExcept::which() const noexcept { return code; }
 
-const QString CrtExcept::whichStr() const { return QString{"0x%1"}.arg(code, 4, 16, u'0'); }
+const QString CrtExcept::whichStr() const { return QString{"0x%1"}.arg(code, 4, 16, QChar{'0'}); }
