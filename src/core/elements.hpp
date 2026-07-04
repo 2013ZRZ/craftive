@@ -1,8 +1,8 @@
 #pragma once
 
 #include "crtutils.hpp"
-#include "err.hpp"
-#include "localize.hpp"
+#include "i18n.hpp"
+#include <QtCore/QHash>
 #include <QtCore/QSharedPointer>
 #include <concepts>
 #include <variant>
@@ -12,10 +12,9 @@ struct rgb {
     uint8_t g;
     uint8_t b;
 
-    CRAFTIVE_DEF_TR
-
     rgb() noexcept;
     rgb(uint8_t _r, uint8_t _g, uint8_t _b) noexcept;
+
     void fromJson(const json &j);
     json toJson() const;
 }; // struct rgb
@@ -41,8 +40,6 @@ struct Ucc {
     bool     hasB{false}; // Whether it has background color
     bool     hasF{false}; // Whether it has foreground color
 
-    CRAFTIVE_DEF_TR
-
     Ucc() = default;
     Ucc(const char32_t _c) noexcept;
     Ucc(const char32_t _c, Mode cm, const rgb color) noexcept;
@@ -54,15 +51,10 @@ struct Ucc {
     QString operator()() const; // Get the character as QString
 }; // struct Ucc
 
-using UccL  = QList<Ucc>;
-using UccL2 = QList<QList<Ucc>>;
-
 class BasicCrtClass {
   protected:
     QString id;
     QString name;
-
-    CRAFTIVE_DEF_TR
 
   public:
     const QString &getID() const noexcept;
@@ -81,6 +73,8 @@ class BasicElement : public BasicCrtClass {
 };
 
 class Block : public BasicElement {
+    friend class Kit;
+
   private:
     Ucc blk;
 
@@ -96,33 +90,31 @@ class Block : public BasicElement {
     json       toJson() const override;
 }; // class Block
 
-using BlockL = QList<Block>;
-
 // Large block (a rectangular combination of blocks).
 class LBlock : public BasicElement {
+    friend class Kit;
+
   private:
-    UccL2         lblk;
-    QList<size_t> w; // for printing for each row
+    QList<QList<Ucc>> lblk;
+    QList<size_t>     w; // for printing for each row
 
   public:
     LBlock() = default;
     LBlock(const size_t w, const size_t h);
     LBlock(const size_t w, const size_t h, const QString &_id, const QString &_name);
-    LBlock(const UccL2 &_lblk, const QString &_id, const QString &_name);
+    LBlock(const QList<QList<Ucc>> &_lblk, const QString &_id, const QString &_name);
     explicit LBlock(const isJson auto &j);
 
-    const UccL2 &getLblk() const noexcept;
-    void         setLblk(const UccL2 &_lblk);
-    const Ucc   &getPos(const size_t r, const size_t c) const;
-    void         setPos(const size_t r, const size_t c, const Ucc &blk);
-    size_t       getW(const size_t r) const;
-    auto         getFullW() const noexcept -> const QList<size_t> &;
-    void         setW(const size_t r, const size_t _w);
-    void         fromJson(const json &j) override;
-    json         toJson() const override;
+    auto       getLblk() const noexcept -> const QList<QList<Ucc>> &;
+    void       setLblk(const QList<QList<Ucc>> &_lblk);
+    const Ucc &getPos(const size_t r, const size_t c) const;
+    void       setPos(const size_t r, const size_t c, const Ucc &blk);
+    size_t     getW(const size_t r) const;
+    auto       getFullW() const noexcept -> const QList<size_t> &;
+    void       setW(const size_t r, const size_t _w);
+    void       fromJson(const json &j) override;
+    json       toJson() const override;
 }; // class LBlock
-
-using LBlockL = QList<LBlock>;
 
 template <class T>
 concept isElem = std::derived_from<std::decay_t<T>, BasicElement>;
@@ -150,23 +142,23 @@ class BasicProduct : public BasicCrtClass {
 // Where stores data of blocks and large-blocks.
 class Kit : public BasicProduct {
   private:
-    BlockL  blks;
-    LBlockL lblks;
+    QHash<QStringView, Block>  blks;
+    QHash<QStringView, LBlock> lblks;
 
   public:
     Kit() = default;
 
-    const BlockL  &getBlks() const noexcept;
-    void           clearBlks() noexcept;
-    const LBlockL &getLblks() const noexcept;
-    void           clearLblks() noexcept;
-    void           operator+=(const Block &blk);
-    void           operator+=(const LBlock &lblk);
-    void           operator-=(const QString &_id);
-    bool           contains(const QString &_id);
-    auto           operator[](const QString &_id) -> const std::variant<Block, LBlock>;
-    void           fromJson(const json &j) override;
-    json           toJson() const override;
+    auto getBlks() const noexcept -> const QHash<QStringView, Block> &;
+    void clearBlks() noexcept;
+    auto getLblks() const noexcept -> const QHash<QStringView, LBlock> &;
+    void clearLblks() noexcept;
+    void operator+=(Block &&blk) noexcept;
+    void operator+=(LBlock &&lblk) noexcept;
+    void operator-=(const QString &_id);
+    bool contains(const QString &_id) noexcept;
+    auto operator[](const QString &_id) -> const std::variant<Block, LBlock>;
+    void fromJson(const json &j) override;
+    json toJson() const override;
 }; // class Kit
 
 using MapDataType = QList<QList<std::variant<QSharedPointer<Block>, QSharedPointer<LBlock>>>>;
@@ -188,12 +180,6 @@ class Map : public BasicProduct {
     void set(const size_t r, const size_t c, T &element)
         requires isElem<T>
     {
-        if (r > data.size() || c > data.empty() ? 0 : data[r].size())
-            throw CrtExcept(
-                0x0009,
-                tr("from Map::set(); the required position is (%1,%2), but it's out of range"),
-                r,
-                c);
         data[r][c] = QSharedPointer<T>{&element};
         // Note: (r, c) will be covered whether there's already a ucc or not
     }

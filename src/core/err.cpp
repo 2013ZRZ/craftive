@@ -2,7 +2,7 @@
 
 const QString &CrtExcept::how() const noexcept { return detail; }
 
-const QString CrtExcept::what() const noexcept { return QCoreApplication::tr(errmsgs[code]); }
+const QString CrtExcept::what() const noexcept { return tr(errmsgs[code]); }
 
 const uint16_t CrtExcept::which() const noexcept { return code; }
 

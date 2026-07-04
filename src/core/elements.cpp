@@ -1,6 +1,7 @@
 #include "elements.hpp"
 #include "crtutils.hpp"
 #include "err.hpp"
+#include "i18n.hpp"
 #include "status.hpp"
 #include <QtCore/QFile>
 #include <QtCore/QStringConverter>
@@ -169,7 +170,7 @@ LBlock::LBlock(const size_t _w, const size_t _h, const QString &_id, const QStri
     setName(_name);
 }
 
-LBlock::LBlock(const UccL2 &_lblk, const QString &_id, const QString &_name) {
+LBlock::LBlock(const QList<QList<Ucc>> &_lblk, const QString &_id, const QString &_name) {
     setLblk(_lblk);
     setID(_id);
     setName(_name);
@@ -177,9 +178,9 @@ LBlock::LBlock(const UccL2 &_lblk, const QString &_id, const QString &_name) {
 
 LBlock::LBlock(const isJson auto &j) { fromJson(j); }
 
-const UccL2 &LBlock::getLblk() const noexcept { return lblk; }
+const QList<QList<Ucc>> &LBlock::getLblk() const noexcept { return lblk; }
 
-void LBlock::setLblk(const UccL2 &_lblk) {
+void LBlock::setLblk(const QList<QList<Ucc>> &_lblk) {
     lblk = _lblk;
     w.resize(lblk.size());
     for (size_t i{}; i < w.size(); i++) w[i] = lblk[i].size();
@@ -324,51 +325,48 @@ void BasicProduct::toFile(const QString &path, const uint8_t indent) {
 
 // Definitions in Kit
 
-// Kit::Kit(const QString &path) { fromFile(path); }
+auto Kit::getBlks() const noexcept -> const QHash<QStringView, Block> & { return blks; }
 
-const BlockL &Kit::getBlks() const noexcept { return blks; }
-
-void Kit::clearBlks() noexcept { blks.clear(); }
-
-const LBlockL &Kit::getLblks() const noexcept { return lblks; }
-
-void Kit::clearLblks() noexcept { lblks.clear(); }
-
-void Kit::operator+=(const Block &blk) { blks.emplaceBack(blk); }
-
-void Kit::operator+=(const LBlock &lblk) { lblks.emplaceBack(lblk); }
-
-void Kit::operator-=(const QString &_id) {
-    auto erased_blks  = erase_if(blks, [&_id](const Block &blk) { return blk.getID() == _id; });
-    auto erased_lblks = erase_if(lblks, [&_id](const LBlock &lblk) { return lblk.getID() == _id; });
-    if (erased_blks == 0 && erased_lblks == 0)
-        throw CrtExcept(
-            0x0004,
-            tr("from Kit::operator-=; no one's id is \"%1\" in both blocks and large-blocks"),
-            _id);
+void Kit::clearBlks() noexcept {
+    blks.clear();
+    blks.squeeze();
 }
 
-bool Kit::contains(const QString &_id) {
-    for (const auto &i : blks)
-        if (i.getID() == _id)
-            return true;
-    for (const auto &i : lblks)
-        if (i.getID() == _id)
-            return true;
-    return false;
+auto Kit::getLblks() const noexcept -> const QHash<QStringView, LBlock> & { return lblks; }
+
+void Kit::clearLblks() noexcept {
+    lblks.clear();
+    lblks.squeeze();
+}
+
+void Kit::operator+=(Block &&blk) noexcept { blks.insert(blk.id, blk); }
+
+void Kit::operator+=(LBlock &&lblk) noexcept { lblks.insert(lblk.id, lblk); }
+
+void Kit::operator-=(const QString &_id) {
+    if (!(blks.remove(_id) || lblks.remove(_id)))
+        throw CrtExcept(
+            0x0004,
+            tr("from Kit::operator-=; this kit doesn't contain an element who's ID is \"%1\""),
+            _id);
+    blks.squeeze();
+    lblks.squeeze();
+}
+
+bool Kit::contains(const QString &_id) noexcept {
+    return blks.contains(_id) || lblks.contains(_id);
 }
 
 auto Kit::operator[](const QString &_id) -> const std::variant<Block, LBlock> {
-    for (const auto &i : blks)
-        if (i.getID() == _id)
-            return i;
-    for (const auto &i : lblks)
-        if (i.getID() == _id)
-            return i;
-    throw CrtExcept(
-        0x0004,
-        tr("from Kit::operator[]; no one's id is \"%1\" in both blocks and large-blocks"),
-        _id);
+    if (blks.contains(_id))
+        return blks[_id];
+    else if (lblks.contains(_id))
+        return lblks[_id];
+    else
+        throw CrtExcept(
+            0x0004,
+            tr("from Kit::operator[]; this kit doesn't contain an element who's ID is \"%1\""),
+            _id);
 }
 
 void Kit::fromJson(const json &j) {
@@ -435,7 +433,7 @@ void Map::setData(const MapDataType &_data) noexcept { data = _data; }
 const Ucc Map::operator[](const size_t r, const size_t c) {
     if (r > data.size() || c > data.empty() ? 0 : data[r].size())
         throw CrtExcept(
-            0x0009,
+            0x000E,
             tr("from Map::operator[]; the required position is (%1,%2), but it's out of range"),
             r,
             c);
@@ -462,7 +460,7 @@ const Ucc Map::operator[](const size_t r, const size_t c) {
 template <> auto Map::get<0>(const size_t r, const size_t c) {
     if (r > data.size() || c > data.empty() ? 0 : data[r].size())
         throw CrtExcept(
-            0x0009,
+            0x000E,
             tr("from Map::get<0>(); the required position is (%1,%2), but it's out of range"),
             r,
             c);
@@ -472,7 +470,7 @@ template <> auto Map::get<0>(const size_t r, const size_t c) {
 template <> auto Map::get<1>(const size_t r, const size_t c) {
     if (r > data.size() || c > data.empty() ? 0 : data[r].size())
         throw CrtExcept(
-            0x0009,
+            0x000E,
             tr("from Map::get<1>(); the required position is (%1,%2), but it's out of range"),
             r,
             c);
@@ -553,28 +551,33 @@ void Map::fromJson(const json &j) {
                     c,
                     name,
                     id);
-            bool found{false};
-            for (size_t i{}; i < CoreStatus::instance().loadedKits.size(); i++) {
-                if (CoreStatus::instance().loadedKits[i]->getID() ==
-                    separateElemID(j["data"][r][c].get<QString>()).kit) {
-                    CoreStatus::instance()
-                        .loadedKits[i]
-                        ->operator[](j["data"][r][c].get<QString>())
-                        .visit([&](auto &&arg) { set(r, c, arg); });
-                    found = true;
-                    break;
-                }
-            }
-            if (!found)
+            auto elemFullID = j["data"][r][c].get<QString>();
+            if (!CoreStatus::instance().containsKit(separateElemID(elemFullID).kit))
                 throw CrtExcept(0x000B,
                                 tr("from Map::fromJson(); couldn't find the kit (ID: %1) where "
-                                   "contains (%2,%3) in the json of Map %4 "
-                                   "(ID: %5), please load this kit and try again"),
-                                separateElemID(j["data"][r][c].get<QString>()).kit,
+                                   "contains the element at (%2,%3) (ID: %4) in the json of Map %5 "
+                                   "(ID: %6), please load this kit and try again"),
+                                separateElemID(elemFullID).kit,
                                 r,
                                 c,
+                                elemFullID,
                                 name,
                                 id);
+            auto &targetKit =
+                CoreStatus::instance().getKit(separateElemID(j["data"][r][c].get<QString>()).kit);
+            if (!targetKit.contains(elemFullID))
+                throw CrtExcept(0x0004,
+                                tr("from Map::fromJson(); Kit %1 (ID: %2) doesn't contain the "
+                                   "element at (%3,%4) (ID: %5) in Map %6 (ID: %7)"),
+                                targetKit.getName(),
+                                targetKit.getID(),
+                                r,
+                                c,
+                                elemFullID,
+                                name,
+                                id);
+            else
+                targetKit[elemFullID].visit([&](auto &&arg) { set(r, c, arg); });
         }
     }
 }

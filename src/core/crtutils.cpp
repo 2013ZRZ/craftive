@@ -1,5 +1,6 @@
 #include "crtutils.hpp"
 #include "err.hpp"
+#include "i18n.hpp"
 #include <QtCore/QRegularExpression>
 #include <ctime>
 #include <random>
@@ -24,10 +25,9 @@ QString Version::operator()() const { return QString{"%1.%2.%3"}.arg(major, mino
 void Version::fromJson(const json &j) {
     // j should be an array like [x, y, z] for "x.y.z"
     if (!j.is_array())
-        throw CrtExcept(
-            0x0006,
-            QCoreApplication::tr("from Version::fromJson(); the version's json isn't an array. It "
-                                 "should be like [x, y, z] for \"x.y.z\""));
+        throw CrtExcept(0x0006,
+                        tr("from Version::fromJson(); the version's json isn't an array. It "
+                           "should be like [x, y, z] for \"x.y.z\""));
     major = j[0];
     minor = j[1];
     patch = j[2];
@@ -72,9 +72,9 @@ QString randomID(uint8_t len) {
     return o;
 }
 
-auto separateElemID(const QString &s) -> IDSeparatorDetail::SeparatedElemID {
-    auto list = s.split(u'/');
+static auto separateElemID(const QString &s) -> IDSeparatorDetail::SeparatedElemID {
+    auto list = s.split(QChar{u'/'});
     if (list.size() != 2)
-        throw CrtExcept(0x000C, QCoreApplication::tr("from separateElemID(); The ID is %1"), s);
+        throw CrtExcept(0x000C, tr("from separateElemID(); The ID is %1"), s);
     return IDSeparatorDetail::SeparatedElemID{.kit = list[0], .elem = list[1]};
 }

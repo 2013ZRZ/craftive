@@ -37,7 +37,7 @@ struct SeparatedElemID {
 };
 } // namespace IDSeparatorDetail
 
-auto separateElemID(const QString &s) -> IDSeparatorDetail::SeparatedElemID;
+static auto separateElemID(const QString &s) -> IDSeparatorDetail::SeparatedElemID;
 
 NLOHMANN_JSON_NAMESPACE_BEGIN
 template <> struct adl_serializer<QString> {

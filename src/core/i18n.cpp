@@ -1,11 +1,11 @@
-#include "localize.hpp"
+#include "i18n.hpp"
 #include <QtCore/QDir>
 #include <QtCore/QFileInfo>
 #include <QtCore/QLibraryInfo>
 #include <QtCore/QString>
 
-void localizeInit() {
-    auto app = QApplication::instance();
+void i18nInit() {
+    auto app = QCoreApplication::instance();
     if (!app)
         return;
 
@@ -14,6 +14,7 @@ void localizeInit() {
 #ifdef _CRAFTIVE_DEBUGGING_LOCALES_DIR
     translationsDir = QString::fromUtf8(_CRAFTIVE_DEBUGGING_LOCALES_DIR);
 #else
+#warning "_CRAFTIVE_DEBUGGING_LOCALES_DIR is undefined; using ./locales as the locales directory"
     translationsDir = QDir::currentPath() + "/locales";
 #endif
 #else
@@ -32,20 +33,33 @@ void localizeInit() {
 #endif
 #endif
 
+    QString      localeName   = QLocale::system().name();
     QTranslator *qtTranslator = new QTranslator{app};
-    if (qtTranslator->load("qt_" + QLocale::system().name(),
-                           QLibraryInfo::path(QLibraryInfo::TranslationsPath)))
+    if (qtTranslator->load("qt_" + localeName, QLibraryInfo::path(QLibraryInfo::TranslationsPath)))
         app->installTranslator(qtTranslator);
     else
         delete qtTranslator;
     QTranslator *appTranslator = new QTranslator{app};
-    QString      localeName    = QLocale::system().name();
-    if (appTranslator->load("craftive_" + localeName, translationsDir))
+    if (appTranslator->load("craftive." + localeName,
+                            translationsDir
+#if !(defined(_WIN32) || defined(__APPLE__))
+                                + "/" + localeName + "/LC_MESSAGES"
+#endif
+                            ))
         app->installTranslator(appTranslator);
     else {
         delete appTranslator;
         appTranslator = new QTranslator(app);
-        if (appTranslator->load("craftive_en_US", translationsDir))
+        if (appTranslator->load("craftive.en_US",
+                                translationsDir
+#if !(defined(_WIN32) || defined(__APPLE__))
+                                    + "/" + localeName + "/LC_MESSAGES"
+#endif
+                                ))
             app->installTranslator(appTranslator);
     }
+}
+
+static inline QString tr(const char *s, const char *c, int n) {
+    return QCoreApplication::tr(s, c, n);
 }

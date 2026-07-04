@@ -1,6 +1,6 @@
 #pragma once
 
-#include "localize.hpp"
+#include "i18n.hpp"
 #include <cstdint>
 
 constexpr const char *errmsgs[] = {"Extern Error",
@@ -12,11 +12,12 @@ constexpr const char *errmsgs[] = {"Extern Error",
                                    "Failed to parse JSON",
                                    "Invalid email address",
                                    "Invalid RGB color",
-                                   "Empty author",
-                                   "Empty map data",
-                                   "No such element in all loaded kits",
+                                   "Author doesn't exist",
+                                   "Map data doesn't exist",
+                                   "No such kit in all loaded kits",
                                    "Invalid Element ID; it should be like \"kit/elem\"",
-                                   "Empty product version"};
+                                   "Product version doesn't exist",
+                                   "Invalid location in this map"};
 
 // Craftive Exceptions
 class CrtExcept {
