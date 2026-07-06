@@ -6,20 +6,20 @@ CoreStatus &CoreStatus::instance() {
     return inst;
 }
 
-auto CoreStatus::getLoadedKits() const noexcept -> const QHash<QStringView, Kit *> & {
+auto CoreStatus::getLoadedKits() const noexcept -> const QHash<QStrPtr, Kit *> & {
     return loadedKits;
 }
 
 bool CoreStatus::registerKit(Kit &newKit) noexcept {
-    if (loadedKits.contains(newKit.getID()))
+    if (loadedKits.contains(newKit.id))
         return false;
     else {
-        loadedKits.insert(newKit.getID(), &newKit);
+        loadedKits.insert(newKit.id, &newKit);
         return true;
     }
 }
 
-bool CoreStatus::removeKit(const QString &id) noexcept {
+bool CoreStatus::removeKit(QString &id) noexcept {
     if (loadedKits.contains(id)) {
         loadedKits.remove(id);
         loadedKits.squeeze();
@@ -28,9 +28,9 @@ bool CoreStatus::removeKit(const QString &id) noexcept {
         return false;
 }
 
-bool CoreStatus::containsKit(const QString &id) const noexcept { return loadedKits.contains(id); }
+bool CoreStatus::containsKit(QString &id) const noexcept { return loadedKits.contains(id); }
 
-Kit &CoreStatus::getKit(const QString &id) const {
+Kit &CoreStatus::getKit(QString &id) const {
     if (loadedKits.contains(id))
         return *(loadedKits[id]);
     else

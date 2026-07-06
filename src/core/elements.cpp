@@ -546,26 +546,26 @@ void Map::fromJson(const json &j) {
                     c,
                     name,
                     id);
-            auto elemFullID = j["data"][r][c].get<QString>();
-            if (!CoreStatus::instance().containsKit(separateElemID(elemFullID).kit))
+            auto elemFullID  = j["data"][r][c].get<QString>();
+            auto targetKitID = separateElemID(elemFullID).kit;
+            if (!CoreStatus::instance().containsKit(targetKitID))
                 throw CrtExcept(0x000B,
                                 tr("from Map::fromJson(); couldn't find the kit (ID: %1) where "
                                    "contains the element at (%2,%3) (ID: %4) in the json of Map %5 "
                                    "(ID: %6), please load this kit and try again"),
-                                separateElemID(elemFullID).kit,
+                                targetKitID,
                                 r,
                                 c,
                                 elemFullID,
                                 name,
                                 id);
-            auto &targetKit =
-                CoreStatus::instance().getKit(separateElemID(j["data"][r][c].get<QString>()).kit);
+            auto &targetKit = CoreStatus::instance().getKit(targetKitID);
             if (!targetKit.contains(elemFullID))
                 throw CrtExcept(0x0004,
                                 tr("from Map::fromJson(); Kit %1 (ID: %2) doesn't contain the "
                                    "element at (%3,%4) (ID: %5) in Map %6 (ID: %7)"),
                                 targetKit.getName(),
-                                targetKit.getID(),
+                                targetKitID,
                                 r,
                                 c,
                                 elemFullID,

@@ -138,6 +138,8 @@ class BasicProduct : public BasicCrtClass {
 
 // Where stores data of blocks and large-blocks.
 class Kit : public BasicProduct {
+    friend class CoreStatus;
+
   private:
     QHash<QStrPtr, Block>  blks;
     QHash<QStrPtr, LBlock> lblks;

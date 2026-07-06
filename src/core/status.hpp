@@ -6,7 +6,7 @@ struct CoreStatus {
     friend class Kit;
 
   private:
-    QHash<QStringView, Kit *> loadedKits;
+    QHash<QStrPtr, Kit *> loadedKits;
 
     CoreStatus()  = default;
     ~CoreStatus() = default;
@@ -17,9 +17,9 @@ struct CoreStatus {
 
     static CoreStatus &instance();
 
-    auto getLoadedKits() const noexcept -> const QHash<QStringView, Kit *> &;
-    bool registerKit(Kit &newKit) noexcept;     // True for success or false if it exists
-    bool removeKit(const QString &id) noexcept; // True for success or false if it doesn't exist
-    bool containsKit(const QString &id) const noexcept;
-    Kit &getKit(const QString &id) const;
+    auto getLoadedKits() const noexcept -> const QHash<QStrPtr, Kit *> &;
+    bool registerKit(Kit &newKit) noexcept; // True for success or false if it exists
+    bool removeKit(QString &id) noexcept;   // True for success or false if it doesn't exist
+    bool containsKit(QString &id) const noexcept;
+    Kit &getKit(QString &id) const;
 };
