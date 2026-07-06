@@ -1,6 +1,6 @@
 #pragma once
 
-#include "i18n.hpp"
+#include <QtCore/QString>
 #include <cstdint>
 
 constexpr const char *errmsgs[] = {"Extern Error",
@@ -26,8 +26,7 @@ class CrtExcept {
     const QString  detail;
 
   public:
-    CrtExcept(const uint16_t _code, const QString &_detail, auto &&...args)
-        : code(_code), detail(_detail.arg(args...)) {}
+    CrtExcept(const uint16_t _code, const QString &_detail, auto &&...args);
 
     const QString &how() const noexcept;   // Return the value of detail
     const QString  what() const noexcept;  // Return the value of errmsgs[code]

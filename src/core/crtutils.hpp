@@ -1,5 +1,8 @@
 #pragma once
 
+#include "err.hpp"
+#include "i18n.hpp"
+#include <QtCore/QHash>
 #include <QtCore/QList>
 #include <QtCore/QString>
 #include <compare>
@@ -15,8 +18,8 @@ concept isJson = std::same_as<std::decay_t<T>, json>;
 struct Version {
     uint8_t major{0}, minor{1}, patch{0};
 
-    Version() : major(0), minor(1), patch(0) {} // Default version is the first one "0.1.0"
-    Version(uint8_t ma, uint8_t mi, uint8_t p) : major(ma), minor(mi), patch(p) {}
+    Version() = default; // Default version is the first one "0.1.0"
+    Version(uint8_t ma, uint8_t mi, uint8_t p);
     explicit Version(const isJson auto &j);
 
     auto    operator<=>(const Version &other) const noexcept -> std::strong_ordering;
@@ -25,6 +28,30 @@ struct Version {
     void    fromJson(const json &j);
     json    toJson() const;
 };
+
+// The real QString"View", with only a pointer to a QString object.
+// As a view, it doesn't own the string.
+class QStrPtr {
+  private:
+    QString *raw;
+
+  public:
+    QStrPtr();
+    QStrPtr(const QStrPtr &)            = default;
+    QStrPtr(QStrPtr &&)                 = delete;
+    QStrPtr &operator=(const QStrPtr &) = default;
+    QStrPtr &operator=(QStrPtr &&)      = delete;
+    QStrPtr(QString &s);
+    ~QStrPtr() = default;
+
+    operator QString() const noexcept;
+    QString  get() const noexcept;
+    QString *operator->() const noexcept;
+    bool     operator==(const QStrPtr &other) const noexcept;
+};
+
+size_t qHash(QStrPtr key, size_t seed);
+size_t qHash(const QStrPtr &key, size_t seed);
 
 bool    isInvalidID(const QString &id);
 bool    isInvalidElemID(const QString &id);
@@ -37,7 +64,12 @@ struct SeparatedElemID {
 };
 } // namespace IDSeparatorDetail
 
-static auto separateElemID(const QString &s) -> IDSeparatorDetail::SeparatedElemID;
+static auto separateElemID(const QString &s) -> IDSeparatorDetail::SeparatedElemID {
+    auto list = s.split(QChar{u'/'});
+    if (list.size() != 2)
+        throw CrtExcept(0x000C, tr("from separateElemID(); The ID is %1"), s);
+    return IDSeparatorDetail::SeparatedElemID{.kit = list[0], .elem = list[1]};
+}
 
 NLOHMANN_JSON_NAMESPACE_BEGIN
 template <> struct adl_serializer<QString> {

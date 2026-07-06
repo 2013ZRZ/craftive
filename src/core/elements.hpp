@@ -1,10 +1,7 @@
 #pragma once
 
 #include "crtutils.hpp"
-#include "i18n.hpp"
-#include <QtCore/QHash>
 #include <QtCore/QSharedPointer>
-#include <concepts>
 #include <variant>
 
 struct rgb {
@@ -142,21 +139,21 @@ class BasicProduct : public BasicCrtClass {
 // Where stores data of blocks and large-blocks.
 class Kit : public BasicProduct {
   private:
-    QHash<QStringView, Block>  blks;
-    QHash<QStringView, LBlock> lblks;
+    QHash<QStrPtr, Block>  blks;
+    QHash<QStrPtr, LBlock> lblks;
 
   public:
     Kit() = default;
 
-    auto getBlks() const noexcept -> const QHash<QStringView, Block> &;
+    auto getBlks() const noexcept -> const QHash<QStrPtr, Block> &;
     void clearBlks() noexcept;
-    auto getLblks() const noexcept -> const QHash<QStringView, LBlock> &;
+    auto getLblks() const noexcept -> const QHash<QStrPtr, LBlock> &;
     void clearLblks() noexcept;
     void operator+=(Block &&blk) noexcept;
     void operator+=(LBlock &&lblk) noexcept;
-    void operator-=(const QString &_id);
-    bool contains(const QString &_id) noexcept;
-    auto operator[](const QString &_id) -> const std::variant<Block, LBlock>;
+    void operator-=(QString &_id);
+    bool contains(QString &_id) noexcept;
+    auto operator[](QString &_id) -> const std::variant<Block, LBlock>;
     void fromJson(const json &j) override;
     json toJson() const override;
 }; // class Kit

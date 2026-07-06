@@ -3,6 +3,7 @@
 #include <QtCore/QFileInfo>
 #include <QtCore/QLibraryInfo>
 #include <QtCore/QString>
+#include <QtCore/QTranslator>
 
 void i18nInit() {
     auto app = QCoreApplication::instance();
@@ -58,8 +59,4 @@ void i18nInit() {
                                 ))
             app->installTranslator(appTranslator);
     }
-}
-
-static inline QString tr(const char *s, const char *c, int n) {
-    return QCoreApplication::tr(s, c, n);
 }

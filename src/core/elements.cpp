@@ -1,7 +1,4 @@
 #include "elements.hpp"
-#include "crtutils.hpp"
-#include "err.hpp"
-#include "i18n.hpp"
 #include "status.hpp"
 #include <QtCore/QFile>
 #include <QtCore/QStringConverter>
@@ -325,14 +322,14 @@ void BasicProduct::toFile(const QString &path, const uint8_t indent) {
 
 // Definitions in Kit
 
-auto Kit::getBlks() const noexcept -> const QHash<QStringView, Block> & { return blks; }
+auto Kit::getBlks() const noexcept -> const QHash<QStrPtr, Block> & { return blks; }
 
 void Kit::clearBlks() noexcept {
     blks.clear();
     blks.squeeze();
 }
 
-auto Kit::getLblks() const noexcept -> const QHash<QStringView, LBlock> & { return lblks; }
+auto Kit::getLblks() const noexcept -> const QHash<QStrPtr, LBlock> & { return lblks; }
 
 void Kit::clearLblks() noexcept {
     lblks.clear();
@@ -343,7 +340,7 @@ void Kit::operator+=(Block &&blk) noexcept { blks.insert(blk.id, blk); }
 
 void Kit::operator+=(LBlock &&lblk) noexcept { lblks.insert(lblk.id, lblk); }
 
-void Kit::operator-=(const QString &_id) {
+void Kit::operator-=(QString &_id) {
     if (!(blks.remove(_id) || lblks.remove(_id)))
         throw CrtExcept(
             0x0004,
@@ -353,11 +350,9 @@ void Kit::operator-=(const QString &_id) {
     lblks.squeeze();
 }
 
-bool Kit::contains(const QString &_id) noexcept {
-    return blks.contains(_id) || lblks.contains(_id);
-}
+bool Kit::contains(QString &_id) noexcept { return blks.contains(_id) || lblks.contains(_id); }
 
-auto Kit::operator[](const QString &_id) -> const std::variant<Block, LBlock> {
+auto Kit::operator[](QString &_id) -> const std::variant<Block, LBlock> {
     if (blks.contains(_id))
         return blks[_id];
     else if (lblks.contains(_id))
