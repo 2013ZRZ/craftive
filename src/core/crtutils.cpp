@@ -52,8 +52,8 @@ size_t qHash(QStrPtr key, size_t seed) { return qHash(key.get(), 0); }
 size_t qHash(const QStrPtr &key, size_t seed) { return qHash(key.get(), 0); }
 
 bool isInvalidID(const QString &id) {
-    for (const auto it : id.toStdString()) {
-        if (!isalnum(it) && it != '_')
+    for (const QChar &ch : id) {
+        if (!ch.isLetterOrNumber() && ch != u'_')
             return true;
     }
     return false;
