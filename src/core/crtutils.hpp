@@ -67,7 +67,8 @@ struct SeparatedElemID {
 static auto separateElemID(const QString &s) -> IDSeparatorDetail::SeparatedElemID {
     auto list = s.split(QChar{u'/'});
     if (list.size() != 2)
-        throw CrtExcept(0x000C, tr("from separateElemID(); The ID is %1"), s);
+        throw CrtExcept(
+            0x000C, translate("separateElemID", "from separateElemID(); The ID is %1"), s);
     return IDSeparatorDetail::SeparatedElemID{.kit = list[0], .elem = list[1]};
 }
 
