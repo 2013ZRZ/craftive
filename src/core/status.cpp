@@ -35,7 +35,7 @@ Kit &CoreStatus::getKit(QString &id) const {
         return *(loadedKits[id]);
     else
         throw CrtExcept(0x000B,
-                        tr("from CoreStatus::getKit(); no one's ID is %1 in all loaded kits, "
+                        translate("CoreStatus", "from CoreStatus::getKit(); no one's ID is %1 in all loaded kits, "
                            "please load this kit and try again"),
                         id);
 }

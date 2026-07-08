@@ -26,7 +26,7 @@ void Version::fromJson(const json &j) {
     // j should be an array like [x, y, z] for "x.y.z"
     if (!j.is_array())
         throw CrtExcept(0x0006,
-                        tr("from Version::fromJson(); the version's json isn't an array. It "
+                        translate("Version", "from Version::fromJson(); the version's json isn't an array. It "
                            "should be like [x, y, z] for \"x.y.z\""));
     major = j[0];
     minor = j[1];
@@ -47,9 +47,9 @@ QString *QStrPtr::operator->() const noexcept { return raw; }
 
 bool QStrPtr::operator==(const QStrPtr &other) const noexcept { return this->get() == other.get(); }
 
-size_t qHash(QStrPtr key, size_t seed) { return qHash(key.get(), 0); }
+size_t qHash(QStrPtr key, size_t seed) { return qHash(key.get(), seed); }
 
-size_t qHash(const QStrPtr &key, size_t seed) { return qHash(key.get(), 0); }
+size_t qHash(const QStrPtr &key, size_t seed) { return qHash(key.get(), seed); }
 
 bool isInvalidID(const QString &id) {
     for (const QChar &ch : id) {

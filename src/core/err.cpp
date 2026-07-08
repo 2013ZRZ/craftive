@@ -1,5 +1,4 @@
 #include "err.hpp"
-#include "i18n.hpp"
 
 CrtExcept::CrtExcept(const uint16_t _code, const QString &_detail, auto &&...args)
     : code(_code), detail(_detail.arg(args...)) {}
