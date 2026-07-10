@@ -26,8 +26,9 @@ void Version::fromJson(const json &j) {
     // j should be an array like [x, y, z] for "x.y.z"
     if (!j.is_array())
         throw CrtExcept(0x0006,
-                        translate("Version", "from Version::fromJson(); the version's json isn't an array. It "
-                           "should be like [x, y, z] for \"x.y.z\""));
+                        translate("Version",
+                                  "from Version::fromJson(); the version's JSON isn't an array. It "
+                                  "should be like [x, y, z] for \"x.y.z\""));
     major = j[0];
     minor = j[1];
     patch = j[2];
