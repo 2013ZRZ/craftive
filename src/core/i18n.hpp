@@ -1,6 +1,6 @@
 #pragma once
 
-#include <QtCore/QCoreApplication>
+#include <QCoreApplication>
 
 void i18nInit();
 

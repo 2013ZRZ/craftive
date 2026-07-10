@@ -2,9 +2,9 @@
 
 #include "err.hpp"
 #include "i18n.hpp"
-#include <QtCore/QHash>
-#include <QtCore/QList>
-#include <QtCore/QString>
+#include <QHash>
+#include <QList>
+#include <QString>
 #include <compare>
 #include <concepts>
 #include <cstdint>

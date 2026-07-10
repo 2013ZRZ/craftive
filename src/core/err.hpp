@@ -1,7 +1,7 @@
 #pragma once
 
 #include "i18n.hpp"
-#include <QtCore/QString>
+#include <QString>
 #include <cstdint>
 
 constexpr const char *errmsgs[] = {

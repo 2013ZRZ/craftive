@@ -1,8 +1,8 @@
 #include "i18n.hpp"
-#include <QtCore/QCoreApplication>
-#include <QtCore/QDir>
-#include <QtCore/QString>
-#include <QtCore/QTranslator>
+#include <QCoreApplication>
+#include <QDir>
+#include <QString>
+#include <QTranslator>
 
 
 namespace {

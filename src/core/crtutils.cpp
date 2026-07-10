@@ -1,5 +1,5 @@
 #include "crtutils.hpp"
-#include <QtCore/QRegularExpression>
+#include <QRegularExpression>
 #include <ctime>
 #include <random>
 

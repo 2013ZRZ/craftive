@@ -1,8 +1,8 @@
 #include "elements.hpp"
 #include "status.hpp"
-#include <QtCore/QFile>
-#include <QtCore/QStringConverter>
-#include <QtCore/QTextStream>
+#include <QFile>
+#include <QStringConverter>
+#include <QTextStream>
 
 
 // Definitions in rgb

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "crtutils.hpp"
-#include <QtCore/QSharedPointer>
+#include <QSharedPointer>
 #include <variant>
 
 struct rgb {
