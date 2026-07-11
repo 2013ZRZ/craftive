@@ -6,7 +6,8 @@ CoreStatus &CoreStatus::instance() {
     return inst;
 }
 
-auto CoreStatus::getLoadedKits() const noexcept -> const QHash<QStrPtr, Kit *> & {
+auto CoreStatus::getLoadedKits() const noexcept
+    -> const QHash<std::reference_wrapper<QString>, Kit *> & {
     return loadedKits;
 }
 
@@ -35,7 +36,7 @@ Kit &CoreStatus::getKit(QString &id) const {
         return *(loadedKits[id]);
     else
         throw CrtExcept(0x000B,
-                        translate("CoreStatus", "from CoreStatus::getKit(); no one's ID is %1 in all loaded kits, "
+                        tr("from CoreStatus::getKit(); no one's ID is %1 in all loaded kits, "
                            "please load this kit and try again"),
                         id);
 }

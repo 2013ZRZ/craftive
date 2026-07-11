@@ -2,9 +2,11 @@ TEMPLATE = app
 
 CONFIG += lrelease
 
-QT += quick
+QT += qml
 
 SOURCES = src/core/*.cpp src/frontend/*.cpp
+
+DESTDIR = out
 
 TARGET = out/craftive
 

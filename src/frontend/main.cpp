@@ -8,6 +8,9 @@ int main(int argc, char *argv[]) {
         &engine,
         &QQmlApplicationEngine::objectCreationFailed,
         &app,
-        [] { QCoreApplication::exit(-1); },
+        [] {
+            qFatal() << "Received signal QQmlApplicationEngine::objectCreationFailed";
+            QCoreApplication::exit(-1);
+        },
         Qt::QueuedConnection);
 }

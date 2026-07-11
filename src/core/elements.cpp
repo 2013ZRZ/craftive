@@ -95,12 +95,10 @@ const QString &BasicCrtClass::getID() const noexcept { return id; }
 
 void BasicCrtClass::setID(const QString &_id) {
     if (isInvalidID(_id))
-        throw CrtExcept(
-            0x0002,
-            translate("BasicCrtClass",
-                      "from BasicCrtClass::setID(); the ID includes invalid character(s)"));
+        throw CrtExcept(0x0002,
+                        tr("from BasicCrtClass::setID(); the ID includes invalid character(s)"));
     else if (_id.isEmpty())
-        throw CrtExcept(0x0001, translate("BasicCrtClass", "from BasicCrtClass::setID()"));
+        throw CrtExcept(0x0001, tr("from BasicCrtClass::setID()"));
     else
         id = _id;
 }
@@ -118,13 +116,11 @@ bool BasicCrtClass::operator==(const BasicCrtClass &other) const noexcept {
 
 void BasicElement::setID(const QString &_id) {
     if (isInvalidElemID(_id))
-        throw CrtExcept(
-            0x0002,
-            translate("BasicElement",
-                      "from BasicElement::setID(); the ID includes invalid character(s) or "
-                      "isn't like \"kit/elem\""));
+        throw CrtExcept(0x0002,
+                        tr("from BasicElement::setID(); the ID includes invalid character(s) or "
+                           "isn't like \"kit/elem\""));
     else if (_id.isEmpty())
-        throw CrtExcept(0x0001, translate("BasicElement", "from BasicElement::setID()"));
+        throw CrtExcept(0x0001, tr("from BasicElement::setID()"));
     else
         id = _id;
 }
@@ -147,13 +143,12 @@ void Block::setBlk(const Ucc &_blk) noexcept { blk = _blk; }
 
 void Block::fromJson(const json &j) {
     if (!j.is_object())
-        throw CrtExcept(
-            0x0006, translate("Block", "from Block::fromJson(); the block's JSON isn't an object"));
+        throw CrtExcept(0x0006, tr("from Block::fromJson(); the block's JSON isn't an object"));
     setBlk(Ucc{j.at("blk")});
     if (j.find("id") != j.end())
         setID(j.at("id").get<QString>());
     else
-        throw CrtExcept(0x0001, translate("Block", "from Block::fromJson()"));
+        throw CrtExcept(0x0001, tr("from Block::fromJson()"));
     setName(j.value("name", id));
 }
 
@@ -225,15 +220,13 @@ size_t LBlock::getW(const size_t r) const {
     else if (r < lblk.size())
         return lblk[r].size();
     else
-        throw CrtExcept(
-            0x0005,
-            translate("LBlock",
-                      "from LBlock::getW(); the required row number is %1, but there's only "
-                      "%n row(s) in this large-block",
-                      nullptr,
-                      lblk.size()),
-            r,
-            lblk.size());
+        throw CrtExcept(0x0005,
+                        tr("from LBlock::getW(); the required row number is %1, but there's only "
+                           "%n row(s) in this large-block",
+                           nullptr,
+                           lblk.size()),
+                        r,
+                        lblk.size());
 }
 
 auto LBlock::getFullW() const noexcept -> const QList<size_t> & { return w; }
@@ -242,37 +235,32 @@ void LBlock::setW(const size_t r, const size_t _w) {
     if (r < w.size())
         w[r] = _w;
     else
-        throw CrtExcept(0x0005, translate("LBlock", "from LBlock::setW()"));
+        throw CrtExcept(0x0005, tr("from LBlock::setW()"));
 }
 
 void LBlock::fromJson(const json &j) {
     if (!j.is_object())
-        throw CrtExcept(
-            0x0006,
-            translate("LBlock", "from LBlock::fromJson(); the large-block's JSON isn't an object"));
+        throw CrtExcept(0x0006,
+                        tr("from LBlock::fromJson(); the large-block's JSON isn't an object"));
     if (!j.at("lblk").is_array())
-        throw CrtExcept(
-            0x0006, translate("LBlock", "from LBlock::fromJson(); the \"lblk\" isn't an array"));
+        throw CrtExcept(0x0006, tr("from LBlock::fromJson(); the \"lblk\" isn't an array"));
     lblk.resize(j.at("lblk").size());
     w.resize(j.at("lblk").size());
     for (size_t r{}; r < j.at("lblk").size(); r++) {
         if (!j.at("lblk")[r].is_array())
-            throw CrtExcept(0x0006,
-                            translate("LBlock", "from LBlock::fromJson(); Row %1 isn't an array"),
-                            r + 1);
+            throw CrtExcept(0x0006, tr("from LBlock::fromJson(); Row %1 isn't an array"), r + 1);
         for (size_t c{}; c < j.at("lblk")[0].size(); c++) {
             lblk[r].resize(j.at("lblk")[r].size());
             setPos(r, c, Ucc{j.at("lblk")[r][c]});
         }
     }
     if (!j.at("w").is_array())
-        throw CrtExcept(0x0006,
-                        translate("LBlock", "from LBlock::fromJson(); the \"w\" isn't an array"));
+        throw CrtExcept(0x0006, tr("from LBlock::fromJson(); the \"w\" isn't an array"));
     for (size_t i{}; i < j.at("w").size(); i++) w[i] = j.at("w")[i].get<size_t>();
     if (j.find("id") != j.end())
         setID(j.at("id").get<QString>());
     else
-        throw CrtExcept(0x0001, translate("LBlock", "from LBlock::fromJson()"));
+        throw CrtExcept(0x0001, tr("from LBlock::fromJson()"));
     setName(j.value("name", id));
 }
 
@@ -298,9 +286,8 @@ void BasicProduct::setAuthor(const QString &_author) {
     if (isInvalidEmail(_author))
         throw CrtExcept(
             0x0007,
-            translate("BasicProduct",
-                      "from BasicProduct::setAuthor(); the string is \"%1\" and it isn't a valid "
-                      "email address"),
+            tr("from BasicProduct::setAuthor(); the string is \"%1\" and it isn't a valid "
+               "email address"),
             _author);
     else
         author = _author;
@@ -315,8 +302,7 @@ void BasicProduct::fromFile(const QString &path) {
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
         throw CrtExcept(
             0x0000,
-            translate("BasicProduct",
-                      "from BasicProduct::fromFile(); failed to open the product file at %1 (%2)"),
+            tr("from BasicProduct::fromFile(); failed to open the product file at %1 (%2)"),
             path,
             file.errorString());
     QTextStream in{&file};
@@ -324,8 +310,7 @@ void BasicProduct::fromFile(const QString &path) {
     try {
         fromJson(json::parse(in.readAll()));
     } catch (const json::parse_error &e) {
-        throw CrtExcept(
-            0x0006, translate("BasicProduct", "from BasicProduct::fromFile() (%1)"), e.what());
+        throw CrtExcept(0x0006, tr("from BasicProduct::fromFile() (%1)"), e.what());
     }
     file.close();
 }
@@ -335,8 +320,7 @@ void BasicProduct::toFile(const QString &path, const uint8_t indent) {
     if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
         throw CrtExcept(
             0x0000,
-            translate("BasicProduct",
-                      "from BasicProduct::toFile(); failed to open the product file at %1 (%2)"),
+            tr("from BasicProduct::toFile(); failed to open the product file at %1 (%2)"),
             path,
             file.errorString());
     QTextStream out{&file};
@@ -349,14 +333,18 @@ void BasicProduct::toFile(const QString &path, const uint8_t indent) {
 
 // Definitions in Kit
 
-auto Kit::getBlks() const noexcept -> const QHash<QStrPtr, Block> & { return blks; }
+auto Kit::getBlks() const noexcept -> const QHash<std::reference_wrapper<QString>, Block> & {
+    return blks;
+}
 
 void Kit::clearBlks() noexcept {
     blks.clear();
     blks.squeeze();
 }
 
-auto Kit::getLblks() const noexcept -> const QHash<QStrPtr, LBlock> & { return lblks; }
+auto Kit::getLblks() const noexcept -> const QHash<std::reference_wrapper<QString>, LBlock> & {
+    return lblks;
+}
 
 void Kit::clearLblks() noexcept {
     lblks.clear();
@@ -381,7 +369,8 @@ void Kit::operator-=(QString &_id) {
 
 bool Kit::contains(QString &_id) noexcept { return blks.contains(_id) || lblks.contains(_id); }
 
-auto Kit::operator[](QString &_id) -> const std::variant<Block, LBlock> {
+auto Kit::operator[](QString &_id)
+    -> const std::variant<std::reference_wrapper<Block>, std::reference_wrapper<LBlock>> {
     if (blks.contains(_id))
         return blks[_id];
     else if (lblks.contains(_id))
@@ -397,15 +386,12 @@ auto Kit::operator[](QString &_id) -> const std::variant<Block, LBlock> {
 
 void Kit::fromJson(const json &j) {
     if (!j.is_object())
-        throw CrtExcept(0x0006,
-                        translate("Kit", "from Kit::fromJson(); the kit's JSON isn't an object"));
+        throw CrtExcept(0x0006, tr("from Kit::fromJson(); the kit's JSON isn't an object"));
 
     if (j.find("id") != j.end())
         setID(j.at("id").get<QString>());
     else
-        throw CrtExcept(
-            0x0001,
-            translate("Kit", "from Kit::fromJson(); couldn't find \"id\" in the kit's JSON"));
+        throw CrtExcept(0x0001, tr("from Kit::fromJson(); couldn't find \"id\" in the kit's JSON"));
 
     setName(j.value("name", id));
 
@@ -427,8 +413,7 @@ void Kit::fromJson(const json &j) {
     else
         throw CrtExcept(
             0x000D,
-            translate("Kit",
-                      "from Kit::fromJson(); couldn't find \"ver\" in the JSON of Kit %1 (ID: %2)"),
+            tr("from Kit::fromJson(); couldn't find \"ver\" in the JSON of Kit %1 (ID: %2)"),
             name,
             id);
 
@@ -500,7 +485,9 @@ template <> auto Map::get<0>(const size_t r, const size_t c) {
                 "from Map::get<0>(); the required position is (%1,%2), but it's out of range"),
             r,
             c);
-    return std::get<0>(data[r][c]) == nullptr ? Block{} : *std::get<0>(data[r][c]);
+    return std::get<0>(data[r][c]) == QSharedPointer<Block>{nullptr}
+               ? QSharedPointer<Block>{nullptr}
+               : std::get<0>(data[r][c]);
 }
 
 template <> auto Map::get<1>(const size_t r, const size_t c) {
@@ -513,7 +500,7 @@ template <> auto Map::get<1>(const size_t r, const size_t c) {
             r,
             c);
     if (std::get<1>(data[r][c]) != nullptr) // is at the upper left corner
-        return *std::get<1>(data[r][c]);
+        return std::get<1>(data[r][c]);
     else {
         for (size_t _r{}; _r < r; _r++)
             for (size_t _c{}; _c < c; _c++)
@@ -521,22 +508,20 @@ template <> auto Map::get<1>(const size_t r, const size_t c) {
                     std::get<1>(data[_r][_c]) != nullptr && // (_r,_c) is at the upper left corner
                     std::get<1>(data[_r][_c])->getLblk().size() + _r > r &&
                     std::get<1>(data[_r][_c])->getW(r - _r) + _c > c) // (r,c) is filled by (_r,_c)
-                    return *std::get<1>(data[_r][_c]);
-        return LBlock{}; // (r,c) is null but QSharedPointer<LBlock> (UNEXCEPTED)
+                    return std::get<1>(data[_r][_c]);
+        return QSharedPointer<LBlock>{
+            nullptr}; // (r,c) is null but QSharedPointer<LBlock> (UNEXCEPTED)
     }
 }
 
 void Map::fromJson(const json &j) {
     if (!j.is_object())
-        throw CrtExcept(0x0006,
-                        translate("Map", "from Map::fromJson(); the map's JSON isn't an object"));
+        throw CrtExcept(0x0006, tr("from Map::fromJson(); the map's JSON isn't an object"));
 
     if (j.find("id") != j.end())
         setID(j.at("id").get<QString>());
     else
-        throw CrtExcept(
-            0x0001,
-            translate("Map", "from Map::fromJson(); couldn't find \"id\" in the map's JSON"));
+        throw CrtExcept(0x0001, tr("from Map::fromJson(); couldn't find \"id\" in the map's JSON"));
 
     setName(j.value("name", id));
 
@@ -558,8 +543,7 @@ void Map::fromJson(const json &j) {
     else
         throw CrtExcept(
             0x000D,
-            translate("Map",
-                      "from Map::fromJson(); couldn't find \"ver\" in the JSON of Map %1 (ID: %2)"),
+            tr("from Map::fromJson(); couldn't find \"ver\" in the JSON of Map %1 (ID: %2)"),
             name,
             id);
 
@@ -583,14 +567,12 @@ void Map::fromJson(const json &j) {
 
     for (size_t r{}; r < j["data"].size(); r++) {
         if (!j["data"][r].is_array())
-            throw CrtExcept(
-                0x0006,
-                translate("Map",
-                          "from Map::fromJson(); Row %1 in \"data\" in the JSON of Map %2 "
-                          "(ID: %3) isn't an array"),
-                r,
-                name,
-                id);
+            throw CrtExcept(0x0006,
+                            tr("from Map::fromJson(); Row %1 in \"data\" in the JSON of Map %2 "
+                               "(ID: %3) isn't an array"),
+                            r,
+                            name,
+                            id);
         for (size_t c{}; c < j["data"][r].size(); c++) {
             if (!j["data"][r][c].is_string())
                 throw CrtExcept(
@@ -606,34 +588,30 @@ void Map::fromJson(const json &j) {
             auto elemFullID  = j["data"][r][c].get<QString>();
             auto targetKitID = separateElemID(elemFullID).kit;
             if (!CoreStatus::instance().containsKit(targetKitID))
-                throw CrtExcept(
-                    0x000B,
-                    translate("Map",
-                              "from Map::fromJson(); couldn't find the kit (ID: %1) where "
-                              "contains the element at (%2,%3) (ID: %4) in the JSON of Map %5 "
-                              "(ID: %6), please load this kit and try again"),
-                    targetKitID,
-                    r,
-                    c,
-                    elemFullID,
-                    name,
-                    id);
+                throw CrtExcept(0x000B,
+                                tr("from Map::fromJson(); couldn't find the kit (ID: %1) where "
+                                   "contains the element at (%2,%3) (ID: %4) in the JSON of Map %5 "
+                                   "(ID: %6), please load this kit and try again"),
+                                targetKitID,
+                                r,
+                                c,
+                                elemFullID,
+                                name,
+                                id);
             auto &targetKit = CoreStatus::instance().getKit(targetKitID);
             if (!targetKit.contains(elemFullID))
-                throw CrtExcept(
-                    0x0004,
-                    translate("Map",
-                              "from Map::fromJson(); Kit %1 (ID: %2) doesn't contain the "
-                              "element at (%3,%4) (ID: %5) in Map %6 (ID: %7)"),
-                    targetKit.getName(),
-                    targetKitID,
-                    r,
-                    c,
-                    elemFullID,
-                    name,
-                    id);
+                throw CrtExcept(0x0004,
+                                tr("from Map::fromJson(); Kit %1 (ID: %2) doesn't contain the "
+                                   "element at (%3,%4) (ID: %5) in Map %6 (ID: %7)"),
+                                targetKit.getName(),
+                                targetKitID,
+                                r,
+                                c,
+                                elemFullID,
+                                name,
+                                id);
             else
-                targetKit[elemFullID].visit([&](auto &&arg) { set(r, c, arg); });
+                targetKit[elemFullID].visit([&](auto &&arg) { set(r, c, arg.get()); });
         }
     }
 }

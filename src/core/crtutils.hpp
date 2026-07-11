@@ -29,30 +29,6 @@ struct Version {
     json    toJson() const;
 };
 
-// The real QString"View", with only a pointer to a QString object.
-// As a view, it doesn't own the string.
-class QStrPtr {
-  private:
-    QString *raw;
-
-  public:
-    QStrPtr();
-    QStrPtr(const QStrPtr &)            = default;
-    QStrPtr(QStrPtr &&)                 = delete;
-    QStrPtr &operator=(const QStrPtr &) = default;
-    QStrPtr &operator=(QStrPtr &&)      = delete;
-    QStrPtr(QString &s);
-    ~QStrPtr() = default;
-
-    operator QString() const noexcept;
-    QString  get() const noexcept;
-    QString *operator->() const noexcept;
-    bool     operator==(const QStrPtr &other) const noexcept;
-};
-
-size_t qHash(QStrPtr key, size_t seed);
-size_t qHash(const QStrPtr &key, size_t seed);
-
 bool    isInvalidID(const QString &id);
 bool    isInvalidElemID(const QString &id);
 bool    isInvalidEmail(const QString &email);

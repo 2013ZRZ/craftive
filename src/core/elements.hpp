@@ -2,6 +2,7 @@
 
 #include "crtutils.hpp"
 #include <QSharedPointer>
+#include <functional>
 #include <variant>
 
 struct rgb {
@@ -48,12 +49,14 @@ struct Ucc {
     QString operator()() const; // Get the character as QString
 }; // struct Ucc
 
-class BasicCrtClass {
-  protected:
+class BasicCrtClass : public QObject {
+    Q_OBJECT
+
+protected:
     QString id;
     QString name;
 
-  public:
+public:
     const QString &getID() const noexcept;
     virtual void   setID(const QString &_id);
     const QString &getName() const noexcept;
@@ -64,18 +67,21 @@ class BasicCrtClass {
 }; // class BasicCrtClass
 
 class BasicElement : public BasicCrtClass {
-  public:
+    Q_OBJECT
+
+public:
     void setID(const QString &_id) override; // An element ID should be like "kit/elem"
     // TODO Interactions
 };
 
 class Block : public BasicElement {
+    Q_OBJECT
     friend class Kit;
 
-  private:
+private:
     Ucc blk;
 
-  public:
+public:
     Block() = default;
     explicit Block(const Ucc &_blk) noexcept;
     Block(const Ucc &_blk, const QString &_id, const QString &_name);
@@ -89,13 +95,14 @@ class Block : public BasicElement {
 
 // Large block (a rectangular combination of blocks).
 class LBlock : public BasicElement {
+    Q_OBJECT
     friend class Kit;
 
-  private:
+private:
     QList<QList<Ucc>> lblk;
     QList<size_t>     w; // for printing for each row
 
-  public:
+public:
     LBlock() = default;
     LBlock(const size_t w, const size_t h);
     LBlock(const size_t w, const size_t h, const QString &_id, const QString &_name);
@@ -117,12 +124,14 @@ template <class T>
 concept isElem = std::derived_from<std::decay_t<T>, BasicElement>;
 
 class BasicProduct : public BasicCrtClass {
-  protected:
+    Q_OBJECT
+
+protected:
     QString author;
     QString des;
     Version ver;
 
-  public:
+public:
     BasicProduct() = default;
     explicit BasicProduct(const QString &path);
 
@@ -138,24 +147,26 @@ class BasicProduct : public BasicCrtClass {
 
 // Where stores data of blocks and large-blocks.
 class Kit : public BasicProduct {
+    Q_OBJECT
     friend class CoreStatus;
 
-  private:
-    QHash<QStrPtr, Block>  blks;
-    QHash<QStrPtr, LBlock> lblks;
+private:
+    QHash<std::reference_wrapper<QString>, Block>  blks;
+    QHash<std::reference_wrapper<QString>, LBlock> lblks;
 
-  public:
+public:
     Kit() = default;
 
-    auto getBlks() const noexcept -> const QHash<QStrPtr, Block> &;
+    auto getBlks() const noexcept -> const QHash<std::reference_wrapper<QString>, Block> &;
     void clearBlks() noexcept;
-    auto getLblks() const noexcept -> const QHash<QStrPtr, LBlock> &;
+    auto getLblks() const noexcept -> const QHash<std::reference_wrapper<QString>, LBlock> &;
     void clearLblks() noexcept;
     void operator+=(Block &&blk) noexcept;
     void operator+=(LBlock &&lblk) noexcept;
     void operator-=(QString &_id);
     bool contains(QString &_id) noexcept;
-    auto operator[](QString &_id) -> const std::variant<Block, LBlock>;
+    auto operator[](QString &_id)
+        -> const std::variant<std::reference_wrapper<Block>, std::reference_wrapper<LBlock>>;
     void fromJson(const json &j) override;
     json toJson() const override;
 }; // class Kit
@@ -163,18 +174,20 @@ class Kit : public BasicProduct {
 using MapDataType = QList<QList<std::variant<QSharedPointer<Block>, QSharedPointer<LBlock>>>>;
 
 class Map : public BasicProduct {
-  private:
+    Q_OBJECT
+
+private:
     MapDataType data; // nullptr: null(0) / filled by a large-block(1)
 
-  public:
+public:
     Map() = default;
 
     const MapDataType     &getData() const noexcept;
     void                   setData(const MapDataType &_data) noexcept;
     const Ucc              operator[](const size_t r, const size_t c);
     template <bool T> auto get(const size_t r, const size_t c) {}
-    template <> auto       get<0>(const size_t r, const size_t c); // Block
-    template <> auto       get<1>(const size_t r, const size_t c); // LBlock
+    template <> auto       get<0>(const size_t r, const size_t c); // QSharedPointer<Block>
+    template <> auto       get<1>(const size_t r, const size_t c); // QSharedPointer<LBlock>
     template <class T>
     void set(const size_t r, const size_t c, T &element)
         requires isElem<T>
