@@ -2,6 +2,7 @@
 
 #include "i18n.hpp"
 #include <QString>
+#include <backward-cpp/backward.hpp>
 #include <cstdint>
 
 constexpr const char *errmsgs[] = {
@@ -23,15 +24,17 @@ constexpr const char *errmsgs[] = {
 
 // Craftive Exceptions
 class CrtExcept {
-  private:
-    const uint16_t code; // Error Code (0x0000 ~ 0xFFFF)
-    const QString  detail;
+private:
+    const uint16_t             code; // Error Code (0x0000 ~ 0xFFFF)
+    const QString              detail;
+    const backward::StackTrace st;
 
-  public:
+public:
     CrtExcept(const uint16_t _code, const QString &_detail, auto &&...args);
 
-    const QString &how() const noexcept;   // Return the value of detail
-    const QString  what() const noexcept;  // Return the value of errmsgs[code]
-    const uint16_t which() const noexcept; // Return the value of code
-    const QString  whichStr() const;       // Return the value of code as QString
+    auto how() const noexcept -> const QString &;                     // Return detail
+    auto stacktrace() const noexcept -> const backward::StackTrace &; // Return st
+    auto what() const noexcept -> QString;   // Return errmsgs[code] (translated)
+    auto which() const noexcept -> uint16_t; // Return code
+    auto whichStr() const -> QString;        // Return code as QString
 };
