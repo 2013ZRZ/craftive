@@ -2,13 +2,13 @@ TEMPLATE = app
 
 CONFIG += lrelease embed_translations
 
-QMAKE_CC         = clang
-QMAKE_CXX        = clang++
-QMAKE_LINK       = clang++
-QMAKE_LINK_SHLIB = clang++
-QMAKE_AR         = llvm-ar
-QMAKE_RANLIB     = llvm-ranlib
-QMAKE_CXXFLAGS  += -flto -std=c++26
+QMAKE_CC         = clang-22
+QMAKE_CXX        = clang++-22
+QMAKE_LINK       = clang++-22
+QMAKE_LINK_SHLIB = clang++-22
+QMAKE_AR         = llvm-ar-22
+QMAKE_RANLIB     = llvm-ranlib-22
+QMAKE_CXXFLAGS  += -flto -std=c++26 -fuse-ld=lld -stdlib=libc++
 QMAKE_LFLAGS    += -flto
 
 QT += quick

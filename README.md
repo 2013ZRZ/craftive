@@ -14,3 +14,9 @@
 ![Still Writing](https://img.shields.io/badge/✍_Still_writing...-E78386?style=for-the-badge)
 
 </div>
+
+## Special Thanks
+- [Qt](https://qt.io/)
+- [Nlohmann JSON](https://json.nlohmann.me/)
+- [Backward-cpp](https://github.com/bombela/backward-cpp)
+- [Material Design 3 for Qt Quick (QML)](https://github.com/sudoevolve/material-components-qml)

@@ -1,1 +1,1 @@
-locales/*.ts linguist-detect=true linguist-language=XML
+locales/*.ts linguist-detectable=true linguist-language=XML

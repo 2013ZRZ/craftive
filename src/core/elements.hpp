@@ -154,7 +154,7 @@ public:
 // Where stores data of blocks and large-blocks.
 class Kit : public BasicProduct {
     Q_OBJECT
-    friend class CoreStatus;
+    friend struct CoreStatus;
 
 private:
     QHash<std::reference_wrapper<QString>, Block>  blks;

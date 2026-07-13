@@ -36,29 +36,6 @@ void Version::fromJson(const json &j) {
 
 json Version::toJson() const { return json{major, minor, patch}; }
 
-std::reference_wrapper<QString>::std::reference_wrapper<QString>() : raw(nullptr) {}
-
-std::reference_wrapper<QString>::std::reference_wrapper<QString>(QString &s) : raw(&s) {}
-
-std::reference_wrapper<QString>::operator QString() const noexcept { return get(); }
-
-QString std::reference_wrapper<QString>::get() const noexcept {
-    return raw == nullptr ? QString{} : *raw;
-}
-
-QString *std::reference_wrapper<QString>::operator->() const noexcept { return raw; }
-
-bool std::reference_wrapper<QString>::operator==(
-    const std::reference_wrapper<QString> &other) const noexcept {
-    return this->get() == other.get();
-}
-
-size_t qHash(std::reference_wrapper<QString> key, size_t seed) { return qHash(key.get(), seed); }
-
-size_t qHash(const std::reference_wrapper<QString> &key, size_t seed) {
-    return qHash(key.get(), seed);
-}
-
 bool isInvalidID(const QString &id) {
     for (const QChar &ch : id) {
         if (!ch.isLetterOrNumber() && ch != u'_')
