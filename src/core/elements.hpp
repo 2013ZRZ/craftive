@@ -6,6 +6,9 @@
 #include <variant>
 
 struct rgb {
+    Q_DECLARE_TR_FUNCTIONS(rgb)
+
+public:
     uint8_t r;
     uint8_t g;
     uint8_t b;
@@ -30,6 +33,9 @@ struct rgb {
  *  Ucc{U'囧', rgb{255, 0, 0}, rgb{255, 255, 0}}
  */
 struct Ucc {
+    Q_DECLARE_TR_FUNCTIONS(Ucc)
+
+public:
     enum class Mode : bool { b, f }; // Color mode
 
     char32_t c;           // Character

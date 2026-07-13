@@ -14,12 +14,9 @@ rgb::rgb(uint8_t _r, uint8_t _g, uint8_t _b) noexcept : r(_r), g(_g), b(_b) {}
 void rgb::fromJson(const json &j) {
     if (!j.is_array())
         throw CrtExcept(
-            0x0008,
-            translate("rgb",
-                      "from rgb::fromJson(); the RGB color in the JSON object isn't an array"));
+            0x0008, tr("from rgb::fromJson(); the RGB color in the JSON object isn't an array"));
     if (j.size() != 3)
-        throw CrtExcept(
-            0x0008, translate("rgb", "from rgb::fromJson(); incorrect number of color channels"));
+        throw CrtExcept(0x0008, tr("from rgb::fromJson(); incorrect number of color channels"));
     r = j[0].get<uint8_t>();
     g = j[1].get<uint8_t>();
     b = j[2].get<uint8_t>();
@@ -54,16 +51,12 @@ void Ucc::fromJson(const json &j) {
     if (!j.is_object())
         throw CrtExcept(
             0x0006,
-            translate(
-                "Ucc",
-                "from Ucc::fromJson(); the unicode colored character's JSON isn't an object"));
+            tr("from Ucc::fromJson(); the unicode colored character's JSON isn't an object"));
     QString _c = j.at("c").get<QString>();
     if (_c.size() > sizeof(char32_t))
         throw CrtExcept(
             0x0003,
-            translate(
-                "Ucc",
-                "from Ucc::fromJson(); the string to parse is %1 and it has too many characters"),
+            tr("from Ucc::fromJson(); the string to parse is %1 and it has too many characters"),
             _c);
     c = _c.toStdU32String()[0];
     if (j.find("b") != j.end()) {
