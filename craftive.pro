@@ -13,7 +13,8 @@ QMAKE_LFLAGS    += -flto
 
 QT += quick
 
-INCLUDEPATH += include/backward-cpp
+INCLUDEPATH += include/backward-cpp include/material-components-qml
+LIBS        += lib/libmd3core.a
 
 SOURCES = $$files(src/core/*.cpp) $$files(src/frontend/*.cpp)
 
@@ -24,3 +25,6 @@ LRELEASE_DIR             = locales
 QM_FILES_RESOURCE_PREFIX = /i18n
 
 RESOURCES += res.qrc
+
+MOC_DIR     = .cache/moc
+OBJECTS_DIR = .cache/o
