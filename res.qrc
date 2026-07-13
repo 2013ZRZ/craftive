@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>src/frontend/main.qml</file>
+        <file>assets/images/logo.svg</file>
+    </qresource>
+</RCC>

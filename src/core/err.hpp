@@ -2,7 +2,7 @@
 
 #include "i18n.hpp"
 #include <QString>
-#include <backward-cpp/backward.hpp>
+#include <backward.hpp>
 #include <cstdint>
 
 constexpr const char *errmsgs[] = {

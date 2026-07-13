@@ -13,4 +13,5 @@ int main(int argc, char *argv[]) {
             QCoreApplication::exit(-1);
         },
         Qt::QueuedConnection);
+    return app.exec();
 }
