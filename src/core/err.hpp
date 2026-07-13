@@ -1,8 +1,8 @@
 #pragma once
 
+#include "backward.hpp"
 #include "i18n.hpp"
 #include <QString>
-#include <backward.hpp>
 #include <cstdint>
 
 constexpr const char *errmsgs[] = {
@@ -25,9 +25,9 @@ constexpr const char *errmsgs[] = {
 // Craftive Exceptions
 class CrtExcept {
 private:
-    const uint16_t             code; // Error Code (0x0000 ~ 0xFFFF)
-    const QString              detail;
-    const backward::StackTrace st;
+    const uint16_t       code; // Error Code (0x0000 ~ 0xFFFF)
+    const QString        detail;
+    backward::StackTrace st;
 
 public:
     CrtExcept(const uint16_t _code, const QString &_detail, auto &&...args);
