@@ -1,1 +1,2 @@
-locales/*.ts linguist-detectable=true linguist-language=XML
+locales/*.ts linguist-detectable=true linguist-language=Qt\Linguist
+*.qrc linguist-detectable=true linguist-language=Qt\Resource
