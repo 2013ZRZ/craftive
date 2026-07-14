@@ -40,8 +40,8 @@ public:
 
     char32_t c;           // Character
     rgb      b;           // Background color
-    rgb      f;           // Foreground color
     bool     hasB{false}; // Whether it has background color
+    rgb      f;           // Foreground color
     bool     hasF{false}; // Whether it has foreground color
 
     Ucc() = default;
@@ -106,22 +106,22 @@ class LBlock : public BasicElement {
 
 private:
     QList<QList<Ucc>> lblk;
-    QList<size_t>     w; // for printing for each row
+    QList<qsizetype>     w; // for printing for each row
 
 public:
     LBlock() = default;
-    LBlock(const size_t w, const size_t h);
-    LBlock(const size_t w, const size_t h, const QString &_id, const QString &_name);
+    LBlock(const qsizetype w, const qsizetype h);
+    LBlock(const qsizetype w, const qsizetype h, const QString &_id, const QString &_name);
     LBlock(const QList<QList<Ucc>> &_lblk, const QString &_id, const QString &_name);
     explicit LBlock(const isJson auto &j);
 
     auto       getLblk() const noexcept -> const QList<QList<Ucc>> &;
     void       setLblk(const QList<QList<Ucc>> &_lblk);
-    const Ucc &getPos(const size_t r, const size_t c) const;
-    void       setPos(const size_t r, const size_t c, const Ucc &blk);
-    size_t     getW(const size_t r) const;
-    auto       getFullW() const noexcept -> const QList<size_t> &;
-    void       setW(const size_t r, const size_t _w);
+    const Ucc &getPos(const qsizetype r, const qsizetype c) const;
+    void       setPos(const qsizetype r, const qsizetype c, const Ucc &blk);
+    qsizetype     getW(const qsizetype r) const;
+    auto       getFullW() const noexcept -> const QList<qsizetype> &;
+    void       setW(const qsizetype r, const qsizetype _w);
     void       fromJson(const json &j) override;
     json       toJson() const override;
 }; // class LBlock
@@ -190,12 +190,12 @@ public:
 
     const MapDataType     &getData() const noexcept;
     void                   setData(const MapDataType &_data) noexcept;
-    const Ucc              operator[](const size_t r, const size_t c);
-    template <bool T> auto get(const size_t r, const size_t c) {}
-    template <> auto       get<0>(const size_t r, const size_t c); // QSharedPointer<Block>
-    template <> auto       get<1>(const size_t r, const size_t c); // QSharedPointer<LBlock>
+    const Ucc              operator[](const qsizetype r, const qsizetype c);
+    template <bool T> auto get(const qsizetype r, const qsizetype c) {}
+    template <> auto       get<0>(const qsizetype r, const qsizetype c); // QSharedPointer<Block>
+    template <> auto       get<1>(const qsizetype r, const qsizetype c); // QSharedPointer<LBlock>
     template <class T>
-    void set(const size_t r, const size_t c, T &element)
+    void set(const qsizetype r, const qsizetype c, T &element)
         requires isElem<T>
     {
         data[r][c] = QSharedPointer<T>{&element};

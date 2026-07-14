@@ -20,7 +20,7 @@ SOURCES = $$files(src/core/*.cpp) $$files(src/frontend/*.cpp)
 
 DESTDIR                  = out
 TARGET                   = craftive
-TRANSLATIONS             = $$files(locales/craftive.*.ts)
+TRANSLATIONS             = $$files(locales/craftive_*.ts)
 LRELEASE_DIR             = locales
 QM_FILES_RESOURCE_PREFIX = /i18n
 

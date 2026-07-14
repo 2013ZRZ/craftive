@@ -153,13 +153,13 @@ json Block::toJson() const {
 
 // Definitions in LBlock
 
-LBlock::LBlock(const size_t _w, const size_t _h) {
+LBlock::LBlock(const qsizetype _w, const qsizetype _h) {
     lblk.resize(_h);
     w.resize(_h);
     for (auto &i : lblk) i.resize(_w);
 }
 
-LBlock::LBlock(const size_t _w, const size_t _h, const QString &_id, const QString &_name) {
+LBlock::LBlock(const qsizetype _w, const qsizetype _h, const QString &_id, const QString &_name) {
     lblk.resize(_h);
     w.resize(_h);
     for (auto &i : lblk) i.resize(_w);
@@ -180,10 +180,10 @@ const QList<QList<Ucc>> &LBlock::getLblk() const noexcept { return lblk; }
 void LBlock::setLblk(const QList<QList<Ucc>> &_lblk) {
     lblk = _lblk;
     w.resize(lblk.size());
-    for (size_t i{}; i < w.size(); i++) w[i] = lblk[i].size();
+    for (qsizetype i{0}; i < w.size(); i++) w[i] = lblk[i].size();
 }
 
-const Ucc &LBlock::getPos(const size_t r, const size_t c) const {
+const Ucc &LBlock::getPos(const qsizetype r, const qsizetype c) const {
     if (r >= lblk.size() || c >= (lblk.empty() ? 0 : lblk[r].size()))
         throw CrtExcept(
             0x0005,
@@ -195,7 +195,7 @@ const Ucc &LBlock::getPos(const size_t r, const size_t c) const {
     return lblk[r][c];
 }
 
-void LBlock::setPos(const size_t r, const size_t c, const Ucc &blk) {
+void LBlock::setPos(const qsizetype r, const qsizetype c, const Ucc &blk) {
     if (r >= lblk.size() || c >= (lblk.empty() ? 0 : lblk[r].size()))
         throw CrtExcept(
             0x0005,
@@ -207,7 +207,7 @@ void LBlock::setPos(const size_t r, const size_t c, const Ucc &blk) {
     lblk[r][c] = blk;
 }
 
-size_t LBlock::getW(const size_t r) const {
+qsizetype LBlock::getW(const qsizetype r) const {
     if (r < w.size())
         return w[r];
     else if (r < lblk.size())
@@ -222,9 +222,9 @@ size_t LBlock::getW(const size_t r) const {
                         lblk.size());
 }
 
-auto LBlock::getFullW() const noexcept -> const QList<size_t> & { return w; }
+auto LBlock::getFullW() const noexcept -> const QList<qsizetype> & { return w; }
 
-void LBlock::setW(const size_t r, const size_t _w) {
+void LBlock::setW(const qsizetype r, const qsizetype _w) {
     if (r < w.size())
         w[r] = _w;
     else
@@ -239,17 +239,17 @@ void LBlock::fromJson(const json &j) {
         throw CrtExcept(0x0006, tr("from LBlock::fromJson(); the \"lblk\" isn't an array"));
     lblk.resize(j.at("lblk").size());
     w.resize(j.at("lblk").size());
-    for (size_t r{}; r < j.at("lblk").size(); r++) {
+    for (qsizetype r{0}; r < j.at("lblk").size(); r++) {
         if (!j.at("lblk")[r].is_array())
             throw CrtExcept(0x0006, tr("from LBlock::fromJson(); Row %1 isn't an array"), r + 1);
-        for (size_t c{}; c < j.at("lblk")[0].size(); c++) {
+        for (qsizetype c{0}; c < j.at("lblk")[0].size(); c++) {
             lblk[r].resize(j.at("lblk")[r].size());
             setPos(r, c, Ucc{j.at("lblk")[r][c]});
         }
     }
     if (!j.at("w").is_array())
         throw CrtExcept(0x0006, tr("from LBlock::fromJson(); the \"w\" isn't an array"));
-    for (size_t i{}; i < j.at("w").size(); i++) w[i] = j.at("w")[i].get<size_t>();
+    for (qsizetype i{0}; i < j.at("w").size(); i++) w[i] = j.at("w")[i].get<qsizetype>();
     if (j.find("id") != j.end())
         setID(j.at("id").get<QString>());
     else
@@ -260,9 +260,9 @@ void LBlock::fromJson(const json &j) {
 json LBlock::toJson() const {
     std::vector<std::vector<json>> lblk_json;
     lblk_json.resize(lblk.size());
-    for (size_t r{}; r < lblk.size(); r++) {
+    for (qsizetype r{0}; r < lblk.size(); r++) {
         lblk_json[r].resize(lblk.empty() ? 0 : lblk[r].size());
-        for (size_t c{}; c < (lblk.empty() ? 0 : lblk[r].size()); c++) {
+        for (qsizetype c{0}; c < (lblk.empty() ? 0 : lblk[r].size()); c++) {
             lblk_json[r][c] = lblk[r][c].toJson();
         }
     }
@@ -440,7 +440,7 @@ const MapDataType &Map::getData() const noexcept { return data; }
 
 void Map::setData(const MapDataType &_data) noexcept { data = _data; }
 
-const Ucc Map::operator[](const size_t r, const size_t c) {
+const Ucc Map::operator[](const qsizetype r, const qsizetype c) {
     if (r > data.size() || c > data.empty() ? 0 : data[r].size())
         throw CrtExcept(
             0x000E,
@@ -453,8 +453,8 @@ const Ucc Map::operator[](const size_t r, const size_t c) {
         if (std::get<1>(data[r][c]) != nullptr)           // is at the upper left corner
             return std::get<1>(data[r][c])->getPos(0, 0); // getPos directly
         else {
-            for (size_t _r{}; _r < r; _r++)
-                for (size_t _c{}; _c < c; _c++)
+            for (qsizetype _r{0}; _r < r; _r++)
+                for (qsizetype _c{0}; _c < c; _c++)
                     if (data[_r][_c].index() && // (_r,_c) is QSharedPointer<LBlock>
                         std::get<1>(data[_r][_c]) !=
                             nullptr && // (_r,_c) is at the upper left corner
@@ -469,7 +469,7 @@ const Ucc Map::operator[](const size_t r, const size_t c) {
         return std::get<0>(data[r][c]) == nullptr ? Ucc{} : std::get<0>(data[r][c])->getBlk();
 }
 
-template <> auto Map::get<0>(const size_t r, const size_t c) {
+template <> auto Map::get<0>(const qsizetype r, const qsizetype c) {
     if (r > data.size() || c > data.empty() ? 0 : data[r].size())
         throw CrtExcept(
             0x000E,
@@ -483,7 +483,7 @@ template <> auto Map::get<0>(const size_t r, const size_t c) {
                : std::get<0>(data[r][c]);
 }
 
-template <> auto Map::get<1>(const size_t r, const size_t c) {
+template <> auto Map::get<1>(const qsizetype r, const qsizetype c) {
     if (r > data.size() || c > data.empty() ? 0 : data[r].size())
         throw CrtExcept(
             0x000E,
@@ -495,8 +495,8 @@ template <> auto Map::get<1>(const size_t r, const size_t c) {
     if (std::get<1>(data[r][c]) != nullptr) // is at the upper left corner
         return std::get<1>(data[r][c]);
     else {
-        for (size_t _r{}; _r < r; _r++)
-            for (size_t _c{}; _c < c; _c++)
+        for (qsizetype _r{0}; _r < r; _r++)
+            for (qsizetype _c{0}; _c < c; _c++)
                 if (data[_r][_c].index() &&                 // (_r,_c) is QSharedPointer<LBlock>
                     std::get<1>(data[_r][_c]) != nullptr && // (_r,_c) is at the upper left corner
                     std::get<1>(data[_r][_c])->getLblk().size() + _r > r &&
@@ -558,7 +558,7 @@ void Map::fromJson(const json &j) {
             name,
             id);
 
-    for (size_t r{}; r < j["data"].size(); r++) {
+    for (qsizetype r{0}; r < j["data"].size(); r++) {
         if (!j["data"][r].is_array())
             throw CrtExcept(0x0006,
                             tr("from Map::fromJson(); Row %1 in \"data\" in the JSON of Map %2 "
@@ -566,7 +566,7 @@ void Map::fromJson(const json &j) {
                             r,
                             name,
                             id);
-        for (size_t c{}; c < j["data"][r].size(); c++) {
+        for (qsizetype c{0}; c < j["data"][r].size(); c++) {
             if (!j["data"][r][c].is_string())
                 throw CrtExcept(
                     0x0006,
@@ -611,8 +611,8 @@ void Map::fromJson(const json &j) {
 
 json Map::toJson() const {
     json dataj;
-    for (size_t r{}; r < data.size(); r++)
-        for (size_t c{}; c < data[r].size(); c++)
+    for (qsizetype r{0}; r < data.size(); r++)
+        for (qsizetype c{0}; c < data[r].size(); c++)
             data[r][c].visit([&](auto &&arg) { dataj[r][c] = arg->getID(); });
     return json{{"author", author},
                 {"id", id},

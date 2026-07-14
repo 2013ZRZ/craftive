@@ -2,3 +2,7 @@
 .cache/
 .out/*
 .clangd
+.DS_Store
+.qm
+.qmake.stash
+qmake_qmake_qm_files.qrc
