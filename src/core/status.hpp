@@ -1,13 +1,15 @@
 #pragma once
 
 #include "elements.hpp"
+#include <QObject>
 
+// Singleton
 struct CoreStatus : public QObject {
     Q_OBJECT
     friend class Kit;
 
 private:
-    QHash<std::reference_wrapper<QString>, Kit *> loadedKits;
+    QHash<QStrPtr, Kit *> loadedKits;
 
     CoreStatus()  = default;
     ~CoreStatus() = default;
@@ -18,7 +20,7 @@ public:
 
     static CoreStatus &instance();
 
-    auto getLoadedKits() const noexcept -> const QHash<std::reference_wrapper<QString>, Kit *> &;
+    auto getLoadedKits() const noexcept -> const QHash<QStrPtr, Kit *> &;
     bool registerKit(Kit &newKit) noexcept; // True for success or false if it exists
     bool removeKit(QString &id) noexcept;   // True for success or false if it doesn't exist
     bool containsKit(QString &id) const noexcept;

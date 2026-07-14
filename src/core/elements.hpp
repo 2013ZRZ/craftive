@@ -1,8 +1,8 @@
 #pragma once
 
 #include "crtutils.hpp"
+#include "i18n.hpp"
 #include <QSharedPointer>
-#include <functional>
 #include <variant>
 
 struct rgb {
@@ -106,7 +106,7 @@ class LBlock : public BasicElement {
 
 private:
     QList<QList<Ucc>> lblk;
-    QList<qsizetype>     w; // for printing for each row
+    QList<uint32_t>   w; // for printing for each row
 
 public:
     LBlock() = default;
@@ -119,9 +119,9 @@ public:
     void       setLblk(const QList<QList<Ucc>> &_lblk);
     const Ucc &getPos(const qsizetype r, const qsizetype c) const;
     void       setPos(const qsizetype r, const qsizetype c, const Ucc &blk);
-    qsizetype     getW(const qsizetype r) const;
-    auto       getFullW() const noexcept -> const QList<qsizetype> &;
-    void       setW(const qsizetype r, const qsizetype _w);
+    uint32_t   getW(const qsizetype r) const;
+    auto       getFullW() const noexcept -> const QList<uint32_t> &;
+    void       setW(const qsizetype r, const uint32_t _w);
     void       fromJson(const json &j) override;
     json       toJson() const override;
 }; // class LBlock
@@ -157,15 +157,15 @@ class Kit : public BasicProduct {
     friend struct CoreStatus;
 
 private:
-    QHash<std::reference_wrapper<QString>, Block>  blks;
-    QHash<std::reference_wrapper<QString>, LBlock> lblks;
+    QHash<QStrPtr, Block>  blks;
+    QHash<QStrPtr, LBlock> lblks;
 
 public:
     Kit() = default;
 
-    auto getBlks() const noexcept -> const QHash<std::reference_wrapper<QString>, Block> &;
+    auto getBlks() const noexcept -> const QHash<QStrPtr, Block> &;
     void clearBlks() noexcept;
-    auto getLblks() const noexcept -> const QHash<std::reference_wrapper<QString>, LBlock> &;
+    auto getLblks() const noexcept -> const QHash<QStrPtr, LBlock> &;
     void clearLblks() noexcept;
     void operator+=(Block &&blk) noexcept;
     void operator+=(LBlock &&lblk) noexcept;

@@ -1,4 +1,6 @@
 #include "crtutils.hpp"
+#include "err.hpp"
+#include "i18n.hpp"
 #include <QRegularExpression>
 #include <ctime>
 #include <random>
@@ -36,6 +38,22 @@ void Version::fromJson(const json &j) {
 
 json Version::toJson() const { return json{major, minor, patch}; }
 
+QStrPtr::QStrPtr() : raw(nullptr) {}
+
+QStrPtr::QStrPtr(QString &s) : raw(&s) {}
+
+QStrPtr::operator QString() const noexcept { return get(); }
+
+QString QStrPtr::get() const noexcept { return raw == nullptr ? QString{} : *raw; }
+
+QString *QStrPtr::operator->() const noexcept { return raw; }
+
+bool QStrPtr::operator==(const QStrPtr &other) const noexcept { return this->get() == other.get(); }
+
+size_t qHash(QStrPtr key, size_t seed) { return qHash(key.get(), seed); }
+
+size_t qHash(const QStrPtr &key, size_t seed) { return qHash(key.get(), seed); }
+
 bool isInvalidID(const QString &id) {
     for (const QChar &ch : id) {
         if (!ch.isLetterOrNumber() && ch != u'_')
@@ -71,4 +89,12 @@ QString randomID(uint8_t len) {
             o += '_'; // 62 : '_'
     }
     return o;
+}
+
+auto separateElemID(const QString &s) -> IDSeparatorDetail::SeparatedElemID {
+    auto list = s.split(QChar{u'/'});
+    if (list.size() != 2)
+        throw CrtExcept(
+            0x000C, translate("separateElemID", "from separateElemID(); The ID is %1"), s);
+    return IDSeparatorDetail::SeparatedElemID{.kit = list[0], .elem = list[1]};
 }

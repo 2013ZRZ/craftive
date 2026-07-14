@@ -1,8 +1,10 @@
 #include "elements.hpp"
+#include "err.hpp"
 #include "status.hpp"
 #include <QFile>
 #include <QStringConverter>
 #include <QTextStream>
+#include <cstdint>
 
 
 // Definitions in rgb
@@ -30,7 +32,7 @@ json rgb::toJson() const { return json{r, g, b}; }
 Ucc::Ucc(const char32_t _c) noexcept : c(_c), hasB(false), hasF(false) {}
 
 Ucc::Ucc(const char32_t _c, const rgb _b, const rgb _f) noexcept
-    : c(_c), hasB(true), b(_b), hasF(true), f(_f) {}
+    : c(_c), b(_b), hasB(true), f(_f), hasF(true) {}
 
 Ucc::Ucc(const char32_t _c, Mode cm, const rgb color) noexcept : c(_c) {
     switch (cm) {
@@ -53,7 +55,7 @@ void Ucc::fromJson(const json &j) {
             0x0006,
             tr("from Ucc::fromJson(); the unicode colored character's JSON isn't an object"));
     QString _c = j.at("c").get<QString>();
-    if (_c.size() > sizeof(char32_t))
+    if (static_cast<size_t>(_c.size()) > sizeof(char32_t))
         throw CrtExcept(
             0x0003,
             tr("from Ucc::fromJson(); the string to parse is %1 and it has too many characters"),
@@ -207,7 +209,7 @@ void LBlock::setPos(const qsizetype r, const qsizetype c, const Ucc &blk) {
     lblk[r][c] = blk;
 }
 
-qsizetype LBlock::getW(const qsizetype r) const {
+uint32_t LBlock::getW(const qsizetype r) const {
     if (r < w.size())
         return w[r];
     else if (r < lblk.size())
@@ -222,9 +224,9 @@ qsizetype LBlock::getW(const qsizetype r) const {
                         lblk.size());
 }
 
-auto LBlock::getFullW() const noexcept -> const QList<qsizetype> & { return w; }
+auto LBlock::getFullW() const noexcept -> const QList<uint32_t> & { return w; }
 
-void LBlock::setW(const qsizetype r, const qsizetype _w) {
+void LBlock::setW(const qsizetype r, const uint32_t _w) {
     if (r < w.size())
         w[r] = _w;
     else
@@ -239,17 +241,17 @@ void LBlock::fromJson(const json &j) {
         throw CrtExcept(0x0006, tr("from LBlock::fromJson(); the \"lblk\" isn't an array"));
     lblk.resize(j.at("lblk").size());
     w.resize(j.at("lblk").size());
-    for (qsizetype r{0}; r < j.at("lblk").size(); r++) {
+    for (size_t r{0}; r < j.at("lblk").size(); r++) {
         if (!j.at("lblk")[r].is_array())
             throw CrtExcept(0x0006, tr("from LBlock::fromJson(); Row %1 isn't an array"), r + 1);
-        for (qsizetype c{0}; c < j.at("lblk")[0].size(); c++) {
+        for (size_t c{0}; c < j.at("lblk")[0].size(); c++) {
             lblk[r].resize(j.at("lblk")[r].size());
             setPos(r, c, Ucc{j.at("lblk")[r][c]});
         }
     }
     if (!j.at("w").is_array())
         throw CrtExcept(0x0006, tr("from LBlock::fromJson(); the \"w\" isn't an array"));
-    for (qsizetype i{0}; i < j.at("w").size(); i++) w[i] = j.at("w")[i].get<qsizetype>();
+    for (size_t i{0}; i < j.at("w").size(); i++) w[i] = j.at("w")[i].get<size_t>();
     if (j.find("id") != j.end())
         setID(j.at("id").get<QString>());
     else
@@ -326,18 +328,14 @@ void BasicProduct::toFile(const QString &path, const uint8_t indent) {
 
 // Definitions in Kit
 
-auto Kit::getBlks() const noexcept -> const QHash<std::reference_wrapper<QString>, Block> & {
-    return blks;
-}
+auto Kit::getBlks() const noexcept -> const QHash<QStrPtr, Block> & { return blks; }
 
 void Kit::clearBlks() noexcept {
     blks.clear();
     blks.squeeze();
 }
 
-auto Kit::getLblks() const noexcept -> const QHash<std::reference_wrapper<QString>, LBlock> & {
-    return lblks;
-}
+auto Kit::getLblks() const noexcept -> const QHash<QStrPtr, LBlock> & { return lblks; }
 
 void Kit::clearLblks() noexcept {
     lblks.clear();
@@ -352,9 +350,7 @@ void Kit::operator-=(QString &_id) {
     if (!(blks.remove(_id) || lblks.remove(_id)))
         throw CrtExcept(
             0x0004,
-            translate(
-                "Kit",
-                "from Kit::operator-=; this kit doesn't contain an element who's ID is \"%1\""),
+            tr("from Kit::operator-=; this kit doesn't contain an element who's ID is \"%1\""),
             _id);
     blks.squeeze();
     lblks.squeeze();
@@ -371,9 +367,7 @@ auto Kit::operator[](QString &_id)
     else
         throw CrtExcept(
             0x0004,
-            translate(
-                "Kit",
-                "from Kit::operator[]; this kit doesn't contain an element who's ID is \"%1\""),
+            tr("from Kit::operator[]; this kit doesn't contain an element who's ID is \"%1\""),
             _id);
 }
 
@@ -558,7 +552,7 @@ void Map::fromJson(const json &j) {
             name,
             id);
 
-    for (qsizetype r{0}; r < j["data"].size(); r++) {
+    for (size_t r{0}; r < j["data"].size(); r++) {
         if (!j["data"][r].is_array())
             throw CrtExcept(0x0006,
                             tr("from Map::fromJson(); Row %1 in \"data\" in the JSON of Map %2 "
@@ -566,7 +560,7 @@ void Map::fromJson(const json &j) {
                             r,
                             name,
                             id);
-        for (qsizetype c{0}; c < j["data"][r].size(); c++) {
+        for (size_t c{0}; c < j["data"][r].size(); c++) {
             if (!j["data"][r][c].is_string())
                 throw CrtExcept(
                     0x0006,

@@ -1,7 +1,5 @@
 #pragma once
 
-#include "err.hpp"
-#include "i18n.hpp"
 #include <QHash>
 #include <QList>
 #include <QString>
@@ -29,6 +27,30 @@ struct Version {
     json    toJson() const;
 };
 
+// The real QString"View", with only a pointer to a QString object.
+// As a view, it doesn't own the string.
+class QStrPtr {
+private:
+    QString *raw;
+
+public:
+    QStrPtr();
+    QStrPtr(const QStrPtr &)            = default;
+    QStrPtr(QStrPtr &&)                 = delete;
+    QStrPtr &operator=(const QStrPtr &) = default;
+    QStrPtr &operator=(QStrPtr &&)      = delete;
+    QStrPtr(QString &s);
+    ~QStrPtr() = default;
+
+             operator QString() const noexcept;
+    QString  get() const noexcept;
+    QString *operator->() const noexcept;
+    bool     operator==(const QStrPtr &other) const noexcept;
+};
+
+size_t qHash(QStrPtr key, size_t seed);
+size_t qHash(const QStrPtr &key, size_t seed);
+
 bool    isInvalidID(const QString &id);
 bool    isInvalidElemID(const QString &id);
 bool    isInvalidEmail(const QString &email);
@@ -40,13 +62,7 @@ struct SeparatedElemID {
 };
 } // namespace IDSeparatorDetail
 
-static auto separateElemID(const QString &s) -> IDSeparatorDetail::SeparatedElemID {
-    auto list = s.split(QChar{u'/'});
-    if (list.size() != 2)
-        throw CrtExcept(
-            0x000C, translate("separateElemID", "from separateElemID(); The ID is %1"), s);
-    return IDSeparatorDetail::SeparatedElemID{.kit = list[0], .elem = list[1]};
-}
+auto separateElemID(const QString &s) -> IDSeparatorDetail::SeparatedElemID;
 
 NLOHMANN_JSON_NAMESPACE_BEGIN
 template <> struct adl_serializer<QString> {
