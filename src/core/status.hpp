@@ -9,7 +9,7 @@ struct CoreStatus : public QObject {
     friend class Kit;
 
 private:
-    QHash<QStrPtr, Kit *> loadedKits;
+    QHash<QString, Kit *> loadedKits;
 
     CoreStatus()  = default;
     ~CoreStatus() = default;
@@ -20,7 +20,7 @@ public:
 
     static CoreStatus &instance();
 
-    auto getLoadedKits() const noexcept -> const QHash<QStrPtr, Kit *> &;
+    auto getLoadedKits() const noexcept -> const QHash<QString, Kit *> &;
     bool registerKit(Kit &newKit) noexcept; // True for success or false if it exists
     bool removeKit(QString &id) noexcept;   // True for success or false if it doesn't exist
     bool containsKit(QString &id) const noexcept;

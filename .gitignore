@@ -1,8 +1,9 @@
 .vscode/
 .cache/
-.out/*
+out/
 .clangd
+.qmllint.ini
 .DS_Store
-.qm
+*.qm
 .qmake.stash
-qmake_qmake_qm_files.qrc
+Makefile

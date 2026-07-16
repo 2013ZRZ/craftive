@@ -303,7 +303,7 @@ void BasicProduct::fromFile(const QString &path) {
     QTextStream in{&file};
     in.setEncoding(QStringConverter::Utf8);
     try {
-        fromJson(json::parse(in.readAll()));
+        fromJson(json::parse(in.readAll().toStdString()));
     } catch (const json::parse_error &e) {
         throw CrtExcept(0x0006, tr("from BasicProduct::fromFile() (%1)"), e.what());
     }
@@ -328,38 +328,32 @@ void BasicProduct::toFile(const QString &path, const uint8_t indent) {
 
 // Definitions in Kit
 
-auto Kit::getBlks() const noexcept -> const QHash<QStrPtr, Block> & { return blks; }
+auto Kit::getBlks() const noexcept -> const QHash<QString, QSharedPointer<Block>> & { return blks; }
 
-void Kit::clearBlks() noexcept {
-    blks.clear();
-    blks.squeeze();
-}
+void Kit::clearBlks() noexcept { blks.clear(); }
 
-auto Kit::getLblks() const noexcept -> const QHash<QStrPtr, LBlock> & { return lblks; }
+auto Kit::getLblks() const noexcept -> const QHash<QString, QSharedPointer<LBlock>> & { return lblks; }
 
-void Kit::clearLblks() noexcept {
-    lblks.clear();
-    lblks.squeeze();
-}
+void Kit::clearLblks() noexcept { lblks.clear(); }
 
-void Kit::operator+=(Block &&blk) noexcept { blks.insert(blk.id, blk); }
+void Kit::operator+=(QSharedPointer<Block> blk) noexcept { blks.insert(blk->getID(), blk); }
 
-void Kit::operator+=(LBlock &&lblk) noexcept { lblks.insert(lblk.id, lblk); }
+void Kit::operator+=(QSharedPointer<LBlock> lblk) noexcept { lblks.insert(lblk->getID(), lblk); }
 
-void Kit::operator-=(QString &_id) {
+void Kit::operator-=(const QString &_id) {
     if (!(blks.remove(_id) || lblks.remove(_id)))
         throw CrtExcept(
             0x0004,
             tr("from Kit::operator-=; this kit doesn't contain an element who's ID is \"%1\""),
             _id);
-    blks.squeeze();
-    lblks.squeeze();
 }
 
-bool Kit::contains(QString &_id) noexcept { return blks.contains(_id) || lblks.contains(_id); }
+bool Kit::contains(const QString &_id) noexcept {
+    return blks.contains(_id) || lblks.contains(_id);
+}
 
-auto Kit::operator[](QString &_id)
-    -> const std::variant<std::reference_wrapper<Block>, std::reference_wrapper<LBlock>> {
+auto Kit::operator[](const QString &_id)
+    -> std::variant<QSharedPointer<Block>, QSharedPointer<LBlock>> {
     if (blks.contains(_id))
         return blks[_id];
     else if (lblks.contains(_id))
@@ -405,9 +399,9 @@ void Kit::fromJson(const json &j) {
             id);
 
     if (j.find("blks") != j.end())
-        for (const json &blk : j["blks"]) *this += Block{blk};
+        for (const json &blk : j["blks"]) *this += QSharedPointer<Block>{new Block{blk}};
     if (j.find("lblks") != j.end())
-        for (const json &lblk : j["lblks"]) *this += LBlock{lblk};
+        for (const json &lblk : j["lblks"]) *this += QSharedPointer<LBlock>{new LBlock{lblk}};
 }
 
 json Kit::toJson() const {
@@ -415,13 +409,13 @@ json Kit::toJson() const {
     if (!blks.empty()) {
         std::vector<json> blks_json;
         blks_json.reserve(blks.size());
-        for (const auto &i : blks) blks_json.emplace_back(i.toJson());
+        for (const auto &i : blks) blks_json.emplace_back(i->toJson());
         j["blks"] = blks_json;
     }
     if (!lblks.empty()) {
         std::vector<json> lblks_json;
         lblks_json.reserve(lblks.size());
-        for (const auto &i : lblks) lblks_json.emplace_back(i.toJson());
+        for (const auto &i : lblks) lblks_json.emplace_back(i->toJson());
         j["lblks"] = lblks_json;
     }
     return j;
@@ -598,7 +592,7 @@ void Map::fromJson(const json &j) {
                                 name,
                                 id);
             else
-                targetKit[elemFullID].visit([&](auto &&arg) { set(r, c, arg.get()); });
+                targetKit[elemFullID].visit([&](auto &&arg) { set(r, c, arg); });
         }
     }
 }

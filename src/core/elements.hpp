@@ -157,22 +157,22 @@ class Kit : public BasicProduct {
     friend struct CoreStatus;
 
 private:
-    QHash<QStrPtr, Block>  blks;
-    QHash<QStrPtr, LBlock> lblks;
+    QHash<QString, QSharedPointer<Block>>  blks;
+    QHash<QString, QSharedPointer<LBlock>> lblks;
 
 public:
     Kit() = default;
 
-    auto getBlks() const noexcept -> const QHash<QStrPtr, Block> &;
+    auto getBlks() const noexcept -> const QHash<QString, QSharedPointer<Block>> &;
     void clearBlks() noexcept;
-    auto getLblks() const noexcept -> const QHash<QStrPtr, LBlock> &;
+    auto getLblks() const noexcept -> const QHash<QString, QSharedPointer<LBlock>> &;
     void clearLblks() noexcept;
-    void operator+=(Block &&blk) noexcept;
-    void operator+=(LBlock &&lblk) noexcept;
-    void operator-=(QString &_id);
-    bool contains(QString &_id) noexcept;
-    auto operator[](QString &_id)
-        -> const std::variant<std::reference_wrapper<Block>, std::reference_wrapper<LBlock>>;
+    void operator+=(QSharedPointer<Block> blk) noexcept;
+    void operator+=(QSharedPointer<LBlock> lblk) noexcept;
+    void operator-=(const QString &_id);
+    bool contains(const QString &_id) noexcept;
+    auto operator[](const QString &_id)
+        -> std::variant<QSharedPointer<Block>, QSharedPointer<LBlock>>;
     void fromJson(const json &j) override;
     json toJson() const override;
 }; // class Kit
@@ -195,10 +195,10 @@ public:
     template <> auto       get<0>(const qsizetype r, const qsizetype c); // QSharedPointer<Block>
     template <> auto       get<1>(const qsizetype r, const qsizetype c); // QSharedPointer<LBlock>
     template <class T>
-    void set(const qsizetype r, const qsizetype c, T &element)
+    void set(const qsizetype r, const qsizetype c, const QSharedPointer<T> &element)
         requires isElem<T>
     {
-        data[r][c] = QSharedPointer<T>{&element};
+        data[r][c] = element;
         // Note: (r, c) will be covered whether there's already a ucc or not
     }
     void fromJson(const json &j) override;

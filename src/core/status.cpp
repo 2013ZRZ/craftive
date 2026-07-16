@@ -6,7 +6,7 @@ CoreStatus &CoreStatus::instance() {
     return inst;
 }
 
-auto CoreStatus::getLoadedKits() const noexcept -> const QHash<QStrPtr, Kit *> & {
+auto CoreStatus::getLoadedKits() const noexcept -> const QHash<QString, Kit *> & {
     return loadedKits;
 }
 

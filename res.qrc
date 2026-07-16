@@ -1,6 +1,13 @@
 <RCC>
-    <qresource prefix="/">
-        <file>src/frontend/main.qml</file>
-        <file>assets/images/logo.svg</file>
+    <qresource prefix="/qmls">
+        <file alias="main.qml">src/frontend/main.qml</file>
+    </qresource>
+    <qresource prefix="/images">
+        <file alias="logo.svg">assets/images/logo.svg</file>
+    </qresource>
+    <qresource prefix="/i18n">
+        <file alias="craftive_en.qm">out/locales/craftive_en.qm</file>
+        <file alias="craftive_en_US.qm">out/locales/craftive_en_US.qm</file>
+        <file alias="craftive_zh_CN.qm">out/locales/craftive_zh_CN.qm</file>
     </qresource>
 </RCC>

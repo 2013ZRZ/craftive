@@ -27,30 +27,6 @@ struct Version {
     json    toJson() const;
 };
 
-// The real QString"View", with only a pointer to a QString object.
-// As a view, it doesn't own the string.
-class QStrPtr {
-private:
-    QString *raw;
-
-public:
-    QStrPtr();
-    QStrPtr(const QStrPtr &)            = default;
-    QStrPtr(QStrPtr &&)                 = delete;
-    QStrPtr &operator=(const QStrPtr &) = default;
-    QStrPtr &operator=(QStrPtr &&)      = delete;
-    QStrPtr(QString &s);
-    ~QStrPtr() = default;
-
-             operator QString() const noexcept;
-    QString  get() const noexcept;
-    QString *operator->() const noexcept;
-    bool     operator==(const QStrPtr &other) const noexcept;
-};
-
-size_t qHash(QStrPtr key, size_t seed);
-size_t qHash(const QStrPtr &key, size_t seed);
-
 bool    isInvalidID(const QString &id);
 bool    isInvalidElemID(const QString &id);
 bool    isInvalidEmail(const QString &email);
@@ -73,9 +49,14 @@ template <> struct adl_serializer<QString> {
 };
 
 template <typename T> struct adl_serializer<QList<T>> {
-    static void to_json(json &j, const QList<T> &opt) { j = opt.toStdVector(); }
-    static void from_json(const json &j, QString &opt) {
-        opt = QList<T>::fromStdVector(j.get<std::string>());
+    static void to_json(json &j, const QList<T> &opt) {
+        j = json::array();
+        for (const auto &v : opt) j.push_back(v);
+    }
+    static void from_json(const json &j, QList<T> &opt) {
+        opt.clear();
+        opt.reserve(j.size());
+        for (const auto &v : j) opt.push_back(v.get<T>());
     }
 };
 NLOHMANN_JSON_NAMESPACE_END
