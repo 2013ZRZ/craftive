@@ -1,0 +1,46 @@
+<RCC>
+    <qresource prefix="/qt/qml/md3/Core">
+        <file alias="Controls/Breadcrumb.qml">include/md3-qml/src/Core/Controls/Breadcrumb.qml</file>
+        <file alias="Controls/Button.qml">include/md3-qml/src/Core/Controls/Button.qml</file>
+        <file alias="Controls/CanvasBarChart.qml">include/md3-qml/src/Core/Controls/CanvasBarChart.qml</file>
+        <file alias="Controls/CanvasLineChart.qml">include/md3-qml/src/Core/Controls/CanvasLineChart.qml</file>
+        <file alias="Controls/CanvasPieChart.qml">include/md3-qml/src/Core/Controls/CanvasPieChart.qml</file>
+        <file alias="Controls/Card.qml">include/md3-qml/src/Core/Controls/Card.qml</file>
+        <file alias="Controls/Carousel.qml">include/md3-qml/src/Core/Controls/Carousel.qml</file>
+        <file alias="Controls/Checkbox.qml">include/md3-qml/src/Core/Controls/Checkbox.qml</file>
+        <file alias="Controls/Chip.qml">include/md3-qml/src/Core/Controls/Chip.qml</file>
+        <file alias="Controls/CircularProgress.qml">include/md3-qml/src/Core/Controls/CircularProgress.qml</file>
+        <file alias="Controls/ColorPicker.qml">include/md3-qml/src/Core/Controls/ColorPicker.qml</file>
+        <file alias="Controls/ComboBox.qml">include/md3-qml/src/Core/Controls/ComboBox.qml</file>
+        <file alias="Controls/DataTable.qml">include/md3-qml/src/Core/Controls/DataTable.qml</file>
+        <file alias="Controls/DatePicker.qml">include/md3-qml/src/Core/Controls/DatePicker.qml</file>
+        <file alias="Controls/Dialog.qml">include/md3-qml/src/Core/Controls/Dialog.qml</file>
+        <file alias="Controls/FAB.qml">include/md3-qml/src/Core/Controls/FAB.qml</file>
+        <file alias="Controls/FabMenu.qml">include/md3-qml/src/Core/Controls/FabMenu.qml</file>
+        <file alias="Controls/IconButton.qml">include/md3-qml/src/Core/Controls/IconButton.qml</file>
+        <file alias="Controls/IndexBackground.qml">include/md3-qml/src/Core/Controls/IndexBackground.qml</file>
+        <file alias="Controls/LinearProgress.qml">include/md3-qml/src/Core/Controls/LinearProgress.qml</file>
+        <file alias="Controls/LoadingIndicator.qml">include/md3-qml/src/Core/Controls/LoadingIndicator.qml</file>
+        <file alias="Controls/Menu.qml">include/md3-qml/src/Core/Controls/Menu.qml</file>
+        <file alias="Controls/NavigationBar.qml">include/md3-qml/src/Core/Controls/NavigationBar.qml</file>
+        <file alias="Controls/NavigationDrawer.qml">include/md3-qml/src/Core/Controls/NavigationDrawer.qml</file>
+        <file alias="Controls/NavigationRail.qml">include/md3-qml/src/Core/Controls/NavigationRail.qml</file>
+        <file alias="Controls/RadioButton.qml">include/md3-qml/src/Core/Controls/RadioButton.qml</file>
+        <file alias="Controls/Ripple.qml">include/md3-qml/src/Core/Controls/Ripple.qml</file>
+        <file alias="Controls/ScrollBar.qml">include/md3-qml/src/Core/Controls/ScrollBar.qml</file>
+        <file alias="Controls/SegmentedButton.qml">include/md3-qml/src/Core/Controls/SegmentedButton.qml</file>
+        <file alias="Controls/SideSheet.qml">include/md3-qml/src/Core/Controls/SideSheet.qml</file>
+        <file alias="Controls/Slider.qml">include/md3-qml/src/Core/Controls/Slider.qml</file>
+        <file alias="Controls/Snackbar.qml">include/md3-qml/src/Core/Controls/Snackbar.qml</file>
+        <file alias="Controls/Switch.qml">include/md3-qml/src/Core/Controls/Switch.qml</file>
+        <file alias="Controls/Tabs.qml">include/md3-qml/src/Core/Controls/Tabs.qml</file>
+        <file alias="Controls/TextField.qml">include/md3-qml/src/Core/Controls/TextField.qml</file>
+        <file alias="Controls/TimePicker.qml">include/md3-qml/src/Core/Controls/TimePicker.qml</file>
+        <file alias="Controls/ToolTip.qml">include/md3-qml/src/Core/Controls/ToolTip.qml</file>
+        <file alias="Controls/TopAppBar.qml">include/md3-qml/src/Core/Controls/TopAppBar.qml</file>
+        <file alias="Styles/Theme.qml">include/md3-qml/src/Core/Styles/Theme.qml</file>
+        <file alias="Styles/animations/AnimatedWindow.qml">include/md3-qml/src/Core/Styles/animations/AnimatedWindow.qml</file>
+        <file alias="Styles/assets/IconData.js">include/md3-qml/src/Core/Styles/assets/IconData.js</file>
+        <file alias="Styles/assets/MaterialIconsRound-Regular.otf">include/md3-qml/src/Core/Styles/assets/MaterialIconsRound-Regular.otf</file>
+    </qresource>
+</RCC>

@@ -6,4 +6,5 @@ out/
 .DS_Store
 *.qm
 .qmake.stash
-Makefile
+craftive_qmltyperegistrations.cpp
+craftive.qmltypes

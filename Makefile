@@ -17,7 +17,7 @@ CXX           = clang++-22
 DEFINES       = -DQT_NO_DEBUG -DQT_QUICK_LIB -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_QML_LIB -DQT_QMLINTEGRATION_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -O2 -Wall -Wextra -fPIC -D_REENTRANT $(DEFINES)
 CXXFLAGS      = -pipe -flto -std=c++26 -stdlib=libc++ -Wno-unused-parameter -O2 -Wall -Wextra -fPIC -D_REENTRANT $(DEFINES)
-INCPATH       = -I. -Iinclude/backward-cpp -Iinclude/material-components-qml -I../../Qt/6.11.0/gcc_64/include -I../../Qt/6.11.0/gcc_64/include/QtQuick -I../../Qt/6.11.0/gcc_64/include/QtOpenGL -I../../Qt/6.11.0/gcc_64/include/QtGui -I../../Qt/6.11.0/gcc_64/include/QtQml -I../../Qt/6.11.0/gcc_64/include/QtQmlIntegration -I../../Qt/6.11.0/gcc_64/include/QtNetwork -I../../Qt/6.11.0/gcc_64/include/QtCore -I.cache/moc -I../../Qt/6.11.0/gcc_64/mkspecs/linux-g++
+INCPATH       = -I. -Iinclude/backward-cpp -Iinclude/md3-qml/src/Core/Cpp -Iinclude/md3-qml/3rdparty/material-color-utilities -I../../Qt/6.11.0/gcc_64/include -I../../Qt/6.11.0/gcc_64/include/QtQuick -I../../Qt/6.11.0/gcc_64/include/QtOpenGL -I../../Qt/6.11.0/gcc_64/include/QtGui -I../../Qt/6.11.0/gcc_64/include/QtQml -I../../Qt/6.11.0/gcc_64/include/QtQmlIntegration -I../../Qt/6.11.0/gcc_64/include/QtNetwork -I../../Qt/6.11.0/gcc_64/include/QtCore -I.cache/moc -I../../Qt/6.11.0/gcc_64/mkspecs/linux-g++
 QMAKE         = /usr/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -40,7 +40,7 @@ DISTNAME      = craftive1.0.0
 DISTDIR = /home/zrz/pro/craftive/.cache/o/craftive1.0.0
 LINK          = clang++-22
 LFLAGS        = -flto -fuse-ld=lld -Wl,-O1 -Wl,-rpath,/home/zrz/Qt/6.11.0/gcc_64/lib -Wl,-rpath-link,/home/zrz/Qt/6.11.0/gcc_64/lib
-LIBS          = $(SUBLIBS) lib/libmd3core.a /home/zrz/Qt/6.11.0/gcc_64/lib/libQt6Quick.so /home/zrz/Qt/6.11.0/gcc_64/lib/libQt6OpenGL.so /home/zrz/Qt/6.11.0/gcc_64/lib/libQt6Gui.so /home/zrz/Qt/6.11.0/gcc_64/lib/libQt6Qml.so /home/zrz/Qt/6.11.0/gcc_64/lib/libQt6Network.so /home/zrz/Qt/6.11.0/gcc_64/lib/libQt6Core.so -lpthread -lGL   
+LIBS          = $(SUBLIBS) /home/zrz/Qt/6.11.0/gcc_64/lib/libQt6Quick.so /home/zrz/Qt/6.11.0/gcc_64/lib/libQt6OpenGL.so /home/zrz/Qt/6.11.0/gcc_64/lib/libQt6Gui.so /home/zrz/Qt/6.11.0/gcc_64/lib/libQt6Qml.so /home/zrz/Qt/6.11.0/gcc_64/lib/libQt6Network.so /home/zrz/Qt/6.11.0/gcc_64/lib/libQt6Core.so -lpthread -lGL   
 AR            = llvm-ar-22
 RANLIB        = llvm-ranlib-22
 SED           = sed
@@ -56,13 +56,73 @@ SOURCES       = src/core/crtutils.cpp \
 		src/core/elements.cpp \
 		src/core/err.cpp \
 		src/core/status.cpp \
-		src/frontend/main.cpp ../.cache/rcc/qrc_res.cpp
+		src/frontend/main.cpp \
+		include/md3-qml/src/Core/Cpp/stylemanager.cpp \
+		include/md3-qml/3rdparty/material-color-utilities/blend/blend.cc \
+		include/md3-qml/3rdparty/material-color-utilities/cam/cam.cc \
+		include/md3-qml/3rdparty/material-color-utilities/cam/hct.cc \
+		include/md3-qml/3rdparty/material-color-utilities/cam/hct_solver.cc \
+		include/md3-qml/3rdparty/material-color-utilities/cam/viewing_conditions.cc \
+		include/md3-qml/3rdparty/material-color-utilities/contrast/contrast.cc \
+		include/md3-qml/3rdparty/material-color-utilities/dislike/dislike.cc \
+		include/md3-qml/3rdparty/material-color-utilities/dynamiccolor/dynamic_color.cc \
+		include/md3-qml/3rdparty/material-color-utilities/dynamiccolor/dynamic_scheme.cc \
+		include/md3-qml/3rdparty/material-color-utilities/dynamiccolor/material_dynamic_colors.cc \
+		include/md3-qml/3rdparty/material-color-utilities/palettes/tones.cc \
+		include/md3-qml/3rdparty/material-color-utilities/quantize/celebi.cc \
+		include/md3-qml/3rdparty/material-color-utilities/quantize/lab.cc \
+		include/md3-qml/3rdparty/material-color-utilities/quantize/wsmeans.cc \
+		include/md3-qml/3rdparty/material-color-utilities/quantize/wu.cc \
+		include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_content.cc \
+		include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_expressive.cc \
+		include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_fidelity.cc \
+		include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_fruit_salad.cc \
+		include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_monochrome.cc \
+		include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_neutral.cc \
+		include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_rainbow.cc \
+		include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_tonal_spot.cc \
+		include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_vibrant.cc \
+		include/md3-qml/3rdparty/material-color-utilities/score/score.cc \
+		include/md3-qml/3rdparty/material-color-utilities/temperature/temperature_cache.cc \
+		include/md3-qml/3rdparty/material-color-utilities/utils/utils.cc craftive_qmltyperegistrations.cpp \
+		../.cache/rcc/qrc_res.cpp \
+		../.cache/rcc/qrc_md3-core.cpp
 OBJECTS       = .cache/o/crtutils.o \
 		.cache/o/elements.o \
 		.cache/o/err.o \
 		.cache/o/status.o \
 		.cache/o/main.o \
-		.cache/o/qrc_res.o
+		.cache/o/stylemanager.o \
+		.cache/o/blend.o \
+		.cache/o/cam.o \
+		.cache/o/hct.o \
+		.cache/o/hct_solver.o \
+		.cache/o/viewing_conditions.o \
+		.cache/o/contrast.o \
+		.cache/o/dislike.o \
+		.cache/o/dynamic_color.o \
+		.cache/o/dynamic_scheme.o \
+		.cache/o/material_dynamic_colors.o \
+		.cache/o/tones.o \
+		.cache/o/celebi.o \
+		.cache/o/lab.o \
+		.cache/o/wsmeans.o \
+		.cache/o/wu.o \
+		.cache/o/scheme_content.o \
+		.cache/o/scheme_expressive.o \
+		.cache/o/scheme_fidelity.o \
+		.cache/o/scheme_fruit_salad.o \
+		.cache/o/scheme_monochrome.o \
+		.cache/o/scheme_neutral.o \
+		.cache/o/scheme_rainbow.o \
+		.cache/o/scheme_tonal_spot.o \
+		.cache/o/scheme_vibrant.o \
+		.cache/o/score.o \
+		.cache/o/temperature_cache.o \
+		.cache/o/utils.o \
+		.cache/o/craftive_qmltyperegistrations.o \
+		.cache/o/qrc_res.o \
+		.cache/o/qrc_md3-core.o
 DIST          = ../../Qt/6.11.0/gcc_64/mkspecs/features/spec_pre.prf \
 		../../Qt/6.11.0/gcc_64/mkspecs/common/unix.conf \
 		../../Qt/6.11.0/gcc_64/mkspecs/common/linux.conf \
@@ -262,6 +322,8 @@ DIST          = ../../Qt/6.11.0/gcc_64/mkspecs/features/spec_pre.prf \
 		../../Qt/6.11.0/gcc_64/mkspecs/features/default_pre.prf \
 		../../Qt/6.11.0/gcc_64/mkspecs/features/resolve_config.prf \
 		../../Qt/6.11.0/gcc_64/mkspecs/features/default_post.prf \
+		../../Qt/6.11.0/gcc_64/mkspecs/features/qmltypes.prf \
+		../../Qt/6.11.0/gcc_64/mkspecs/features/metatypes.prf \
 		../../Qt/6.11.0/gcc_64/mkspecs/features/lrelease.prf \
 		../../Qt/6.11.0/gcc_64/mkspecs/features/warn_on.prf \
 		../../Qt/6.11.0/gcc_64/mkspecs/features/permissions.prf \
@@ -281,7 +343,35 @@ DIST          = ../../Qt/6.11.0/gcc_64/mkspecs/features/spec_pre.prf \
 		src/core/elements.cpp \
 		src/core/err.cpp \
 		src/core/status.cpp \
-		src/frontend/main.cpp
+		src/frontend/main.cpp \
+		include/md3-qml/src/Core/Cpp/stylemanager.cpp \
+		include/md3-qml/3rdparty/material-color-utilities/blend/blend.cc \
+		include/md3-qml/3rdparty/material-color-utilities/cam/cam.cc \
+		include/md3-qml/3rdparty/material-color-utilities/cam/hct.cc \
+		include/md3-qml/3rdparty/material-color-utilities/cam/hct_solver.cc \
+		include/md3-qml/3rdparty/material-color-utilities/cam/viewing_conditions.cc \
+		include/md3-qml/3rdparty/material-color-utilities/contrast/contrast.cc \
+		include/md3-qml/3rdparty/material-color-utilities/dislike/dislike.cc \
+		include/md3-qml/3rdparty/material-color-utilities/dynamiccolor/dynamic_color.cc \
+		include/md3-qml/3rdparty/material-color-utilities/dynamiccolor/dynamic_scheme.cc \
+		include/md3-qml/3rdparty/material-color-utilities/dynamiccolor/material_dynamic_colors.cc \
+		include/md3-qml/3rdparty/material-color-utilities/palettes/tones.cc \
+		include/md3-qml/3rdparty/material-color-utilities/quantize/celebi.cc \
+		include/md3-qml/3rdparty/material-color-utilities/quantize/lab.cc \
+		include/md3-qml/3rdparty/material-color-utilities/quantize/wsmeans.cc \
+		include/md3-qml/3rdparty/material-color-utilities/quantize/wu.cc \
+		include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_content.cc \
+		include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_expressive.cc \
+		include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_fidelity.cc \
+		include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_fruit_salad.cc \
+		include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_monochrome.cc \
+		include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_neutral.cc \
+		include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_rainbow.cc \
+		include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_tonal_spot.cc \
+		include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_vibrant.cc \
+		include/md3-qml/3rdparty/material-color-utilities/score/score.cc \
+		include/md3-qml/3rdparty/material-color-utilities/temperature/temperature_cache.cc \
+		include/md3-qml/3rdparty/material-color-utilities/utils/utils.cc
 QMAKE_TARGET  = craftive
 DESTDIR       = out/
 TARGET        = out/craftive
@@ -290,7 +380,7 @@ TARGET        = out/craftive
 first: all
 ####### Build rules
 
-out/craftive: out/locales/craftive_en.qm out/locales/craftive_en_US.qm out/locales/craftive_zh_CN.qm $(OBJECTS)  
+out/craftive: craftive_metatypes.json out/locales/craftive_en.qm out/locales/craftive_en_US.qm out/locales/craftive_zh_CN.qm $(OBJECTS)  
 	@test -d out/ || mkdir -p out/
 	$(LINK) $(LFLAGS) -o $(TARGET)  $(OBJECTS) $(OBJCOMP) $(LIBS)
 
@@ -493,6 +583,8 @@ Makefile: craftive.pro ../../Qt/6.11.0/gcc_64/mkspecs/linux-g++/qmake.conf ../..
 		../../Qt/6.11.0/gcc_64/mkspecs/features/default_pre.prf \
 		../../Qt/6.11.0/gcc_64/mkspecs/features/resolve_config.prf \
 		../../Qt/6.11.0/gcc_64/mkspecs/features/default_post.prf \
+		../../Qt/6.11.0/gcc_64/mkspecs/features/qmltypes.prf \
+		../../Qt/6.11.0/gcc_64/mkspecs/features/metatypes.prf \
 		../../Qt/6.11.0/gcc_64/mkspecs/features/lrelease.prf \
 		../../Qt/6.11.0/gcc_64/mkspecs/features/warn_on.prf \
 		../../Qt/6.11.0/gcc_64/mkspecs/features/permissions.prf \
@@ -510,6 +602,7 @@ Makefile: craftive.pro ../../Qt/6.11.0/gcc_64/mkspecs/linux-g++/qmake.conf ../..
 		../../Qt/6.11.0/gcc_64/mkspecs/features/lex.prf \
 		craftive.pro \
 		res.qrc \
+		md3-core.qrc \
 		../../Qt/6.11.0/gcc_64/lib/libQt6Quick.prl \
 		../../Qt/6.11.0/gcc_64/lib/libQt6OpenGL.prl \
 		../../Qt/6.11.0/gcc_64/lib/libQt6Gui.prl \
@@ -716,6 +809,8 @@ Makefile: craftive.pro ../../Qt/6.11.0/gcc_64/mkspecs/linux-g++/qmake.conf ../..
 ../../Qt/6.11.0/gcc_64/mkspecs/features/default_pre.prf:
 ../../Qt/6.11.0/gcc_64/mkspecs/features/resolve_config.prf:
 ../../Qt/6.11.0/gcc_64/mkspecs/features/default_post.prf:
+../../Qt/6.11.0/gcc_64/mkspecs/features/qmltypes.prf:
+../../Qt/6.11.0/gcc_64/mkspecs/features/metatypes.prf:
 ../../Qt/6.11.0/gcc_64/mkspecs/features/lrelease.prf:
 ../../Qt/6.11.0/gcc_64/mkspecs/features/warn_on.prf:
 ../../Qt/6.11.0/gcc_64/mkspecs/features/permissions.prf:
@@ -733,6 +828,7 @@ Makefile: craftive.pro ../../Qt/6.11.0/gcc_64/mkspecs/linux-g++/qmake.conf ../..
 ../../Qt/6.11.0/gcc_64/mkspecs/features/lex.prf:
 craftive.pro:
 res.qrc:
+md3-core.qrc:
 ../../Qt/6.11.0/gcc_64/lib/libQt6Quick.prl:
 ../../Qt/6.11.0/gcc_64/lib/libQt6OpenGL.prl:
 ../../Qt/6.11.0/gcc_64/lib/libQt6Gui.prl:
@@ -753,10 +849,14 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
+	$(COPY_FILE) --parents craftive_metatypes.json $(DISTDIR)/
+	$(COPY_FILE) --parents craftive_metatypes.json $(DISTDIR)/
+	$(COPY_FILE) --parents res.qrc md3-core.qrc $(DISTDIR)/
+	$(COPY_FILE) --parents src/core/crtutils.cpp src/core/elements.cpp src/core/err.cpp src/core/status.cpp src/frontend/main.cpp include/md3-qml/src/Core/Cpp/stylemanager.cpp include/md3-qml/3rdparty/material-color-utilities/blend/blend.cc include/md3-qml/3rdparty/material-color-utilities/cam/cam.cc include/md3-qml/3rdparty/material-color-utilities/cam/hct.cc include/md3-qml/3rdparty/material-color-utilities/cam/hct_solver.cc include/md3-qml/3rdparty/material-color-utilities/cam/viewing_conditions.cc include/md3-qml/3rdparty/material-color-utilities/contrast/contrast.cc include/md3-qml/3rdparty/material-color-utilities/dislike/dislike.cc include/md3-qml/3rdparty/material-color-utilities/dynamiccolor/dynamic_color.cc include/md3-qml/3rdparty/material-color-utilities/dynamiccolor/dynamic_scheme.cc include/md3-qml/3rdparty/material-color-utilities/dynamiccolor/material_dynamic_colors.cc include/md3-qml/3rdparty/material-color-utilities/palettes/tones.cc include/md3-qml/3rdparty/material-color-utilities/quantize/celebi.cc include/md3-qml/3rdparty/material-color-utilities/quantize/lab.cc include/md3-qml/3rdparty/material-color-utilities/quantize/wsmeans.cc include/md3-qml/3rdparty/material-color-utilities/quantize/wu.cc include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_content.cc include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_expressive.cc include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_fidelity.cc include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_fruit_salad.cc include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_monochrome.cc include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_neutral.cc include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_rainbow.cc include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_tonal_spot.cc include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_vibrant.cc include/md3-qml/3rdparty/material-color-utilities/score/score.cc include/md3-qml/3rdparty/material-color-utilities/temperature/temperature_cache.cc include/md3-qml/3rdparty/material-color-utilities/utils/utils.cc $(DISTDIR)/
+	$(COPY_FILE) --parents .cache/moc/moc_.cpp.json $(DISTDIR)/
 	$(COPY_FILE) --parents locales/craftive_en.ts locales/craftive_en_US.ts locales/craftive_zh_CN.ts $(DISTDIR)/
-	$(COPY_FILE) --parents res.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents ../../Qt/6.11.0/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents src/core/crtutils.cpp src/core/elements.cpp src/core/err.cpp src/core/status.cpp src/frontend/main.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents src/core/crtutils.cpp src/core/elements.cpp src/core/err.cpp src/core/status.cpp src/frontend/main.cpp include/md3-qml/src/Core/Cpp/stylemanager.cpp include/md3-qml/3rdparty/material-color-utilities/blend/blend.cc include/md3-qml/3rdparty/material-color-utilities/cam/cam.cc include/md3-qml/3rdparty/material-color-utilities/cam/hct.cc include/md3-qml/3rdparty/material-color-utilities/cam/hct_solver.cc include/md3-qml/3rdparty/material-color-utilities/cam/viewing_conditions.cc include/md3-qml/3rdparty/material-color-utilities/contrast/contrast.cc include/md3-qml/3rdparty/material-color-utilities/dislike/dislike.cc include/md3-qml/3rdparty/material-color-utilities/dynamiccolor/dynamic_color.cc include/md3-qml/3rdparty/material-color-utilities/dynamiccolor/dynamic_scheme.cc include/md3-qml/3rdparty/material-color-utilities/dynamiccolor/material_dynamic_colors.cc include/md3-qml/3rdparty/material-color-utilities/palettes/tones.cc include/md3-qml/3rdparty/material-color-utilities/quantize/celebi.cc include/md3-qml/3rdparty/material-color-utilities/quantize/lab.cc include/md3-qml/3rdparty/material-color-utilities/quantize/wsmeans.cc include/md3-qml/3rdparty/material-color-utilities/quantize/wu.cc include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_content.cc include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_expressive.cc include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_fidelity.cc include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_fruit_salad.cc include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_monochrome.cc include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_neutral.cc include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_rainbow.cc include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_tonal_spot.cc include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_vibrant.cc include/md3-qml/3rdparty/material-color-utilities/score/score.cc include/md3-qml/3rdparty/material-color-utilities/temperature/temperature_cache.cc include/md3-qml/3rdparty/material-color-utilities/utils/utils.cc $(DISTDIR)/
 	$(COPY_FILE) --parents locales/craftive_en.ts locales/craftive_en_US.ts locales/craftive_zh_CN.ts $(DISTDIR)/
 
 
@@ -781,6 +881,92 @@ check: first
 
 benchmark: first
 
+compiler_qmltyperegistrar_compiler_make_all: craftive_qmltyperegistrations.cpp
+compiler_qmltyperegistrar_compiler_clean:
+	-$(DEL_FILE) craftive_qmltyperegistrations.cpp
+craftive_qmltyperegistrations.cpp: craftive_metatypes.json 
+	/home/zrz/Qt/6.11.0/gcc_64/libexec/qmltyperegistrar --generate-qmltypes=craftive.qmltypes --import-name=md3.Core --major-version=1 --minor-version=0 -o craftive_qmltyperegistrations.cpp craftive_metatypes.json
+
+compiler_qmltyperegistrar_qmltypes_make_all: craftive.qmltypes
+compiler_qmltyperegistrar_qmltypes_clean:
+	-$(DEL_FILE) craftive.qmltypes
+craftive.qmltypes: craftive_metatypes.json \
+		craftive_qmltyperegistrations.cpp
+	
+
+
+compiler_moc_json_header_make_all:
+compiler_moc_json_header_clean:
+compiler_rcc_make_all: ../.cache/rcc/qrc_res.cpp ../.cache/rcc/qrc_md3-core.cpp
+compiler_rcc_clean:
+	-$(DEL_FILE) ../.cache/rcc/qrc_res.cpp ../.cache/rcc/qrc_md3-core.cpp
+../.cache/rcc/qrc_res.cpp: res.qrc \
+		../../Qt/6.11.0/gcc_64/libexec/rcc \
+		assets/images/logo.svg \
+		src/frontend/main.qml \
+		out/locales/craftive_zh_CN.qm \
+		out/locales/craftive_en_US.qm \
+		out/locales/craftive_en.qm
+	/home/zrz/Qt/6.11.0/gcc_64/libexec/rcc -name res res.qrc -o ../.cache/rcc/qrc_res.cpp
+
+../.cache/rcc/qrc_md3-core.cpp: md3-core.qrc \
+		../../Qt/6.11.0/gcc_64/libexec/rcc \
+		include/md3-qml/src/Core/Controls/ScrollBar.qml \
+		include/md3-qml/src/Core/Controls/Snackbar.qml \
+		include/md3-qml/src/Core/Controls/LinearProgress.qml \
+		include/md3-qml/src/Core/Controls/NavigationDrawer.qml \
+		include/md3-qml/src/Core/Controls/TimePicker.qml \
+		include/md3-qml/src/Core/Controls/ColorPicker.qml \
+		include/md3-qml/src/Core/Controls/SideSheet.qml \
+		include/md3-qml/src/Core/Controls/IndexBackground.qml \
+		include/md3-qml/src/Core/Controls/RadioButton.qml \
+		include/md3-qml/src/Core/Controls/TextField.qml \
+		include/md3-qml/src/Core/Controls/Ripple.qml \
+		include/md3-qml/src/Core/Controls/NavigationBar.qml \
+		include/md3-qml/src/Core/Controls/ComboBox.qml \
+		include/md3-qml/src/Core/Controls/FAB.qml \
+		include/md3-qml/src/Core/Controls/CircularProgress.qml \
+		include/md3-qml/src/Core/Controls/CanvasPieChart.qml \
+		include/md3-qml/src/Core/Controls/NavigationRail.qml \
+		include/md3-qml/src/Core/Controls/Slider.qml \
+		include/md3-qml/src/Core/Controls/DatePicker.qml \
+		include/md3-qml/src/Core/Controls/Dialog.qml \
+		include/md3-qml/src/Core/Controls/LoadingIndicator.qml \
+		include/md3-qml/src/Core/Controls/Menu.qml \
+		include/md3-qml/src/Core/Controls/ToolTip.qml \
+		include/md3-qml/src/Core/Controls/FabMenu.qml \
+		include/md3-qml/src/Core/Controls/IconButton.qml \
+		include/md3-qml/src/Core/Controls/Switch.qml \
+		include/md3-qml/src/Core/Controls/CanvasLineChart.qml \
+		include/md3-qml/src/Core/Controls/Chip.qml \
+		include/md3-qml/src/Core/Controls/TopAppBar.qml \
+		include/md3-qml/src/Core/Controls/Card.qml \
+		include/md3-qml/src/Core/Controls/Carousel.qml \
+		include/md3-qml/src/Core/Controls/Tabs.qml \
+		include/md3-qml/src/Core/Controls/Button.qml \
+		include/md3-qml/src/Core/Controls/Checkbox.qml \
+		include/md3-qml/src/Core/Controls/DataTable.qml \
+		include/md3-qml/src/Core/Controls/SegmentedButton.qml \
+		include/md3-qml/src/Core/Controls/Breadcrumb.qml \
+		include/md3-qml/src/Core/Controls/CanvasBarChart.qml \
+		include/md3-qml/src/Core/Styles/Theme.qml \
+		include/md3-qml/src/Core/Styles/assets/MaterialIconsRound-Regular.otf \
+		include/md3-qml/src/Core/Styles/assets/IconData.js \
+		include/md3-qml/src/Core/Styles/animations/AnimatedWindow.qml
+	/home/zrz/Qt/6.11.0/gcc_64/libexec/rcc -name md3-core md3-core.qrc -o ../.cache/rcc/qrc_md3-core.cpp
+
+compiler_moc_header_make_all:
+compiler_moc_header_clean:
+compiler_moc_objc_header_make_all:
+compiler_moc_objc_header_clean:
+compiler_moc_json_source_make_all:
+compiler_moc_json_source_clean:
+compiler_moc_collect_json_make_all: craftive_metatypes.json
+compiler_moc_collect_json_clean:
+	-$(DEL_FILE) craftive_metatypes.json
+craftive_metatypes.json: .cache/moc/moc_.cpp.json 
+	/home/zrz/Qt/6.11.0/gcc_64/libexec/moc --collect-json -o craftive_metatypes.json .cache/moc/moc_.cpp.json
+
 compiler_lrelease_make_all: out/locales/craftive_en.qm out/locales/craftive_en_US.qm out/locales/craftive_zh_CN.qm
 out/locales/craftive_en.qm: locales/craftive_en.ts
 	/home/zrz/Qt/6.11.0/gcc_64/bin/lrelease locales/craftive_en.ts -qm out/locales/craftive_en.qm
@@ -791,28 +977,12 @@ out/locales/craftive_en_US.qm: locales/craftive_en_US.ts
 out/locales/craftive_zh_CN.qm: locales/craftive_zh_CN.ts
 	/home/zrz/Qt/6.11.0/gcc_64/bin/lrelease locales/craftive_zh_CN.ts -qm out/locales/craftive_zh_CN.qm
 
-compiler_rcc_make_all: ../.cache/rcc/qrc_res.cpp
-compiler_rcc_clean:
-	-$(DEL_FILE) ../.cache/rcc/qrc_res.cpp
-../.cache/rcc/qrc_res.cpp: res.qrc \
-		../../Qt/6.11.0/gcc_64/libexec/rcc \
-		assets/images/logo.svg \
-		src/frontend/main.qml \
-		out/locales/craftive_zh_CN.qm \
-		out/locales/craftive_en_US.qm \
-		out/locales/craftive_en.qm
-	/home/zrz/Qt/6.11.0/gcc_64/libexec/rcc -name res res.qrc -o ../.cache/rcc/qrc_res.cpp
-
 compiler_moc_predefs_make_all: .cache/moc/moc_predefs.h
 compiler_moc_predefs_clean:
 	-$(DEL_FILE) .cache/moc/moc_predefs.h
 .cache/moc/moc_predefs.h: ../../Qt/6.11.0/gcc_64/mkspecs/features/data/dummy.cpp
 	clang++-22 -pipe -flto -std=c++26 -stdlib=libc++ -Wno-unused-parameter -O2 -Wall -Wextra -fPIC -dM -E -o .cache/moc/moc_predefs.h ../../Qt/6.11.0/gcc_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all:
-compiler_moc_header_clean:
-compiler_moc_objc_header_make_all:
-compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
 compiler_yacc_decl_make_all:
@@ -821,7 +991,7 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean 
+compiler_clean: compiler_qmltyperegistrar_compiler_clean compiler_qmltyperegistrar_qmltypes_clean compiler_rcc_clean compiler_moc_collect_json_clean compiler_moc_predefs_clean 
 
 ####### Compile
 
@@ -1609,27 +1779,14 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean
 		../../Qt/6.11.0/gcc_64/include/QtCore/qsize.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qmargins.h \
 		../../Qt/6.11.0/gcc_64/include/QtGui/qguiapplication_platform.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/QPluginMetaData \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qplugin.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qpointer.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qjsonobject.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qjsonvalue.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qcborvalue.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qcborcommon.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qdatetime.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qcalendar.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qregularexpression.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qurl.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/quuid.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qendian.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qjsondocument.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qjsonparseerror.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/q20algorithm.h \
 		../../Qt/6.11.0/gcc_64/include/QtQml/QQmlApplicationEngine \
 		../../Qt/6.11.0/gcc_64/include/QtQml/qqmlapplicationengine.h \
 		../../Qt/6.11.0/gcc_64/include/QtQml/qqmlengine.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qurl.h \
 		../../Qt/6.11.0/gcc_64/include/QtQml/qjsengine.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qtimezone.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qdatetime.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qcalendar.h \
 		../../Qt/6.11.0/gcc_64/include/QtQml/qjsvalue.h \
 		../../Qt/6.11.0/gcc_64/include/QtQml/qtqmlglobal.h \
 		../../Qt/6.11.0/gcc_64/include/QtQml/qtqml-config.h \
@@ -1649,6 +1806,7 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean
 		../../Qt/6.11.0/gcc_64/include/QtCore/qmetasequence.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qiterable_impl.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qmetaobject.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qpointer.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qversionnumber.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qspan.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/q20iterator.h \
@@ -1659,8 +1817,436 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean
 		../../Qt/6.11.0/gcc_64/include/QtQml/qqmlabstracturlinterceptor.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o .cache/o/main.o src/frontend/main.cpp
 
+.cache/o/stylemanager.o: include/md3-qml/src/Core/Cpp/stylemanager.cpp include/md3-qml/src/Core/Cpp/stylemanager.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/QObject \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qobject.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qobjectdefs.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qnamespace.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qglobal.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qtcoreglobal.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qtversionchecks.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qtconfiginclude.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qconfig.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qtcore-config.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qtconfigmacros.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qtdeprecationdefinitions.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qcompilerdetection.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qprocessordetection.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qsystemdetection.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qtcoreexports.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qtdeprecationmarkers.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qtclasshelpermacros.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qtpreprocessorsupport.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qassert.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qtnoop.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qtypes.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qtversion.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qtypeinfo.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qcontainerfwd.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qsysinfo.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qlogging.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qflags.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qcompare_impl.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qatomic.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qbasicatomic.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qatomic_cxx11.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qgenericatomic.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qyieldcpu.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qconstructormacros.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qdarwinhelpers.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qexceptionhandling.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qforeach.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qttypetraits.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qfunctionpointer.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qglobalstatic.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qmalloc.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qminmax.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qnumeric.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/q20type_traits.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qoverload.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qswap.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qtenvironmentvariables.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qtresource.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qttranslation.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qversiontagging.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qcompare.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qstdlibdetection.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qcomparehelpers.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qtmetamacros.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qfunctionaltools_impl.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qstring.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qchar.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qstringview.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qbytearray.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qrefcount.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qarraydata.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qpair.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qarraydatapointer.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qarraydataops.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qcontainertools_impl.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qxptype_traits.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/q23type_traits.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/q20functional.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/q20memory.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/q17memory.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qbytearrayalgorithms.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qbytearrayview.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qstringfwd.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qstringalgorithms.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qlatin1stringview.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qanystringview.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qutf8stringview.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qstringtokenizer.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qstringbuilder.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qstringconverter.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qstringconverter_base.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qlist.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qhashfunctions.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qiterator.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qbytearraylist.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qstringlist.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qalgorithms.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/q20bit.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qsimd.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qstringmatcher.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qcoreevent.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qbasictimer.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qabstracteventdispatcher.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qeventloop.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qdeadlinetimer.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qmetatype.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qdatastream.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qiodevicebase.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qscopedpointer.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qfloat16.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qmath.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qtformat_impl.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qiterable.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qtaggedpointer.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qmetacontainer.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qcontainerinfo.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qscopeguard.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qobject_impl.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qbindingstorage.h \
+		../../Qt/6.11.0/gcc_64/include/QtGui/QColor \
+		../../Qt/6.11.0/gcc_64/include/QtGui/qcolor.h \
+		../../Qt/6.11.0/gcc_64/include/QtGui/qtguiglobal.h \
+		../../Qt/6.11.0/gcc_64/include/QtGui/qtgui-config.h \
+		../../Qt/6.11.0/gcc_64/include/QtGui/qtguiexports.h \
+		../../Qt/6.11.0/gcc_64/include/QtGui/qrgb.h \
+		../../Qt/6.11.0/gcc_64/include/QtGui/qrgba64.h \
+		../../Qt/6.11.0/gcc_64/include/QtGui/QImage \
+		../../Qt/6.11.0/gcc_64/include/QtGui/qimage.h \
+		../../Qt/6.11.0/gcc_64/include/QtGui/qpaintdevice.h \
+		../../Qt/6.11.0/gcc_64/include/QtGui/qwindowdefs.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qrect.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qcheckedint_impl.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qmargins.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/q23utility.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/q20utility.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qsize.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qpoint.h \
+		../../Qt/6.11.0/gcc_64/include/QtGui/qpixelformat.h \
+		../../Qt/6.11.0/gcc_64/include/QtGui/qtransform.h \
+		../../Qt/6.11.0/gcc_64/include/QtGui/qpolygon.h \
+		../../Qt/6.11.0/gcc_64/include/QtGui/qregion.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qspan.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/q20iterator.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qline.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/QMap \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qmap.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qshareddata.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qshareddata_impl.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/QVariantMap \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qvariantmap.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/QVariant \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qvariant.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qdebug.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qtextstream.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qcontiguouscache.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qsharedpointer.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qset.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qhash.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qvarlengtharray.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qalloc.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/QString \
+		../../Qt/6.11.0/gcc_64/include/QtQml/qqml.h \
+		../../Qt/6.11.0/gcc_64/include/QtQml/qqmlprivate.h \
+		../../Qt/6.11.0/gcc_64/include/QtQml/qjsprimitivevalue.h \
+		../../Qt/6.11.0/gcc_64/include/QtQml/qtqmlglobal.h \
+		../../Qt/6.11.0/gcc_64/include/QtQml/qtqml-config.h \
+		../../Qt/6.11.0/gcc_64/include/QtNetwork/qtnetworkglobal.h \
+		../../Qt/6.11.0/gcc_64/include/QtNetwork/qtnetwork-config.h \
+		../../Qt/6.11.0/gcc_64/include/QtNetwork/qtnetworkexports.h \
+		../../Qt/6.11.0/gcc_64/include/QtQml/qtqmlexports.h \
+		../../Qt/6.11.0/gcc_64/include/QtQml/qjsnumbercoercion.h \
+		../../Qt/6.11.0/gcc_64/include/QtQml/qjsvalue.h \
+		../../Qt/6.11.0/gcc_64/include/QtQml/qqmllist.h \
+		../../Qt/6.11.0/gcc_64/include/QtQml/qqmlparserstatus.h \
+		../../Qt/6.11.0/gcc_64/include/QtQml/qqmlpropertyvaluesource.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qdatetime.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qcalendar.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qlocale.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qmetasequence.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qiterable_impl.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qmetaobject.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qpointer.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qurl.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qversionnumber.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qtyperevision.h \
+		../../Qt/6.11.0/gcc_64/include/QtQml/qqmlregistration.h \
+		../../Qt/6.11.0/gcc_64/include/QtQmlIntegration/qqmlintegration.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/QDebug \
+		../../Qt/6.11.0/gcc_64/include/QtQml/QQmlFile \
+		../../Qt/6.11.0/gcc_64/include/QtQml/qqmlfile.h \
+		../../Qt/6.11.0/gcc_64/include/QtGui/QImageReader \
+		../../Qt/6.11.0/gcc_64/include/QtGui/qimagereader.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qcoreapplication.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qnativeinterface.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qcoreapplication_platform.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qfuture.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qfutureinterface.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qmutex.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qtsan_impl.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qresultstore.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qfuture_impl.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qthreadpool.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qthread.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qrunnable.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qexception.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qpromise.h \
+		../../Qt/6.11.0/gcc_64/include/QtGui/qimageiohandler.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qiodevice.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qplugin.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qjsonobject.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qjsonvalue.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qcborvalue.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qcborcommon.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qregularexpression.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/quuid.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qendian.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qjsondocument.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qjsonparseerror.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/q20algorithm.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qfactoryinterface.h \
+		../../Qt/6.11.0/gcc_64/include/QtGui/QGuiApplication \
+		../../Qt/6.11.0/gcc_64/include/QtGui/qguiapplication.h \
+		../../Qt/6.11.0/gcc_64/include/QtGui/qinputmethod.h \
+		../../Qt/6.11.0/gcc_64/include/QtGui/qguiapplication_platform.h \
+		../../Qt/6.11.0/gcc_64/include/QtGui/QStyleHints \
+		../../Qt/6.11.0/gcc_64/include/QtGui/qstylehints.h \
+		include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_tonal_spot.h \
+		include/md3-qml/3rdparty/material-color-utilities/cam/hct.h \
+		include/md3-qml/3rdparty/material-color-utilities/utils/utils.h \
+		include/md3-qml/3rdparty/material-color-utilities/dynamiccolor/dynamic_scheme.h \
+		include/md3-qml/3rdparty/material-color-utilities/dynamiccolor/variant.h \
+		include/md3-qml/3rdparty/material-color-utilities/palettes/tones.h \
+		include/md3-qml/3rdparty/material-color-utilities/quantize/celebi.h \
+		include/md3-qml/3rdparty/material-color-utilities/quantize/wsmeans.h \
+		include/md3-qml/3rdparty/material-color-utilities/score/score.h \
+		include/md3-qml/3rdparty/material-color-utilities/blend/blend.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o .cache/o/stylemanager.o include/md3-qml/src/Core/Cpp/stylemanager.cpp
+
+.cache/o/blend.o: include/md3-qml/3rdparty/material-color-utilities/blend/blend.cc include/md3-qml/3rdparty/material-color-utilities/blend/blend.h \
+		include/md3-qml/3rdparty/material-color-utilities/utils/utils.h \
+		include/md3-qml/3rdparty/material-color-utilities/cam/cam.h \
+		include/md3-qml/3rdparty/material-color-utilities/cam/viewing_conditions.h \
+		include/md3-qml/3rdparty/material-color-utilities/cam/hct.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o .cache/o/blend.o include/md3-qml/3rdparty/material-color-utilities/blend/blend.cc
+
+.cache/o/cam.o: include/md3-qml/3rdparty/material-color-utilities/cam/cam.cc include/md3-qml/3rdparty/material-color-utilities/cam/cam.h \
+		include/md3-qml/3rdparty/material-color-utilities/cam/viewing_conditions.h \
+		include/md3-qml/3rdparty/material-color-utilities/utils/utils.h \
+		include/md3-qml/3rdparty/material-color-utilities/cam/hct_solver.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o .cache/o/cam.o include/md3-qml/3rdparty/material-color-utilities/cam/cam.cc
+
+.cache/o/hct.o: include/md3-qml/3rdparty/material-color-utilities/cam/hct.cc include/md3-qml/3rdparty/material-color-utilities/cam/hct.h \
+		include/md3-qml/3rdparty/material-color-utilities/utils/utils.h \
+		include/md3-qml/3rdparty/material-color-utilities/cam/hct_solver.h \
+		include/md3-qml/3rdparty/material-color-utilities/cam/cam.h \
+		include/md3-qml/3rdparty/material-color-utilities/cam/viewing_conditions.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o .cache/o/hct.o include/md3-qml/3rdparty/material-color-utilities/cam/hct.cc
+
+.cache/o/hct_solver.o: include/md3-qml/3rdparty/material-color-utilities/cam/hct_solver.cc include/md3-qml/3rdparty/material-color-utilities/cam/hct_solver.h \
+		include/md3-qml/3rdparty/material-color-utilities/cam/cam.h \
+		include/md3-qml/3rdparty/material-color-utilities/cam/viewing_conditions.h \
+		include/md3-qml/3rdparty/material-color-utilities/utils/utils.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o .cache/o/hct_solver.o include/md3-qml/3rdparty/material-color-utilities/cam/hct_solver.cc
+
+.cache/o/viewing_conditions.o: include/md3-qml/3rdparty/material-color-utilities/cam/viewing_conditions.cc include/md3-qml/3rdparty/material-color-utilities/cam/viewing_conditions.h \
+		include/md3-qml/3rdparty/material-color-utilities/utils/utils.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o .cache/o/viewing_conditions.o include/md3-qml/3rdparty/material-color-utilities/cam/viewing_conditions.cc
+
+.cache/o/contrast.o: include/md3-qml/3rdparty/material-color-utilities/contrast/contrast.cc include/md3-qml/3rdparty/material-color-utilities/contrast/contrast.h \
+		include/md3-qml/3rdparty/material-color-utilities/utils/utils.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o .cache/o/contrast.o include/md3-qml/3rdparty/material-color-utilities/contrast/contrast.cc
+
+.cache/o/dislike.o: include/md3-qml/3rdparty/material-color-utilities/dislike/dislike.cc include/md3-qml/3rdparty/material-color-utilities/dislike/dislike.h \
+		include/md3-qml/3rdparty/material-color-utilities/cam/hct.h \
+		include/md3-qml/3rdparty/material-color-utilities/utils/utils.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o .cache/o/dislike.o include/md3-qml/3rdparty/material-color-utilities/dislike/dislike.cc
+
+.cache/o/dynamic_color.o: include/md3-qml/3rdparty/material-color-utilities/dynamiccolor/dynamic_color.cc include/md3-qml/3rdparty/material-color-utilities/dynamiccolor/dynamic_color.h \
+		include/md3-qml/3rdparty/material-color-utilities/cam/hct.h \
+		include/md3-qml/3rdparty/material-color-utilities/utils/utils.h \
+		include/md3-qml/3rdparty/material-color-utilities/dynamiccolor/contrast_curve.h \
+		include/md3-qml/3rdparty/material-color-utilities/dynamiccolor/dynamic_scheme.h \
+		include/md3-qml/3rdparty/material-color-utilities/dynamiccolor/variant.h \
+		include/md3-qml/3rdparty/material-color-utilities/palettes/tones.h \
+		include/md3-qml/3rdparty/material-color-utilities/contrast/contrast.h \
+		include/md3-qml/3rdparty/material-color-utilities/dynamiccolor/tone_delta_pair.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o .cache/o/dynamic_color.o include/md3-qml/3rdparty/material-color-utilities/dynamiccolor/dynamic_color.cc
+
+.cache/o/dynamic_scheme.o: include/md3-qml/3rdparty/material-color-utilities/dynamiccolor/dynamic_scheme.cc include/md3-qml/3rdparty/material-color-utilities/dynamiccolor/dynamic_scheme.h \
+		include/md3-qml/3rdparty/material-color-utilities/cam/hct.h \
+		include/md3-qml/3rdparty/material-color-utilities/utils/utils.h \
+		include/md3-qml/3rdparty/material-color-utilities/dynamiccolor/variant.h \
+		include/md3-qml/3rdparty/material-color-utilities/palettes/tones.h \
+		include/md3-qml/3rdparty/material-color-utilities/dynamiccolor/material_dynamic_colors.h \
+		include/md3-qml/3rdparty/material-color-utilities/dynamiccolor/dynamic_color.h \
+		include/md3-qml/3rdparty/material-color-utilities/dynamiccolor/contrast_curve.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o .cache/o/dynamic_scheme.o include/md3-qml/3rdparty/material-color-utilities/dynamiccolor/dynamic_scheme.cc
+
+.cache/o/material_dynamic_colors.o: include/md3-qml/3rdparty/material-color-utilities/dynamiccolor/material_dynamic_colors.cc include/md3-qml/3rdparty/material-color-utilities/dynamiccolor/material_dynamic_colors.h \
+		include/md3-qml/3rdparty/material-color-utilities/dynamiccolor/dynamic_color.h \
+		include/md3-qml/3rdparty/material-color-utilities/cam/hct.h \
+		include/md3-qml/3rdparty/material-color-utilities/utils/utils.h \
+		include/md3-qml/3rdparty/material-color-utilities/dynamiccolor/contrast_curve.h \
+		include/md3-qml/3rdparty/material-color-utilities/dynamiccolor/dynamic_scheme.h \
+		include/md3-qml/3rdparty/material-color-utilities/dynamiccolor/variant.h \
+		include/md3-qml/3rdparty/material-color-utilities/palettes/tones.h \
+		include/md3-qml/3rdparty/material-color-utilities/cam/cam.h \
+		include/md3-qml/3rdparty/material-color-utilities/cam/viewing_conditions.h \
+		include/md3-qml/3rdparty/material-color-utilities/dislike/dislike.h \
+		include/md3-qml/3rdparty/material-color-utilities/dynamiccolor/tone_delta_pair.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o .cache/o/material_dynamic_colors.o include/md3-qml/3rdparty/material-color-utilities/dynamiccolor/material_dynamic_colors.cc
+
+.cache/o/tones.o: include/md3-qml/3rdparty/material-color-utilities/palettes/tones.cc include/md3-qml/3rdparty/material-color-utilities/palettes/tones.h \
+		include/md3-qml/3rdparty/material-color-utilities/cam/hct.h \
+		include/md3-qml/3rdparty/material-color-utilities/utils/utils.h \
+		include/md3-qml/3rdparty/material-color-utilities/cam/cam.h \
+		include/md3-qml/3rdparty/material-color-utilities/cam/viewing_conditions.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o .cache/o/tones.o include/md3-qml/3rdparty/material-color-utilities/palettes/tones.cc
+
+.cache/o/celebi.o: include/md3-qml/3rdparty/material-color-utilities/quantize/celebi.cc include/md3-qml/3rdparty/material-color-utilities/quantize/celebi.h \
+		include/md3-qml/3rdparty/material-color-utilities/quantize/wsmeans.h \
+		include/md3-qml/3rdparty/material-color-utilities/utils/utils.h \
+		include/md3-qml/3rdparty/material-color-utilities/quantize/wu.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o .cache/o/celebi.o include/md3-qml/3rdparty/material-color-utilities/quantize/celebi.cc
+
+.cache/o/lab.o: include/md3-qml/3rdparty/material-color-utilities/quantize/lab.cc include/md3-qml/3rdparty/material-color-utilities/quantize/lab.h \
+		include/md3-qml/3rdparty/material-color-utilities/utils/utils.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o .cache/o/lab.o include/md3-qml/3rdparty/material-color-utilities/quantize/lab.cc
+
+.cache/o/wsmeans.o: include/md3-qml/3rdparty/material-color-utilities/quantize/wsmeans.cc include/md3-qml/3rdparty/material-color-utilities/quantize/wsmeans.h \
+		include/md3-qml/3rdparty/material-color-utilities/utils/utils.h \
+		include/md3-qml/3rdparty/material-color-utilities/quantize/lab.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o .cache/o/wsmeans.o include/md3-qml/3rdparty/material-color-utilities/quantize/wsmeans.cc
+
+.cache/o/wu.o: include/md3-qml/3rdparty/material-color-utilities/quantize/wu.cc include/md3-qml/3rdparty/material-color-utilities/quantize/wu.h \
+		include/md3-qml/3rdparty/material-color-utilities/utils/utils.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o .cache/o/wu.o include/md3-qml/3rdparty/material-color-utilities/quantize/wu.cc
+
+.cache/o/scheme_content.o: include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_content.cc include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_content.h \
+		include/md3-qml/3rdparty/material-color-utilities/cam/hct.h \
+		include/md3-qml/3rdparty/material-color-utilities/utils/utils.h \
+		include/md3-qml/3rdparty/material-color-utilities/dynamiccolor/dynamic_scheme.h \
+		include/md3-qml/3rdparty/material-color-utilities/dynamiccolor/variant.h \
+		include/md3-qml/3rdparty/material-color-utilities/palettes/tones.h \
+		include/md3-qml/3rdparty/material-color-utilities/dislike/dislike.h \
+		include/md3-qml/3rdparty/material-color-utilities/temperature/temperature_cache.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o .cache/o/scheme_content.o include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_content.cc
+
+.cache/o/scheme_expressive.o: include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_expressive.cc include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_expressive.h \
+		include/md3-qml/3rdparty/material-color-utilities/cam/hct.h \
+		include/md3-qml/3rdparty/material-color-utilities/utils/utils.h \
+		include/md3-qml/3rdparty/material-color-utilities/dynamiccolor/dynamic_scheme.h \
+		include/md3-qml/3rdparty/material-color-utilities/dynamiccolor/variant.h \
+		include/md3-qml/3rdparty/material-color-utilities/palettes/tones.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o .cache/o/scheme_expressive.o include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_expressive.cc
+
+.cache/o/scheme_fidelity.o: include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_fidelity.cc include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_fidelity.h \
+		include/md3-qml/3rdparty/material-color-utilities/cam/hct.h \
+		include/md3-qml/3rdparty/material-color-utilities/utils/utils.h \
+		include/md3-qml/3rdparty/material-color-utilities/dynamiccolor/dynamic_scheme.h \
+		include/md3-qml/3rdparty/material-color-utilities/dynamiccolor/variant.h \
+		include/md3-qml/3rdparty/material-color-utilities/palettes/tones.h \
+		include/md3-qml/3rdparty/material-color-utilities/dislike/dislike.h \
+		include/md3-qml/3rdparty/material-color-utilities/temperature/temperature_cache.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o .cache/o/scheme_fidelity.o include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_fidelity.cc
+
+.cache/o/scheme_fruit_salad.o: include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_fruit_salad.cc include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_fruit_salad.h \
+		include/md3-qml/3rdparty/material-color-utilities/cam/hct.h \
+		include/md3-qml/3rdparty/material-color-utilities/utils/utils.h \
+		include/md3-qml/3rdparty/material-color-utilities/dynamiccolor/dynamic_scheme.h \
+		include/md3-qml/3rdparty/material-color-utilities/dynamiccolor/variant.h \
+		include/md3-qml/3rdparty/material-color-utilities/palettes/tones.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o .cache/o/scheme_fruit_salad.o include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_fruit_salad.cc
+
+.cache/o/scheme_monochrome.o: include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_monochrome.cc include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_monochrome.h \
+		include/md3-qml/3rdparty/material-color-utilities/cam/hct.h \
+		include/md3-qml/3rdparty/material-color-utilities/utils/utils.h \
+		include/md3-qml/3rdparty/material-color-utilities/dynamiccolor/dynamic_scheme.h \
+		include/md3-qml/3rdparty/material-color-utilities/dynamiccolor/variant.h \
+		include/md3-qml/3rdparty/material-color-utilities/palettes/tones.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o .cache/o/scheme_monochrome.o include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_monochrome.cc
+
+.cache/o/scheme_neutral.o: include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_neutral.cc include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_neutral.h \
+		include/md3-qml/3rdparty/material-color-utilities/cam/hct.h \
+		include/md3-qml/3rdparty/material-color-utilities/utils/utils.h \
+		include/md3-qml/3rdparty/material-color-utilities/dynamiccolor/dynamic_scheme.h \
+		include/md3-qml/3rdparty/material-color-utilities/dynamiccolor/variant.h \
+		include/md3-qml/3rdparty/material-color-utilities/palettes/tones.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o .cache/o/scheme_neutral.o include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_neutral.cc
+
+.cache/o/scheme_rainbow.o: include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_rainbow.cc include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_rainbow.h \
+		include/md3-qml/3rdparty/material-color-utilities/cam/hct.h \
+		include/md3-qml/3rdparty/material-color-utilities/utils/utils.h \
+		include/md3-qml/3rdparty/material-color-utilities/dynamiccolor/dynamic_scheme.h \
+		include/md3-qml/3rdparty/material-color-utilities/dynamiccolor/variant.h \
+		include/md3-qml/3rdparty/material-color-utilities/palettes/tones.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o .cache/o/scheme_rainbow.o include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_rainbow.cc
+
+.cache/o/scheme_tonal_spot.o: include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_tonal_spot.cc include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_tonal_spot.h \
+		include/md3-qml/3rdparty/material-color-utilities/cam/hct.h \
+		include/md3-qml/3rdparty/material-color-utilities/utils/utils.h \
+		include/md3-qml/3rdparty/material-color-utilities/dynamiccolor/dynamic_scheme.h \
+		include/md3-qml/3rdparty/material-color-utilities/dynamiccolor/variant.h \
+		include/md3-qml/3rdparty/material-color-utilities/palettes/tones.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o .cache/o/scheme_tonal_spot.o include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_tonal_spot.cc
+
+.cache/o/scheme_vibrant.o: include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_vibrant.cc include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_vibrant.h \
+		include/md3-qml/3rdparty/material-color-utilities/cam/hct.h \
+		include/md3-qml/3rdparty/material-color-utilities/utils/utils.h \
+		include/md3-qml/3rdparty/material-color-utilities/dynamiccolor/dynamic_scheme.h \
+		include/md3-qml/3rdparty/material-color-utilities/dynamiccolor/variant.h \
+		include/md3-qml/3rdparty/material-color-utilities/palettes/tones.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o .cache/o/scheme_vibrant.o include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_vibrant.cc
+
+.cache/o/score.o: include/md3-qml/3rdparty/material-color-utilities/score/score.cc include/md3-qml/3rdparty/material-color-utilities/score/score.h \
+		include/md3-qml/3rdparty/material-color-utilities/utils/utils.h \
+		include/md3-qml/3rdparty/material-color-utilities/cam/hct.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o .cache/o/score.o include/md3-qml/3rdparty/material-color-utilities/score/score.cc
+
+.cache/o/temperature_cache.o: include/md3-qml/3rdparty/material-color-utilities/temperature/temperature_cache.cc include/md3-qml/3rdparty/material-color-utilities/temperature/temperature_cache.h \
+		include/md3-qml/3rdparty/material-color-utilities/cam/hct.h \
+		include/md3-qml/3rdparty/material-color-utilities/utils/utils.h \
+		include/md3-qml/3rdparty/material-color-utilities/quantize/lab.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o .cache/o/temperature_cache.o include/md3-qml/3rdparty/material-color-utilities/temperature/temperature_cache.cc
+
+.cache/o/utils.o: include/md3-qml/3rdparty/material-color-utilities/utils/utils.cc include/md3-qml/3rdparty/material-color-utilities/utils/utils.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o .cache/o/utils.o include/md3-qml/3rdparty/material-color-utilities/utils/utils.cc
+
+.cache/o/craftive_qmltyperegistrations.o: craftive_qmltyperegistrations.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o .cache/o/craftive_qmltyperegistrations.o craftive_qmltyperegistrations.cpp
+
 .cache/o/qrc_res.o: ../.cache/rcc/qrc_res.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o .cache/o/qrc_res.o ../.cache/rcc/qrc_res.cpp
+
+.cache/o/qrc_md3-core.o: ../.cache/rcc/qrc_md3-core.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o .cache/o/qrc_md3-core.o ../.cache/rcc/qrc_md3-core.cpp
 
 ####### Install
 
