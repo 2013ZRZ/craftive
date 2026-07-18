@@ -903,6 +903,7 @@ compiler_rcc_clean:
 ../.cache/rcc/qrc_res.cpp: res.qrc \
 		../../Qt/6.11.0/gcc_64/libexec/rcc \
 		assets/images/logo.svg \
+		src/frontend/approot.qml \
 		src/frontend/main.qml \
 		out/locales/craftive_zh_CN.qm \
 		out/locales/craftive_en_US.qm \

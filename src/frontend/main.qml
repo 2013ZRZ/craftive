@@ -8,4 +8,13 @@ Window {
     height: 600
     visible: true
     title: "Craftive"
+    color: Theme.color.background
+
+    Item {
+        id: prodRoot
+        Loader {
+            anchors.fill: parent
+            source: "approot.qml"
+        }
+    }
 }

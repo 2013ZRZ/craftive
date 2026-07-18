@@ -17,7 +17,7 @@
 ## Build & Run
 0. Prerequisites:
    - The latest version of [Qt](https://qt.io/);
-   - [Nlohmann JSON](https://json.nlohmann.me/)
+   - [Nlohmann JSON](https://json.nlohmann.me/);
    - A toolchain that supports C++26.
 > [!NOTE]
 > Only LLVM 22 is tested.
@@ -53,7 +53,7 @@ craftive
 ├─ craftive_metatypes.json  # By MOC. Don't care it!
 ├─ include/
 │  ├─ backward-cpp/
-│  └─ md3-qml/             # Material Design 3 for Qt Quick (QML)
+│  └─ md3-qml/              # Material Design 3 for Qt Quick (QML)
 ├─ locales/                 # Including TS files. I'm going to put it onto Weblate. 
 ├─ md3-core.qrc             # Qt Resources File for include/md3-qml/
 ├─ res.qrc                  # Qt Resources File for Craftive
