@@ -38,6 +38,9 @@
     ./out/craftive
     ```
 
+## Translation
+Coming soon on Weblate!
+
 ## Project Structure
 ```
 craftive
@@ -61,6 +64,15 @@ craftive
     ├─ core                 # Backend (Almost complete)
     └─ frontend             # Working on!
 ```
+
+## Licenses
+This project, excluding `include/`, is under BSD-3-Clause License.
+
+`include/backward-cpp/` is under MIT License.
+
+`include/md3-qml/src/Core/` is under GNU Lesser General Public License, version 3 or later.
+
+`include/md3-qml/3rdparty/material-color-utilities/` is under Apache License, version 2.0.
 
 ## Special Thanks
 - [Qt](https://qt.io/)
