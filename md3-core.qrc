@@ -42,5 +42,6 @@
         <file alias="Styles/animations/AnimatedWindow.qml">include/md3-qml/src/Core/Styles/animations/AnimatedWindow.qml</file>
         <file alias="Styles/assets/IconData.js">include/md3-qml/src/Core/Styles/assets/IconData.js</file>
         <file alias="Styles/assets/MaterialIconsRound-Regular.otf">include/md3-qml/src/Core/Styles/assets/MaterialIconsRound-Regular.otf</file>
+        <file alias="qmldir">include/md3-qml/src/Core/qmldir</file>
     </qresource>
 </RCC>

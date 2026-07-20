@@ -1,7 +1,6 @@
 <RCC>
     <qresource prefix="/qmls">
-        <file alias="main.qml">src/frontend/main.qml</file>
-        <file alias="approot.qml">src/frontend/approot.qml</file>
+        <file alias="Main.qml">src/frontend/Main.qml</file>
     </qresource>
     <qresource prefix="/images">
         <file alias="logo.svg">assets/images/logo.svg</file>
