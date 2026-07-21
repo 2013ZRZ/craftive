@@ -54,7 +54,6 @@ Window {
                 onItemClicked: index => contentStack.currentIndex = index
 
                 footer: Component {
-                    // Menu Button
                     Item {
                         Layout.fillWidth: true
                         Layout.preferredHeight: 64

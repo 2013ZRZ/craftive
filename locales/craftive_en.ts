@@ -162,6 +162,34 @@
     </message>
 </context>
 <context>
+    <name>Main</name>
+    <message>
+        <location filename="../src/frontend/Main.qml" line="33"/>
+        <source>Home</source>
+        <translation>Home</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/Main.qml" line="37"/>
+        <source>Store</source>
+        <translation>Store</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/Main.qml" line="41"/>
+        <source>Play</source>
+        <translation>Play</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/Main.qml" line="45"/>
+        <source>Craftboard</source>
+        <translation>Craftboard</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/Main.qml" line="49"/>
+        <source>Myself</source>
+        <translation>Myself</translation>
+    </message>
+</context>
+<context>
     <name>Map</name>
     <message>
         <location filename="../src/core/elements.cpp" line="435"/>
@@ -248,34 +276,6 @@
         <location filename="../src/core/crtutils.cpp" line="31"/>
         <source>from Version::fromJson(); the version&apos;s JSON isn&apos;t an array. It should be like [x, y, z] for &quot;x.y.z&quot;</source>
         <translation>from Version::fromJson(); the version&apos;s JSON isn&apos;t an array. It should be like [x, y, z] for &quot;x.y.z&quot;</translation>
-    </message>
-</context>
-<context>
-    <name>approot</name>
-    <message>
-        <location filename="../src/frontend/approot.qml" line="25"/>
-        <source>Home</source>
-        <translation>Home</translation>
-    </message>
-    <message>
-        <location filename="../src/frontend/approot.qml" line="29"/>
-        <source>Store</source>
-        <translation>Store</translation>
-    </message>
-    <message>
-        <location filename="../src/frontend/approot.qml" line="33"/>
-        <source>Play</source>
-        <translation>Play</translation>
-    </message>
-    <message>
-        <location filename="../src/frontend/approot.qml" line="37"/>
-        <source>Craftboard</source>
-        <translation>Craftboard</translation>
-    </message>
-    <message>
-        <location filename="../src/frontend/approot.qml" line="41"/>
-        <source>Myself</source>
-        <translation>Myself</translation>
     </message>
 </context>
 <context>

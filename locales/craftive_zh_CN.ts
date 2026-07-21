@@ -161,6 +161,34 @@
     </message>
 </context>
 <context>
+    <name>Main</name>
+    <message>
+        <location filename="../src/frontend/Main.qml" line="33"/>
+        <source>Home</source>
+        <translation>主页</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/Main.qml" line="37"/>
+        <source>Store</source>
+        <translation>商店</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/Main.qml" line="41"/>
+        <source>Play</source>
+        <translation>开局</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/Main.qml" line="45"/>
+        <source>Craftboard</source>
+        <translation>工作台</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/Main.qml" line="49"/>
+        <source>Myself</source>
+        <translation>我</translation>
+    </message>
+</context>
+<context>
     <name>Map</name>
     <message>
         <location filename="../src/core/elements.cpp" line="435"/>
@@ -247,34 +275,6 @@
         <location filename="../src/core/crtutils.cpp" line="31"/>
         <source>from Version::fromJson(); the version&apos;s JSON isn&apos;t an array. It should be like [x, y, z] for &quot;x.y.z&quot;</source>
         <translation>来自 Version::fromJson()；版本的 JSON 不是数组。其格式应形如 [x, y, z] 以表示 &quot;x.y.z&quot;</translation>
-    </message>
-</context>
-<context>
-    <name>approot</name>
-    <message>
-        <location filename="../src/frontend/approot.qml" line="25"/>
-        <source>Home</source>
-        <translation>主页</translation>
-    </message>
-    <message>
-        <location filename="../src/frontend/approot.qml" line="29"/>
-        <source>Store</source>
-        <translation>商店</translation>
-    </message>
-    <message>
-        <location filename="../src/frontend/approot.qml" line="33"/>
-        <source>Play</source>
-        <translation>开局</translation>
-    </message>
-    <message>
-        <location filename="../src/frontend/approot.qml" line="37"/>
-        <source>Craftboard</source>
-        <translation>工作台</translation>
-    </message>
-    <message>
-        <location filename="../src/frontend/approot.qml" line="41"/>
-        <source>Myself</source>
-        <translation>我</translation>
     </message>
 </context>
 <context>
