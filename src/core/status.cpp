@@ -19,7 +19,7 @@ bool CoreStatus::registerKit(Kit &newKit) noexcept {
     }
 }
 
-bool CoreStatus::removeKit(QString &id) noexcept {
+bool CoreStatus::removeKit(const QString &id) noexcept {
     if (loadedKits.contains(id)) {
         loadedKits.remove(id);
         loadedKits.squeeze();
@@ -28,9 +28,9 @@ bool CoreStatus::removeKit(QString &id) noexcept {
         return false;
 }
 
-bool CoreStatus::containsKit(QString &id) const noexcept { return loadedKits.contains(id); }
+bool CoreStatus::containsKit(const QString &id) const noexcept { return loadedKits.contains(id); }
 
-Kit &CoreStatus::getKit(QString &id) const {
+Kit &CoreStatus::getKit(const QString &id) const {
     if (loadedKits.contains(id))
         return *(loadedKits[id]);
     else

@@ -55,8 +55,8 @@ public:
     QString operator()() const; // Get the character as QString
 }; // struct Ucc
 
-class BasicCrtClass : public QObject {
-    Q_OBJECT
+class BasicCrtClass {
+    Q_DECLARE_TR_FUNCTIONS(BasicCrtClass)
 
 protected:
     QString id;
@@ -73,7 +73,7 @@ public:
 }; // class BasicCrtClass
 
 class BasicElement : public BasicCrtClass {
-    Q_OBJECT
+    Q_DECLARE_TR_FUNCTIONS(BasicElement)
 
 public:
     void setID(const QString &_id) override; // An element ID should be like "kit/elem"
@@ -81,7 +81,7 @@ public:
 };
 
 class Block : public BasicElement {
-    Q_OBJECT
+    Q_DECLARE_TR_FUNCTIONS(Block)
     friend class Kit;
 
 private:
@@ -101,7 +101,7 @@ public:
 
 // Large block (a rectangular combination of blocks).
 class LBlock : public BasicElement {
-    Q_OBJECT
+    Q_DECLARE_TR_FUNCTIONS(LBlock)
     friend class Kit;
 
 private:
@@ -130,7 +130,7 @@ template <class T>
 concept isElem = std::derived_from<std::decay_t<T>, BasicElement>;
 
 class BasicProduct : public BasicCrtClass {
-    Q_OBJECT
+    Q_DECLARE_TR_FUNCTIONS(BasicProduct)
 
 protected:
     QString author;
@@ -153,7 +153,7 @@ public:
 
 // Where stores data of blocks and large-blocks.
 class Kit : public BasicProduct {
-    Q_OBJECT
+    Q_DECLARE_TR_FUNCTIONS(Kit)
     friend struct CoreStatus;
 
 private:
@@ -180,7 +180,7 @@ public:
 using MapDataType = QList<QList<std::variant<QSharedPointer<Block>, QSharedPointer<LBlock>>>>;
 
 class Map : public BasicProduct {
-    Q_OBJECT
+    Q_DECLARE_TR_FUNCTIONS(Map)
 
 private:
     MapDataType data; // nullptr: null(0) / filled by a large-block(1)

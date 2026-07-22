@@ -4,9 +4,8 @@
 #include <QObject>
 
 // Singleton
-struct CoreStatus : public QObject {
-    Q_OBJECT
-    friend class Kit;
+struct CoreStatus {
+    Q_DECLARE_TR_FUNCTIONS(CoreStatus)
 
 private:
     QHash<QString, Kit *> loadedKits;
@@ -21,8 +20,8 @@ public:
     static CoreStatus &instance();
 
     auto getLoadedKits() const noexcept -> const QHash<QString, Kit *> &;
-    bool registerKit(Kit &newKit) noexcept; // True for success or false if it exists
-    bool removeKit(QString &id) noexcept;   // True for success or false if it doesn't exist
-    bool containsKit(QString &id) const noexcept;
-    Kit &getKit(QString &id) const;
+    bool registerKit(Kit &newKit) noexcept;     // True for success or false if it exists
+    bool removeKit(const QString &id) noexcept; // True for success or false if it doesn't exist
+    bool containsKit(const QString &id) const noexcept;
+    Kit &getKit(const QString &id) const;
 };

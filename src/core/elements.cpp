@@ -189,9 +189,7 @@ const Ucc &LBlock::getPos(const qsizetype r, const qsizetype c) const {
     if (r >= lblk.size() || c >= (lblk.empty() ? 0 : lblk[r].size()))
         throw CrtExcept(
             0x0005,
-            translate(
-                "LBlock",
-                "from LBlock::getPos(); the required position is (%1,%2), but it's out of range"),
+            tr("from LBlock::getPos(); the required position is (%1,%2), but it's out of range"),
             r,
             c);
     return lblk[r][c];
@@ -201,9 +199,7 @@ void LBlock::setPos(const qsizetype r, const qsizetype c, const Ucc &blk) {
     if (r >= lblk.size() || c >= (lblk.empty() ? 0 : lblk[r].size()))
         throw CrtExcept(
             0x0005,
-            translate(
-                "LBlock",
-                "from LBlock::setPos(); the required position is (%1,%2), but it's out of range"),
+            tr("from LBlock::setPos(); the required position is (%1,%2), but it's out of range"),
             r,
             c);
     lblk[r][c] = blk;
@@ -381,9 +377,7 @@ void Kit::fromJson(const json &j) {
     else
         throw CrtExcept(
             0x0009,
-            translate(
-                "Kit",
-                "from Kit::fromJson(); couldn't find \"author\" in the JSON of Kit %1 (ID: %2)"),
+            tr("from Kit::fromJson(); couldn't find \"author\" in the JSON of Kit %1 (ID: %2)"),
             name,
             id);
 
@@ -432,9 +426,7 @@ const Ucc Map::operator[](const qsizetype r, const qsizetype c) {
     if (r > data.size() || c > data.empty() ? 0 : data[r].size())
         throw CrtExcept(
             0x000E,
-            translate(
-                "Map",
-                "from Map::operator[]; the required position is (%1,%2), but it's out of range"),
+            tr("from Map::operator[]; the required position is (%1,%2), but it's out of range"),
             r,
             c);
     if (data[r][c].index() == 1) {                        // is QSharedPointer<LBlock>
@@ -461,9 +453,7 @@ template <> auto Map::get<0>(const qsizetype r, const qsizetype c) {
     if (r > data.size() || c > data.empty() ? 0 : data[r].size())
         throw CrtExcept(
             0x000E,
-            translate(
-                "Map",
-                "from Map::get<0>(); the required position is (%1,%2), but it's out of range"),
+            tr("from Map::get<0>(); the required position is (%1,%2), but it's out of range"),
             r,
             c);
     return std::get<0>(data[r][c]) == QSharedPointer<Block>{nullptr}
@@ -475,9 +465,7 @@ template <> auto Map::get<1>(const qsizetype r, const qsizetype c) {
     if (r > data.size() || c > data.empty() ? 0 : data[r].size())
         throw CrtExcept(
             0x000E,
-            translate(
-                "Map",
-                "from Map::get<1>(); the required position is (%1,%2), but it's out of range"),
+            tr("from Map::get<1>(); the required position is (%1,%2), but it's out of range"),
             r,
             c);
     if (std::get<1>(data[r][c]) != nullptr) // is at the upper left corner
@@ -511,9 +499,7 @@ void Map::fromJson(const json &j) {
     else
         throw CrtExcept(
             0x0009,
-            translate(
-                "Map",
-                "from Map::fromJson(); couldn't find \"author\" in the JSON of Map %1 (ID: %2)"),
+            tr("from Map::fromJson(); couldn't find \"author\" in the JSON of Map %1 (ID: %2)"),
             name,
             id);
 
@@ -531,18 +517,14 @@ void Map::fromJson(const json &j) {
     if (j.find("data") == j.end())
         throw CrtExcept(
             0x000A,
-            translate(
-                "Map",
-                "from Map::fromJson(); couldn't find \"data\" in the JSON of Map %1 (ID: %2)"),
+            tr("from Map::fromJson(); couldn't find \"data\" in the JSON of Map %1 (ID: %2)"),
             name,
             id);
 
     if (!j["data"].is_array())
         throw CrtExcept(
             0x0006,
-            translate(
-                "Map",
-                "from Map::fromJson(); \"data\" in the JSON of Map %1 (ID: %2) isn't an array"),
+            tr("from Map::fromJson(); \"data\" in the JSON of Map %1 (ID: %2) isn't an array"),
             name,
             id);
 
@@ -558,10 +540,8 @@ void Map::fromJson(const json &j) {
             if (!j["data"][r][c].is_string())
                 throw CrtExcept(
                     0x0006,
-                    translate(
-                        "Map",
-                        "from Map::fromJson(); (%1,%2)'s ID in \"data\" in the JSON of Map %3 "
-                        "(ID: %4) isn't a string"),
+                    tr("from Map::fromJson(); (%1,%2)'s ID in \"data\" in the JSON of Map %3 "
+                       "(ID: %4) isn't a string"),
                     r,
                     c,
                     name,
