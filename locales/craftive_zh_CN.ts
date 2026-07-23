@@ -30,28 +30,28 @@
 <context>
     <name>BasicProduct</name>
     <message>
-        <location filename="../src/core/elements.cpp" line="284"/>
+        <location filename="../src/core/elements.cpp" line="280"/>
         <source>from BasicProduct::setAuthor(); the string is &quot;%1&quot; and it isn&apos;t a valid email address</source>
         <translation>来自 BasicProduct::setAuthor()；字符串 &quot;%1&quot;不是有效的电子邮件地址</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="300"/>
+        <location filename="../src/core/elements.cpp" line="296"/>
         <source>from BasicProduct::fromFile(); failed to open the product file at %1 (%2)</source>
         <translation>来自 BasicProduct::fromFile()；无法打开产品文件 %1 (%2)</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="308"/>
+        <location filename="../src/core/elements.cpp" line="304"/>
         <source>from BasicProduct::fromFile() (%1)</source>
         <translation>来自 BasicProduct::fromFile() (%1)</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="318"/>
+        <location filename="../src/core/elements.cpp" line="314"/>
         <source>from BasicProduct::toFile(); failed to open the product file at %1 (%2)</source>
         <translation>来自 BasicProduct::toFile()；无法打开产品文件 %1 (%2)</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="390"/>
-        <location filename="../src/core/elements.cpp" line="520"/>
+        <location filename="../src/core/elements.cpp" line="384"/>
+        <location filename="../src/core/elements.cpp" line="506"/>
         <source>Empty</source>
         <translation>空</translation>
     </message>
@@ -80,32 +80,32 @@
 <context>
     <name>Kit</name>
     <message>
-        <location filename="../src/core/elements.cpp" line="347"/>
+        <location filename="../src/core/elements.cpp" line="343"/>
         <source>from Kit::operator-=; this kit doesn&apos;t contain an element who&apos;s ID is &quot;%1&quot;</source>
         <translation>来自 Kit::operator-=；此锦囊不包含 ID 为 &quot;%1&quot; 的元素</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="364"/>
+        <location filename="../src/core/elements.cpp" line="360"/>
         <source>from Kit::operator[]; this kit doesn&apos;t contain an element who&apos;s ID is &quot;%1&quot;</source>
         <translation>来自 Kit::operator[]；此锦囊不包含 ID 为 &quot;%1&quot; 的元素</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="370"/>
+        <location filename="../src/core/elements.cpp" line="366"/>
         <source>from Kit::fromJson(); the kit&apos;s JSON isn&apos;t an object</source>
         <translation>来自 Kit::fromJson()；此锦囊的 JSON 不是对象</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="375"/>
+        <location filename="../src/core/elements.cpp" line="371"/>
         <source>from Kit::fromJson(); couldn&apos;t find &quot;id&quot; in the kit&apos;s JSON</source>
         <translation>来自 Kit::fromJson()；在此锦囊的 JSON 中找不到 &quot;id&quot;</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="384"/>
+        <location filename="../src/core/elements.cpp" line="380"/>
         <source>from Kit::fromJson(); couldn&apos;t find &quot;author&quot; in the JSON of Kit %1 (ID: %2)</source>
         <translation>来自 Kit::fromJson()；在锦囊 %1 (ID：%2) 的 JSON 中找不到 &quot;author&quot;</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="397"/>
+        <location filename="../src/core/elements.cpp" line="391"/>
         <source>from Kit::fromJson(); couldn&apos;t find &quot;ver&quot; in the JSON of Kit %1 (ID: %2)</source>
         <translation>来自 Kit::fromJson()；在锦囊 %1 (ID: %2) 的 JSON 中找不到 &quot;ver&quot;</translation>
     </message>
@@ -118,44 +118,44 @@
         <translation>来自 LBlock::getPos()；所需位置为 (%1,%2)，但超出范围</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="204"/>
+        <location filename="../src/core/elements.cpp" line="202"/>
         <source>from LBlock::setPos(); the required position is (%1,%2), but it&apos;s out of range</source>
         <translation>来自 LBlock::setPos()；所需位置为 (%1,%2)，但超出范围</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/core/elements.cpp" line="219"/>
+        <location filename="../src/core/elements.cpp" line="215"/>
         <source>from LBlock::getW(); the required row number is %1, but there&apos;s only %n row(s) in this large-block</source>
         <translation>
             <numerusform>来自 LBlock::getW()；所需行号为 %1，但该大方块仅有 %n 行</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="233"/>
+        <location filename="../src/core/elements.cpp" line="229"/>
         <source>from LBlock::setW()</source>
         <translation>来自 LBlock::setW()</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="239"/>
+        <location filename="../src/core/elements.cpp" line="235"/>
         <source>from LBlock::fromJson(); the large-block&apos;s JSON isn&apos;t an object</source>
         <translation>来自 LBlock::fromJson()；此大方块的 JSON 不是对象</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="241"/>
+        <location filename="../src/core/elements.cpp" line="237"/>
         <source>from LBlock::fromJson(); the &quot;lblk&quot; isn&apos;t an array</source>
         <translation>来自 LBlock::fromJson()；&quot;lblk&quot; 不是数组</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="246"/>
+        <location filename="../src/core/elements.cpp" line="242"/>
         <source>from LBlock::fromJson(); Row %1 isn&apos;t an array</source>
         <translation>来自 LBlock::fromJson()；第 %1 行不是数组</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="253"/>
+        <location filename="../src/core/elements.cpp" line="249"/>
         <source>from LBlock::fromJson(); the &quot;w&quot; isn&apos;t an array</source>
         <translation>来自 LBlock::fromJson()；&quot;w&quot; 不是数组</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="258"/>
+        <location filename="../src/core/elements.cpp" line="254"/>
         <source>from LBlock::fromJson()</source>
         <translation>来自 LBlock::fromJson()</translation>
     </message>
@@ -191,67 +191,67 @@
 <context>
     <name>Map</name>
     <message>
-        <location filename="../src/core/elements.cpp" line="435"/>
+        <location filename="../src/core/elements.cpp" line="429"/>
         <source>from Map::operator[]; the required position is (%1,%2), but it&apos;s out of range</source>
         <translation>来自 Map::operator[]；所需位置为 (%1,%2)，但超出范围</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="464"/>
+        <location filename="../src/core/elements.cpp" line="456"/>
         <source>from Map::get&lt;0&gt;(); the required position is (%1,%2), but it&apos;s out of range</source>
-        <translation>来自 Map::get&lt;0&gt;()；所需位置为 (%1,%2)，但超出范围</translation>
+        <translation type="vanished">来自 Map::get&lt;0&gt;()；所需位置为 (%1,%2)，但超出范围</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="478"/>
+        <location filename="../src/core/elements.cpp" line="468"/>
         <source>from Map::get&lt;1&gt;(); the required position is (%1,%2), but it&apos;s out of range</source>
         <translation>来自 Map::get&lt;1&gt;()；所需位置为 (%1,%2)，但超出范围</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="500"/>
+        <location filename="../src/core/elements.cpp" line="488"/>
         <source>from Map::fromJson(); the map&apos;s JSON isn&apos;t an object</source>
         <translation>来自 Map::fromJson()；此地图的 JSON 不是对象</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="505"/>
+        <location filename="../src/core/elements.cpp" line="493"/>
         <source>from Map::fromJson(); couldn&apos;t find &quot;id&quot; in the map&apos;s JSON</source>
         <translation>来自 Map::fromJson()；在此地图 的 JSON 中找不到 &quot;id&quot;</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="514"/>
+        <location filename="../src/core/elements.cpp" line="502"/>
         <source>from Map::fromJson(); couldn&apos;t find &quot;author&quot; in the JSON of Map %1 (ID: %2)</source>
         <translation>来自 Map::fromJson()；在地图 %1 (ID: %2) 的 JSON 中找不到 &quot;author&quot;</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="527"/>
+        <location filename="../src/core/elements.cpp" line="513"/>
         <source>from Map::fromJson(); couldn&apos;t find &quot;ver&quot; in the JSON of Map %1 (ID: %2)</source>
         <translation>来自 Map::fromJson()；在地图 %1 (ID: %2) 的 JSON 中找不到 &quot;ver&quot;</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="534"/>
+        <location filename="../src/core/elements.cpp" line="520"/>
         <source>from Map::fromJson(); couldn&apos;t find &quot;data&quot; in the JSON of Map %1 (ID: %2)</source>
         <translation>来自 Map::fromJson()；在地图 %1 (ID: %2) 的 JSON 中找不到 &quot;data&quot;</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="543"/>
+        <location filename="../src/core/elements.cpp" line="527"/>
         <source>from Map::fromJson(); &quot;data&quot; in the JSON of Map %1 (ID: %2) isn&apos;t an array</source>
         <translation>来自 Map::fromJson()；地图 %1 (ID: %2) 的 JSON 中 &quot;data&quot; 不是数组</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="552"/>
+        <location filename="../src/core/elements.cpp" line="534"/>
         <source>from Map::fromJson(); Row %1 in &quot;data&quot; in the JSON of Map %2 (ID: %3) isn&apos;t an array</source>
         <translation>来自 Map::fromJson()；地图 %2 (ID: %3) 的 JSON 中 &quot;data&quot; 的第 %1 行不是数组</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="561"/>
+        <location filename="../src/core/elements.cpp" line="543"/>
         <source>from Map::fromJson(); (%1,%2)&apos;s ID in &quot;data&quot; in the JSON of Map %3 (ID: %4) isn&apos;t a string</source>
         <translation>来自 Map::fromJson()；地图 %3 (ID: %4) 的 JSON 中 &quot;data&quot; 的 (%1,%2) 的 ID 不是字符串</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="573"/>
+        <location filename="../src/core/elements.cpp" line="553"/>
         <source>from Map::fromJson(); couldn&apos;t find the kit (ID: %1) where contains the element at (%2,%3) (ID: %4) in the JSON of Map %5 (ID: %6), please load this kit and try again</source>
         <translation>来自 Map::fromJson()；在地图 %5 (ID: %6) 的 JSON 中找不到 (%2,%3) 处元素 (ID: %4) 所属的锦囊 (ID: %1)，请加载相应锦囊后重试</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="585"/>
+        <location filename="../src/core/elements.cpp" line="565"/>
         <source>from Map::fromJson(); Kit %1 (ID: %2) doesn&apos;t contain the element at (%3,%4) (ID: %5) in Map %6 (ID: %7)</source>
         <translation>来自 Map::fromJson()；锦囊 %1 (ID: %2) 不包含地图 %6 (ID: %7) 中 (%3,%4) 处的元素 (ID: %5)</translation>
     </message>
