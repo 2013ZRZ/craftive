@@ -1,2 +1,3 @@
-locales/*.ts linguist-detectable=true linguist-language=XML
+include/ linguist-vendored
+locales/ linguist-detectable=false
 *.qrc linguist-detectable=true linguist-language=XML
