@@ -453,7 +453,7 @@ template <> auto Map::get<0>(const qsizetype r, const qsizetype c) {
     if (r > data.size() || c > data.empty() ? 0 : data[r].size())
         throw CrtExcept(
             0x000E,
-            tr("from Map::get<0>(); the required position is (%1,%2), but it's out of range"),
+            Map::tr("from Map::get<0>(); the required position is (%1,%2), but it's out of range"),
             r,
             c);
     return std::get<0>(data[r][c]) == QSharedPointer<Block>{nullptr}
@@ -465,7 +465,7 @@ template <> auto Map::get<1>(const qsizetype r, const qsizetype c) {
     if (r > data.size() || c > data.empty() ? 0 : data[r].size())
         throw CrtExcept(
             0x000E,
-            tr("from Map::get<1>(); the required position is (%1,%2), but it's out of range"),
+            Map::tr("from Map::get<1>(); the required position is (%1,%2), but it's out of range"),
             r,
             c);
     if (std::get<1>(data[r][c]) != nullptr) // is at the upper left corner

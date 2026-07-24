@@ -199,7 +199,7 @@
     <message>
         <location filename="../src/core/elements.cpp" line="456"/>
         <source>from Map::get&lt;0&gt;(); the required position is (%1,%2), but it&apos;s out of range</source>
-        <translation type="vanished">from Map::get&lt;0&gt;(); the required position is (%1,%2), but it&apos;s out of range</translation>
+        <translation>from Map::get&lt;0&gt;(); the required position is (%1,%2), but it&apos;s out of range</translation>
     </message>
     <message>
         <location filename="../src/core/elements.cpp" line="468"/>

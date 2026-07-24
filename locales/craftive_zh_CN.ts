@@ -198,7 +198,7 @@
     <message>
         <location filename="../src/core/elements.cpp" line="456"/>
         <source>from Map::get&lt;0&gt;(); the required position is (%1,%2), but it&apos;s out of range</source>
-        <translation type="vanished">来自 Map::get&lt;0&gt;()；所需位置为 (%1,%2)，但超出范围</translation>
+        <translation>来自 Map::get&lt;0&gt;()；所需位置为 (%1,%2)，但超出范围</translation>
     </message>
     <message>
         <location filename="../src/core/elements.cpp" line="468"/>
