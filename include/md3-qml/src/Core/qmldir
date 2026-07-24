@@ -37,4 +37,4 @@ TextField 1.0 Controls/TextField.qml
 TimePicker 1.0 Controls/TimePicker.qml
 ToolTip 1.0 Controls/ToolTip.qml
 TopAppBar 1.0 Controls/TopAppBar.qml
-Theme 1.0 Styles/Theme.qml
+singleton Theme 1.0 Styles/Theme.qml
