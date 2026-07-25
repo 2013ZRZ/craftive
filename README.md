@@ -14,7 +14,7 @@
 ![Still Writing](https://img.shields.io/badge/✍_Still_writing...-E78386?style=for-the-badge)
 </div>
 
-## Build & Run
+## 🛠️ Build & Run
 0. Prerequisites:
    - The latest version of [Qt](https://qt.io/);
    - [Nlohmann JSON](https://json.nlohmann.me/);
@@ -38,10 +38,10 @@
     ./out/craftive
     ```
 
-## Translation
+## 🌐 Translation
 Coming soon on Weblate!
 
-## Project Structure
+## 🗂️ Project Structure
 ```
 craftive
 ├─ .clang-format
@@ -65,7 +65,7 @@ craftive
     └─ frontend             # Working on!
 ```
 
-## Licenses
+## 📃 Licenses
 This project, excluding `include/`, is under BSD-3-Clause License.
 
 `include/backward-cpp/` is under MIT License.
@@ -74,7 +74,7 @@ This project, excluding `include/`, is under BSD-3-Clause License.
 
 `include/md3-qml/3rdparty/material-color-utilities/` is under Apache License, version 2.0.
 
-## Special Thanks
+## ❤️ Special Thanks
 - [Qt](https://qt.io/)
 - [Nlohmann JSON](https://json.nlohmann.me/)
 - [Backward-cpp](https://github.com/bombela/backward-cpp)
