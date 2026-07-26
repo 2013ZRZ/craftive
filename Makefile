@@ -997,9 +997,8 @@ compiler_clean: compiler_qmltyperegistrar_compiler_clean compiler_qmltyperegistr
 ####### Compile
 
 .cache/o/crtutils.o: src/core/crtutils.cpp src/core/crtutils.hpp \
-		../../Qt/6.11.0/gcc_64/include/QtCore/QHash \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qhash.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qalgorithms.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/QCoreApplication \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qcoreapplication.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qglobal.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qtcoreglobal.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qtversionchecks.h \
@@ -1047,13 +1046,6 @@ compiler_clean: compiler_qmltyperegistrar_compiler_clean compiler_qmltyperegistr
 		../../Qt/6.11.0/gcc_64/include/QtCore/qtresource.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qttranslation.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qversiontagging.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/q20bit.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qsimd.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/q20functional.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qcontainertools_impl.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qxptype_traits.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/q23type_traits.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qhashfunctions.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qstring.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qchar.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qcompare.h \
@@ -1068,6 +1060,10 @@ compiler_clean: compiler_qmltyperegistrar_compiler_clean compiler_qmltyperegistr
 		../../Qt/6.11.0/gcc_64/include/QtCore/qpair.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qarraydatapointer.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qarraydataops.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qcontainertools_impl.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qxptype_traits.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/q23type_traits.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/q20functional.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/q20memory.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/q17memory.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qbytearrayalgorithms.h \
@@ -1081,18 +1077,6 @@ compiler_clean: compiler_qmltyperegistrar_compiler_clean compiler_qmltyperegistr
 		../../Qt/6.11.0/gcc_64/include/QtCore/qstringbuilder.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qstringconverter.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qstringconverter_base.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qiterator.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qlist.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qbytearraylist.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qstringlist.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qstringmatcher.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/QList \
-		../../Qt/6.11.0/gcc_64/include/QtCore/QString \
-		src/core/err.hpp \
-		include/backward-cpp/backward.hpp \
-		src/core/i18n.hpp \
-		../../Qt/6.11.0/gcc_64/include/QtCore/QCoreApplication \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qcoreapplication.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qcoreevent.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qbasictimer.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qabstracteventdispatcher.h \
@@ -1100,6 +1084,15 @@ compiler_clean: compiler_qmltyperegistrar_compiler_clean compiler_qmltyperegistr
 		../../Qt/6.11.0/gcc_64/include/QtCore/qobjectdefs.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qobjectdefs_impl.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qfunctionaltools_impl.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qlist.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qhashfunctions.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qiterator.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qbytearraylist.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qstringlist.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qalgorithms.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/q20bit.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qsimd.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qstringmatcher.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qscopedpointer.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qmetatype.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qdatastream.h \
@@ -1139,23 +1132,23 @@ compiler_clean: compiler_qmltyperegistrar_compiler_clean compiler_qmltyperegistr
 		../../Qt/6.11.0/gcc_64/include/QtCore/qsharedpointer.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qsharedpointer_impl.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qset.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qhash.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qvarlengtharray.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qalloc.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/q23utility.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/q20utility.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/QLocale \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qlocale.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/QTranslator \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qtranslator.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/QList \
+		../../Qt/6.11.0/gcc_64/include/QtCore/QString \
+		src/core/err.hpp \
+		include/backward-cpp/backward.hpp \
 		../../Qt/6.11.0/gcc_64/include/QtCore/QRegularExpression \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qregularexpression.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o .cache/o/crtutils.o src/core/crtutils.cpp
 
 .cache/o/elements.o: src/core/elements.cpp src/core/elements.hpp \
 		src/core/crtutils.hpp \
-		../../Qt/6.11.0/gcc_64/include/QtCore/QHash \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qhash.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qalgorithms.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/QCoreApplication \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qcoreapplication.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qglobal.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qtcoreglobal.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qtversionchecks.h \
@@ -1203,13 +1196,6 @@ compiler_clean: compiler_qmltyperegistrar_compiler_clean compiler_qmltyperegistr
 		../../Qt/6.11.0/gcc_64/include/QtCore/qtresource.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qttranslation.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qversiontagging.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/q20bit.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qsimd.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/q20functional.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qcontainertools_impl.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qxptype_traits.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/q23type_traits.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qhashfunctions.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qstring.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qchar.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qcompare.h \
@@ -1224,6 +1210,10 @@ compiler_clean: compiler_qmltyperegistrar_compiler_clean compiler_qmltyperegistr
 		../../Qt/6.11.0/gcc_64/include/QtCore/qpair.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qarraydatapointer.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qarraydataops.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qcontainertools_impl.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qxptype_traits.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/q23type_traits.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/q20functional.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/q20memory.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/q17memory.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qbytearrayalgorithms.h \
@@ -1237,16 +1227,6 @@ compiler_clean: compiler_qmltyperegistrar_compiler_clean compiler_qmltyperegistr
 		../../Qt/6.11.0/gcc_64/include/QtCore/qstringbuilder.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qstringconverter.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qstringconverter_base.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qiterator.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qlist.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qbytearraylist.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qstringlist.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qstringmatcher.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/QList \
-		../../Qt/6.11.0/gcc_64/include/QtCore/QString \
-		src/core/i18n.hpp \
-		../../Qt/6.11.0/gcc_64/include/QtCore/QCoreApplication \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qcoreapplication.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qcoreevent.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qbasictimer.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qabstracteventdispatcher.h \
@@ -1254,6 +1234,15 @@ compiler_clean: compiler_qmltyperegistrar_compiler_clean compiler_qmltyperegistr
 		../../Qt/6.11.0/gcc_64/include/QtCore/qobjectdefs.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qobjectdefs_impl.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qfunctionaltools_impl.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qlist.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qhashfunctions.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qiterator.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qbytearraylist.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qstringlist.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qalgorithms.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/q20bit.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qsimd.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qstringmatcher.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qscopedpointer.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qmetatype.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qdatastream.h \
@@ -1293,19 +1282,18 @@ compiler_clean: compiler_qmltyperegistrar_compiler_clean compiler_qmltyperegistr
 		../../Qt/6.11.0/gcc_64/include/QtCore/qsharedpointer.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qsharedpointer_impl.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qset.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qhash.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qvarlengtharray.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qalloc.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/q23utility.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/q20utility.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/QLocale \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qlocale.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/QTranslator \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qtranslator.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/QList \
+		../../Qt/6.11.0/gcc_64/include/QtCore/QString \
+		../../Qt/6.11.0/gcc_64/include/QtCore/QHash \
 		../../Qt/6.11.0/gcc_64/include/QtCore/QSharedPointer \
 		src/core/err.hpp \
 		include/backward-cpp/backward.hpp \
 		src/core/status.hpp \
-		../../Qt/6.11.0/gcc_64/include/QtCore/QObject \
 		../../Qt/6.11.0/gcc_64/include/QtCore/QFile \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qfile.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qfiledevice.h \
@@ -1318,9 +1306,9 @@ compiler_clean: compiler_qmltyperegistrar_compiler_clean compiler_qmltyperegistr
 
 .cache/o/err.o: src/core/err.cpp src/core/err.hpp \
 		include/backward-cpp/backward.hpp \
-		src/core/i18n.hpp \
-		../../Qt/6.11.0/gcc_64/include/QtCore/QCoreApplication \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qcoreapplication.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/QString \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qstring.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qchar.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qglobal.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qtcoreglobal.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qtversionchecks.h \
@@ -1368,8 +1356,6 @@ compiler_clean: compiler_qmltyperegistrar_compiler_clean compiler_qmltyperegistr
 		../../Qt/6.11.0/gcc_64/include/QtCore/qtresource.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qttranslation.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qversiontagging.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qstring.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qchar.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qcompare.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qstdlibdetection.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qcomparehelpers.h \
@@ -1399,6 +1385,8 @@ compiler_clean: compiler_qmltyperegistrar_compiler_clean compiler_qmltyperegistr
 		../../Qt/6.11.0/gcc_64/include/QtCore/qstringbuilder.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qstringconverter.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qstringconverter_base.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/QCoreApplication \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qcoreapplication.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qcoreevent.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qbasictimer.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qabstracteventdispatcher.h \
@@ -1458,20 +1446,14 @@ compiler_clean: compiler_qmltyperegistrar_compiler_clean compiler_qmltyperegistr
 		../../Qt/6.11.0/gcc_64/include/QtCore/qvarlengtharray.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qalloc.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/q23utility.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/q20utility.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/QLocale \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qlocale.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/QTranslator \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qtranslator.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/QString
+		../../Qt/6.11.0/gcc_64/include/QtCore/q20utility.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o .cache/o/err.o src/core/err.cpp
 
 .cache/o/status.o: src/core/status.cpp src/core/status.hpp \
 		src/core/elements.hpp \
 		src/core/crtutils.hpp \
-		../../Qt/6.11.0/gcc_64/include/QtCore/QHash \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qhash.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qalgorithms.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/QCoreApplication \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qcoreapplication.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qglobal.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qtcoreglobal.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qtversionchecks.h \
@@ -1519,13 +1501,6 @@ compiler_clean: compiler_qmltyperegistrar_compiler_clean compiler_qmltyperegistr
 		../../Qt/6.11.0/gcc_64/include/QtCore/qtresource.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qttranslation.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qversiontagging.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/q20bit.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qsimd.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/q20functional.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qcontainertools_impl.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qxptype_traits.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/q23type_traits.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qhashfunctions.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qstring.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qchar.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qcompare.h \
@@ -1540,6 +1515,10 @@ compiler_clean: compiler_qmltyperegistrar_compiler_clean compiler_qmltyperegistr
 		../../Qt/6.11.0/gcc_64/include/QtCore/qpair.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qarraydatapointer.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qarraydataops.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qcontainertools_impl.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qxptype_traits.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/q23type_traits.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/q20functional.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/q20memory.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/q17memory.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qbytearrayalgorithms.h \
@@ -1553,16 +1532,6 @@ compiler_clean: compiler_qmltyperegistrar_compiler_clean compiler_qmltyperegistr
 		../../Qt/6.11.0/gcc_64/include/QtCore/qstringbuilder.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qstringconverter.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qstringconverter_base.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qiterator.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qlist.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qbytearraylist.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qstringlist.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qstringmatcher.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/QList \
-		../../Qt/6.11.0/gcc_64/include/QtCore/QString \
-		src/core/i18n.hpp \
-		../../Qt/6.11.0/gcc_64/include/QtCore/QCoreApplication \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qcoreapplication.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qcoreevent.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qbasictimer.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qabstracteventdispatcher.h \
@@ -1570,6 +1539,15 @@ compiler_clean: compiler_qmltyperegistrar_compiler_clean compiler_qmltyperegistr
 		../../Qt/6.11.0/gcc_64/include/QtCore/qobjectdefs.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qobjectdefs_impl.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qfunctionaltools_impl.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qlist.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qhashfunctions.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qiterator.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qbytearraylist.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qstringlist.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qalgorithms.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/q20bit.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qsimd.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qstringmatcher.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qscopedpointer.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qmetatype.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qdatastream.h \
@@ -1609,23 +1587,22 @@ compiler_clean: compiler_qmltyperegistrar_compiler_clean compiler_qmltyperegistr
 		../../Qt/6.11.0/gcc_64/include/QtCore/qsharedpointer.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qsharedpointer_impl.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qset.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qhash.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qvarlengtharray.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qalloc.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/q23utility.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/q20utility.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/QLocale \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qlocale.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/QTranslator \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qtranslator.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/QList \
+		../../Qt/6.11.0/gcc_64/include/QtCore/QString \
+		../../Qt/6.11.0/gcc_64/include/QtCore/QHash \
 		../../Qt/6.11.0/gcc_64/include/QtCore/QSharedPointer \
-		../../Qt/6.11.0/gcc_64/include/QtCore/QObject \
 		src/core/err.hpp \
 		include/backward-cpp/backward.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o .cache/o/status.o src/core/status.cpp
 
-.cache/o/main.o: src/frontend/main.cpp src/core/i18n.hpp \
-		../../Qt/6.11.0/gcc_64/include/QtCore/QCoreApplication \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qcoreapplication.h \
+.cache/o/main.o: src/frontend/main.cpp ../../Qt/6.11.0/gcc_64/include/QtGui/QGuiApplication \
+		../../Qt/6.11.0/gcc_64/include/QtGui/qguiapplication.h \
+		../../Qt/6.11.0/gcc_64/include/QtGui/qtguiglobal.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qglobal.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qtcoreglobal.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qtversionchecks.h \
@@ -1673,6 +1650,9 @@ compiler_clean: compiler_qmltyperegistrar_compiler_clean compiler_qmltyperegistr
 		../../Qt/6.11.0/gcc_64/include/QtCore/qtresource.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qttranslation.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qversiontagging.h \
+		../../Qt/6.11.0/gcc_64/include/QtGui/qtgui-config.h \
+		../../Qt/6.11.0/gcc_64/include/QtGui/qtguiexports.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qcoreapplication.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qstring.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qchar.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qcompare.h \
@@ -1764,17 +1744,9 @@ compiler_clean: compiler_qmltyperegistrar_compiler_clean compiler_qmltyperegistr
 		../../Qt/6.11.0/gcc_64/include/QtCore/qalloc.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/q23utility.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/q20utility.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/QLocale \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qlocale.h \
-		../../Qt/6.11.0/gcc_64/include/QtCore/QTranslator \
-		../../Qt/6.11.0/gcc_64/include/QtCore/qtranslator.h \
-		../../Qt/6.11.0/gcc_64/include/QtGui/QGuiApplication \
-		../../Qt/6.11.0/gcc_64/include/QtGui/qguiapplication.h \
-		../../Qt/6.11.0/gcc_64/include/QtGui/qtguiglobal.h \
-		../../Qt/6.11.0/gcc_64/include/QtGui/qtgui-config.h \
-		../../Qt/6.11.0/gcc_64/include/QtGui/qtguiexports.h \
 		../../Qt/6.11.0/gcc_64/include/QtGui/qwindowdefs.h \
 		../../Qt/6.11.0/gcc_64/include/QtGui/qinputmethod.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qlocale.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qpoint.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qcheckedint_impl.h \
 		../../Qt/6.11.0/gcc_64/include/QtCore/qsize.h \
@@ -1815,7 +1787,9 @@ compiler_clean: compiler_qmltyperegistrar_compiler_clean compiler_qmltyperegistr
 		../../Qt/6.11.0/gcc_64/include/QtQml/qqmlregistration.h \
 		../../Qt/6.11.0/gcc_64/include/QtQmlIntegration/qqmlintegration.h \
 		../../Qt/6.11.0/gcc_64/include/QtQml/qqmlerror.h \
-		../../Qt/6.11.0/gcc_64/include/QtQml/qqmlabstracturlinterceptor.h
+		../../Qt/6.11.0/gcc_64/include/QtQml/qqmlabstracturlinterceptor.h \
+		../../Qt/6.11.0/gcc_64/include/QtCore/QTranslator \
+		../../Qt/6.11.0/gcc_64/include/QtCore/qtranslator.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o .cache/o/main.o src/frontend/main.cpp
 
 .cache/o/stylemanager.o: include/md3-qml/src/Core/Cpp/stylemanager.cpp include/md3-qml/src/Core/Cpp/stylemanager.h \

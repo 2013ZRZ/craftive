@@ -1,3 +1,4 @@
+pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Window
 import QtQuick.Layouts
@@ -7,6 +8,8 @@ Window {
     id: craftiveWindow
     width: 800
     height: 600
+    minimumWidth: 640
+    minimumHeight: 480
     visible: true
     title: "Craftive"
     color: Theme.color.background
@@ -54,22 +57,25 @@ Window {
                 onItemClicked: index => contentStack.currentIndex = index
 
                 footer: Component {
-                    Item {
-                        Layout.fillWidth: true
-                        Layout.preferredHeight: 64
+                    ColumnLayout {
+                        width: parent.width
+                        Item {
+                            Layout.fillWidth: true
+                            Layout.preferredHeight: 64
 
-                        IconButton {
-                            anchors.verticalCenter: parent.verticalCenter
-                            anchors.left: parent.left
-                            anchors.leftMargin: isRail ? (parent.width - width) / 2 : 12
+                            IconButton {
+                                anchors.verticalCenter: parent.verticalCenter
+                                anchors.left: parent.left
+                                anchors.leftMargin: navRail.isRail ? (parent.width - width) / 2 : 12
 
-                            icon: "menu"
-                            onClicked: isRail = !isRail
+                                icon: navRail.isRail ? "chevron_right" : "chevron_left"
+                                onClicked: navRail.isRail = !navRail.isRail
 
-                            Behavior on anchors.leftMargin {
-                                NumberAnimation {
-                                    duration: 200
-                                    easing.type: Easing.OutCubic
+                                Behavior on anchors.leftMargin {
+                                    NumberAnimation {
+                                        duration: 200
+                                        easing.type: Easing.OutCubic
+                                    }
                                 }
                             }
                         }
