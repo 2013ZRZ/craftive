@@ -16,7 +16,7 @@ CC            = clang-22
 CXX           = clang++-22
 DEFINES       = -DQT_NO_DEBUG -DQT_QUICK_LIB -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_QML_LIB -DQT_QMLINTEGRATION_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -O2 -Wall -Wextra -fPIC -D_REENTRANT $(DEFINES)
-CXXFLAGS      = -pipe -flto -std=c++26 -stdlib=libc++ -Wno-unused-parameter -O2 -Wall -Wextra -fPIC -D_REENTRANT $(DEFINES)
+CXXFLAGS      = -pipe -g -flto -std=c++26 -stdlib=libc++ -Wno-unused-parameter -O2 -Wall -Wextra -fPIC -D_REENTRANT $(DEFINES)
 INCPATH       = -I. -Iinclude/backward-cpp -Iinclude/md3-qml/src/Core/Cpp -Iinclude/md3-qml/3rdparty/material-color-utilities -I../../Qt/6.11.0/gcc_64/include -I../../Qt/6.11.0/gcc_64/include/QtQuick -I../../Qt/6.11.0/gcc_64/include/QtOpenGL -I../../Qt/6.11.0/gcc_64/include/QtGui -I../../Qt/6.11.0/gcc_64/include/QtQml -I../../Qt/6.11.0/gcc_64/include/QtQmlIntegration -I../../Qt/6.11.0/gcc_64/include/QtNetwork -I../../Qt/6.11.0/gcc_64/include/QtCore -I.cache/moc -I../../Qt/6.11.0/gcc_64/mkspecs/linux-g++
 QMAKE         = /usr/bin/qmake
 DEL_FILE      = rm -f
@@ -39,7 +39,7 @@ COMPRESS      = gzip -9f
 DISTNAME      = craftive1.0.0
 DISTDIR = /home/zrz/pro/craftive/.cache/o/craftive1.0.0
 LINK          = clang++-22
-LFLAGS        = -flto -fuse-ld=lld -Wl,-O1 -Wl,-rpath,/home/zrz/Qt/6.11.0/gcc_64/lib -Wl,-rpath-link,/home/zrz/Qt/6.11.0/gcc_64/lib
+LFLAGS        = -g -flto -fuse-ld=lld -Wl,-O1 -Wl,-rpath,/home/zrz/Qt/6.11.0/gcc_64/lib -Wl,-rpath-link,/home/zrz/Qt/6.11.0/gcc_64/lib
 LIBS          = $(SUBLIBS) /home/zrz/Qt/6.11.0/gcc_64/lib/libQt6Quick.so /home/zrz/Qt/6.11.0/gcc_64/lib/libQt6OpenGL.so /home/zrz/Qt/6.11.0/gcc_64/lib/libQt6Gui.so /home/zrz/Qt/6.11.0/gcc_64/lib/libQt6Qml.so /home/zrz/Qt/6.11.0/gcc_64/lib/libQt6Network.so /home/zrz/Qt/6.11.0/gcc_64/lib/libQt6Core.so -lpthread -lGL   
 AR            = llvm-ar-22
 RANLIB        = llvm-ranlib-22
@@ -86,7 +86,8 @@ SOURCES       = src/core/crtutils.cpp \
 		include/md3-qml/3rdparty/material-color-utilities/temperature/temperature_cache.cc \
 		include/md3-qml/3rdparty/material-color-utilities/utils/utils.cc craftive_qmltyperegistrations.cpp \
 		../.cache/rcc/qrc_res.cpp \
-		../.cache/rcc/qrc_md3-core.cpp
+		../.cache/rcc/qrc_md3-core.cpp \
+		../.cache/rcc/qrc_qmake_qmake_qm_files.cpp
 OBJECTS       = .cache/o/crtutils.o \
 		.cache/o/elements.o \
 		.cache/o/err.o \
@@ -122,7 +123,8 @@ OBJECTS       = .cache/o/crtutils.o \
 		.cache/o/utils.o \
 		.cache/o/craftive_qmltyperegistrations.o \
 		.cache/o/qrc_res.o \
-		.cache/o/qrc_md3-core.o
+		.cache/o/qrc_md3-core.o \
+		.cache/o/qrc_qmake_qmake_qm_files.o
 DIST          = ../../Qt/6.11.0/gcc_64/mkspecs/features/spec_pre.prf \
 		../../Qt/6.11.0/gcc_64/mkspecs/common/unix.conf \
 		../../Qt/6.11.0/gcc_64/mkspecs/common/linux.conf \
@@ -380,7 +382,7 @@ TARGET        = out/craftive
 first: all
 ####### Build rules
 
-out/craftive: craftive_metatypes.json out/locales/craftive_en.qm out/locales/craftive_en_US.qm out/locales/craftive_zh_CN.qm $(OBJECTS)  
+out/craftive: craftive_metatypes.json $(OBJECTS)  
 	@test -d out/ || mkdir -p out/
 	$(LINK) $(LFLAGS) -o $(TARGET)  $(OBJECTS) $(OBJCOMP) $(LIBS)
 
@@ -603,6 +605,7 @@ Makefile: craftive.pro ../../Qt/6.11.0/gcc_64/mkspecs/linux-g++/qmake.conf ../..
 		craftive.pro \
 		res.qrc \
 		md3-core.qrc \
+		../.cache/rcc/qmake_qmake_qm_files.qrc \
 		../../Qt/6.11.0/gcc_64/lib/libQt6Quick.prl \
 		../../Qt/6.11.0/gcc_64/lib/libQt6OpenGL.prl \
 		../../Qt/6.11.0/gcc_64/lib/libQt6Gui.prl \
@@ -829,6 +832,7 @@ Makefile: craftive.pro ../../Qt/6.11.0/gcc_64/mkspecs/linux-g++/qmake.conf ../..
 craftive.pro:
 res.qrc:
 md3-core.qrc:
+../.cache/rcc/qmake_qmake_qm_files.qrc:
 ../../Qt/6.11.0/gcc_64/lib/libQt6Quick.prl:
 ../../Qt/6.11.0/gcc_64/lib/libQt6OpenGL.prl:
 ../../Qt/6.11.0/gcc_64/lib/libQt6Gui.prl:
@@ -851,7 +855,7 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents craftive_metatypes.json $(DISTDIR)/
 	$(COPY_FILE) --parents craftive_metatypes.json $(DISTDIR)/
-	$(COPY_FILE) --parents res.qrc md3-core.qrc $(DISTDIR)/
+	$(COPY_FILE) --parents res.qrc md3-core.qrc ../.cache/rcc/qmake_qmake_qm_files.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents src/core/crtutils.cpp src/core/elements.cpp src/core/err.cpp src/core/status.cpp src/frontend/main.cpp include/md3-qml/src/Core/Cpp/stylemanager.cpp include/md3-qml/3rdparty/material-color-utilities/blend/blend.cc include/md3-qml/3rdparty/material-color-utilities/cam/cam.cc include/md3-qml/3rdparty/material-color-utilities/cam/hct.cc include/md3-qml/3rdparty/material-color-utilities/cam/hct_solver.cc include/md3-qml/3rdparty/material-color-utilities/cam/viewing_conditions.cc include/md3-qml/3rdparty/material-color-utilities/contrast/contrast.cc include/md3-qml/3rdparty/material-color-utilities/dislike/dislike.cc include/md3-qml/3rdparty/material-color-utilities/dynamiccolor/dynamic_color.cc include/md3-qml/3rdparty/material-color-utilities/dynamiccolor/dynamic_scheme.cc include/md3-qml/3rdparty/material-color-utilities/dynamiccolor/material_dynamic_colors.cc include/md3-qml/3rdparty/material-color-utilities/palettes/tones.cc include/md3-qml/3rdparty/material-color-utilities/quantize/celebi.cc include/md3-qml/3rdparty/material-color-utilities/quantize/lab.cc include/md3-qml/3rdparty/material-color-utilities/quantize/wsmeans.cc include/md3-qml/3rdparty/material-color-utilities/quantize/wu.cc include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_content.cc include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_expressive.cc include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_fidelity.cc include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_fruit_salad.cc include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_monochrome.cc include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_neutral.cc include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_rainbow.cc include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_tonal_spot.cc include/md3-qml/3rdparty/material-color-utilities/scheme/scheme_vibrant.cc include/md3-qml/3rdparty/material-color-utilities/score/score.cc include/md3-qml/3rdparty/material-color-utilities/temperature/temperature_cache.cc include/md3-qml/3rdparty/material-color-utilities/utils/utils.cc $(DISTDIR)/
 	$(COPY_FILE) --parents .cache/moc/moc_.cpp.json $(DISTDIR)/
 	$(COPY_FILE) --parents locales/craftive_en.ts locales/craftive_en_US.ts locales/craftive_zh_CN.ts $(DISTDIR)/
@@ -897,16 +901,13 @@ craftive.qmltypes: craftive_metatypes.json \
 
 compiler_moc_json_header_make_all:
 compiler_moc_json_header_clean:
-compiler_rcc_make_all: ../.cache/rcc/qrc_res.cpp ../.cache/rcc/qrc_md3-core.cpp
+compiler_rcc_make_all: ../.cache/rcc/qrc_res.cpp ../.cache/rcc/qrc_md3-core.cpp ../.cache/rcc/qrc_qmake_qmake_qm_files.cpp
 compiler_rcc_clean:
-	-$(DEL_FILE) ../.cache/rcc/qrc_res.cpp ../.cache/rcc/qrc_md3-core.cpp
+	-$(DEL_FILE) ../.cache/rcc/qrc_res.cpp ../.cache/rcc/qrc_md3-core.cpp ../.cache/rcc/qrc_qmake_qmake_qm_files.cpp
 ../.cache/rcc/qrc_res.cpp: res.qrc \
 		../../Qt/6.11.0/gcc_64/libexec/rcc \
 		assets/images/logo.svg \
-		src/frontend/Main.qml \
-		out/locales/craftive_zh_CN.qm \
-		out/locales/craftive_en_US.qm \
-		out/locales/craftive_en.qm
+		src/frontend/Main.qml
 	/home/zrz/Qt/6.11.0/gcc_64/libexec/rcc -name res res.qrc -o ../.cache/rcc/qrc_res.cpp
 
 ../.cache/rcc/qrc_md3-core.cpp: md3-core.qrc \
@@ -956,6 +957,13 @@ compiler_rcc_clean:
 		include/md3-qml/src/Core/Styles/animations/AnimatedWindow.qml
 	/home/zrz/Qt/6.11.0/gcc_64/libexec/rcc -name md3-core md3-core.qrc -o ../.cache/rcc/qrc_md3-core.cpp
 
+../.cache/rcc/qrc_qmake_qmake_qm_files.cpp: ../.cache/rcc/qmake_qmake_qm_files.qrc \
+		../../Qt/6.11.0/gcc_64/libexec/rcc \
+		out/locales/craftive_zh_CN.qm \
+		out/locales/craftive_en_US.qm \
+		out/locales/craftive_en.qm
+	/home/zrz/Qt/6.11.0/gcc_64/libexec/rcc -name qmake_qmake_qm_files ../.cache/rcc/qmake_qmake_qm_files.qrc -o ../.cache/rcc/qrc_qmake_qmake_qm_files.cpp
+
 compiler_moc_header_make_all:
 compiler_moc_header_clean:
 compiler_moc_objc_header_make_all:
@@ -969,6 +977,8 @@ craftive_metatypes.json: .cache/moc/moc_.cpp.json
 	/home/zrz/Qt/6.11.0/gcc_64/libexec/moc --collect-json -o craftive_metatypes.json .cache/moc/moc_.cpp.json
 
 compiler_lrelease_make_all: out/locales/craftive_en.qm out/locales/craftive_en_US.qm out/locales/craftive_zh_CN.qm
+compiler_lrelease_clean:
+	-$(DEL_FILE) out/locales/craftive_en.qm out/locales/craftive_en_US.qm out/locales/craftive_zh_CN.qm
 out/locales/craftive_en.qm: locales/craftive_en.ts
 	/home/zrz/Qt/6.11.0/gcc_64/bin/lrelease locales/craftive_en.ts -qm out/locales/craftive_en.qm
 
@@ -982,7 +992,7 @@ compiler_moc_predefs_make_all: .cache/moc/moc_predefs.h
 compiler_moc_predefs_clean:
 	-$(DEL_FILE) .cache/moc/moc_predefs.h
 .cache/moc/moc_predefs.h: ../../Qt/6.11.0/gcc_64/mkspecs/features/data/dummy.cpp
-	clang++-22 -pipe -flto -std=c++26 -stdlib=libc++ -Wno-unused-parameter -O2 -Wall -Wextra -fPIC -dM -E -o .cache/moc/moc_predefs.h ../../Qt/6.11.0/gcc_64/mkspecs/features/data/dummy.cpp
+	clang++-22 -pipe -g -flto -std=c++26 -stdlib=libc++ -Wno-unused-parameter -O2 -Wall -Wextra -fPIC -dM -E -o .cache/moc/moc_predefs.h ../../Qt/6.11.0/gcc_64/mkspecs/features/data/dummy.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -992,7 +1002,7 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_qmltyperegistrar_compiler_clean compiler_qmltyperegistrar_qmltypes_clean compiler_rcc_clean compiler_moc_collect_json_clean compiler_moc_predefs_clean 
+compiler_clean: compiler_qmltyperegistrar_compiler_clean compiler_qmltyperegistrar_qmltypes_clean compiler_rcc_clean compiler_moc_collect_json_clean compiler_lrelease_clean compiler_moc_predefs_clean 
 
 ####### Compile
 
@@ -2222,6 +2232,9 @@ compiler_clean: compiler_qmltyperegistrar_compiler_clean compiler_qmltyperegistr
 
 .cache/o/qrc_md3-core.o: ../.cache/rcc/qrc_md3-core.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o .cache/o/qrc_md3-core.o ../.cache/rcc/qrc_md3-core.cpp
+
+.cache/o/qrc_qmake_qmake_qm_files.o: ../.cache/rcc/qrc_qmake_qmake_qm_files.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o .cache/o/qrc_qmake_qmake_qm_files.o ../.cache/rcc/qrc_qmake_qmake_qm_files.cpp
 
 ####### Install
 

@@ -1,6 +1,6 @@
 TEMPLATE = app
 
-CONFIG += lrelease
+CONFIG += lrelease embed_translations
 
 QMAKE_CC           = clang-22
 QMAKE_CXX          = clang++-22
@@ -8,8 +8,8 @@ QMAKE_LINK         = clang++-22
 QMAKE_LINK_SHLIB   = clang++-22
 QMAKE_AR           = llvm-ar-22
 QMAKE_RANLIB       = llvm-ranlib-22
-QMAKE_CXXFLAGS    += -flto -std=c++26 -stdlib=libc++ -Wno-unused-parameter
-QMAKE_LFLAGS      += -flto -fuse-ld=lld
+QMAKE_CXXFLAGS    += -g -flto -std=c++26 -stdlib=libc++ -Wno-unused-parameter
+QMAKE_LFLAGS      += -g -flto -fuse-ld=lld
 
 QT += quick
 
@@ -60,6 +60,7 @@ DESTDIR                  = out
 TARGET                   = craftive
 TRANSLATIONS             = $$files(locales/craftive_*.ts)
 LRELEASE_DIR             = out/locales
+QM_FILES_RESOURCE_PREFIX = /i18n
 
 RESOURCES += res.qrc md3-core.qrc
 RCC_DIR    = ../.cache/rcc
