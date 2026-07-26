@@ -1,6 +1,6 @@
 #pragma once
 
-#include <QHash>
+#include <QCoreApplication>
 #include <QList>
 #include <QString>
 #include <compare>
@@ -14,6 +14,9 @@ template <typename T>
 concept isJson = std::same_as<std::decay_t<T>, json>;
 
 struct Version {
+    Q_DECLARE_TR_FUNCTIONS(Version)
+
+public:
     uint8_t major{0}, minor{1}, patch{0};
 
     Version() = default; // Default version is the first one "0.1.0"

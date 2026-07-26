@@ -328,7 +328,9 @@ auto Kit::getBlks() const noexcept -> const QHash<QString, QSharedPointer<Block>
 
 void Kit::clearBlks() noexcept { blks.clear(); }
 
-auto Kit::getLblks() const noexcept -> const QHash<QString, QSharedPointer<LBlock>> & { return lblks; }
+auto Kit::getLblks() const noexcept -> const QHash<QString, QSharedPointer<LBlock>> & {
+    return lblks;
+}
 
 void Kit::clearLblks() noexcept { lblks.clear(); }
 
@@ -381,7 +383,7 @@ void Kit::fromJson(const json &j) {
             name,
             id);
 
-    setDes(j.value("des", translate("BasicProduct", "Empty")));
+    setDes(j.value("des", QCoreApplication::translate("BasicProduct", "Empty")));
 
     if (j.find("ver") != j.end())
         setVer(Version{j.at("ver")});
@@ -503,7 +505,7 @@ void Map::fromJson(const json &j) {
             name,
             id);
 
-    setDes(j.value("des", translate("BasicProduct", "Empty")));
+    setDes(j.value("des", QCoreApplication::translate("BasicProduct", "Empty")));
 
     if (j.find("ver") != j.end())
         setVer(Version{j.at("ver")});

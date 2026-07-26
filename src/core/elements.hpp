@@ -1,7 +1,7 @@
 #pragma once
 
 #include "crtutils.hpp"
-#include "i18n.hpp"
+#include <QHash>
 #include <QSharedPointer>
 #include <variant>
 
@@ -134,7 +134,7 @@ class BasicProduct : public BasicCrtClass {
 
 protected:
     QString author;
-    QString des;
+    QString des{tr("Empty")};
     Version ver;
 
 public:

@@ -1,10 +1,12 @@
-#include "../core/i18n.hpp"
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QTranslator>
 
 int main(int argc, char *argv[]) {
     QGuiApplication app{argc, argv};
-    CRAFTIVE_I18N_INIT
+    QTranslator     appTranslator;
+    if (appTranslator.load("craftive_" + QLocale::system().name(), "qrc:///i18n/"))
+        app.installTranslator(&appTranslator);
     QQmlApplicationEngine engine;
     QObject::connect(
         &engine,

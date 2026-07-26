@@ -1,7 +1,6 @@
 #pragma once
 
 #include "elements.hpp"
-#include <QObject>
 
 // Singleton
 struct CoreStatus {
