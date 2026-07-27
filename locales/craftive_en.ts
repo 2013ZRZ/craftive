@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="en">
+<TS version="2.1" language="en_US">
 <context>
     <name>BasicCrtClass</name>
     <message>
@@ -50,8 +50,9 @@
         <translation>from BasicProduct::toFile(); failed to open the product file at %1 (%2)</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="384"/>
-        <location filename="../src/core/elements.cpp" line="506"/>
+        <location filename="../src/core/elements.cpp" line="386"/>
+        <location filename="../src/core/elements.cpp" line="508"/>
+        <location filename="../src/core/elements.hpp" line="137"/>
         <source>Empty</source>
         <translation>Empty</translation>
     </message>
@@ -78,34 +79,52 @@
     </message>
 </context>
 <context>
+    <name>ErrDialog</name>
+    <message>
+        <location filename="../src/frontend/ErrDialog.qml" line="5"/>
+        <source>Oops!</source>
+        <translation>Oops!</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/ErrDialog.qml" line="7"/>
+        <source>Retry</source>
+        <translation>Retry</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/ErrDialog.qml" line="8"/>
+        <source>Cancel</source>
+        <translation>Cancel</translation>
+    </message>
+</context>
+<context>
     <name>Kit</name>
     <message>
-        <location filename="../src/core/elements.cpp" line="343"/>
+        <location filename="../src/core/elements.cpp" line="345"/>
         <source>from Kit::operator-=; this kit doesn&apos;t contain an element who&apos;s ID is &quot;%1&quot;</source>
         <translation>from Kit::operator-=; this kit doesn&apos;t contain an element who&apos;s ID is &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="360"/>
+        <location filename="../src/core/elements.cpp" line="362"/>
         <source>from Kit::operator[]; this kit doesn&apos;t contain an element who&apos;s ID is &quot;%1&quot;</source>
         <translation>from Kit::operator[]; this kit doesn&apos;t contain an element who&apos;s ID is &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="366"/>
+        <location filename="../src/core/elements.cpp" line="368"/>
         <source>from Kit::fromJson(); the kit&apos;s JSON isn&apos;t an object</source>
         <translation>from Kit::fromJson(); the kit&apos;s JSON isn&apos;t an object</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="371"/>
+        <location filename="../src/core/elements.cpp" line="373"/>
         <source>from Kit::fromJson(); couldn&apos;t find &quot;id&quot; in the kit&apos;s JSON</source>
         <translation>from Kit::fromJson(); couldn&apos;t find &quot;id&quot; in the kit&apos;s JSON</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="380"/>
+        <location filename="../src/core/elements.cpp" line="382"/>
         <source>from Kit::fromJson(); couldn&apos;t find &quot;author&quot; in the JSON of Kit %1 (ID: %2)</source>
         <translation>from Kit::fromJson(); couldn&apos;t find &quot;author&quot; in the JSON of Kit %1 (ID: %2)</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="391"/>
+        <location filename="../src/core/elements.cpp" line="393"/>
         <source>from Kit::fromJson(); couldn&apos;t find &quot;ver&quot; in the JSON of Kit %1 (ID: %2)</source>
         <translation>from Kit::fromJson(); couldn&apos;t find &quot;ver&quot; in the JSON of Kit %1 (ID: %2)</translation>
     </message>
@@ -164,27 +183,27 @@
 <context>
     <name>Main</name>
     <message>
-        <location filename="../src/frontend/Main.qml" line="33"/>
+        <location filename="../src/frontend/Main.qml" line="36"/>
         <source>Home</source>
         <translation>Home</translation>
     </message>
     <message>
-        <location filename="../src/frontend/Main.qml" line="37"/>
+        <location filename="../src/frontend/Main.qml" line="40"/>
         <source>Store</source>
         <translation>Store</translation>
     </message>
     <message>
-        <location filename="../src/frontend/Main.qml" line="41"/>
+        <location filename="../src/frontend/Main.qml" line="44"/>
         <source>Play</source>
         <translation>Play</translation>
     </message>
     <message>
-        <location filename="../src/frontend/Main.qml" line="45"/>
+        <location filename="../src/frontend/Main.qml" line="48"/>
         <source>Craftboard</source>
         <translation>Craftboard</translation>
     </message>
     <message>
-        <location filename="../src/frontend/Main.qml" line="49"/>
+        <location filename="../src/frontend/Main.qml" line="52"/>
         <source>Myself</source>
         <translation>Myself</translation>
     </message>
@@ -192,67 +211,67 @@
 <context>
     <name>Map</name>
     <message>
-        <location filename="../src/core/elements.cpp" line="429"/>
+        <location filename="../src/core/elements.cpp" line="431"/>
         <source>from Map::operator[]; the required position is (%1,%2), but it&apos;s out of range</source>
         <translation>from Map::operator[]; the required position is (%1,%2), but it&apos;s out of range</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="456"/>
+        <location filename="../src/core/elements.cpp" line="458"/>
         <source>from Map::get&lt;0&gt;(); the required position is (%1,%2), but it&apos;s out of range</source>
         <translation>from Map::get&lt;0&gt;(); the required position is (%1,%2), but it&apos;s out of range</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="468"/>
+        <location filename="../src/core/elements.cpp" line="470"/>
         <source>from Map::get&lt;1&gt;(); the required position is (%1,%2), but it&apos;s out of range</source>
         <translation>from Map::get&lt;1&gt;(); the required position is (%1,%2), but it&apos;s out of range</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="488"/>
+        <location filename="../src/core/elements.cpp" line="490"/>
         <source>from Map::fromJson(); the map&apos;s JSON isn&apos;t an object</source>
         <translation>from Map::fromJson(); the map&apos;s JSON isn&apos;t an object</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="493"/>
+        <location filename="../src/core/elements.cpp" line="495"/>
         <source>from Map::fromJson(); couldn&apos;t find &quot;id&quot; in the map&apos;s JSON</source>
         <translation>from Map::fromJson(); couldn&apos;t find &quot;id&quot; in the map&apos;s JSON</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="502"/>
+        <location filename="../src/core/elements.cpp" line="504"/>
         <source>from Map::fromJson(); couldn&apos;t find &quot;author&quot; in the JSON of Map %1 (ID: %2)</source>
         <translation>from Map::fromJson(); couldn&apos;t find &quot;author&quot; in the JSON of Map %1 (ID: %2)</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="513"/>
+        <location filename="../src/core/elements.cpp" line="515"/>
         <source>from Map::fromJson(); couldn&apos;t find &quot;ver&quot; in the JSON of Map %1 (ID: %2)</source>
         <translation>from Map::fromJson(); couldn&apos;t find &quot;ver&quot; in the JSON of Map %1 (ID: %2)</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="520"/>
+        <location filename="../src/core/elements.cpp" line="522"/>
         <source>from Map::fromJson(); couldn&apos;t find &quot;data&quot; in the JSON of Map %1 (ID: %2)</source>
         <translation>from Map::fromJson(); couldn&apos;t find &quot;data&quot; in the JSON of Map %1 (ID: %2)</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="527"/>
+        <location filename="../src/core/elements.cpp" line="529"/>
         <source>from Map::fromJson(); &quot;data&quot; in the JSON of Map %1 (ID: %2) isn&apos;t an array</source>
         <translation>from Map::fromJson(); &quot;data&quot; in the JSON of Map %1 (ID: %2) isn&apos;t an array</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="534"/>
+        <location filename="../src/core/elements.cpp" line="536"/>
         <source>from Map::fromJson(); Row %1 in &quot;data&quot; in the JSON of Map %2 (ID: %3) isn&apos;t an array</source>
         <translation>from Map::fromJson(); Row %1 in &quot;data&quot; in the JSON of Map %2 (ID: %3) isn&apos;t an array</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="543"/>
+        <location filename="../src/core/elements.cpp" line="545"/>
         <source>from Map::fromJson(); (%1,%2)&apos;s ID in &quot;data&quot; in the JSON of Map %3 (ID: %4) isn&apos;t a string</source>
         <translation>from Map::fromJson(); (%1,%2)&apos;s ID in &quot;data&quot; in the JSON of Map %3 (ID: %4) isn&apos;t a string</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="553"/>
+        <location filename="../src/core/elements.cpp" line="555"/>
         <source>from Map::fromJson(); couldn&apos;t find the kit (ID: %1) where contains the element at (%2,%3) (ID: %4) in the JSON of Map %5 (ID: %6), please load this kit and try again</source>
         <translation>from Map::fromJson(); couldn&apos;t find the kit (ID: %1) where contains the element at (%2,%3) (ID: %4) in the JSON of Map %5 (ID: %6), please load this kit and try again</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="565"/>
+        <location filename="../src/core/elements.cpp" line="567"/>
         <source>from Map::fromJson(); Kit %1 (ID: %2) doesn&apos;t contain the element at (%3,%4) (ID: %5) in Map %6 (ID: %7)</source>
         <translation>from Map::fromJson(); Kit %1 (ID: %2) doesn&apos;t contain the element at (%3,%4) (ID: %5) in Map %6 (ID: %7)</translation>
     </message>
@@ -273,7 +292,7 @@
 <context>
     <name>Version</name>
     <message>
-        <location filename="../src/core/crtutils.cpp" line="31"/>
+        <location filename="../src/core/crtutils.cpp" line="30"/>
         <source>from Version::fromJson(); the version&apos;s JSON isn&apos;t an array. It should be like [x, y, z] for &quot;x.y.z&quot;</source>
         <translation>from Version::fromJson(); the version&apos;s JSON isn&apos;t an array. It should be like [x, y, z] for &quot;x.y.z&quot;</translation>
     </message>
@@ -281,77 +300,77 @@
 <context>
     <name>errmsgs</name>
     <message>
-        <location filename="../src/core/err.hpp" line="9"/>
+        <location filename="../src/core/err.cpp" line="5"/>
         <source>Extern Error</source>
         <translation>Extern Error</translation>
     </message>
     <message>
-        <location filename="../src/core/err.hpp" line="10"/>
+        <location filename="../src/core/err.cpp" line="6"/>
         <source>Empty ID</source>
         <translation>Empty ID</translation>
     </message>
     <message>
-        <location filename="../src/core/err.hpp" line="11"/>
+        <location filename="../src/core/err.cpp" line="7"/>
         <source>Invalid ID</source>
         <translation>Invalid ID</translation>
     </message>
     <message>
-        <location filename="../src/core/err.hpp" line="12"/>
+        <location filename="../src/core/err.cpp" line="8"/>
         <source>Invalid unicode colored character</source>
         <translation>Invalid unicode colored character</translation>
     </message>
     <message>
-        <location filename="../src/core/err.hpp" line="13"/>
+        <location filename="../src/core/err.cpp" line="9"/>
         <source>No such element in this kit</source>
         <translation>No such element in this kit</translation>
     </message>
     <message>
-        <location filename="../src/core/err.hpp" line="14"/>
+        <location filename="../src/core/err.cpp" line="10"/>
         <source>Invalid location in this large-block</source>
         <translation>Invalid location in this large-block</translation>
     </message>
     <message>
-        <location filename="../src/core/err.hpp" line="15"/>
+        <location filename="../src/core/err.cpp" line="11"/>
         <source>Failed to parse JSON</source>
         <translation>Failed to parse JSON</translation>
     </message>
     <message>
-        <location filename="../src/core/err.hpp" line="16"/>
+        <location filename="../src/core/err.cpp" line="12"/>
         <source>Invalid email address</source>
         <translation>Invalid email address</translation>
     </message>
     <message>
-        <location filename="../src/core/err.hpp" line="17"/>
+        <location filename="../src/core/err.cpp" line="13"/>
         <source>Invalid RGB color</source>
         <translation>Invalid RGB color</translation>
     </message>
     <message>
-        <location filename="../src/core/err.hpp" line="18"/>
+        <location filename="../src/core/err.cpp" line="14"/>
         <source>Author doesn&apos;t exist</source>
         <translation>Author doesn&apos;t exist</translation>
     </message>
     <message>
-        <location filename="../src/core/err.hpp" line="19"/>
+        <location filename="../src/core/err.cpp" line="15"/>
         <source>Map data doesn&apos;t exist</source>
         <translation>Map data doesn&apos;t exist</translation>
     </message>
     <message>
-        <location filename="../src/core/err.hpp" line="20"/>
+        <location filename="../src/core/err.cpp" line="16"/>
         <source>No such kit in all loaded kits</source>
         <translation>No such kit in all loaded kits</translation>
     </message>
     <message>
-        <location filename="../src/core/err.hpp" line="21"/>
+        <location filename="../src/core/err.cpp" line="17"/>
         <source>Invalid Element ID; it should be like &quot;kit/elem&quot;</source>
         <translation>Invalid Element ID; it should be like &quot;kit/elem&quot;</translation>
     </message>
     <message>
-        <location filename="../src/core/err.hpp" line="22"/>
+        <location filename="../src/core/err.cpp" line="18"/>
         <source>Product version doesn&apos;t exist</source>
         <translation>Product version doesn&apos;t exist</translation>
     </message>
     <message>
-        <location filename="../src/core/err.hpp" line="23"/>
+        <location filename="../src/core/err.cpp" line="19"/>
         <source>Invalid location in this map</source>
         <translation>Invalid location in this map</translation>
     </message>
@@ -372,7 +391,7 @@
 <context>
     <name>separateElemID</name>
     <message>
-        <location filename="../src/core/crtutils.cpp" line="82"/>
+        <location filename="../src/core/crtutils.cpp" line="81"/>
         <source>from separateElemID(); The ID is %1</source>
         <translation>from separateElemID(); The ID is %1</translation>
     </message>

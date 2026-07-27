@@ -50,8 +50,9 @@
         <translation>来自 BasicProduct::toFile()；无法打开产品文件 %1 (%2)</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="384"/>
-        <location filename="../src/core/elements.cpp" line="506"/>
+        <location filename="../src/core/elements.cpp" line="386"/>
+        <location filename="../src/core/elements.cpp" line="508"/>
+        <location filename="../src/core/elements.hpp" line="137"/>
         <source>Empty</source>
         <translation>空</translation>
     </message>
@@ -78,34 +79,52 @@
     </message>
 </context>
 <context>
+    <name>ErrDialog</name>
+    <message>
+        <location filename="../src/frontend/ErrDialog.qml" line="5"/>
+        <source>Oops!</source>
+        <translation>哦豁！</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/ErrDialog.qml" line="7"/>
+        <source>Retry</source>
+        <translation>重试</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/ErrDialog.qml" line="8"/>
+        <source>Cancel</source>
+        <translation>取消</translation>
+    </message>
+</context>
+<context>
     <name>Kit</name>
     <message>
-        <location filename="../src/core/elements.cpp" line="343"/>
+        <location filename="../src/core/elements.cpp" line="345"/>
         <source>from Kit::operator-=; this kit doesn&apos;t contain an element who&apos;s ID is &quot;%1&quot;</source>
         <translation>来自 Kit::operator-=；此锦囊不包含 ID 为 &quot;%1&quot; 的元素</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="360"/>
+        <location filename="../src/core/elements.cpp" line="362"/>
         <source>from Kit::operator[]; this kit doesn&apos;t contain an element who&apos;s ID is &quot;%1&quot;</source>
         <translation>来自 Kit::operator[]；此锦囊不包含 ID 为 &quot;%1&quot; 的元素</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="366"/>
+        <location filename="../src/core/elements.cpp" line="368"/>
         <source>from Kit::fromJson(); the kit&apos;s JSON isn&apos;t an object</source>
         <translation>来自 Kit::fromJson()；此锦囊的 JSON 不是对象</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="371"/>
+        <location filename="../src/core/elements.cpp" line="373"/>
         <source>from Kit::fromJson(); couldn&apos;t find &quot;id&quot; in the kit&apos;s JSON</source>
         <translation>来自 Kit::fromJson()；在此锦囊的 JSON 中找不到 &quot;id&quot;</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="380"/>
+        <location filename="../src/core/elements.cpp" line="382"/>
         <source>from Kit::fromJson(); couldn&apos;t find &quot;author&quot; in the JSON of Kit %1 (ID: %2)</source>
         <translation>来自 Kit::fromJson()；在锦囊 %1 (ID：%2) 的 JSON 中找不到 &quot;author&quot;</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="391"/>
+        <location filename="../src/core/elements.cpp" line="393"/>
         <source>from Kit::fromJson(); couldn&apos;t find &quot;ver&quot; in the JSON of Kit %1 (ID: %2)</source>
         <translation>来自 Kit::fromJson()；在锦囊 %1 (ID: %2) 的 JSON 中找不到 &quot;ver&quot;</translation>
     </message>
@@ -163,27 +182,27 @@
 <context>
     <name>Main</name>
     <message>
-        <location filename="../src/frontend/Main.qml" line="33"/>
+        <location filename="../src/frontend/Main.qml" line="36"/>
         <source>Home</source>
         <translation>主页</translation>
     </message>
     <message>
-        <location filename="../src/frontend/Main.qml" line="37"/>
+        <location filename="../src/frontend/Main.qml" line="40"/>
         <source>Store</source>
         <translation>商店</translation>
     </message>
     <message>
-        <location filename="../src/frontend/Main.qml" line="41"/>
+        <location filename="../src/frontend/Main.qml" line="44"/>
         <source>Play</source>
         <translation>开局</translation>
     </message>
     <message>
-        <location filename="../src/frontend/Main.qml" line="45"/>
+        <location filename="../src/frontend/Main.qml" line="48"/>
         <source>Craftboard</source>
         <translation>工作台</translation>
     </message>
     <message>
-        <location filename="../src/frontend/Main.qml" line="49"/>
+        <location filename="../src/frontend/Main.qml" line="52"/>
         <source>Myself</source>
         <translation>我</translation>
     </message>
@@ -191,67 +210,67 @@
 <context>
     <name>Map</name>
     <message>
-        <location filename="../src/core/elements.cpp" line="429"/>
+        <location filename="../src/core/elements.cpp" line="431"/>
         <source>from Map::operator[]; the required position is (%1,%2), but it&apos;s out of range</source>
         <translation>来自 Map::operator[]；所需位置为 (%1,%2)，但超出范围</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="456"/>
+        <location filename="../src/core/elements.cpp" line="458"/>
         <source>from Map::get&lt;0&gt;(); the required position is (%1,%2), but it&apos;s out of range</source>
         <translation>来自 Map::get&lt;0&gt;()；所需位置为 (%1,%2)，但超出范围</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="468"/>
+        <location filename="../src/core/elements.cpp" line="470"/>
         <source>from Map::get&lt;1&gt;(); the required position is (%1,%2), but it&apos;s out of range</source>
         <translation>来自 Map::get&lt;1&gt;()；所需位置为 (%1,%2)，但超出范围</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="488"/>
+        <location filename="../src/core/elements.cpp" line="490"/>
         <source>from Map::fromJson(); the map&apos;s JSON isn&apos;t an object</source>
         <translation>来自 Map::fromJson()；此地图的 JSON 不是对象</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="493"/>
+        <location filename="../src/core/elements.cpp" line="495"/>
         <source>from Map::fromJson(); couldn&apos;t find &quot;id&quot; in the map&apos;s JSON</source>
         <translation>来自 Map::fromJson()；在此地图 的 JSON 中找不到 &quot;id&quot;</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="502"/>
+        <location filename="../src/core/elements.cpp" line="504"/>
         <source>from Map::fromJson(); couldn&apos;t find &quot;author&quot; in the JSON of Map %1 (ID: %2)</source>
         <translation>来自 Map::fromJson()；在地图 %1 (ID: %2) 的 JSON 中找不到 &quot;author&quot;</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="513"/>
+        <location filename="../src/core/elements.cpp" line="515"/>
         <source>from Map::fromJson(); couldn&apos;t find &quot;ver&quot; in the JSON of Map %1 (ID: %2)</source>
         <translation>来自 Map::fromJson()；在地图 %1 (ID: %2) 的 JSON 中找不到 &quot;ver&quot;</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="520"/>
+        <location filename="../src/core/elements.cpp" line="522"/>
         <source>from Map::fromJson(); couldn&apos;t find &quot;data&quot; in the JSON of Map %1 (ID: %2)</source>
         <translation>来自 Map::fromJson()；在地图 %1 (ID: %2) 的 JSON 中找不到 &quot;data&quot;</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="527"/>
+        <location filename="../src/core/elements.cpp" line="529"/>
         <source>from Map::fromJson(); &quot;data&quot; in the JSON of Map %1 (ID: %2) isn&apos;t an array</source>
         <translation>来自 Map::fromJson()；地图 %1 (ID: %2) 的 JSON 中 &quot;data&quot; 不是数组</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="534"/>
+        <location filename="../src/core/elements.cpp" line="536"/>
         <source>from Map::fromJson(); Row %1 in &quot;data&quot; in the JSON of Map %2 (ID: %3) isn&apos;t an array</source>
         <translation>来自 Map::fromJson()；地图 %2 (ID: %3) 的 JSON 中 &quot;data&quot; 的第 %1 行不是数组</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="543"/>
+        <location filename="../src/core/elements.cpp" line="545"/>
         <source>from Map::fromJson(); (%1,%2)&apos;s ID in &quot;data&quot; in the JSON of Map %3 (ID: %4) isn&apos;t a string</source>
         <translation>来自 Map::fromJson()；地图 %3 (ID: %4) 的 JSON 中 &quot;data&quot; 的 (%1,%2) 的 ID 不是字符串</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="553"/>
+        <location filename="../src/core/elements.cpp" line="555"/>
         <source>from Map::fromJson(); couldn&apos;t find the kit (ID: %1) where contains the element at (%2,%3) (ID: %4) in the JSON of Map %5 (ID: %6), please load this kit and try again</source>
         <translation>来自 Map::fromJson()；在地图 %5 (ID: %6) 的 JSON 中找不到 (%2,%3) 处元素 (ID: %4) 所属的锦囊 (ID: %1)，请加载相应锦囊后重试</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="565"/>
+        <location filename="../src/core/elements.cpp" line="567"/>
         <source>from Map::fromJson(); Kit %1 (ID: %2) doesn&apos;t contain the element at (%3,%4) (ID: %5) in Map %6 (ID: %7)</source>
         <translation>来自 Map::fromJson()；锦囊 %1 (ID: %2) 不包含地图 %6 (ID: %7) 中 (%3,%4) 处的元素 (ID: %5)</translation>
     </message>
@@ -272,7 +291,7 @@
 <context>
     <name>Version</name>
     <message>
-        <location filename="../src/core/crtutils.cpp" line="31"/>
+        <location filename="../src/core/crtutils.cpp" line="30"/>
         <source>from Version::fromJson(); the version&apos;s JSON isn&apos;t an array. It should be like [x, y, z] for &quot;x.y.z&quot;</source>
         <translation>来自 Version::fromJson()；版本的 JSON 不是数组。其格式应形如 [x, y, z] 以表示 &quot;x.y.z&quot;</translation>
     </message>
@@ -280,77 +299,77 @@
 <context>
     <name>errmsgs</name>
     <message>
-        <location filename="../src/core/err.hpp" line="9"/>
+        <location filename="../src/core/err.cpp" line="5"/>
         <source>Extern Error</source>
         <translation>外部错误</translation>
     </message>
     <message>
-        <location filename="../src/core/err.hpp" line="10"/>
+        <location filename="../src/core/err.cpp" line="6"/>
         <source>Empty ID</source>
         <translation>ID 为空</translation>
     </message>
     <message>
-        <location filename="../src/core/err.hpp" line="11"/>
+        <location filename="../src/core/err.cpp" line="7"/>
         <source>Invalid ID</source>
         <translation>ID 无效</translation>
     </message>
     <message>
-        <location filename="../src/core/err.hpp" line="12"/>
+        <location filename="../src/core/err.cpp" line="8"/>
         <source>Invalid unicode colored character</source>
         <translation>Unicode 彩色字符无效</translation>
     </message>
     <message>
-        <location filename="../src/core/err.hpp" line="13"/>
+        <location filename="../src/core/err.cpp" line="9"/>
         <source>No such element in this kit</source>
         <translation>此锦囊中不存在该元素</translation>
     </message>
     <message>
-        <location filename="../src/core/err.hpp" line="14"/>
+        <location filename="../src/core/err.cpp" line="10"/>
         <source>Invalid location in this large-block</source>
         <translation>此大方块中的位置无效</translation>
     </message>
     <message>
-        <location filename="../src/core/err.hpp" line="15"/>
+        <location filename="../src/core/err.cpp" line="11"/>
         <source>Failed to parse JSON</source>
         <translation>解析 JSON 失败</translation>
     </message>
     <message>
-        <location filename="../src/core/err.hpp" line="16"/>
+        <location filename="../src/core/err.cpp" line="12"/>
         <source>Invalid email address</source>
         <translation>电子邮件地址无效</translation>
     </message>
     <message>
-        <location filename="../src/core/err.hpp" line="17"/>
+        <location filename="../src/core/err.cpp" line="13"/>
         <source>Invalid RGB color</source>
         <translation>RGB 颜色无效</translation>
     </message>
     <message>
-        <location filename="../src/core/err.hpp" line="18"/>
+        <location filename="../src/core/err.cpp" line="14"/>
         <source>Author doesn&apos;t exist</source>
         <translation>作者不存在</translation>
     </message>
     <message>
-        <location filename="../src/core/err.hpp" line="19"/>
+        <location filename="../src/core/err.cpp" line="15"/>
         <source>Map data doesn&apos;t exist</source>
         <translation>地图数据不存在</translation>
     </message>
     <message>
-        <location filename="../src/core/err.hpp" line="20"/>
+        <location filename="../src/core/err.cpp" line="16"/>
         <source>No such kit in all loaded kits</source>
         <translation>所有已加载的锦囊中不存在该锦囊</translation>
     </message>
     <message>
-        <location filename="../src/core/err.hpp" line="21"/>
+        <location filename="../src/core/err.cpp" line="17"/>
         <source>Invalid Element ID; it should be like &quot;kit/elem&quot;</source>
         <translation>元素的 ID 无效；其格式应形如 &quot;kit/elem&quot;</translation>
     </message>
     <message>
-        <location filename="../src/core/err.hpp" line="22"/>
+        <location filename="../src/core/err.cpp" line="18"/>
         <source>Product version doesn&apos;t exist</source>
         <translation>产品版本不存在</translation>
     </message>
     <message>
-        <location filename="../src/core/err.hpp" line="23"/>
+        <location filename="../src/core/err.cpp" line="19"/>
         <source>Invalid location in this map</source>
         <translation>此地图中的位置无效</translation>
     </message>
@@ -371,7 +390,7 @@
 <context>
     <name>separateElemID</name>
     <message>
-        <location filename="../src/core/crtutils.cpp" line="82"/>
+        <location filename="../src/core/crtutils.cpp" line="81"/>
         <source>from separateElemID(); The ID is %1</source>
         <translation>来自 separateElemID()；ID 为 %1</translation>
     </message>
