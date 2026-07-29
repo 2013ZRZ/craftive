@@ -145,8 +145,8 @@ public:
     void           setAuthor(const QString &_author);
     const QString &getDes() const noexcept;
     void           setDes(const QString &_des) noexcept;
-    Version        getVer() const noexcept;
-    void           setVer(Version _ver) noexcept;
+    Version        getVer() const noexcept { return ver; }
+    void           setVer(Version _ver) noexcept { ver = _ver; }
     void           fromFile(const QString &path);
     void           toFile(const QString &path, const uint8_t indent = 4);
 }; // class BasicProduct
@@ -191,9 +191,7 @@ public:
     const MapDataType     &getData() const noexcept;
     void                   setData(const MapDataType &_data) noexcept;
     const Ucc              operator[](const qsizetype r, const qsizetype c);
-    template <bool T> auto get(const qsizetype r, const qsizetype c) {}
-    template <> auto       get<0>(const qsizetype r, const qsizetype c); // QSharedPointer<Block>
-    template <> auto       get<1>(const qsizetype r, const qsizetype c); // QSharedPointer<LBlock>
+    template <int N> auto  get(const qsizetype r, const qsizetype c);
     template <class T>
     void set(const qsizetype r, const qsizetype c, const QSharedPointer<T> &element)
         requires isElem<T>

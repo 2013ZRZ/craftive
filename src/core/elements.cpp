@@ -574,7 +574,7 @@ void Map::fromJson(const json &j) {
                                 name,
                                 id);
             else
-                targetKit[elemFullID].visit([&](auto &&arg) { set(r, c, arg); });
+                std::visit([&](auto &&arg) { set(r, c, arg); }, targetKit[elemFullID]);
         }
     }
 }
@@ -583,7 +583,7 @@ json Map::toJson() const {
     json dataj;
     for (qsizetype r{0}; r < data.size(); r++)
         for (qsizetype c{0}; c < data[r].size(); c++)
-            data[r][c].visit([&](auto &&arg) { dataj[r][c] = arg->getID(); });
+            std::visit([&](auto &&arg) { dataj[r][c] = arg->getID(); }, data[r][c]);
     return json{{"author", author},
                 {"id", id},
                 {"name", name},

@@ -6,7 +6,6 @@
 
 Version::Version(uint8_t ma, uint8_t mi, uint8_t p) : major(ma), minor(mi), patch(p) {}
 
-Version::Version(const isJson auto &j) { fromJson(j); }
 
 auto Version::operator<=>(const Version &other) const noexcept -> std::strong_ordering {
     if (major != other.major)

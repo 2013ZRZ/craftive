@@ -21,7 +21,7 @@ public:
 
     Version() = default; // Default version is the first one "0.1.0"
     Version(uint8_t ma, uint8_t mi, uint8_t p);
-    explicit Version(const isJson auto &j);
+    explicit Version(const isJson auto &j) { fromJson(j); }
 
     auto    operator<=>(const Version &other) const noexcept -> std::strong_ordering;
     bool    operator==(const Version &other) const noexcept;

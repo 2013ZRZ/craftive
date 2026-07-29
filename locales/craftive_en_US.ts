@@ -81,19 +81,24 @@
 <context>
     <name>ErrDialog</name>
     <message>
-        <location filename="../src/frontend/ErrDialog.qml" line="5"/>
-        <source>Oops!</source>
-        <translation>Oops!</translation>
+        <location filename="../src/frontend/ErrDialog.qml" line="8"/>
+        <source>Oops! Error %1 &quot;%2&quot; occurred.</source>
+        <translation>Oops! Error %1 &quot;%2&quot; occurred.</translation>
     </message>
     <message>
-        <location filename="../src/frontend/ErrDialog.qml" line="7"/>
+        <location filename="../src/frontend/ErrDialog.qml" line="10"/>
         <source>Retry</source>
         <translation>Retry</translation>
     </message>
     <message>
-        <location filename="../src/frontend/ErrDialog.qml" line="8"/>
+        <location filename="../src/frontend/ErrDialog.qml" line="11"/>
         <source>Cancel</source>
         <translation>Cancel</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/ErrDialog.qml" line="16"/>
+        <source>Detail: %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -292,7 +297,7 @@
 <context>
     <name>Version</name>
     <message>
-        <location filename="../src/core/crtutils.cpp" line="30"/>
+        <location filename="../src/core/crtutils.cpp" line="29"/>
         <source>from Version::fromJson(); the version&apos;s JSON isn&apos;t an array. It should be like [x, y, z] for &quot;x.y.z&quot;</source>
         <translation>from Version::fromJson(); the version&apos;s JSON isn&apos;t an array. It should be like [x, y, z] for &quot;x.y.z&quot;</translation>
     </message>
@@ -391,7 +396,7 @@
 <context>
     <name>separateElemID</name>
     <message>
-        <location filename="../src/core/crtutils.cpp" line="81"/>
+        <location filename="../src/core/crtutils.cpp" line="80"/>
         <source>from separateElemID(); The ID is %1</source>
         <translation>from separateElemID(); The ID is %1</translation>
     </message>

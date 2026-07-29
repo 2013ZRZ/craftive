@@ -81,19 +81,24 @@
 <context>
     <name>ErrDialog</name>
     <message>
-        <location filename="../src/frontend/ErrDialog.qml" line="5"/>
-        <source>Oops!</source>
-        <translation>哦豁！</translation>
+        <location filename="../src/frontend/ErrDialog.qml" line="8"/>
+        <source>Oops! Error %1 &quot;%2&quot; occurred.</source>
+        <translation>哦豁！发生错误 %1 “%2”。</translation>
     </message>
     <message>
-        <location filename="../src/frontend/ErrDialog.qml" line="7"/>
+        <location filename="../src/frontend/ErrDialog.qml" line="10"/>
         <source>Retry</source>
         <translation>重试</translation>
     </message>
     <message>
-        <location filename="../src/frontend/ErrDialog.qml" line="8"/>
+        <location filename="../src/frontend/ErrDialog.qml" line="11"/>
         <source>Cancel</source>
         <translation>取消</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/ErrDialog.qml" line="16"/>
+        <source>Detail: %1</source>
+        <translation>详细信息：%1</translation>
     </message>
 </context>
 <context>
@@ -291,7 +296,7 @@
 <context>
     <name>Version</name>
     <message>
-        <location filename="../src/core/crtutils.cpp" line="30"/>
+        <location filename="../src/core/crtutils.cpp" line="29"/>
         <source>from Version::fromJson(); the version&apos;s JSON isn&apos;t an array. It should be like [x, y, z] for &quot;x.y.z&quot;</source>
         <translation>来自 Version::fromJson()；版本的 JSON 不是数组。其格式应形如 [x, y, z] 以表示 &quot;x.y.z&quot;</translation>
     </message>
@@ -390,7 +395,7 @@
 <context>
     <name>separateElemID</name>
     <message>
-        <location filename="../src/core/crtutils.cpp" line="81"/>
+        <location filename="../src/core/crtutils.cpp" line="80"/>
         <source>from separateElemID(); The ID is %1</source>
         <translation>来自 separateElemID()；ID 为 %1</translation>
     </message>
