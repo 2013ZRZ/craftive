@@ -54,9 +54,7 @@ craftive
 ├─ assets/images/logo.svg
 ├─ craftive.pro             # qmake
 ├─ craftive_metatypes.json  # By MOC. Don't care it!
-├─ include/
-│  ├─ backward-cpp/
-│  └─ md3-qml/              # Material Design 3 for Qt Quick (QML)
+├─ include/md3-qml/         # Material Design 3 for Qt Quick (QML)
 ├─ locales/                 # Including TS files. I'm going to put it onto Weblate. 
 ├─ md3-core.qrc             # Qt Resources File for include/md3-qml/
 ├─ res.qrc                  # Qt Resources File for Craftive
@@ -68,8 +66,6 @@ craftive
 ## 📃 Licenses
 This project, excluding `include/`, is under BSD-3-Clause License.
 
-`include/backward-cpp/` is under MIT License.
-
 `include/md3-qml/src/Core/` is under GNU Lesser General Public License, version 3 or later.
 
 `include/md3-qml/3rdparty/material-color-utilities/` is under Apache License, version 2.0.
@@ -77,5 +73,4 @@ This project, excluding `include/`, is under BSD-3-Clause License.
 ## ❤️ Special Thanks
 - [Qt](https://qt.io/)
 - [Nlohmann JSON](https://json.nlohmann.me/)
-- [Backward-cpp](https://github.com/bombela/backward-cpp)
 - [Material Design 3 for Qt Quick (QML)](https://github.com/sudoevolve/material-components-qml)
