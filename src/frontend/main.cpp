@@ -27,6 +27,6 @@ int main(int argc, char *argv[]) {
             QCoreApplication::exit(-1);
         },
         Qt::QueuedConnection);
-    engine.load(QUrl{"qrc:///qmls/Main.qml"});
+    engine.loadFromModule("crt", "Main");
     return app.exec();
 }

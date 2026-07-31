@@ -1,11 +1,6 @@
 .vscode/
 .cache/
-out/
 build/
 .clangd
 .qmllint.ini
 .DS_Store
-*.qm
-.qmake.stash
-craftive_qmltyperegistrations.cpp
-craftive.qmltypes

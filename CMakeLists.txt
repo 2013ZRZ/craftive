@@ -130,7 +130,7 @@ if(NOT DEFINED Qt6_DIR AND NOT DEFINED CMAKE_PREFIX_PATH)
     endif()
 endif()
 
-find_package(Qt6 REQUIRED COMPONENTS Quick Gui)
+find_package(Qt6 REQUIRED COMPONENTS Quick Gui LinguistTools)
 qt_standard_project_setup()
 qt_policy(SET QTP0001 NEW)
 qt_policy(SET QTP0004 NEW)
@@ -155,13 +155,25 @@ file(GLOB_RECURSE APP_CPP_FILES
     "src/*.cpp"
 )
 
-qt_add_executable(CraftiveApp
+file(GLOB_RECURSE APP_TS_FILES
+    CONFIGURE_DEPENDS
+    RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
+    "locales/craftive_*.ts"
+)
+
+qt_add_translations(craftive
+   TS_FILES ${APP_TS_FILES}
+   QM_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
+   RESOURCE_PREFIX "/i18n"
+)
+
+qt_add_executable(craftive
     MANUAL_FINALIZATION
     ${APP_CPP_FILES}
 )
 
-qt_add_qml_module(CraftiveApp
-    URI craftive
+qt_add_qml_module(craftive
+    URI crt
     VERSION 1.0
     QML_FILES
         ${APP_QML_FILES}
@@ -169,26 +181,29 @@ qt_add_qml_module(CraftiveApp
         src/core/err.hpp src/core/err.cpp
 )
 
-target_include_directories(CraftiveApp
+qt_add_binary_resources(craftiveRes res.qrc)
+add_dependencies(craftive craftiveRes)
+
+target_include_directories(craftive
     PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/src/core
 )
-target_compile_definitions(CraftiveApp
+target_compile_definitions(craftive
     PRIVATE
         PROJECT_SOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}"
 )
 
 if(MSVC)
-    target_link_libraries(CraftiveApp
+    target_link_libraries(craftive
         PRIVATE
             Qt6::Quick
             md3Core
     )
 
     set(MD3_WHOLEARCHIVE_OPTIONS /WHOLEARCHIVE:md3Core)
-    target_link_options(CraftiveApp PRIVATE ${MD3_WHOLEARCHIVE_OPTIONS})
+    target_link_options(craftive PRIVATE ${MD3_WHOLEARCHIVE_OPTIONS})
 elseif(MINGW OR (UNIX AND NOT APPLE))
-    target_link_libraries(CraftiveApp
+    target_link_libraries(craftive
         PRIVATE
             Qt6::Quick
             -Wl,--whole-archive
@@ -196,18 +211,18 @@ elseif(MINGW OR (UNIX AND NOT APPLE))
             -Wl,--no-whole-archive
     )
 elseif(APPLE)
-    target_link_libraries(CraftiveApp
+    target_link_libraries(craftive
         PRIVATE
             Qt6::Quick
             md3Core
     )
 else()
-    target_link_libraries(CraftiveApp
+    target_link_libraries(craftive
         PRIVATE
             Qt6::Quick
             md3Core
     )
 endif()
 
-qt_import_qml_plugins(CraftiveApp)
-qt_finalize_executable(CraftiveApp)
+qt_import_qml_plugins(craftive)
+qt_finalize_executable(craftive)

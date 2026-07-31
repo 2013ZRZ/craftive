@@ -1,7 +1,7 @@
 pragma Singleton
 import QtQuick
 import md3.Core
-import craftive.Core
+import crt
 
 Dialog {
     id: globalErrDialog
