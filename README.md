@@ -37,7 +37,7 @@
 > 
 > For example, if you use stable LLVM toolchain, you should replace `-fuse-ld=lld-22` with `-fuse-ld=lld` in `CMakeLists.txt` and then run:
 > ```
-> cmake -S . -B build -DCMAKE_CXX_COMPILER=/bin/clang++-22 -DCMAKE_AR=/bin/llvm-ar-22 -DCMAKE_RANLIB=/bin/llvm-ranlib-22
+> cmake -S . -B build -DCMAKE_CXX_COMPILER=/bin/clang++ -DCMAKE_AR=/bin/llvm-ar -DCMAKE_RANLIB=/bin/llvm-ranlib
 > cmake --build build -j$(nproc)
 > ```
 
