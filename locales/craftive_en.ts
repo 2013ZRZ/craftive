@@ -98,7 +98,7 @@
     <message>
         <location filename="../src/frontend/ErrDialog.qml" line="16"/>
         <source>Detail: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Detail: %1</translation>
     </message>
 </context>
 <context>
@@ -188,29 +188,34 @@
 <context>
     <name>Main</name>
     <message>
-        <location filename="../src/frontend/Main.qml" line="36"/>
+        <location filename="../src/frontend/Main.qml" line="38"/>
         <source>Home</source>
         <translation>Home</translation>
     </message>
     <message>
-        <location filename="../src/frontend/Main.qml" line="40"/>
+        <location filename="../src/frontend/Main.qml" line="42"/>
         <source>Store</source>
         <translation>Store</translation>
     </message>
     <message>
-        <location filename="../src/frontend/Main.qml" line="44"/>
+        <location filename="../src/frontend/Main.qml" line="46"/>
         <source>Play</source>
         <translation>Play</translation>
     </message>
     <message>
-        <location filename="../src/frontend/Main.qml" line="48"/>
+        <location filename="../src/frontend/Main.qml" line="50"/>
         <source>Craftboard</source>
         <translation>Craftboard</translation>
     </message>
     <message>
-        <location filename="../src/frontend/Main.qml" line="52"/>
+        <location filename="../src/frontend/Main.qml" line="54"/>
         <source>Myself</source>
         <translation>Myself</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/Main.qml" line="58"/>
+        <source>Settings</source>
+        <translation>Settings</translation>
     </message>
 </context>
 <context>
@@ -279,6 +284,49 @@
         <location filename="../src/core/elements.cpp" line="567"/>
         <source>from Map::fromJson(); Kit %1 (ID: %2) doesn&apos;t contain the element at (%3,%4) (ID: %5) in Map %6 (ID: %7)</source>
         <translation>from Map::fromJson(); Kit %1 (ID: %2) doesn&apos;t contain the element at (%3,%4) (ID: %5) in Map %6 (ID: %7)</translation>
+    </message>
+</context>
+<context>
+    <name>Settings</name>
+    <message>
+        <location filename="../src/frontend/pages/Settings.qml" line="21"/>
+        <source>Settings</source>
+        <translation>Settings</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/pages/Settings.qml" line="32"/>
+        <source>Appearance</source>
+        <translation>Appearance</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/pages/Settings.qml" line="67"/>
+        <source>Dark Mode</source>
+        <translation>Dark Mode</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/pages/Settings.qml" line="72"/>
+        <source>Use dark theme for low-light environments</source>
+        <translation>Use dark theme for low-light environments</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/pages/Settings.qml" line="120"/>
+        <source>Theme Color</source>
+        <translation>Theme Color</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/pages/Settings.qml" line="125"/>
+        <source>Select a seed color to generate the Material You color scheme</source>
+        <translation>Select a seed color to generate the Material You color scheme</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/pages/Settings.qml" line="218"/>
+        <source>About</source>
+        <translation>About</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/pages/Settings.qml" line="252"/>
+        <source>Version</source>
+        <translation>Version</translation>
     </message>
 </context>
 <context>

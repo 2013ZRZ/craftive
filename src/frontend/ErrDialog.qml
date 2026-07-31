@@ -12,8 +12,8 @@ Dialog {
 
     signal errorOccurred(e: CrtExcept)
     onErrorOccurred: e => {
-        this.title = this.title.arg(e.whichStr()).arg(e.what());
-        this.text = qsTr("Detail: %1").arg(e.how());
+        this.title = this.title.arg(e.whichStr).arg(e.what);
+        this.text = qsTr("Detail: %1").arg(e.how);
         this.open();
     }
 }

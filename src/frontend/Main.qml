@@ -19,6 +19,8 @@ Window {
         width: parent.width
         height: parent.height
 
+        property list<string> pagesPaths: ["pages/Home.qml", "pages/Store.qml", "pages/Play.qml", "pages/Craftboard.qml", "pages/Myself.qml", "pages/Settings.qml"]
+
         RowLayout {
             anchors.fill: parent
             spacing: 0
@@ -50,11 +52,15 @@ Window {
                     {
                         icon: "face",
                         text: qsTr("Myself")
+                    },
+                    {
+                        icon: "settings",
+                        text: qsTr("Settings")
                     }
                 ]
 
-                currentIndex: contentStack.currentIndex
-                onItemClicked: index => contentStack.currentIndex = index
+                currentIndex: 0
+                onItemClicked: index => currentIndex = index
 
                 footer: Component {
                     ColumnLayout {
@@ -83,11 +89,46 @@ Window {
                 }
             }
 
-            StackLayout {
-                id: contentStack
+            Rectangle {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                currentIndex: 0
+                color: Theme.color.background
+                clip: true
+
+                Loader {
+                    id: pageLoader
+                    anchors.fill: parent
+                    source: root.pagesPaths[navRail.currentIndex]
+
+                    onLoaded: {
+                        if (item) {
+                            enterAnim.stop();
+                            animOpacity.target = item;
+                            animY.target = item;
+                            item.opacity = 0;
+                            item.y = 50;
+                            enterAnim.start();
+                        }
+                    }
+                }
+
+                ParallelAnimation {
+                    id: enterAnim
+                    NumberAnimation {
+                        id: animOpacity
+                        property: "opacity"
+                        to: 1
+                        duration: 300
+                        easing.type: Easing.OutCubic
+                    }
+                    NumberAnimation {
+                        id: animY
+                        property: "y"
+                        to: 0
+                        duration: 300
+                        easing.type: Easing.OutCubic
+                    }
+                }
             }
         }
     }

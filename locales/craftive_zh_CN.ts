@@ -187,29 +187,34 @@
 <context>
     <name>Main</name>
     <message>
-        <location filename="../src/frontend/Main.qml" line="36"/>
+        <location filename="../src/frontend/Main.qml" line="38"/>
         <source>Home</source>
         <translation>主页</translation>
     </message>
     <message>
-        <location filename="../src/frontend/Main.qml" line="40"/>
+        <location filename="../src/frontend/Main.qml" line="42"/>
         <source>Store</source>
         <translation>商店</translation>
     </message>
     <message>
-        <location filename="../src/frontend/Main.qml" line="44"/>
+        <location filename="../src/frontend/Main.qml" line="46"/>
         <source>Play</source>
         <translation>开局</translation>
     </message>
     <message>
-        <location filename="../src/frontend/Main.qml" line="48"/>
+        <location filename="../src/frontend/Main.qml" line="50"/>
         <source>Craftboard</source>
         <translation>工作台</translation>
     </message>
     <message>
-        <location filename="../src/frontend/Main.qml" line="52"/>
+        <location filename="../src/frontend/Main.qml" line="54"/>
         <source>Myself</source>
         <translation>我</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/Main.qml" line="58"/>
+        <source>Settings</source>
+        <translation>设置</translation>
     </message>
 </context>
 <context>
@@ -278,6 +283,49 @@
         <location filename="../src/core/elements.cpp" line="567"/>
         <source>from Map::fromJson(); Kit %1 (ID: %2) doesn&apos;t contain the element at (%3,%4) (ID: %5) in Map %6 (ID: %7)</source>
         <translation>来自 Map::fromJson()；锦囊 %1 (ID: %2) 不包含地图 %6 (ID: %7) 中 (%3,%4) 处的元素 (ID: %5)</translation>
+    </message>
+</context>
+<context>
+    <name>Settings</name>
+    <message>
+        <location filename="../src/frontend/pages/Settings.qml" line="21"/>
+        <source>Settings</source>
+        <translation>设置</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/pages/Settings.qml" line="32"/>
+        <source>Appearance</source>
+        <translation>外观</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/pages/Settings.qml" line="67"/>
+        <source>Dark Mode</source>
+        <translation>暗色模式</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/pages/Settings.qml" line="72"/>
+        <source>Use dark theme for low-light environments</source>
+        <translation>在低光环境下使用较暗的主题</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/pages/Settings.qml" line="120"/>
+        <source>Theme Color</source>
+        <translation>主题色</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/pages/Settings.qml" line="125"/>
+        <source>Select a seed color to generate the Material You color scheme</source>
+        <translation>选取一个种子色以生成 Material You 配色方案</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/pages/Settings.qml" line="218"/>
+        <source>About</source>
+        <translation>关于</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/pages/Settings.qml" line="252"/>
+        <source>Version</source>
+        <translation>版本</translation>
     </message>
 </context>
 <context>
