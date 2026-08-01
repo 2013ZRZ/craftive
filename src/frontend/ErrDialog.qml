@@ -6,14 +6,20 @@ import crt
 Dialog {
     id: globalErrDialog
     title: qsTr("Oops! Error %1 \"%2\" occurred.")
+    text: qsTr("Detail: %1")
     icon: "error"
     acceptText: qsTr("Retry")
     rejectText: qsTr("Cancel")
 
     signal errorOccurred(e: CrtExcept)
     onErrorOccurred: e => {
-        this.title = this.title.arg(e.whichStr).arg(e.what);
-        this.text = qsTr("Detail: %1").arg(e.how);
+        title = title.arg(e.whichStr).arg(e.what);
+        text = text.arg(e.how);
         this.open();
+    }
+
+    onClosed: {
+        title = qsTr("Oops! Error %1 \"%2\" occurred.");
+        text = qsTr("Detail: %1");
     }
 }
