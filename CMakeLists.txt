@@ -167,6 +167,11 @@ qt_add_translations(craftive
    RESOURCE_PREFIX "/i18n"
 )
 
+set_source_files_properties(
+    src/frontend/utils/Typofont.qml
+    PROPERTIES QT_QML_SINGLETON_TYPE TRUE
+)
+
 qt_add_executable(craftive
     MANUAL_FINALIZATION
     ${APP_CPP_FILES}

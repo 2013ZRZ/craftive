@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Effects
 import md3.Core
+import crt
 
 Flickable {
     id: settingsPage
@@ -19,7 +20,7 @@ Flickable {
 
         Text {
             text: qsTr("Settings")
-            font: Theme.typography.headlineLarge
+            font: Typofont.headlineLarge
             color: Theme.color.onSurfaceColor
         }
 
@@ -30,7 +31,7 @@ Flickable {
 
             Text {
                 text: qsTr("Appearance")
-                font: Theme.typography.titleMedium
+                font: Typofont.titleMedium
                 color: Theme.color.primary
             }
 
@@ -65,12 +66,12 @@ Flickable {
                         spacing: 2
                         Text {
                             text: qsTr("Dark Mode")
-                            font: Theme.typography.titleMedium
+                            font: Typofont.titleSmall
                             color: Theme.color.onSurfaceColor
                         }
                         Text {
                             text: qsTr("Use dark theme for low-light environments")
-                            font: Theme.typography.bodyMedium
+                            font: Typofont.bodySmall
                             color: Theme.color.onSurfaceVariantColor
                         }
                     }
@@ -118,12 +119,12 @@ Flickable {
                             spacing: 2
                             Text {
                                 text: qsTr("Theme Color")
-                                font: Theme.typography.titleMedium
+                                font: Typofont.titleSmall
                                 color: Theme.color.onSurfaceColor
                             }
                             Text {
                                 text: qsTr("Select a seed color to generate the Material You color scheme")
-                                font: Theme.typography.bodyMedium
+                                font: Typofont.bodySmall
                                 color: Theme.color.onSurfaceVariantColor
                             }
                         }
@@ -216,7 +217,7 @@ Flickable {
 
             Text {
                 text: qsTr("About")
-                font: Theme.typography.titleMedium
+                font: Typofont.titleMedium
                 color: Theme.color.primary
             }
 
@@ -250,12 +251,12 @@ Flickable {
                         spacing: 2
                         Text {
                             text: qsTr("Version")
-                            font: Theme.typography.titleMedium
+                            font: Typofont.titleSmall
                             color: Theme.color.onSurfaceColor
                         }
                         Text {
                             text: "0.1.0 Dev"
-                            font: Theme.typography.bodyMedium
+                            font: Typofont.bodySmall
                             color: Theme.color.onSurfaceVariantColor
                         }
                         Item {
