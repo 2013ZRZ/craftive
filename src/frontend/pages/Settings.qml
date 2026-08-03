@@ -47,18 +47,8 @@ Flickable {
                     anchors.margins: 16
                     spacing: 16
 
-                    Rectangle {
-                        width: 40
-                        height: 40
-                        radius: 20
-                        color: Theme.color.surfaceContainerHigh
-                        Text {
-                            anchors.centerIn: parent
-                            text: "dark_mode"
-                            font.family: Theme.iconFont.name
-                            font.pixelSize: 24
-                            color: Theme.color.onSurfaceVariantColor
-                        }
+                    IconCircle {
+                        icon: "dark_mode"
                     }
 
                     ColumnLayout {
@@ -102,18 +92,8 @@ Flickable {
 
                     RowLayout {
                         spacing: 16
-                        Rectangle {
-                            width: 40
-                            height: 40
-                            radius: 20
-                            color: Theme.color.surfaceContainerHigh
-                            Text {
-                                anchors.centerIn: parent
-                                text: "palette"
-                                font.family: Theme.iconFont.name
-                                font.pixelSize: 24
-                                color: Theme.color.onSurfaceVariantColor
-                            }
+                        IconCircle {
+                            icon: "palette"
                         }
                         ColumnLayout {
                             spacing: 2
@@ -232,18 +212,8 @@ Flickable {
                     anchors.margins: 16
                     spacing: 16
 
-                    Rectangle {
-                        width: 40
-                        height: 40
-                        radius: 20
-                        color: Theme.color.surfaceContainerHigh
-                        Text {
-                            anchors.centerIn: parent
-                            text: "info"
-                            font.family: Theme.iconFont.name
-                            font.pixelSize: 24
-                            color: Theme.color.onSurfaceVariantColor
-                        }
+                    IconCircle {
+                        icon: "info"
                     }
 
                     ColumnLayout {
