@@ -48,19 +48,19 @@ Flickable {
                     spacing: 16
 
                     IconCircle {
-                        icon: "dark_mode"
+                        icon: StyleManager.isDarkTheme ? "dark_mode" : "light_mode"
                     }
 
                     ColumnLayout {
                         Layout.fillWidth: true
                         spacing: 2
                         Text {
-                            text: qsTr("Dark Mode")
+                            text: qsTr("Theme")
                             font: Typofont.titleSmall
                             color: Theme.color.onSurfaceColor
                         }
                         Text {
-                            text: qsTr("Use dark theme for low-light environments")
+                            text: StyleManager.isDarkTheme ? qsTr("Using dark theme now") : qsTr("Using light theme now")
                             font: Typofont.bodySmall
                             color: Theme.color.onSurfaceVariantColor
                         }
@@ -71,6 +71,7 @@ Flickable {
                     }
 
                     Switch {
+                        icon: "dark_mode"
                         checked: StyleManager.isDarkTheme
                         onClicked: StyleManager.isDarkTheme = checked
                     }

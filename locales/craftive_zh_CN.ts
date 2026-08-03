@@ -300,32 +300,37 @@
         <translation>外观</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="68"/>
-        <source>Dark Mode</source>
-        <translation>暗色模式</translation>
+        <location filename="../src/frontend/pages/Settings.qml" line="58"/>
+        <source>Theme</source>
+        <translation>主题</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="73"/>
-        <source>Use dark theme for low-light environments</source>
-        <translation>在低光环境下使用较暗的主题</translation>
+        <location filename="../src/frontend/pages/Settings.qml" line="63"/>
+        <source>Using dark theme now</source>
+        <translation>正在使用暗色主题</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="121"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="63"/>
+        <source>Using light theme now</source>
+        <translation>正在使用亮色主题</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/pages/Settings.qml" line="102"/>
         <source>Theme Color</source>
         <translation>主题色</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="126"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="107"/>
         <source>Select a seed color to generate the Material You color scheme</source>
         <translation>选取一个种子色以生成 Material You 配色方案</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="219"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="200"/>
         <source>About</source>
         <translation>关于</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="253"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="224"/>
         <source>Version</source>
         <translation>版本</translation>
     </message>
