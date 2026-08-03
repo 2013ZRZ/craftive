@@ -82,21 +82,23 @@
     <name>ErrDialog</name>
     <message>
         <location filename="../src/frontend/ErrDialog.qml" line="8"/>
+        <location filename="../src/frontend/ErrDialog.qml" line="22"/>
         <source>Oops! Error %1 &quot;%2&quot; occurred.</source>
         <translation>Oops! Error %1 &quot;%2&quot; occurred.</translation>
     </message>
     <message>
-        <location filename="../src/frontend/ErrDialog.qml" line="10"/>
+        <location filename="../src/frontend/ErrDialog.qml" line="11"/>
         <source>Retry</source>
         <translation>Retry</translation>
     </message>
     <message>
-        <location filename="../src/frontend/ErrDialog.qml" line="11"/>
+        <location filename="../src/frontend/ErrDialog.qml" line="12"/>
         <source>Cancel</source>
         <translation>Cancel</translation>
     </message>
     <message>
-        <location filename="../src/frontend/ErrDialog.qml" line="16"/>
+        <location filename="../src/frontend/ErrDialog.qml" line="9"/>
+        <location filename="../src/frontend/ErrDialog.qml" line="23"/>
         <source>Detail: %1</source>
         <translation>Detail: %1</translation>
     </message>
@@ -289,42 +291,42 @@
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="21"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="22"/>
         <source>Settings</source>
         <translation>Settings</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="32"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="33"/>
         <source>Appearance</source>
         <translation>Appearance</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="67"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="68"/>
         <source>Dark Mode</source>
         <translation>Dark Mode</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="72"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="73"/>
         <source>Use dark theme for low-light environments</source>
         <translation>Use dark theme for low-light environments</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="120"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="121"/>
         <source>Theme Color</source>
         <translation>Theme Color</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="125"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="126"/>
         <source>Select a seed color to generate the Material You color scheme</source>
         <translation>Select a seed color to generate the Material You color scheme</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="218"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="219"/>
         <source>About</source>
         <translation>About</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="252"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="253"/>
         <source>Version</source>
         <translation>Version</translation>
     </message>

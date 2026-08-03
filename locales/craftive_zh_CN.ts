@@ -82,21 +82,23 @@
     <name>ErrDialog</name>
     <message>
         <location filename="../src/frontend/ErrDialog.qml" line="8"/>
+        <location filename="../src/frontend/ErrDialog.qml" line="22"/>
         <source>Oops! Error %1 &quot;%2&quot; occurred.</source>
         <translation>哦豁！发生错误 %1 “%2”。</translation>
     </message>
     <message>
-        <location filename="../src/frontend/ErrDialog.qml" line="10"/>
+        <location filename="../src/frontend/ErrDialog.qml" line="11"/>
         <source>Retry</source>
         <translation>重试</translation>
     </message>
     <message>
-        <location filename="../src/frontend/ErrDialog.qml" line="11"/>
+        <location filename="../src/frontend/ErrDialog.qml" line="12"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="../src/frontend/ErrDialog.qml" line="16"/>
+        <location filename="../src/frontend/ErrDialog.qml" line="9"/>
+        <location filename="../src/frontend/ErrDialog.qml" line="23"/>
         <source>Detail: %1</source>
         <translation>详细信息：%1</translation>
     </message>
@@ -288,42 +290,42 @@
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="21"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="22"/>
         <source>Settings</source>
         <translation>设置</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="32"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="33"/>
         <source>Appearance</source>
         <translation>外观</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="67"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="68"/>
         <source>Dark Mode</source>
         <translation>暗色模式</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="72"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="73"/>
         <source>Use dark theme for low-light environments</source>
         <translation>在低光环境下使用较暗的主题</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="120"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="121"/>
         <source>Theme Color</source>
         <translation>主题色</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="125"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="126"/>
         <source>Select a seed color to generate the Material You color scheme</source>
         <translation>选取一个种子色以生成 Material You 配色方案</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="218"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="219"/>
         <source>About</source>
         <translation>关于</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="252"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="253"/>
         <source>Version</source>
         <translation>版本</translation>
     </message>
