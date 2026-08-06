@@ -186,6 +186,13 @@ Flickable {
                     ColorPicker {
                         Layout.fillWidth: true
                         Layout.topMargin: 8
+                        title: qsTr("Or select more precisely below:")
+                        hasAlpha: false
+                        asSeedColor: true
+                        selectedColor: StyleManager.seedColor
+                        hueText: qsTr("Hue")
+                        chromaText: qsTr("Chroma")
+                        toneText: qsTr("Tone")
                     }
                 }
             }

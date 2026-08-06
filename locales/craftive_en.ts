@@ -326,12 +326,32 @@
         <translation>Select a seed color to generate the Material You color scheme</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="200"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="189"/>
+        <source>Or select more precisely below:</source>
+        <translation>Or select more precisely below:</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/pages/Settings.qml" line="193"/>
+        <source>Hue</source>
+        <translation>Hue</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/pages/Settings.qml" line="194"/>
+        <source>Chroma</source>
+        <translation>Chroma</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/pages/Settings.qml" line="195"/>
+        <source>Tone</source>
+        <translation>Tone</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/pages/Settings.qml" line="207"/>
         <source>About</source>
         <translation>About</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="224"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="231"/>
         <source>Version</source>
         <translation>Version</translation>
     </message>

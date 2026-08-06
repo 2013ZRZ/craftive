@@ -325,12 +325,32 @@
         <translation>选取一个种子色以生成 Material You 配色方案</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="200"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="189"/>
+        <source>Or select more precisely below:</source>
+        <translation>或在下方精细调节：</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/pages/Settings.qml" line="193"/>
+        <source>Hue</source>
+        <translation>色相</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/pages/Settings.qml" line="194"/>
+        <source>Chroma</source>
+        <translation>色度</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/pages/Settings.qml" line="195"/>
+        <source>Tone</source>
+        <translation>色调</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/pages/Settings.qml" line="207"/>
         <source>About</source>
         <translation>关于</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="224"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="231"/>
         <source>Version</source>
         <translation>版本</translation>
     </message>
