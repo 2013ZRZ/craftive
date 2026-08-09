@@ -31,11 +31,14 @@ bool CoreStatus::removeKit(const QString &id) noexcept {
 bool CoreStatus::containsKit(const QString &id) const noexcept { return loadedKits.contains(id); }
 
 Kit &CoreStatus::getKit(const QString &id) const {
-    if (loadedKits.contains(id))
-        return *(loadedKits[id]);
-    else
-        throw CrtExcept(0x000B,
-                        tr("from CoreStatus::getKit(); no one's ID is %1 in all loaded kits, "
-                           "please load this kit and try again"),
-                        id);
+    try {
+        if (loadedKits.contains(id))
+            return *(loadedKits[id]);
+        else
+            throw CrtExcept(0x000B,
+                            tr("From CoreStatus::getKit(); no one's ID is %1 in all loaded kits, "
+                               "please load this kit and try again"),
+                            id);
+    }
+    CATCH_THROW(CoreStatus::getKit())
 }

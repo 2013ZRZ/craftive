@@ -1,7 +1,6 @@
 pragma Singleton
 import QtQuick
 import md3.Core
-import crt
 
 Dialog {
     id: globalErrDialog
@@ -11,10 +10,9 @@ Dialog {
     acceptText: qsTr("Retry")
     rejectText: qsTr("Cancel")
 
-    signal errorOccurred(e: CrtExcept)
-    onErrorOccurred: e => {
-        title = title.arg(e.whichStr).arg(e.what);
-        text = text.arg(e.how);
+    function show(which: string, what: string, how: string) {
+        title = title.arg(which).arg(what);
+        text = text.arg(how);
         this.open();
     }
 

@@ -1,22 +1,23 @@
+#include "../core/err.hpp"
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QQmlContext>
 #include <QTranslator>
 
+CrtExceptReceiver *globalExceptReceiver{nullptr};
+
 int main(int argc, char *argv[]) {
+    // Create application
     QGuiApplication app{argc, argv};
     QTranslator     appTranslator;
-    if (appTranslator.load(QLocale::system(), "craftive", "_", ":/i18n/")) {
-        qDebug() << QString{"Loaded translator successfully with filePath = %1"}.arg(
-            appTranslator.filePath());
+    if (appTranslator.load(QLocale::system(), "craftive", "_", ":/i18n/"))
         app.installTranslator(&appTranslator);
-    } else {
-        qWarning() << QString{"Failed to load from these files: "} + [&] -> QString {
-            QString result;
-            for (const auto &i : QLocale::system().uiLanguages(QLocale::TagSeparator::Underscore))
-                result += QString{":/i18n/craftive_%1.qm "}.arg(i);
-            return result;
-        }();
-    }
+
+    // Create exceptions receiver
+    CrtExceptReceiver receiver;
+    globalExceptReceiver = &receiver;
+
+    // Create QML engine
     QQmlApplicationEngine engine;
     QObject::connect(
         &engine,
@@ -27,6 +28,11 @@ int main(int argc, char *argv[]) {
             QCoreApplication::exit(-1);
         },
         Qt::QueuedConnection);
+
+    // Expose the exception receiver to QML
+    engine.rootContext()->setContextProperty("exceptReceiver", &receiver);
+
+    // Start!!
     engine.loadFromModule("crt", "Main");
     return app.exec();
 }

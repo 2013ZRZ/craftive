@@ -7,6 +7,7 @@
 #include <concepts>
 #include <cstdint>
 #include <nlohmann/json.hpp>
+#include <type_traits>
 
 using json = nlohmann::json;
 
@@ -30,9 +31,24 @@ public:
     json    toJson() const;
 };
 
-bool    isInvalidID(const QString &id);
-bool    isInvalidElemID(const QString &id);
-bool    isInvalidEmail(const QString &email);
+template <typename T>
+    requires std::is_nothrow_default_constructible_v<T> && std::is_move_constructible_v<T>
+struct OptionalOnStack {
+    T    value;
+    bool has;
+
+    OptionalOnStack() : has(false) {}
+    OptionalOnStack(T &&v) : value(std::forward(v)), has(true) {}
+
+    auto operator=(T &&other) noexcept -> OptionalOnStack<T> &;
+    auto operator=(OptionalOnStack<T> &&other) noexcept -> OptionalOnStack<T> &;
+         operator bool() const noexcept;
+    void reset() noexcept;
+};
+
+void    checkID(const QString &id);
+void    checkElemID(const QString &id);
+void    checkEmail(const QString &email);
 QString randomID(uint8_t len = 50);
 
 namespace IDSeparatorDetail {

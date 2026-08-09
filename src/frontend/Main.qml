@@ -14,6 +14,13 @@ Window {
     title: "Craftive"
     color: Theme.color.background
 
+    Connections {
+        target: exceptReceiver
+        function onExceptionOccurred(which, what, how) {
+            ErrDialog.show(which, what, how);
+        }
+    }
+
     Item {
         id: root
         width: parent.width

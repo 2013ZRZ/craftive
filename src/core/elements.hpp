@@ -1,9 +1,6 @@
 #pragma once
 
 #include "crtutils.hpp"
-#include <QHash>
-#include <QSharedPointer>
-#include <variant>
 
 struct rgb {
     Q_DECLARE_TR_FUNCTIONS(rgb)
@@ -22,7 +19,7 @@ public:
 
 /** Unicode Colored Character
  *
- *  Unicode character with background or foreground color.
+ *  Unicode character with background and / or foreground color.
  *
  *  U'\t' means a null character.
  *
@@ -91,7 +88,7 @@ public:
     Block() = default;
     explicit Block(const Ucc &_blk) noexcept;
     Block(const Ucc &_blk, const QString &_id, const QString &_name);
-    explicit Block(const isJson auto &j);
+    explicit Block(const isJson auto &j) { fromJson(j); }
 
     const Ucc &getBlk() const noexcept;
     void       setBlk(const Ucc &_blk) noexcept;
@@ -110,10 +107,10 @@ private:
 
 public:
     LBlock() = default;
-    LBlock(const qsizetype w, const qsizetype h);
-    LBlock(const qsizetype w, const qsizetype h, const QString &_id, const QString &_name);
+    LBlock(const qsizetype _w, const qsizetype _h);
+    LBlock(const qsizetype _w, const qsizetype _h, const QString &_id, const QString &_name);
     LBlock(const QList<QList<Ucc>> &_lblk, const QString &_id, const QString &_name);
-    explicit LBlock(const isJson auto &j);
+    explicit LBlock(const isJson auto &j) { fromJson(j); }
 
     auto       getLblk() const noexcept -> const QList<QList<Ucc>> &;
     void       setLblk(const QList<QList<Ucc>> &_lblk);
@@ -128,77 +125,3 @@ public:
 
 template <class T>
 concept isElem = std::derived_from<std::decay_t<T>, BasicElement>;
-
-class BasicProduct : public BasicCrtClass {
-    Q_DECLARE_TR_FUNCTIONS(BasicProduct)
-
-protected:
-    QString author;
-    QString des{tr("Empty")};
-    Version ver;
-
-public:
-    BasicProduct() = default;
-    explicit BasicProduct(const QString &path);
-
-    const QString &getAuthor() const noexcept;
-    void           setAuthor(const QString &_author);
-    const QString &getDes() const noexcept;
-    void           setDes(const QString &_des) noexcept;
-    Version        getVer() const noexcept { return ver; }
-    void           setVer(Version _ver) noexcept { ver = _ver; }
-    void           fromFile(const QString &path);
-    void           toFile(const QString &path, const uint8_t indent = 4);
-}; // class BasicProduct
-
-// Where stores data of blocks and large-blocks.
-class Kit : public BasicProduct {
-    Q_DECLARE_TR_FUNCTIONS(Kit)
-    friend struct CoreStatus;
-
-private:
-    QHash<QString, QSharedPointer<Block>>  blks;
-    QHash<QString, QSharedPointer<LBlock>> lblks;
-
-public:
-    Kit() = default;
-
-    auto getBlks() const noexcept -> const QHash<QString, QSharedPointer<Block>> &;
-    void clearBlks() noexcept;
-    auto getLblks() const noexcept -> const QHash<QString, QSharedPointer<LBlock>> &;
-    void clearLblks() noexcept;
-    void operator+=(QSharedPointer<Block> blk) noexcept;
-    void operator+=(QSharedPointer<LBlock> lblk) noexcept;
-    void operator-=(const QString &_id);
-    bool contains(const QString &_id) noexcept;
-    auto operator[](const QString &_id)
-        -> std::variant<QSharedPointer<Block>, QSharedPointer<LBlock>>;
-    void fromJson(const json &j) override;
-    json toJson() const override;
-}; // class Kit
-
-using MapDataType = QList<QList<std::variant<QSharedPointer<Block>, QSharedPointer<LBlock>>>>;
-
-class Map : public BasicProduct {
-    Q_DECLARE_TR_FUNCTIONS(Map)
-
-private:
-    MapDataType data; // nullptr: null(0) / filled by a large-block(1)
-
-public:
-    Map() = default;
-
-    const MapDataType     &getData() const noexcept;
-    void                   setData(const MapDataType &_data) noexcept;
-    const Ucc              operator[](const qsizetype r, const qsizetype c);
-    template <int N> auto  get(const qsizetype r, const qsizetype c);
-    template <class T>
-    void set(const qsizetype r, const qsizetype c, const QSharedPointer<T> &element)
-        requires isElem<T>
-    {
-        data[r][c] = element;
-        // Note: (r, c) will be covered whether there's already a ucc or not
-    }
-    void fromJson(const json &j) override;
-    json toJson() const override;
-}; // class Map
