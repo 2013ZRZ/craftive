@@ -182,7 +182,7 @@ void Map::setData(const MapDataType &_data) noexcept { data = _data; }
 
 const Ucc Map::operator[](const qsizetype r, const qsizetype c) {
     try {
-        if (r > data.size() || c > (data.empty() ? 0 : data[r].size()))
+        if (r >= data.size() || c >= (data.empty() ? 0 : data[r].size()))
             throw CrtExcept(
                 0x000E,
                 tr("From Map::operator[]; the required position is (%1,%2), but it's out of range"),
@@ -212,7 +212,7 @@ const Ucc Map::operator[](const qsizetype r, const qsizetype c) {
 
 template <> auto Map::get<0>(const qsizetype r, const qsizetype c) {
     try {
-        if (r > data.size() || c > data.empty() ? 0 : data[r].size())
+        if (r >= data.size() || c >= (data.empty() ? 0 : data[r].size()))
             throw CrtExcept(
                 0x000E,
                 Map::tr(
@@ -228,7 +228,7 @@ template <> auto Map::get<0>(const qsizetype r, const qsizetype c) {
 
 template <> auto Map::get<1>(const qsizetype r, const qsizetype c) {
     try {
-        if (r > data.size() || c > data.empty() ? 0 : data[r].size())
+        if (r >= data.size() || c >= (data.empty() ? 0 : data[r].size()))
             throw CrtExcept(
                 0x000E,
                 Map::tr(

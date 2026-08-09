@@ -22,7 +22,7 @@ bool Version::operator==(const Version &other) const noexcept {
 
 QString Version::operator()() const {
     try {
-        return QString{"%1.%2.%3"}.arg(minor).arg(major).arg(patch);
+        return QString{"%1.%2.%3"}.arg(major).arg(minor).arg(patch);
     }
     CATCH_THROW(Version::operator())
 }
