@@ -24,17 +24,17 @@
 <context>
     <name>Block</name>
     <message>
-        <location filename="../src/core/elements.cpp" line="146"/>
+        <location filename="../src/core/elements.cpp" line="144"/>
         <source>From Block::fromJson(); the block&apos;s JSON isn&apos;t an object</source>
         <translation>来自 Block::fromJson()；此方块的 JSON 不是对象</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="153"/>
+        <location filename="../src/core/elements.cpp" line="151"/>
         <source>From Block::fromJson(); couldn&apos;t find &quot;id&quot; in the block&apos;s JSON</source>
         <translation>来自 Block::fromJson()；在此方块的 JSON 中找不到“id”</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="163"/>
+        <location filename="../src/core/elements.cpp" line="161"/>
         <source>From Block::fromJson(); couldn&apos;t find &quot;blk&quot; in the JSON of the block %1 (ID: %2)</source>
         <translation>来自 Block::fromJson；在方块 %1 的 JSON 中找不到“blk”</translation>
     </message>
@@ -108,54 +108,54 @@
 <context>
     <name>LBlock</name>
     <message>
-        <location filename="../src/core/elements.cpp" line="219"/>
+        <location filename="../src/core/elements.cpp" line="215"/>
         <source>From LBlock::getPos(); the required position is (%1,%2), but it&apos;s out of range</source>
         <translation>来自 LBlock::getPos()；所需位置为 (%1,%2)，但超出范围</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="232"/>
+        <location filename="../src/core/elements.cpp" line="228"/>
         <source>From LBlock::setPos(); the required position is (%1,%2), but it&apos;s out of range</source>
         <translation>来自 LBlock::setPos()；所需位置为 (%1,%2)，但超出范围</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/core/elements.cpp" line="250"/>
+        <location filename="../src/core/elements.cpp" line="246"/>
         <source>From LBlock::getW(); the required row number is %1, but there&apos;s only %n row(s) in this large-block</source>
         <translation>
             <numerusform>来自 LBlock::getW()；所需行号为 %1，但该大方块仅有 %n 行</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="267"/>
+        <location filename="../src/core/elements.cpp" line="263"/>
         <source>From LBlock::setW()</source>
         <translation>来自 LBlock::setW()</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="276"/>
+        <location filename="../src/core/elements.cpp" line="272"/>
         <source>From LBlock::fromJson(); the large-block&apos;s JSON isn&apos;t an object</source>
         <translation>来自 LBlock::fromJson()；此大方块的 JSON 不是对象</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="284"/>
+        <location filename="../src/core/elements.cpp" line="280"/>
         <source>From LBlock::fromJson(); couldn&apos;t find &quot;id&quot; in the large-block&apos;s JSON</source>
         <translation>来自 LBlock::fromJson()；在此大方块的 JSON 中找不到“id”</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="294"/>
+        <location filename="../src/core/elements.cpp" line="290"/>
         <source>From LBlock::fromJson(); the &quot;lblk&quot; isn&apos;t an array in the JSON of the large-block %1 (ID: %2)</source>
         <translation>来自 LBlock::fromJson()；在大方块 %1（ID：%2）的 JSON 中“lblk”不是数组</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="303"/>
+        <location filename="../src/core/elements.cpp" line="299"/>
         <source>From LBlock::fromJson(); Row %1 isn&apos;t an array in the JSON of the large-block %2 (ID: %3)</source>
         <translation>来自 LBlock::fromJson()；在大方块 %2（ID：%3）的 JSON 中第 %1 行不是数组</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="315"/>
+        <location filename="../src/core/elements.cpp" line="311"/>
         <source>From LBlock::fromJson(); couldn&apos;t find &quot;lblk&quot; in the JSON of the large-block %1 (ID: %2)</source>
         <translation>来自 LBlock::fromJson()；在此大方块的 JSON 中找不到“lblk”</translation>
     </message>
     <message>
-        <location filename="../src/core/elements.cpp" line="324"/>
+        <location filename="../src/core/elements.cpp" line="320"/>
         <source>From LBlock::fromJson(); the &quot;w&quot; isn&apos;t an array in the JSON of the large-block %1 (ID: %2)</source>
         <translation>来自 LBlock::fromJson()；在大方块 %1（ID：%2）的 JSON 中“w”不是数组</translation>
     </message>
@@ -163,32 +163,32 @@
 <context>
     <name>Main</name>
     <message>
-        <location filename="../src/frontend/Main.qml" line="43"/>
+        <location filename="../src/frontend/Main.qml" line="45"/>
         <source>Home</source>
         <translation>主页</translation>
     </message>
     <message>
-        <location filename="../src/frontend/Main.qml" line="47"/>
+        <location filename="../src/frontend/Main.qml" line="49"/>
         <source>Store</source>
         <translation>商店</translation>
     </message>
     <message>
-        <location filename="../src/frontend/Main.qml" line="51"/>
+        <location filename="../src/frontend/Main.qml" line="53"/>
         <source>Play</source>
         <translation>开局</translation>
     </message>
     <message>
-        <location filename="../src/frontend/Main.qml" line="55"/>
+        <location filename="../src/frontend/Main.qml" line="57"/>
         <source>Craftboard</source>
         <translation>工作台</translation>
     </message>
     <message>
-        <location filename="../src/frontend/Main.qml" line="59"/>
+        <location filename="../src/frontend/Main.qml" line="61"/>
         <source>Myself</source>
         <translation>我</translation>
     </message>
     <message>
-        <location filename="../src/frontend/Main.qml" line="63"/>
+        <location filename="../src/frontend/Main.qml" line="65"/>
         <source>Settings</source>
         <translation>设置</translation>
     </message>

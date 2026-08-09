@@ -155,7 +155,7 @@ Flickable {
                                         text: "check"
                                         font.family: Theme.iconFont.name
                                         font.pixelSize: 24
-                                        color: "#ffffff" // Always white on color blobs usually
+                                        color: (0.299 * StyleManager.seedColor.r + 0.587 * StyleManager.seedColor.g + 0.114 * StyleManager.seedColor.b) > 0.5 ? "black" : "white"
                                         visible: Qt.colorEqual(StyleManager.seedColor, modelData)
                                         opacity: visible ? 1 : 0
                                         scale: visible ? 1 : 0.5
