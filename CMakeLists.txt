@@ -186,7 +186,7 @@ qt_add_qml_module(craftive
         src/core/err.hpp src/core/err.cpp
 )
 
-qt_add_binary_resources(craftiveRes res.qrc)
+qt_add_binary_resources(craftiveRes src/res.qrc)
 add_dependencies(craftive craftiveRes)
 
 target_include_directories(craftive
