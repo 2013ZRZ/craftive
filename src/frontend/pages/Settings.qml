@@ -233,7 +233,7 @@ Flickable {
                             color: Theme.color.onSurfaceColor
                         }
                         Text {
-                            text: "0.1.0 Dev"
+                            text: "Dev"
                             font: Typofont.bodySmall
                             color: Theme.color.onSurfaceVariantColor
                         }
@@ -248,5 +248,11 @@ Flickable {
         Item {
             Layout.fillHeight: true
         }
+    }
+
+    ScrollBar {
+        anchors.right: parent.right
+        target: settingsPage
+        orientation: Qt.Vertical
     }
 }
