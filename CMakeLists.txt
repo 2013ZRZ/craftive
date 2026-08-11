@@ -15,6 +15,16 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 add_link_options(-fuse-ld=lld-22)
 
+# ── ccache ────────────────────────────────────────────────────────────────
+find_program(CCACHE_PROGRAM ccache)
+if(CCACHE_PROGRAM)
+    set(CMAKE_CXX_COMPILER_LAUNCHER "${CCACHE_PROGRAM}" CACHE FILEPATH
+        "Ccache launcher for C++ compilation")
+    message(STATUS "Ccache enabled: ${CCACHE_PROGRAM}")
+else()
+    message(WARNING "Ccache not found; falling back to plain compilation")
+endif()
+
 if(WIN32)
     # Reduce generated object/dep file path length for MinGW on deep build dirs.
     set(CMAKE_OBJECT_PATH_MAX 128)
@@ -135,6 +145,8 @@ qt_standard_project_setup()
 qt_policy(SET QTP0001 NEW)
 qt_policy(SET QTP0004 NEW)
 
+set(CMAKE_AUTORCC ON)
+
 set(MD3_SOURCE_DIR "${CMAKE_CURRENT_LIST_DIR}/include/md3-qml")
 
 if(NOT EXISTS "${MD3_SOURCE_DIR}/src/Core/CMakeLists.txt")
@@ -186,8 +198,7 @@ qt_add_qml_module(craftive
         src/core/err.hpp src/core/err.cpp
 )
 
-qt_add_binary_resources(craftiveRes src/res.qrc)
-add_dependencies(craftive craftiveRes)
+target_sources(craftive PRIVATE src/res.qrc)
 
 target_include_directories(craftive
     PRIVATE
