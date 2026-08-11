@@ -2,7 +2,7 @@
     <img alt="Craftive Logo" src="assets/images/logo.svg" width="100" height="100">
     <h1>Craftive</h1>
 
-![Craft your world with your creativity](https://readme-typing-svg.demolab.com?font=JetBrains+Mono&duration=2000&color=B6C7EA&center=true&multiline=false&repeat=false&width=400&height=60&lines=Creative+crafts)
+![Creative craft](https://readme-typing-svg.demolab.com?font=JetBrains+Mono&duration=2000&color=B6C7EA&center=true&multiline=false&repeat=false&width=400&height=60&lines=Creative+craft)
 
 [![License](https://img.shields.io/badge/License-BSD_3--Clause-97D8C2?style=for-the-badge)](./LICENSE)
 ![GitHub Repo Stars](https://img.shields.io/github/stars/2013ZRZ/craftive?logo=github&style=for-the-badge&color=FBE464)
