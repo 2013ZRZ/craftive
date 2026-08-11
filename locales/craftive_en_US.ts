@@ -73,6 +73,26 @@
     </message>
 </context>
 <context>
+    <name>Home</name>
+    <message>
+        <location filename="../src/frontend/pages/Home.qml" line="21"/>
+        <source>Home</source>
+        <translation>Home</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/pages/Home.qml" line="28"/>
+        <source>Explore</source>
+        <translation>Explore</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/pages/Home.qml" line="60"/>
+        <location filename="../src/frontend/pages/Home.qml" line="64"/>
+        <location filename="../src/frontend/pages/Home.qml" line="68"/>
+        <source>Welcome to Craftive!</source>
+        <translation>Welcome to Craftive!</translation>
+    </message>
+</context>
+<context>
     <name>Kit</name>
     <message>
         <location filename="../src/core/products.cpp" line="86"/>

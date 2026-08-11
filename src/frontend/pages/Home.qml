@@ -24,74 +24,87 @@ Flickable {
         }
 
         // Explore
-        Carousel {
-            id: exploreCarousel
-            type: "hero"
-            itemWidth: 320
-            itemHeight: 180
-
-            model: [
-                {
-                    image: ":/images/intro.png",
-                    title: qsTr("Welcome to Craftive!") + "(0)"
-                },
-                {
-                    image: ":/images/intro.png",
-                    title: qsTr("Welcome to Craftive!") + "(1)"
-                },
-                {
-                    image: ":/images/intro.png",
-                    title: qsTr("Welcome to Craftive!") + "(2)"
-                }
-            ]
-
-            delegate: Item {
-                width: parent.width
-                height: parent.height
-                anchors.top: parent.top
-                anchors.horizontalCenter: parent.horizontalCenter
-                Image {
-                    source: model.image
-                    anchors.fill: parent
-                    fillMode: PreserveAspectCrop
-                }
-            }
+        Text {
+            text: qsTr("Explore")
+            font: Typofont.titleMedium
+            color: Theme.color.primary
         }
 
-        Row {
-            anchors.width: parent.width
-            Text {
-                id: cardTitle
-                text: exploreCarousel.model.title
-                anchors.leftMargin: parent.left
-                anchors.verticalCenter: parent.verticalCenter
-            }
-            Button {
-                id: exploreCarouselPrev
-                type: "filledTonal"
-                icon: "chevron_left"
-                text: qsTr("Previous")
-                anchors.rightMargin: exploreCarouselNext.left
-                anchors.verticalCenter: parent.verticalCenter
-                onClicked: {
-                    if (exploreCarousel.index == 0) // first
-                        exploreCarousel.index = exploreCarousel.count - 1;
-                    else
-                        exploreCarousel.index--;
+        Rectangle {
+            id: exploreCard
+            Layout.fillWidth: true
+            height: explore.implicitHeight
+            radius: 24
+            color: Theme.color.surfaceVariant
+            Layout.alignment: Qt.AlignVCenter
+
+            ColumnLayout {
+                id: explore
+                width: parent.width
+
+                Item {
+                    Layout.fillWidth: true
+                    height: exploreCard.radius
                 }
-            }
-            Button {
-                id: exploreCarouselNext
-                type: "filledTonal"
-                icon: "chevron_right"
-                text: qsTr("Next")
-                anchors.rightMargin: parent.right
-                anchors.verticalCenter: parent.verticalCenter
-                onClicked: {
-                    if (exploreCarousel.index == exploreCarousel.count - 1) // last
-                        exploreCarousel.index = 0;
-                    else
-                        exploreCarousel.index++;
+
+                Carousel {
+                    id: exploreCarousel
+                    type: "centered"
+                    itemWidth: parent.width * 0.9
+                    itemHeight: itemWidth * 0.5
+                    radius: 24
+
+                    model: [
+                        {
+                            image: "qrc:/images/intro.png",
+                            title: qsTr("Welcome to Craftive!") + " (0)"
+                        },
+                        {
+                            image: "qrc:/images/intro.png",
+                            title: qsTr("Welcome to Craftive!") + " (1)"
+                        },
+                        {
+                            image: "qrc:/images/intro.png",
+                            title: qsTr("Welcome to Craftive!") + " (2)"
+                        }
+                    ]
+
+                    delegate: Image {
+                        property var modelData
+                        anchors.fill: parent
+                        source: modelData.image
+                        fillMode: Image.PreserveAspectCrop
+                        horizontalAlignment: Image.AlignHCenter
+                        verticalAlignment: Image.AlignVCenter
+                    } // TODO rounded corner
+                }
+
+                RowLayout {
+                    Layout.fillWidth: true
+                    // TODO left margin
+                    Text {
+                        id: cardTitle
+                        text: exploreCarousel.model[exploreCarousel.currentIndex].title
+                        font: Typofont.titleMedium
+                        Layout.alignment: Qt.AlignVCenter
+                    }
+                    Item {
+                        Layout.fillWidth: true
+                    }
+                    IconButton {
+                        id: exploreCarouselPrev
+                        icon: "chevron_left"
+                        enabled: exploreCarousel.currentIndex !== 0 // first
+                        Layout.alignment: Qt.AlignVCenter
+                        onClicked: exploreCarousel.currentIndex--
+                    }
+                    IconButton {
+                        id: exploreCarouselNext
+                        icon: "chevron_right"
+                        enabled: exploreCarousel.currentIndex !== exploreCarousel.count - 1 // last
+                        Layout.alignment: Qt.AlignVCenter
+                        onClicked: exploreCarousel.currentIndex++
+                    }
                 }
             }
         }
