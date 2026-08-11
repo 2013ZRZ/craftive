@@ -2,7 +2,7 @@
     <img alt="Craftive Logo" src="assets/images/logo.svg" width="100" height="100">
     <h1>Craftive</h1>
 
-![Craft your world with your creativity](https://readme-typing-svg.demolab.com?font=JetBrains+Mono&duration=2000&color=B6C7EA&center=true&multiline=true&repeat=false&width=400&height=60&lines=Craft+your+world;with+your+creativity)
+![Craft your world with your creativity](https://readme-typing-svg.demolab.com?font=JetBrains+Mono&duration=2000&color=B6C7EA&center=true&multiline=false&repeat=false&width=400&height=60&lines=Creative+crafts)
 
 [![License](https://img.shields.io/badge/License-BSD_3--Clause-97D8C2?style=for-the-badge)](./LICENSE)
 ![GitHub Repo Stars](https://img.shields.io/github/stars/2013ZRZ/craftive?logo=github&style=for-the-badge&color=FBE464)
@@ -18,6 +18,7 @@
 0. Prerequisites:
    - The latest version of CMake, required 3.16+;
    - The latest version of [Qt](https://qt.io/);
+   - Ninja;
    - [Nlohmann JSON](https://json.nlohmann.me/);
    - A toolchain that supports C++26.
 > [!NOTE]
@@ -29,16 +30,16 @@
    ```
 2. Build:
    ```
-   cmake -S . -B build
-   cmake --build build -j$(nproc)
+   cmake -S . -B build -G Ninja
+   ninja -C build
    ```
 > [!WARNING]
 > `CMakeLists.txt` uses `lld-22` as the linker as default. You may need to specify your toolchain, both in `CMakeLists.txt` and your build command. Otherwise, you may receive unexcepted errors.
 > 
 > For example, if you use stable LLVM toolchain, you should replace `-fuse-ld=lld-22` with `-fuse-ld=lld` in `CMakeLists.txt` and then run:
 > ```
-> cmake -S . -B build -DCMAKE_CXX_COMPILER=/bin/clang++ -DCMAKE_AR=/bin/llvm-ar -DCMAKE_RANLIB=/bin/llvm-ranlib
-> cmake --build build -j$(nproc)
+> cmake -S . -B build -G Ninja -DCMAKE_CXX_COMPILER=/bin/clang++ -DCMAKE_AR=/bin/llvm-ar -DCMAKE_RANLIB=/bin/llvm-ranlib
+> ninja -C build
 > ```
 
 3. Run:
@@ -56,16 +57,17 @@ craftive
 ├─ .git/
 ├─ .gitattributes
 ├─ .gitignore
-├─ assets/images/logo.svg
+├─ assets/images/
 ├─ CMakeLists.txt           # CMake
 ├─ include/md3-qml/         # Material Design 3 for Qt Quick (QML)
 ├─ LICENSE                  # BSD 3-Clause License
 ├─ locales/                 # Including TS files. I'm going to put it onto Weblate.
 ├─ README.md
-├─ res.qrc                  # Qt Resources File for Craftive
 └─ src/
     ├─ core                 # I.e. Backend
-    └─ frontend
+    ├─ frontend
+    ├─ res/images
+    └─ res.qrc                  # Qt Resources File for Craftive
 ```
 
 ## 📃 Licenses
