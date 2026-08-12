@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
+import QtQuick.Effects
 import md3.Core
 import crt
 
@@ -33,8 +34,9 @@ Flickable {
         Rectangle {
             id: exploreCard
             Layout.fillWidth: true
-            height: explore.implicitHeight
-            radius: 24
+            height: explore.height
+            Layout.preferredHeight: explore.implicitHeight
+            radius: 16
             color: Theme.color.surfaceVariant
             Layout.alignment: Qt.AlignVCenter
 
@@ -52,7 +54,6 @@ Flickable {
                     type: "centered"
                     itemWidth: Math.min(parent.width * 0.9, 800)
                     itemHeight: itemWidth * 0.5
-                    radius: 24
 
                     model: [
                         {
@@ -69,37 +70,73 @@ Flickable {
                         }
                     ]
 
-                    delegate: Image {
+                    delegate: Item {
                         property var modelData
                         anchors.fill: parent
-                        source: modelData.image
-                        fillMode: Image.PreserveAspectCrop
-                        horizontalAlignment: Image.AlignHCenter
-                        verticalAlignment: Image.AlignVCenter
-                    } // TODO rounded corner
+
+                        Image {
+                            anchors.fill: parent
+                            source: modelData.image
+                            fillMode: Image.PreserveAspectCrop
+                            horizontalAlignment: Image.AlignHCenter
+                            verticalAlignment: Image.AlignVCenter
+
+                            layer.enabled: true
+                            layer.effect: MultiEffect {
+                                maskEnabled: true
+                                maskSource: carouselMask
+                                autoPaddingEnabled: false
+                                antialiasing: true
+                                maskThresholdMin: 0.5
+                                maskSpreadAtMin: 1.0
+                            }
+                        }
+
+                        Rectangle {
+                            id: carouselMask
+                            anchors.fill: parent
+                            radius: 16
+                            color: "black"
+                            visible: false
+                            layer.enabled: true
+                        }
+
+                        LoadingIndicator {
+                            anchors.centerIn: parent
+                            size: 48
+                            running: sourceImage.status === Image.Loading
+                            visible: sourceImage.status === Image.Loading
+                            withContainer: true
+                            z: 99
+                        }
+                    }
                 }
 
                 RowLayout {
                     Layout.fillWidth: true
-                    Item {
-                        width: 30 // left margin
-                    }
-                    Text {
-                        id: cardTitle
-                        text: (exploreCarousel.model[exploreCarousel.currentIndex].title.length > 20) ? (exploreCarousel.model[exploreCarousel.currentIndex].title.substring(0, 17) + "...") : exploreCarousel.model[exploreCarousel.currentIndex].title // To ensure the length is <= 20
-                        font: Typofont.titleMedium
-                        color: Theme.color.onSurfaceVariantColor
-                        Layout.alignment: Qt.AlignVCenter
-                    }
-                    Item {
-                        Layout.fillWidth: true
-                    }
                     IconButton {
                         id: exploreCarouselPrev
                         icon: "chevron_left"
                         enabled: exploreCarousel.currentIndex !== 0 // first
                         Layout.alignment: Qt.AlignVCenter
                         onClicked: exploreCarousel.currentIndex--
+                    }
+                    Item {
+                        Layout.fillWidth: true
+                    }
+                    Text {
+                        id: cardTitle
+                        text: {
+                            var result = exploreCarousel.model[exploreCarousel.currentIndex].title;
+                            var maxsize = Math.floor((exploreCard.width - 80) * 0.75 / cardTitle.font.pixelSize);
+                            return (result.length > maxsize) ? (result.substring(0, maxsize) + "...") : result;
+                        }
+                        font: Typofont.titleMedium
+                        color: Theme.color.onSurfaceVariantColor
+                        Layout.alignment: Qt.AlignCenter
+                    }
+                    Item {
+                        Layout.fillWidth: true
                     }
                     IconButton {
                         id: exploreCarouselNext
