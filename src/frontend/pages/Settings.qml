@@ -12,7 +12,7 @@ Flickable {
 
     ColumnLayout {
         id: content
-        width: Math.min(parent.width - 48, 800)
+        width: parent.width - 48
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
         anchors.topMargin: 32

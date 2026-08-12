@@ -11,7 +11,7 @@ Flickable {
 
     ColumnLayout {
         id: content
-        width: Math.min(parent.width - 48, 800)
+        width: parent.width - 48
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
         anchors.topMargin: 32
@@ -50,7 +50,7 @@ Flickable {
                 Carousel {
                     id: exploreCarousel
                     type: "centered"
-                    itemWidth: parent.width * 0.9
+                    itemWidth: Math.min(parent.width * 0.9, 800)
                     itemHeight: itemWidth * 0.5
                     radius: 24
 
@@ -81,11 +81,14 @@ Flickable {
 
                 RowLayout {
                     Layout.fillWidth: true
-                    // TODO left margin
+                    Item {
+                        width: 30 // left margin
+                    }
                     Text {
                         id: cardTitle
-                        text: exploreCarousel.model[exploreCarousel.currentIndex].title
+                        text: (exploreCarousel.model[exploreCarousel.currentIndex].title.length > 20) ? (exploreCarousel.model[exploreCarousel.currentIndex].title.substring(0, 17) + "...") : exploreCarousel.model[exploreCarousel.currentIndex].title // To ensure the length is <= 20
                         font: Typofont.titleMedium
+                        color: Theme.color.onSurfaceVariantColor
                         Layout.alignment: Qt.AlignVCenter
                     }
                     Item {
