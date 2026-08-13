@@ -75,6 +75,7 @@ Flickable {
                         anchors.fill: parent
 
                         Image {
+                            id: sourceImage
                             anchors.fill: parent
                             source: modelData.image
                             fillMode: Image.PreserveAspectCrop

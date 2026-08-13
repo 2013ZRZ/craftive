@@ -1,4 +1,5 @@
-#include "../core/err.hpp"
+#include "err.hpp"
+#include "settingshelper.hpp"
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
@@ -10,7 +11,11 @@ int main(int argc, char *argv[]) {
     // Create application
     QGuiApplication app{argc, argv};
     QTranslator     appTranslator;
-    if (appTranslator.load(QLocale::system(), "craftive", "_", ":/i18n/"))
+    if (appTranslator.load(
+            SettingsHelper{}.value("appearance/locale", QLocale::system()).toLocale(),
+            "craftive",
+            "_",
+            ":/i18n/"))
         app.installTranslator(&appTranslator);
 
     // Create exceptions receiver

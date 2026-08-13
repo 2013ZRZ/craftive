@@ -75,19 +75,19 @@
 <context>
     <name>Home</name>
     <message>
-        <location filename="../src/frontend/pages/Home.qml" line="21"/>
+        <location filename="../src/frontend/pages/Home.qml" line="22"/>
         <source>Home</source>
         <translation>主页</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Home.qml" line="28"/>
+        <location filename="../src/frontend/pages/Home.qml" line="29"/>
         <source>Explore</source>
         <translation>探索</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Home.qml" line="60"/>
-        <location filename="../src/frontend/pages/Home.qml" line="64"/>
-        <location filename="../src/frontend/pages/Home.qml" line="68"/>
+        <location filename="../src/frontend/pages/Home.qml" line="61"/>
+        <location filename="../src/frontend/pages/Home.qml" line="65"/>
+        <location filename="../src/frontend/pages/Home.qml" line="69"/>
         <source>Welcome to Craftive!</source>
         <translation>欢迎来到 Craftive！</translation>
     </message>
@@ -295,56 +295,93 @@
     </message>
     <message>
         <location filename="../src/frontend/pages/Settings.qml" line="58"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="90"/>
+        <source>Language</source>
+        <translation>语言</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/pages/Settings.qml" line="64"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="108"/>
+        <source>Follow System</source>
+        <translation>跟随系统</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/pages/Settings.qml" line="91"/>
+        <source>OK</source>
+        <translation>确定</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/pages/Settings.qml" line="142"/>
+        <source>Restart</source>
+        <translation>重启</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/pages/Settings.qml" line="143"/>
+        <source>You need to restart Craftive to apply the new language. Do you want to restart now?</source>
+        <translation>您需要重启 Craftive 以应用新的语言。您想要现在重启吗？</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/pages/Settings.qml" line="144"/>
+        <source>Yes, restart now</source>
+        <translation>是，现在重启</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/pages/Settings.qml" line="145"/>
+        <source>No, restart later</source>
+        <translation>不，稍后重启</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/pages/Settings.qml" line="169"/>
         <source>Theme</source>
         <translation>主题</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="63"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="174"/>
         <source>Using dark theme now</source>
         <translation>正在使用暗色主题</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="63"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="174"/>
         <source>Using light theme now</source>
         <translation>正在使用亮色主题</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="102"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="213"/>
         <source>Theme Color</source>
         <translation>主题色</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="107"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="218"/>
         <source>Select a seed color to generate the Material You color scheme</source>
         <translation>选取一个种子色以生成 Material You 配色方案</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="189"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="300"/>
         <source>Or select more precisely below:</source>
         <translation>或在下方精细调节：</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="193"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="304"/>
         <source>Hue</source>
         <translation>色相</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="194"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="305"/>
         <source>Chroma</source>
         <translation>色度</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="195"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="306"/>
         <source>Tone</source>
         <translation>色调</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="207"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="318"/>
         <source>About</source>
         <translation>关于</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="231"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="342"/>
         <source>Version</source>
         <translation>版本</translation>
     </message>

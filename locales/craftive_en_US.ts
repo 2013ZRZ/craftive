@@ -75,19 +75,19 @@
 <context>
     <name>Home</name>
     <message>
-        <location filename="../src/frontend/pages/Home.qml" line="21"/>
+        <location filename="../src/frontend/pages/Home.qml" line="22"/>
         <source>Home</source>
         <translation>Home</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Home.qml" line="28"/>
+        <location filename="../src/frontend/pages/Home.qml" line="29"/>
         <source>Explore</source>
         <translation>Explore</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Home.qml" line="60"/>
-        <location filename="../src/frontend/pages/Home.qml" line="64"/>
-        <location filename="../src/frontend/pages/Home.qml" line="68"/>
+        <location filename="../src/frontend/pages/Home.qml" line="61"/>
+        <location filename="../src/frontend/pages/Home.qml" line="65"/>
+        <location filename="../src/frontend/pages/Home.qml" line="69"/>
         <source>Welcome to Craftive!</source>
         <translation>Welcome to Craftive!</translation>
     </message>
@@ -296,56 +296,93 @@
     </message>
     <message>
         <location filename="../src/frontend/pages/Settings.qml" line="58"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="90"/>
+        <source>Language</source>
+        <translation>Language</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/pages/Settings.qml" line="64"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="108"/>
+        <source>Follow System</source>
+        <translation>Follow System</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/pages/Settings.qml" line="91"/>
+        <source>OK</source>
+        <translation>OK</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/pages/Settings.qml" line="142"/>
+        <source>Restart</source>
+        <translation>Restart</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/pages/Settings.qml" line="143"/>
+        <source>You need to restart Craftive to apply the new language. Do you want to restart now?</source>
+        <translation>You need to restart Craftive to apply the new language. Do you want to restart now?</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/pages/Settings.qml" line="144"/>
+        <source>Yes, restart now</source>
+        <translation>Yes, restart now</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/pages/Settings.qml" line="145"/>
+        <source>No, restart later</source>
+        <translation>No, restart later</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/pages/Settings.qml" line="169"/>
         <source>Theme</source>
         <translation>Theme</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="63"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="174"/>
         <source>Using dark theme now</source>
         <translation>Using dark theme now</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="63"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="174"/>
         <source>Using light theme now</source>
         <translation>Using light theme now</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="102"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="213"/>
         <source>Theme Color</source>
         <translation>Theme Color</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="107"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="218"/>
         <source>Select a seed color to generate the Material You color scheme</source>
         <translation>Select a seed color to generate the Material You color scheme</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="189"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="300"/>
         <source>Or select more precisely below:</source>
         <translation>Or select more precisely below:</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="193"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="304"/>
         <source>Hue</source>
         <translation>Hue</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="194"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="305"/>
         <source>Chroma</source>
         <translation>Chroma</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="195"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="306"/>
         <source>Tone</source>
         <translation>Tone</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="207"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="318"/>
         <source>About</source>
         <translation>About</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="231"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="342"/>
         <source>Version</source>
         <translation>Version</translation>
     </message>

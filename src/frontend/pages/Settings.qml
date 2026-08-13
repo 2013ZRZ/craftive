@@ -35,6 +35,114 @@ Flickable {
                 color: Theme.color.primary
             }
 
+            // Language
+            Rectangle {
+                Layout.fillWidth: true
+                height: 72
+                color: Theme.color.surfaceContainer
+                radius: 12
+
+                RowLayout {
+                    anchors.fill: parent
+                    anchors.margins: 16
+                    spacing: 16
+
+                    IconCircle {
+                        icon: "translate"
+                    }
+
+                    ColumnLayout {
+                        Layout.fillWidth: true
+                        spacing: 2
+                        Text {
+                            text: qsTr("Language")
+                            font: Typofont.titleSmall
+                            color: Theme.color.onSurfaceColor
+                        }
+                        Text {
+                            id: settingsAppearanceLanguageDescription
+                            text: SettingsHelper.followingSystemLocale ? qsTr("Follow System") : SettingsHelper.appearance_locale.nativeLanguageName
+                            font: Typofont.bodySmall
+                            color: Theme.color.onSurfaceVariantColor
+                        }
+                    }
+
+                    Item {
+                        Layout.fillWidth: true
+                    }
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        languageDialog.prepare();
+                        languageDialog.open();
+                    }
+                }
+            }
+
+            Dialog {
+                id: languageDialog
+                icon: "translate"
+                title: qsTr("Language")
+                acceptText: qsTr("OK")
+                showRejectButton: false
+
+                property bool followSystem: SettingsHelper.followingSystemLocale
+                property var selectedLocale: SettingsHelper.usingLocale
+
+                function prepare() {
+                    followSystem = SettingsHelper.followingSystemLocale;
+                    selectedLocale = SettingsHelper.usingLocale;
+                }
+
+                ColumnLayout {
+                    spacing: 0
+                    width: parent.width
+                    Repeater {
+                        model: SettingsHelper.availableLocales
+                        delegate: RadioButton {
+                            text: (index === 0) ? qsTr("Follow System") : modelData.nativeLanguageName
+                            checked: languageDialog.followSystem ? (index === 0) : (index !== 0 && modelData.name === languageDialog.selectedLocale.name)
+                            Layout.fillWidth: true
+                            onClicked: {
+                                parent.children.forEach(child => {
+                                    if (child !== this && child.hasOwnProperty("checked"))
+                                        child.checked = false;
+                                });
+                                if (index === 0) {
+                                    languageDialog.followSystem = true;
+                                    languageDialog.selectedLocale = SettingsHelper.usingLocale;
+                                } else {
+                                    languageDialog.followSystem = false;
+                                    languageDialog.selectedLocale = modelData;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                onAccepted: {
+                    if (followSystem) {
+                        SettingsHelper.remove("appearance/locale");
+                        changeLocaleDialog.open();
+                    } else if (SettingsHelper.appearance_locale.name !== selectedLocale.name) {
+                        SettingsHelper.appearance_locale = selectedLocale;
+                        changeLocaleDialog.open();
+                    }
+                }
+            }
+
+            Dialog {
+                id: changeLocaleDialog
+                icon: "restart_alt"
+                title: qsTr("Restart")
+                text: qsTr("You need to restart Craftive to apply the new language. Do you want to restart now?")
+                acceptText: qsTr("Yes, restart now")
+                rejectText: qsTr("No, restart later")
+                onAccepted: SettingsHelper.restartApp()
+            }
+
             // Dark Mode
             Rectangle {
                 Layout.fillWidth: true

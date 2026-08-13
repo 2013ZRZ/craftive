@@ -64,10 +64,11 @@ craftive
 ├─ locales/                 # Including TS files. I'm going to put it onto Weblate.
 ├─ README.md
 └─ src/
+    ├─ common
     ├─ core                 # I.e. Backend
     ├─ frontend
     ├─ res/images
-    └─ res.qrc                  # Qt Resources File for Craftive
+    └─ res.qrc              # Qt Resources File for Craftive
 ```
 
 ## 📃 Licenses

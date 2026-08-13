@@ -195,7 +195,10 @@ qt_add_qml_module(craftive
     QML_FILES
         ${APP_QML_FILES}
     SOURCES
-        src/core/err.hpp src/core/err.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/core/err.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/core/err.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/common/settingshelper.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/common/settingshelper.cpp
 )
 
 target_sources(craftive PRIVATE src/res.qrc)
@@ -203,6 +206,7 @@ target_sources(craftive PRIVATE src/res.qrc)
 target_include_directories(craftive
     PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/src/core
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/common
 )
 target_compile_definitions(craftive
     PRIVATE
