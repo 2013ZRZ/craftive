@@ -129,7 +129,7 @@ Flickable {
                         id: cardTitle
                         text: {
                             var result = exploreCarousel.model[exploreCarousel.currentIndex].title;
-                            var maxsize = Math.floor((exploreCard.width - 80) * 0.75 / cardTitle.font.pixelSize);
+                            var maxsize = Math.floor((exploreCard.width - 80) * 0.9 / cardTitle.font.pixelSize);
                             return (result.length > maxsize) ? (result.substring(0, maxsize) + "...") : result;
                         }
                         font: Typofont.titleMedium
