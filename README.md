@@ -14,6 +14,9 @@
 ![Still Writing](https://img.shields.io/badge/✍_Still_writing...-E78386?style=for-the-badge)
 </div>
 
+## ℹ️ Introduction
+![Introduction photo](assets/images/intro.png)
+
 ## 🛠️ Build & Run
 0. Prerequisites:
    - The latest version of CMake, required 3.16+;
