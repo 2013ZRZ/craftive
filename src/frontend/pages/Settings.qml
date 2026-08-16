@@ -110,20 +110,19 @@ Flickable {
                                     if (child !== this && child.hasOwnProperty("checked"))
                                         child.checked = false;
                                 });
-                                if (index === 0) {
+                                if (index === 0)
                                     languageDialog.followSystem = true;
-                                    languageDialog.selectedLocale = SettingsHelper.usingLocale;
-                                } else {
+                                else {
                                     languageDialog.followSystem = false;
                                     languageDialog.selectedLocale = modelData;
                                 }
-                            }
+                        
                         }
                     }
                 }
 
                 onAccepted: {
-                    if (followSystem) {
+                    if (followSystem && SettingsHelper.contains("appearance/locale") {
                         SettingsHelper.remove("appearance/locale");
                         changeLocaleDialog.open();
                     } else if (SettingsHelper.appearance_locale.name !== selectedLocale.name) {
