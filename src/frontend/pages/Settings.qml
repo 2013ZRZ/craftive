@@ -86,7 +86,7 @@ Flickable {
                 icon: "translate"
                 title: qsTr("Language")
                 acceptText: qsTr("OK")
-                showRejectButton: false
+                rejectText: qsTr("Cancel")
 
                 property bool followSystem: SettingsHelper.followingSystemLocale
                 property var selectedLocale: SettingsHelper.usingLocale
@@ -130,6 +130,8 @@ Flickable {
                         changeLocaleDialog.open();
                     }
                 }
+                onRejected: prepare()
+                onClosed: prepare()
             }
 
             Dialog {
