@@ -8,6 +8,7 @@
 ![GitHub Repo Stars](https://img.shields.io/github/stars/2013ZRZ/craftive?logo=github&style=for-the-badge&color=FBE464)
 ![GitHub Repo Size](https://img.shields.io/github/repo-size/2013ZRZ/craftive?style=for-the-badge&color=93B7E5)
 ![GitHub Last Commit](https://img.shields.io/github/last-commit/2013ZRZ/craftive?style=for-the-badge&logo=github&color=51BC90)
+![Material Design 3](https://img.shields.io/badge/Material_Design-B6C7EA?style=for-the-badge&logo=materialdesign&logoColor=black)
 ![Made with C++26](https://img.shields.io/badge/Made_with-C%2B%2B26-D0DFF0?style=for-the-badge&logo=c%2B%2B&logoColor=blue&labelColor=white)
 ![Made with Qt](https://img.shields.io/badge/Made_with-Qt-A6C4CE?style=for-the-badge&logo=qt&labelColor=white)
 [![Gitee Mirror](https://img.shields.io/badge/Gitee_Mirror-zrz2013%2Fcraftive-92BFE7?style=for-the-badge&logo=gitee&logoColor=C71D23&labelColor=white)](https://gitee.com/zrz2013/craftive)
@@ -16,6 +17,7 @@
 
 ## ℹ️ Introduction
 ![Introduction photo](assets/images/intro.png)
+Craftive is a 2D Minecraft-like game. It uses Unicode characters like emojis as blocks, and combinations as large-blocks. It also allows all elements to interact with each other or the player via JavaScript provided by the author. Everyone can play, create and share maps - like "world" in Minecraft, through online stores based on Git. Craftive is still developing. Any contributions are welcome! (To be continued)
 
 ## 🛠️ Build & Run
 0. Prerequisites:
