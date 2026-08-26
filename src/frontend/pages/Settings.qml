@@ -182,7 +182,10 @@ Flickable {
                     Switch {
                         icon: "dark_mode"
                         checked: StyleManager.isDarkTheme
-                        onClicked: StyleManager.isDarkTheme = checked
+                        onClicked: {
+                            StyleManager.isDarkTheme = checked;
+                            SettingsHelper.appearance_isDarkTheme = checked;
+                        }
                     }
                 }
             }
