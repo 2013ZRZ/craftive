@@ -14,6 +14,31 @@ Window {
     title: "Craftive"
     color: Theme.color.background
 
+    // All available pages. 0 ~ 4 are in the navigation rail and after 4 is/are not.
+    enum PagesEnum {
+        HomePage,
+        StorePage,
+        PlayPage,
+        CraftboardPage,
+        MyselfPage,
+        SettingsPage
+    }
+
+    property int currentPage: Main.PagesEnum.HomePage
+    property int prevPage: Main.PagesEnum.HomePage
+
+    function navigatePageTo(newPage: int) {
+        prevPage = currentPage;
+        if (newPage < 5)  // in navigation rail
+            currentPage = newPage;
+        else
+            currentPage = newPage;
+    }
+
+    function navigatePageBack() {
+        navigatePageTo(prevPage);
+    } // TODO multistage back
+
     Connections {
         target: exceptReceiver
         function onExceptionOccurred(which, what, how) {
@@ -26,7 +51,7 @@ Window {
         width: parent.width
         height: parent.height
 
-        property list<string> pagesPaths: ["pages/Home.qml", "pages/Store.qml", "pages/Play.qml", "pages/Craftboard.qml", "pages/Myself.qml", "pages/Settings.qml"]
+        property list<string> pagesPaths: ["pages/Home.qml", "pages/Store.qml", "pages/Play.qml", "pages/Craftboard.qml", "pages/Myself.qml", "pages/Settings.qml"] // ordered by PagesEnum
 
         RowLayout {
             anchors.fill: parent
@@ -59,15 +84,14 @@ Window {
                     {
                         icon: "face",
                         text: qsTr("Myself")
-                    },
-                    {
-                        icon: "settings",
-                        text: qsTr("Settings")
                     }
                 ]
 
                 currentIndex: 0
-                onItemClicked: index => currentIndex = index
+                onItemClicked: index => {
+                    currentIndex = index;
+                    currentPage = index;
+                }
 
                 footer: Component {
                     ColumnLayout {
@@ -105,7 +129,7 @@ Window {
                 Loader {
                     id: pageLoader
                     anchors.fill: parent
-                    source: root.pagesPaths[navRail.currentIndex]
+                    source: root.pagesPaths[craftiveWindow.currentPage]
 
                     onLoaded: {
                         if (item) {

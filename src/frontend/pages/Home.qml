@@ -18,12 +18,6 @@ Flickable {
         anchors.topMargin: 32
         spacing: 24
 
-        Text {
-            text: qsTr("Home")
-            font: Typofont.headlineLarge
-            color: Theme.color.onSurfaceColor
-        }
-
         // Explore
         Text {
             text: qsTr("Explore")

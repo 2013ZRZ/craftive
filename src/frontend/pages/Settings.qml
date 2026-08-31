@@ -18,10 +18,16 @@ Flickable {
         anchors.topMargin: 32
         spacing: 24
 
-        Text {
-            text: qsTr("Settings")
-            font: Typofont.headlineLarge
-            color: Theme.color.onSurfaceColor
+        RowLayout {
+            IconButton {
+                icon: "west"
+                onClicked: navigatePageBack()
+            }
+            Text {
+                text: qsTr("Settings")
+                font: Typofont.headlineLarge
+                color: Theme.color.onSurfaceColor
+            }
         }
 
         // Appearance Section
