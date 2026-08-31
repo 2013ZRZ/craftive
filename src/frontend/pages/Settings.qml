@@ -116,13 +116,13 @@ Flickable {
                                     languageDialog.followSystem = false;
                                     languageDialog.selectedLocale = modelData;
                                 }
-                        
+                            }
                         }
                     }
                 }
 
                 onAccepted: {
-                    if (followSystem && SettingsHelper.contains("appearance/locale") {
+                    if (followSystem && SettingsHelper.contains("appearance/locale")) {
                         SettingsHelper.remove("appearance/locale");
                         changeLocaleDialog.open();
                     } else if (SettingsHelper.appearance_locale.name !== selectedLocale.name) {
