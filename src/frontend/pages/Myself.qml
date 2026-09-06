@@ -16,14 +16,83 @@ Flickable {
         anchors.topMargin: 32
         spacing: 24
 
-        RowLayout {
-            Item {
+        ColumnLayout {
+            Layout.fillWidth: true
+            spacing: 2
+
+            // Settings
+            Rectangle {
                 Layout.fillWidth: true
+                height: 72
+                color: Theme.color.surfaceContainer
+                topLeftRadius: 16
+                topRightRadius: 16
+                bottomLeftRadius: 2
+                bottomRightRadius: 2
+
+                RowLayout {
+                    anchors.fill: parent
+                    anchors.margins: 16
+                    spacing: 16
+
+                    IconCircle {
+                        icon: "settings"
+                    }
+                    Text {
+                        text: qsTr("Settings")
+                        font: Typofont.titleSmall
+                        color: Theme.color.onSurfaceColor
+                    }
+                    Item {
+                        Layout.fillWidth: true
+                    }
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: navigatePageTo(Main.PagesEnum.SettingsPage)
+                }
             }
-            IconButton {
-                icon: "settings"
-                onClicked: navigatePageTo(Main.PagesEnum.SettingsPage)
+
+            // About
+            Rectangle {
+                Layout.fillWidth: true
+                height: 72
+                color: Theme.color.surfaceContainer
+                topLeftRadius: 2
+                topRightRadius: 2
+                bottomLeftRadius: 16
+                bottomRightRadius: 16
+
+                RowLayout {
+                    anchors.fill: parent
+                    anchors.margins: 16
+                    spacing: 16
+
+                    IconCircle {
+                        icon: "info"
+                    }
+                    Text {
+                        text: qsTr("About")
+                        font: Typofont.titleSmall
+                        color: Theme.color.onSurfaceColor
+                    }
+                    Item {
+                        Layout.fillWidth: true
+                    }
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: navigatePageTo(Main.PagesEnum.AboutPage)
+                }
             }
         }
+    }
+
+    ScrollBar {
+        anchors.right: parent.right
+        target: myselfPage
+        orientation: Qt.Vertical
     }
 }

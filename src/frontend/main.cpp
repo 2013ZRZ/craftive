@@ -37,6 +37,10 @@ int main(int argc, char *argv[]) {
     // Expose the exception receiver to QML
     engine.rootContext()->setContextProperty("exceptReceiver", &receiver);
 
+    // Expose buildinfo to QML
+    engine.rootContext()->setContextProperty("buildInfoBuildTime", QString{BUILDINFO_BUILDTIME});
+    engine.rootContext()->setContextProperty("buildInfoCommitHash", QString{BUILDINFO_COMMITHASH});
+
     // Start!!
     engine.loadFromModule("crt", "Main");
     return app.exec();

@@ -2,6 +2,24 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="en_US">
 <context>
+    <name>About</name>
+    <message>
+        <location filename="../src/frontend/pages/About.qml" line="26"/>
+        <source>About</source>
+        <translation>About</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/pages/About.qml" line="108"/>
+        <source>Build Time</source>
+        <translation>Build Time</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/pages/About.qml" line="146"/>
+        <source>Commit Hash</source>
+        <translation>Commit Hash</translation>
+    </message>
+</context>
+<context>
     <name>BasicProduct</name>
     <message>
         <location filename="../src/core/products.cpp" line="36"/>
@@ -15,6 +33,8 @@
     </message>
     <message>
         <location filename="../src/core/products.cpp" line="133"/>
+        <location filename="../src/core/products.cpp" line="283"/>
+        <location filename="../src/core/products.hpp" line="12"/>
         <location filename="../src/core/products.cpp" line="283"/>
         <location filename="../src/core/products.hpp" line="12"/>
         <source>Empty</source>
@@ -52,6 +72,7 @@
     <message>
         <location filename="../src/frontend/ErrDialog.qml" line="7"/>
         <location filename="../src/frontend/ErrDialog.qml" line="20"/>
+        <location filename="../src/frontend/ErrDialog.qml" line="20"/>
         <source>Oops! Error %1 &quot;%2&quot; occurred.</source>
         <translation>Oops! Error %1 &quot;%2&quot; occurred.</translation>
     </message>
@@ -68,6 +89,7 @@
     <message>
         <location filename="../src/frontend/ErrDialog.qml" line="8"/>
         <location filename="../src/frontend/ErrDialog.qml" line="21"/>
+        <location filename="../src/frontend/ErrDialog.qml" line="21"/>
         <source>Detail: %1</source>
         <translation>Detail: %1</translation>
     </message>
@@ -75,19 +97,18 @@
 <context>
     <name>Home</name>
     <message>
-        <location filename="../src/frontend/pages/Home.qml" line="22"/>
-        <source>Home</source>
-        <translation>Home</translation>
-    </message>
-    <message>
-        <location filename="../src/frontend/pages/Home.qml" line="29"/>
+        <location filename="../src/frontend/pages/Home.qml" line="23"/>
         <source>Explore</source>
         <translation>Explore</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Home.qml" line="61"/>
-        <location filename="../src/frontend/pages/Home.qml" line="65"/>
-        <location filename="../src/frontend/pages/Home.qml" line="69"/>
+        <location filename="../src/frontend/pages/Home.qml" line="55"/>
+        <location filename="../src/frontend/pages/Home.qml" line="59"/>
+        <location filename="../src/frontend/pages/Home.qml" line="63"/>
+        <location filename="../src/frontend/pages/Home.qml" line="59"/>
+        <location filename="../src/frontend/pages/Home.qml" line="63"/>
+        <location filename="../src/frontend/pages/Home.qml" line="59"/>
+        <location filename="../src/frontend/pages/Home.qml" line="63"/>
         <source>Welcome to Craftive!</source>
         <translation>Welcome to Craftive!</translation>
     </message>
@@ -184,34 +205,29 @@
 <context>
     <name>Main</name>
     <message>
-        <location filename="../src/frontend/Main.qml" line="45"/>
+        <location filename="../src/frontend/Main.qml" line="71"/>
         <source>Home</source>
         <translation>Home</translation>
     </message>
     <message>
-        <location filename="../src/frontend/Main.qml" line="49"/>
+        <location filename="../src/frontend/Main.qml" line="75"/>
         <source>Store</source>
         <translation>Store</translation>
     </message>
     <message>
-        <location filename="../src/frontend/Main.qml" line="53"/>
+        <location filename="../src/frontend/Main.qml" line="79"/>
         <source>Play</source>
         <translation>Play</translation>
     </message>
     <message>
-        <location filename="../src/frontend/Main.qml" line="57"/>
+        <location filename="../src/frontend/Main.qml" line="83"/>
         <source>Craftboard</source>
         <translation>Craftboard</translation>
     </message>
     <message>
-        <location filename="../src/frontend/Main.qml" line="61"/>
+        <location filename="../src/frontend/Main.qml" line="87"/>
         <source>Myself</source>
         <translation>Myself</translation>
-    </message>
-    <message>
-        <location filename="../src/frontend/Main.qml" line="65"/>
-        <source>Settings</source>
-        <translation>Settings</translation>
     </message>
 </context>
 <context>
@@ -283,108 +299,120 @@
     </message>
 </context>
 <context>
-    <name>Settings</name>
+    <name>Myself</name>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="22"/>
+        <location filename="../src/frontend/pages/Myself.qml" line="42"/>
         <source>Settings</source>
         <translation>Settings</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="33"/>
+        <location filename="../src/frontend/pages/Myself.qml" line="76"/>
+        <source>About</source>
+        <translation>About</translation>
+    </message>
+</context>
+<context>
+    <name>Settings</name>
+    <message>
+        <location filename="../src/frontend/pages/Settings.qml" line="27"/>
+        <source>Settings</source>
+        <translation>Settings</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/pages/Settings.qml" line="39"/>
         <source>Appearance</source>
         <translation>Appearance</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="58"/>
-        <location filename="../src/frontend/pages/Settings.qml" line="90"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="64"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="93"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="93"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="93"/>
         <source>Language</source>
         <translation>Language</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="64"/>
-        <location filename="../src/frontend/pages/Settings.qml" line="108"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="70"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="111"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="111"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="111"/>
         <source>Follow System</source>
         <translation>Follow System</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="91"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="94"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="142"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="95"/>
+        <source>Cancel</source>
+        <translation>Cancel</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/pages/Settings.qml" line="146"/>
         <source>Restart</source>
         <translation>Restart</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="143"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="147"/>
         <source>You need to restart Craftive to apply the new language. Do you want to restart now?</source>
         <translation>You need to restart Craftive to apply the new language. Do you want to restart now?</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="144"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="148"/>
         <source>Yes, restart now</source>
         <translation>Yes, restart now</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="145"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="149"/>
         <source>No, restart later</source>
         <translation>No, restart later</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="169"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="173"/>
         <source>Theme</source>
         <translation>Theme</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="174"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="178"/>
         <source>Using dark theme now</source>
         <translation>Using dark theme now</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="174"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="178"/>
         <source>Using light theme now</source>
         <translation>Using light theme now</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="213"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="220"/>
         <source>Theme Color</source>
         <translation>Theme Color</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="218"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="225"/>
         <source>Select a seed color to generate the Material You color scheme</source>
         <translation>Select a seed color to generate the Material You color scheme</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="300"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="307"/>
         <source>Or select more precisely below:</source>
         <translation>Or select more precisely below:</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="304"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="311"/>
         <source>Hue</source>
         <translation>Hue</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="305"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="312"/>
         <source>Chroma</source>
         <translation>Chroma</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="306"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="313"/>
         <source>Tone</source>
         <translation>Tone</translation>
-    </message>
-    <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="318"/>
-        <source>About</source>
-        <translation>About</translation>
-    </message>
-    <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="342"/>
-        <source>Version</source>
-        <translation>Version</translation>
     </message>
 </context>
 <context>
@@ -428,6 +456,7 @@
     <name>checkID</name>
     <message>
         <location filename="../src/core/crtutils.cpp" line="85"/>
+        <location filename="../src/core/crtutils.cpp" line="88"/>
         <location filename="../src/core/crtutils.cpp" line="88"/>
         <source>From checkID()</source>
         <translation>From checkID()</translation>
@@ -513,11 +542,13 @@
     <message>
         <location filename="../src/core/err.hpp" line="80"/>
         <location filename="../src/core/err.hpp" line="105"/>
+        <location filename="../src/core/err.hpp" line="105"/>
         <source>From %1; the original error message is &quot;%2&quot;</source>
         <translation>From %1; the original error message is &quot;%2&quot;</translation>
     </message>
     <message>
         <location filename="../src/core/err.hpp" line="90"/>
+        <location filename="../src/core/err.hpp" line="114"/>
         <location filename="../src/core/err.hpp" line="114"/>
         <source>From %1; unknown exception type, neither CrtExcept nor std::exception</source>
         <translation>From %1; unknown exception type, neither CrtExcept nor std::exception</translation>

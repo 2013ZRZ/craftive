@@ -316,53 +316,6 @@ Flickable {
             }
         }
 
-        // About Section
-        ColumnLayout {
-            Layout.fillWidth: true
-            spacing: 16
-
-            Text {
-                text: qsTr("About")
-                font: Typofont.titleMedium
-                color: Theme.color.primary
-            }
-
-            Rectangle {
-                Layout.fillWidth: true
-                height: 72
-                color: Theme.color.surfaceContainer
-                radius: 12
-
-                RowLayout {
-                    anchors.fill: parent
-                    anchors.margins: 16
-                    spacing: 16
-
-                    IconCircle {
-                        icon: "info"
-                    }
-
-                    ColumnLayout {
-                        Layout.fillWidth: true
-                        spacing: 2
-                        Text {
-                            text: qsTr("Version")
-                            font: Typofont.titleSmall
-                            color: Theme.color.onSurfaceColor
-                        }
-                        Text {
-                            text: "Dev"
-                            font: Typofont.bodySmall
-                            color: Theme.color.onSurfaceVariantColor
-                        }
-                        Item {
-                            Layout.fillWidth: true
-                        }
-                    }
-                }
-            }
-        }
-
         Item {
             Layout.fillHeight: true
         }

@@ -21,7 +21,8 @@ Window {
         PlayPage,
         CraftboardPage,
         MyselfPage,
-        SettingsPage
+        SettingsPage,
+        AboutPage
     }
 
     property int currentPage: Main.PagesEnum.HomePage
@@ -51,7 +52,7 @@ Window {
         width: parent.width
         height: parent.height
 
-        property list<string> pagesPaths: ["pages/Home.qml", "pages/Store.qml", "pages/Play.qml", "pages/Craftboard.qml", "pages/Myself.qml", "pages/Settings.qml"] // ordered by PagesEnum
+        property list<string> pagesPaths: ["pages/Home.qml", "pages/Store.qml", "pages/Play.qml", "pages/Craftboard.qml", "pages/Myself.qml", "pages/Settings.qml", "pages/About.qml"] // ordered by PagesEnum
 
         RowLayout {
             anchors.fill: parent

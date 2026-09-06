@@ -208,10 +208,33 @@ target_include_directories(craftive
         ${CMAKE_CURRENT_SOURCE_DIR}/src/core
         ${CMAKE_CURRENT_SOURCE_DIR}/src/common
 )
+
+# buildInfoBuildTime
+string(TIMESTAMP BUILDINFO_BUILDTIME "%Y-%m-%d %H:%M:%S" UTC)
+
+# buildInfoCommitHash
+execute_process(
+    COMMAND git rev-parse --short HEAD
+    OUTPUT_VARIABLE BUILDINFO_COMMITHASH
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+    ERROR_QUIET
+)
+if(NOT BUILDINFO_COMMITHASH)
+    set(BUILDINFO_COMMITHASH "Unknown")
+endif()
+
 target_compile_definitions(craftive
     PRIVATE
         PROJECT_SOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}"
+        BUILDINFO_BUILDTIME="${BUILDINFO_BUILDTIME}"
+        BUILDINFO_COMMITHASH="${BUILDINFO_COMMITHASH}"
 )
+
+# Force rebuild main.cpp to update buildinfo
+add_custom_target(force_rebuild
+    COMMAND ${CMAKE_COMMAND} -E touch ${CMAKE_CURRENT_SOURCE_DIR}/src/frontend/main.cpp
+)
+add_dependencies(craftive force_rebuild)
 
 if(MSVC)
     target_link_libraries(craftive
