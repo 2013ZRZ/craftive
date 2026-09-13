@@ -41,7 +41,7 @@ Window {
     } // TODO multistage back
 
     Connections {
-        target: exceptReceiver
+        target: CrtExceptReceiver
         function onExceptionOccurred(which, what, how) {
             ErrDialog.show(which, what, how);
         }

@@ -56,6 +56,8 @@ public:
 // Receiver (interact with QML frontend)
 class CrtExceptReceiver : public QObject {
     Q_OBJECT
+    QML_ELEMENT
+    QML_SINGLETON
 
 private:
     static inline CrtExceptReceiver *instancePtr{nullptr};
