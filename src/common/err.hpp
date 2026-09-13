@@ -1,6 +1,5 @@
 #pragma once
 
-#include "qcoreapplication.h"
 #include <QEvent>
 #include <QObject>
 #include <QString>
@@ -58,8 +57,13 @@ public:
 class CrtExceptReceiver : public QObject {
     Q_OBJECT
 
+private:
+    static inline CrtExceptReceiver *instancePtr{nullptr};
+
 public:
-    explicit CrtExceptReceiver(QObject *parent = nullptr) : QObject(parent) {}
+    explicit CrtExceptReceiver(QObject *parent = nullptr) : QObject(parent) { instancePtr = this; }
+    ~CrtExceptReceiver() { instancePtr = nullptr; }
+    static CrtExceptReceiver *instance() noexcept { return instancePtr; }
 
 protected:
     bool event(QEvent *event) override;
@@ -67,8 +71,6 @@ protected:
 signals:
     void exceptionOccurred(const QString &which, const QString &what, const QString &how);
 };
-
-extern CrtExceptReceiver *globalExceptReceiver;
 
 #define CATCH_THROW(context)                                                               \
     catch (const CrtExcept &e) {                                                           \
@@ -96,24 +98,23 @@ extern CrtExceptReceiver *globalExceptReceiver;
     }
 
 // Only for QML callees
-#define CATCH_AT_ENTRY(context)                                                            \
-    catch (const CrtExcept &e) {                                                           \
-        CrtExcept::report(e);                                                              \
-    }                                                                                      \
-    catch (const std::exception &e) {                                                      \
-        CrtExcept wrapped{0x0000,                                                          \
-                          QCoreApplication::translate(                                     \
-                              "errmsgs", "From %1; the original error message is \"%2\""), \
-                          #context,                                                        \
-                          e.what()};                                                       \
-        CrtExcept::report(wrapped);                                                        \
-    }                                                                                      \
-    catch (...) {                                                                          \
-        CrtExcept wrapped{                                                                 \
-            0x0000,                                                                        \
-            QCoreApplication::translate(                                                   \
-                "errmsgs",                                                                 \
-                "From %1; unknown exception type, neither CrtExcept nor std::exception"),  \
-            #context};                                                                     \
-        CrtExcept::report(wrapped);                                                        \
+#define CATCH_AT_ENTRY(context)                                                           \
+    catch (const CrtExcept &e) {                                                          \
+        CrtExcept::report(e);                                                             \
+    }                                                                                     \
+    catch (const std::exception &e) {                                                     \
+        CrtExcept::report(                                                                \
+            CrtExcept{0x0000,                                                             \
+                      QCoreApplication::translate(                                        \
+                          "errmsgs", "From %1; the original error message is \"%2\""),    \
+                      #context,                                                           \
+                      e.what()});                                                         \
+    }                                                                                     \
+    catch (...) {                                                                         \
+        CrtExcept::report(CrtExcept{                                                      \
+            0x0000,                                                                       \
+            QCoreApplication::translate(                                                  \
+                "errmsgs",                                                                \
+                "From %1; unknown exception type, neither CrtExcept nor std::exception"), \
+            #context});                                                                   \
     }

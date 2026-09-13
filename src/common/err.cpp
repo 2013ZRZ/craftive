@@ -1,5 +1,4 @@
 #include "err.hpp"
-#include "qcoreapplication.h"
 #include <QCoreApplication>
 
 constexpr const char *errmsgs[] = {
@@ -39,7 +38,7 @@ void CrtExcept::report(const CrtExcept &e) {
         return;
     else {
         e.markReported();
-        QCoreApplication::postEvent(globalExceptReceiver, new CrtExceptEvent{e});
+        QCoreApplication::postEvent(CrtExceptReceiver::instance(), new CrtExceptEvent{e});
     }
 }
 

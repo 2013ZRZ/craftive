@@ -1,11 +1,8 @@
-#include "err.hpp"
 #include "settingshelper.hpp"
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QTranslator>
-
-CrtExceptReceiver *globalExceptReceiver{nullptr};
 
 int main(int argc, char *argv[]) {
     // Create application
@@ -18,10 +15,6 @@ int main(int argc, char *argv[]) {
             ":/i18n/"))
         app.installTranslator(&appTranslator);
 
-    // Create exceptions receiver
-    CrtExceptReceiver receiver;
-    globalExceptReceiver = &receiver;
-
     // Create QML engine
     QQmlApplicationEngine engine;
     QObject::connect(
@@ -33,9 +26,6 @@ int main(int argc, char *argv[]) {
             QCoreApplication::exit(-1);
         },
         Qt::QueuedConnection);
-
-    // Expose the exception receiver to QML
-    engine.rootContext()->setContextProperty("exceptReceiver", &receiver);
 
     // Expose buildinfo to QML
     engine.rootContext()->setContextProperty("buildInfoBuildTime", QString{BUILDINFO_BUILDTIME});
