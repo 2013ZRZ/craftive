@@ -33,7 +33,7 @@ Flickable {
         // Appearance Section
         ColumnLayout {
             Layout.fillWidth: true
-            spacing: 16
+            spacing: 2
 
             Text {
                 text: qsTr("Appearance")
@@ -41,12 +41,19 @@ Flickable {
                 color: Theme.color.primary
             }
 
+            Item {
+                height: 16
+            }
+
             // Language
             Rectangle {
                 Layout.fillWidth: true
                 height: 72
                 color: Theme.color.surfaceContainer
-                radius: 12
+                topLeftRadius: 16
+                topRightRadius: 16
+                bottomLeftRadius: 2
+                bottomRightRadius: 2
 
                 RowLayout {
                     anchors.fill: parent
@@ -155,7 +162,10 @@ Flickable {
                 Layout.fillWidth: true
                 height: 72
                 color: Theme.color.surfaceContainer
-                radius: 12
+                topLeftRadius: 2
+                topRightRadius: 2
+                bottomLeftRadius: 2
+                bottomRightRadius: 2
 
                 RowLayout {
                     anchors.fill: parent
@@ -201,7 +211,10 @@ Flickable {
                 Layout.fillWidth: true
                 implicitHeight: themeColumn.implicitHeight + 32
                 color: Theme.color.surfaceContainer
-                radius: 12
+                topLeftRadius: 2
+                topRightRadius: 2
+                bottomLeftRadius: 16
+                bottomRightRadius: 16
 
                 ColumnLayout {
                     id: themeColumn
