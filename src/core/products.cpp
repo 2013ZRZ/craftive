@@ -83,7 +83,7 @@ void Kit::operator-=(const QString &_id) {
     if (!(blks.remove(_id) || lblks.remove(_id)))
         throw CrtExcept(
             0x0004,
-            tr("From Kit::operator-=; this kit doesn't contain an element who's ID is \"%1\""),
+            tr("From Kit::operator-=; this kit doesn't contain an element whose ID is \"%1\""),
             _id);
 }
 
@@ -100,7 +100,7 @@ auto Kit::operator[](const QString &_id)
     else
         throw CrtExcept(
             0x0004,
-            tr("From Kit::operator[]; this kit doesn't contain an element who's ID is \"%1\""),
+            tr("From Kit::operator[]; this kit doesn't contain an element whose ID is \"%1\""),
             _id);
 }
 

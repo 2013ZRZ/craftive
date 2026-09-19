@@ -1,4 +1,4 @@
-#include "settingshelper.hpp"
+#include "settings.hpp"
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
@@ -9,7 +9,7 @@ int main(int argc, char *argv[]) {
     QGuiApplication app{argc, argv};
     QTranslator     appTranslator;
     if (appTranslator.load(
-            SettingsHelper{}.value("appearance/locale", QLocale::system()).toLocale(),
+            SettingsInstance().value("appearance/locale", QLocale::system()).toLocale(),
             "craftive",
             "_",
             ":/i18n/"))

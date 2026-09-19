@@ -9,12 +9,12 @@
         <translation>关于</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/About.qml" line="108"/>
+        <location filename="../src/frontend/pages/About.qml" line="114"/>
         <source>Build Time</source>
         <translation>构建时间</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/About.qml" line="146"/>
+        <location filename="../src/frontend/pages/About.qml" line="152"/>
         <source>Commit Hash</source>
         <translation>提交哈希</translation>
     </message>
@@ -117,12 +117,12 @@
     <name>Kit</name>
     <message>
         <location filename="../src/core/products.cpp" line="86"/>
-        <source>From Kit::operator-=; this kit doesn&apos;t contain an element who&apos;s ID is &quot;%1&quot;</source>
+        <source>From Kit::operator-=; this kit doesn&apos;t contain an element whose ID is &quot;%1&quot;</source>
         <translation>来自 Kit::operator-=；此锦囊不包含 ID 为“%1”的元素</translation>
     </message>
     <message>
         <location filename="../src/core/products.cpp" line="103"/>
-        <source>From Kit::operator[]; this kit doesn&apos;t contain an element who&apos;s ID is &quot;%1&quot;</source>
+        <source>From Kit::operator[]; this kit doesn&apos;t contain an element whose ID is &quot;%1&quot;</source>
         <translation>来自 Kit::operator[]；此锦囊不包含 ID 为“%1”的元素</translation>
     </message>
     <message>
@@ -323,93 +323,93 @@
         <translation>外观</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="64"/>
-        <location filename="../src/frontend/pages/Settings.qml" line="93"/>
-        <location filename="../src/frontend/pages/Settings.qml" line="93"/>
-        <location filename="../src/frontend/pages/Settings.qml" line="93"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="71"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="100"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="100"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="100"/>
         <source>Language</source>
         <translation>语言</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="70"/>
-        <location filename="../src/frontend/pages/Settings.qml" line="111"/>
-        <location filename="../src/frontend/pages/Settings.qml" line="111"/>
-        <location filename="../src/frontend/pages/Settings.qml" line="111"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="77"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="118"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="118"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="118"/>
         <source>Follow System</source>
         <translation>跟随系统</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="94"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="101"/>
         <source>OK</source>
         <translation>确定</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="95"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="102"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="146"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="153"/>
         <source>Restart</source>
         <translation>重启</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="147"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="154"/>
         <source>You need to restart Craftive to apply the new language. Do you want to restart now?</source>
         <translation>您需要重启 Craftive 以应用新的语言。您想要现在重启吗？</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="148"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="155"/>
         <source>Yes, restart now</source>
         <translation>是，现在重启</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="149"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="156"/>
         <source>No, restart later</source>
         <translation>不，稍后重启</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="173"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="183"/>
         <source>Theme</source>
         <translation>主题</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="178"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="188"/>
         <source>Using dark theme now</source>
         <translation>正在使用暗色主题</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="178"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="188"/>
         <source>Using light theme now</source>
         <translation>正在使用亮色主题</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="220"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="233"/>
         <source>Theme Color</source>
         <translation>主题色</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="225"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="238"/>
         <source>Select a seed color to generate the Material You color scheme</source>
         <translation>选取一个种子色以生成 Material You 配色方案</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="307"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="320"/>
         <source>Or select more precisely below:</source>
         <translation>或在下方精细调节：</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="311"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="324"/>
         <source>Hue</source>
         <translation>色相</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="312"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="325"/>
         <source>Chroma</source>
         <translation>色度</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="313"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="326"/>
         <source>Tone</source>
         <translation>色调</translation>
     </message>
@@ -430,7 +430,7 @@
 <context>
     <name>Version</name>
     <message>
-        <location filename="../src/core/crtutils.cpp" line="35"/>
+        <location filename="../src/core/crtutils.cpp" line="34"/>
         <source>From Version::fromJson(); the version&apos;s JSON isn&apos;t an array. It should be like [x, y, z] for &quot;x.y.z&quot;</source>
         <translation>来自 Version::fromJson()；版本的 JSON 不是数组。其格式应形如 [x, y, z] 以表示“x.y.z”</translation>
     </message>
@@ -438,7 +438,7 @@
 <context>
     <name>checkElemID</name>
     <message>
-        <location filename="../src/core/crtutils.cpp" line="100"/>
+        <location filename="../src/core/crtutils.cpp" line="99"/>
         <source>From checkElemID(); the ID isn&apos;t like &quot;kit/elem&quot;</source>
         <translation>来自 checkElemID()；此 ID 并非形如“kit/elem”</translation>
     </message>
@@ -446,7 +446,7 @@
 <context>
     <name>checkEmail</name>
     <message>
-        <location filename="../src/core/crtutils.cpp" line="115"/>
+        <location filename="../src/core/crtutils.cpp" line="114"/>
         <source>From checkEmail(); the string is &quot;%1&quot; and it isn&apos;t a valid email address</source>
         <translation>来自 checkEmail()；字符串 %1 不是有效的电子邮件地址</translation>
     </message>
@@ -454,9 +454,9 @@
 <context>
     <name>checkID</name>
     <message>
-        <location filename="../src/core/crtutils.cpp" line="85"/>
-        <location filename="../src/core/crtutils.cpp" line="88"/>
-        <location filename="../src/core/crtutils.cpp" line="88"/>
+        <location filename="../src/core/crtutils.cpp" line="84"/>
+        <location filename="../src/core/crtutils.cpp" line="87"/>
+        <location filename="../src/core/crtutils.cpp" line="87"/>
         <source>From checkID()</source>
         <translation>来自 checkID()</translation>
     </message>
@@ -464,91 +464,91 @@
 <context>
     <name>errmsgs</name>
     <message>
-        <location filename="../src/core/err.cpp" line="6"/>
+        <location filename="../src/common/err.cpp" line="5"/>
         <source>Extern error</source>
         <translation>外部错误</translation>
     </message>
     <message>
-        <location filename="../src/core/err.cpp" line="7"/>
+        <location filename="../src/common/err.cpp" line="6"/>
         <source>Empty ID</source>
         <translation>ID 为空</translation>
     </message>
     <message>
-        <location filename="../src/core/err.cpp" line="8"/>
+        <location filename="../src/common/err.cpp" line="7"/>
         <source>Invalid ID</source>
         <translation>ID 无效</translation>
     </message>
     <message>
-        <location filename="../src/core/err.cpp" line="9"/>
+        <location filename="../src/common/err.cpp" line="8"/>
         <source>Invalid unicode colored character</source>
         <translation>Unicode 彩色字符无效</translation>
     </message>
     <message>
-        <location filename="../src/core/err.cpp" line="10"/>
+        <location filename="../src/common/err.cpp" line="9"/>
         <source>No such element in this kit</source>
         <translation>此锦囊中不存在该元素</translation>
     </message>
     <message>
-        <location filename="../src/core/err.cpp" line="11"/>
+        <location filename="../src/common/err.cpp" line="10"/>
         <source>Invalid location in this large-block</source>
         <translation>此大方块中的位置无效</translation>
     </message>
     <message>
-        <location filename="../src/core/err.cpp" line="12"/>
+        <location filename="../src/common/err.cpp" line="11"/>
         <source>Failed to parse JSON</source>
         <translation>解析 JSON 失败</translation>
     </message>
     <message>
-        <location filename="../src/core/err.cpp" line="13"/>
+        <location filename="../src/common/err.cpp" line="12"/>
         <source>Invalid email address</source>
         <translation>电子邮件地址无效</translation>
     </message>
     <message>
-        <location filename="../src/core/err.cpp" line="14"/>
+        <location filename="../src/common/err.cpp" line="13"/>
         <source>Invalid RGB color</source>
         <translation>RGB 颜色无效</translation>
     </message>
     <message>
-        <location filename="../src/core/err.cpp" line="15"/>
+        <location filename="../src/common/err.cpp" line="14"/>
         <source>Author doesn&apos;t exist</source>
         <translation>作者不存在</translation>
     </message>
     <message>
-        <location filename="../src/core/err.cpp" line="16"/>
+        <location filename="../src/common/err.cpp" line="15"/>
         <source>Data doesn&apos;t exist</source>
         <translation>数据不存在</translation>
     </message>
     <message>
-        <location filename="../src/core/err.cpp" line="17"/>
+        <location filename="../src/common/err.cpp" line="16"/>
         <source>No such kit in all loaded kits</source>
         <translation>所有已加载的锦囊中不存在该锦囊</translation>
     </message>
     <message>
-        <location filename="../src/core/err.cpp" line="18"/>
+        <location filename="../src/common/err.cpp" line="17"/>
         <source>Invalid Element ID; it should be like &quot;kit/elem&quot;</source>
         <translation>元素的 ID 无效；其格式应形如“kit/elem”</translation>
     </message>
     <message>
-        <location filename="../src/core/err.cpp" line="19"/>
+        <location filename="../src/common/err.cpp" line="18"/>
         <source>Product version doesn&apos;t exist</source>
         <translation>产品版本不存在</translation>
     </message>
     <message>
-        <location filename="../src/core/err.cpp" line="20"/>
+        <location filename="../src/common/err.cpp" line="19"/>
         <source>Invalid location in this map</source>
         <translation>此地图中的位置无效</translation>
     </message>
     <message>
-        <location filename="../src/core/err.hpp" line="80"/>
-        <location filename="../src/core/err.hpp" line="105"/>
-        <location filename="../src/core/err.hpp" line="105"/>
+        <location filename="../src/common/err.hpp" line="84"/>
+        <location filename="../src/common/err.hpp" line="110"/>
+        <location filename="../src/common/err.hpp" line="110"/>
         <source>From %1; the original error message is &quot;%2&quot;</source>
         <translation>来自 %1；原错误消息为“%2”</translation>
     </message>
     <message>
-        <location filename="../src/core/err.hpp" line="90"/>
-        <location filename="../src/core/err.hpp" line="114"/>
-        <location filename="../src/core/err.hpp" line="114"/>
+        <location filename="../src/common/err.hpp" line="94"/>
+        <location filename="../src/common/err.hpp" line="118"/>
+        <location filename="../src/common/err.hpp" line="118"/>
         <source>From %1; unknown exception type, neither CrtExcept nor std::exception</source>
         <translation>来自 %1；未知的异常类型，既非 CrtExcept 也非 std::exception</translation>
     </message>
@@ -569,7 +569,7 @@
 <context>
     <name>separateElemID</name>
     <message>
-        <location filename="../src/core/crtutils.cpp" line="150"/>
+        <location filename="../src/core/crtutils.cpp" line="149"/>
         <source>From separateElemID(); the ID is %1</source>
         <translation>来自 separateElemID()；ID 为 %1</translation>
     </message>

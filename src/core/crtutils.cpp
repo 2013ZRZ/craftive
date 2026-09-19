@@ -1,6 +1,5 @@
 #include "crtutils.hpp"
 #include "err.hpp"
-#include "qcoreapplication.h"
 #include <QRegularExpression>
 #include <ctime>
 #include <random>

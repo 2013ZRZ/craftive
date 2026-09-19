@@ -6,6 +6,8 @@
 #include <QSettings>
 #include <qqmlregistration.h>
 
+QSettings &SettingsInstance();
+
 class SettingsHelper : public QObject {
     Q_OBJECT
     QML_ELEMENT
@@ -25,9 +27,6 @@ class SettingsHelper : public QObject {
     Q_PROPERTY(QLocale usingLocale READ usingLocale CONSTANT)
     Q_PROPERTY(QList<QLocale> availableLocales READ availableLocales CONSTANT)
     Q_PROPERTY(bool followingSystemLocale READ followingSystemLocale CONSTANT)
-
-private:
-    QSettings m_s{"craftive", "craftive"};
 
 public:
     SettingsHelper(QObject *parent = nullptr) : QObject(parent) {}

@@ -9,12 +9,12 @@
         <translation>About</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/About.qml" line="108"/>
+        <location filename="../src/frontend/pages/About.qml" line="114"/>
         <source>Build Time</source>
         <translation>Build Time</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/About.qml" line="146"/>
+        <location filename="../src/frontend/pages/About.qml" line="152"/>
         <source>Commit Hash</source>
         <translation>Commit Hash</translation>
     </message>
@@ -117,13 +117,13 @@
     <name>Kit</name>
     <message>
         <location filename="../src/core/products.cpp" line="86"/>
-        <source>From Kit::operator-=; this kit doesn&apos;t contain an element who&apos;s ID is &quot;%1&quot;</source>
-        <translation>from Kit::operator-=; this kit doesn&apos;t contain an element who&apos;s ID is &quot;%1&quot;</translation>
+        <source>From Kit::operator-=; this kit doesn&apos;t contain an element whose ID is &quot;%1&quot;</source>
+        <translation>from Kit::operator-=; this kit doesn&apos;t contain an element whose ID is &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="../src/core/products.cpp" line="103"/>
-        <source>From Kit::operator[]; this kit doesn&apos;t contain an element who&apos;s ID is &quot;%1&quot;</source>
-        <translation>from Kit::operator[]; this kit doesn&apos;t contain an element who&apos;s ID is &quot;%1&quot;</translation>
+        <source>From Kit::operator[]; this kit doesn&apos;t contain an element whose ID is &quot;%1&quot;</source>
+        <translation>from Kit::operator[]; this kit doesn&apos;t contain an element whose ID is &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="../src/core/products.cpp" line="110"/>
@@ -324,93 +324,93 @@
         <translation>Appearance</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="64"/>
-        <location filename="../src/frontend/pages/Settings.qml" line="93"/>
-        <location filename="../src/frontend/pages/Settings.qml" line="93"/>
-        <location filename="../src/frontend/pages/Settings.qml" line="93"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="71"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="100"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="100"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="100"/>
         <source>Language</source>
         <translation>Language</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="70"/>
-        <location filename="../src/frontend/pages/Settings.qml" line="111"/>
-        <location filename="../src/frontend/pages/Settings.qml" line="111"/>
-        <location filename="../src/frontend/pages/Settings.qml" line="111"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="77"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="118"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="118"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="118"/>
         <source>Follow System</source>
         <translation>Follow System</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="94"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="101"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="95"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="102"/>
         <source>Cancel</source>
         <translation>Cancel</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="146"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="153"/>
         <source>Restart</source>
         <translation>Restart</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="147"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="154"/>
         <source>You need to restart Craftive to apply the new language. Do you want to restart now?</source>
         <translation>You need to restart Craftive to apply the new language. Do you want to restart now?</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="148"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="155"/>
         <source>Yes, restart now</source>
         <translation>Yes, restart now</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="149"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="156"/>
         <source>No, restart later</source>
         <translation>No, restart later</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="173"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="183"/>
         <source>Theme</source>
         <translation>Theme</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="178"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="188"/>
         <source>Using dark theme now</source>
         <translation>Using dark theme now</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="178"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="188"/>
         <source>Using light theme now</source>
         <translation>Using light theme now</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="220"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="233"/>
         <source>Theme Color</source>
         <translation>Theme Color</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="225"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="238"/>
         <source>Select a seed color to generate the Material You color scheme</source>
         <translation>Select a seed color to generate the Material You color scheme</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="307"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="320"/>
         <source>Or select more precisely below:</source>
         <translation>Or select more precisely below:</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="311"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="324"/>
         <source>Hue</source>
         <translation>Hue</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="312"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="325"/>
         <source>Chroma</source>
         <translation>Chroma</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Settings.qml" line="313"/>
+        <location filename="../src/frontend/pages/Settings.qml" line="326"/>
         <source>Tone</source>
         <translation>Tone</translation>
     </message>
@@ -431,7 +431,7 @@
 <context>
     <name>Version</name>
     <message>
-        <location filename="../src/core/crtutils.cpp" line="35"/>
+        <location filename="../src/core/crtutils.cpp" line="34"/>
         <source>From Version::fromJson(); the version&apos;s JSON isn&apos;t an array. It should be like [x, y, z] for &quot;x.y.z&quot;</source>
         <translation>from Version::fromJson(); the version&apos;s JSON isn&apos;t an array. It should be like [x, y, z] for &quot;x.y.z&quot;</translation>
     </message>
@@ -439,7 +439,7 @@
 <context>
     <name>checkElemID</name>
     <message>
-        <location filename="../src/core/crtutils.cpp" line="100"/>
+        <location filename="../src/core/crtutils.cpp" line="99"/>
         <source>From checkElemID(); the ID isn&apos;t like &quot;kit/elem&quot;</source>
         <translation>From checkElemID(); the ID isn&apos;t like &quot;kit/elem&quot;</translation>
     </message>
@@ -447,7 +447,7 @@
 <context>
     <name>checkEmail</name>
     <message>
-        <location filename="../src/core/crtutils.cpp" line="115"/>
+        <location filename="../src/core/crtutils.cpp" line="114"/>
         <source>From checkEmail(); the string is &quot;%1&quot; and it isn&apos;t a valid email address</source>
         <translation>From checkEmail(); the string is &quot;%1&quot; and it isn&apos;t a valid email address</translation>
     </message>
@@ -455,9 +455,9 @@
 <context>
     <name>checkID</name>
     <message>
-        <location filename="../src/core/crtutils.cpp" line="85"/>
-        <location filename="../src/core/crtutils.cpp" line="88"/>
-        <location filename="../src/core/crtutils.cpp" line="88"/>
+        <location filename="../src/core/crtutils.cpp" line="84"/>
+        <location filename="../src/core/crtutils.cpp" line="87"/>
+        <location filename="../src/core/crtutils.cpp" line="87"/>
         <source>From checkID()</source>
         <translation>From checkID()</translation>
     </message>
@@ -465,91 +465,91 @@
 <context>
     <name>errmsgs</name>
     <message>
-        <location filename="../src/core/err.cpp" line="6"/>
+        <location filename="../src/common/err.cpp" line="5"/>
         <source>Extern error</source>
         <translation>Extern error</translation>
     </message>
     <message>
-        <location filename="../src/core/err.cpp" line="7"/>
+        <location filename="../src/common/err.cpp" line="6"/>
         <source>Empty ID</source>
         <translation>Empty ID</translation>
     </message>
     <message>
-        <location filename="../src/core/err.cpp" line="8"/>
+        <location filename="../src/common/err.cpp" line="7"/>
         <source>Invalid ID</source>
         <translation>Invalid ID</translation>
     </message>
     <message>
-        <location filename="../src/core/err.cpp" line="9"/>
+        <location filename="../src/common/err.cpp" line="8"/>
         <source>Invalid unicode colored character</source>
         <translation>Invalid unicode colored character</translation>
     </message>
     <message>
-        <location filename="../src/core/err.cpp" line="10"/>
+        <location filename="../src/common/err.cpp" line="9"/>
         <source>No such element in this kit</source>
         <translation>No such element in this kit</translation>
     </message>
     <message>
-        <location filename="../src/core/err.cpp" line="11"/>
+        <location filename="../src/common/err.cpp" line="10"/>
         <source>Invalid location in this large-block</source>
         <translation>Invalid location in this large-block</translation>
     </message>
     <message>
-        <location filename="../src/core/err.cpp" line="12"/>
+        <location filename="../src/common/err.cpp" line="11"/>
         <source>Failed to parse JSON</source>
         <translation>Failed to parse JSON</translation>
     </message>
     <message>
-        <location filename="../src/core/err.cpp" line="13"/>
+        <location filename="../src/common/err.cpp" line="12"/>
         <source>Invalid email address</source>
         <translation>Invalid email address</translation>
     </message>
     <message>
-        <location filename="../src/core/err.cpp" line="14"/>
+        <location filename="../src/common/err.cpp" line="13"/>
         <source>Invalid RGB color</source>
         <translation>Invalid RGB color</translation>
     </message>
     <message>
-        <location filename="../src/core/err.cpp" line="15"/>
+        <location filename="../src/common/err.cpp" line="14"/>
         <source>Author doesn&apos;t exist</source>
         <translation>Author doesn&apos;t exist</translation>
     </message>
     <message>
-        <location filename="../src/core/err.cpp" line="16"/>
+        <location filename="../src/common/err.cpp" line="15"/>
         <source>Data doesn&apos;t exist</source>
         <translation>Data doesn&apos;t exist</translation>
     </message>
     <message>
-        <location filename="../src/core/err.cpp" line="17"/>
+        <location filename="../src/common/err.cpp" line="16"/>
         <source>No such kit in all loaded kits</source>
         <translation>No such kit in all loaded kits</translation>
     </message>
     <message>
-        <location filename="../src/core/err.cpp" line="18"/>
+        <location filename="../src/common/err.cpp" line="17"/>
         <source>Invalid Element ID; it should be like &quot;kit/elem&quot;</source>
         <translation>Invalid Element ID; it should be like &quot;kit/elem&quot;</translation>
     </message>
     <message>
-        <location filename="../src/core/err.cpp" line="19"/>
+        <location filename="../src/common/err.cpp" line="18"/>
         <source>Product version doesn&apos;t exist</source>
         <translation>Product version doesn&apos;t exist</translation>
     </message>
     <message>
-        <location filename="../src/core/err.cpp" line="20"/>
+        <location filename="../src/common/err.cpp" line="19"/>
         <source>Invalid location in this map</source>
         <translation>Invalid location in this map</translation>
     </message>
     <message>
-        <location filename="../src/core/err.hpp" line="80"/>
-        <location filename="../src/core/err.hpp" line="105"/>
-        <location filename="../src/core/err.hpp" line="105"/>
+        <location filename="../src/common/err.hpp" line="84"/>
+        <location filename="../src/common/err.hpp" line="110"/>
+        <location filename="../src/common/err.hpp" line="110"/>
         <source>From %1; the original error message is &quot;%2&quot;</source>
         <translation>From %1; the original error message is &quot;%2&quot;</translation>
     </message>
     <message>
-        <location filename="../src/core/err.hpp" line="90"/>
-        <location filename="../src/core/err.hpp" line="114"/>
-        <location filename="../src/core/err.hpp" line="114"/>
+        <location filename="../src/common/err.hpp" line="94"/>
+        <location filename="../src/common/err.hpp" line="118"/>
+        <location filename="../src/common/err.hpp" line="118"/>
         <source>From %1; unknown exception type, neither CrtExcept nor std::exception</source>
         <translation>From %1; unknown exception type, neither CrtExcept nor std::exception</translation>
     </message>
@@ -570,7 +570,7 @@
 <context>
     <name>separateElemID</name>
     <message>
-        <location filename="../src/core/crtutils.cpp" line="150"/>
+        <location filename="../src/core/crtutils.cpp" line="149"/>
         <source>From separateElemID(); the ID is %1</source>
         <translation>From separateElemID(); the ID is %1</translation>
     </message>

@@ -1,40 +1,46 @@
-#include "settingshelper.hpp"
+#include "settings.hpp"
+#include "qsettings.h"
 #include <QCoreApplication>
 #include <QDir>
 #include <QProcess>
 #include <algorithm>
 
-QVariant SettingsHelper::value(const QString &key, const QVariant &defaultValue) const {
-    return m_s.value(key, defaultValue);
+QSettings &SettingsInstance() {
+    static QSettings inst{"craftive", "craftive"};
+    return inst;
 }
-bool SettingsHelper::contains(const QString &key) const { return m_s.contains(key); }
-void SettingsHelper::remove(const QString &key) { m_s.remove(key); }
+
+QVariant SettingsHelper::value(const QString &key, const QVariant &defaultValue) const {
+    return SettingsInstance().value(key, defaultValue);
+}
+bool SettingsHelper::contains(const QString &key) const { return SettingsInstance().contains(key); }
+void SettingsHelper::remove(const QString &key) { SettingsInstance().remove(key); }
 
 // Appearance Section
 QLocale SettingsHelper::appearance_locale() const {
-    return m_s.value("appearance/locale").toLocale();
+    return SettingsInstance().value("appearance/locale").toLocale();
 }
 bool SettingsHelper::appearance_isDarkTheme() const {
-    return m_s.value("appearance/isDarkTheme").toBool();
+    return SettingsInstance().value("appearance/isDarkTheme").toBool();
 }
 QColor SettingsHelper::appearance_seedColor() const {
-    return m_s.value("appearance/seedColor").value<QColor>();
+    return SettingsInstance().value("appearance/seedColor").value<QColor>();
 }
 void SettingsHelper::setAppearance_locale(const QLocale &v) {
     if (v != appearance_locale()) {
-        m_s.setValue("appearance/locale", v);
+        SettingsInstance().setValue("appearance/locale", v);
         emit appearance_localeChanged();
     }
 }
 void SettingsHelper::setAppearance_isDarkTheme(bool v) {
     if (v != appearance_isDarkTheme()) {
-        m_s.setValue("appearance/isDarkTheme", v);
+        SettingsInstance().setValue("appearance/isDarkTheme", v);
         emit appearance_isDarkThemeChanged();
     }
 }
 void SettingsHelper::setAppearance_seedColor(const QColor &v) {
     if (v != appearance_seedColor()) {
-        m_s.setValue("appearance/seedColor", v);
+        SettingsInstance().setValue("appearance/seedColor", v);
         emit appearance_seedColorChanged();
     }
 }
@@ -61,7 +67,9 @@ QList<QLocale> SettingsHelper::availableLocales() const {
     result.emplaceFront(QLocale::system());
     return result;
 }
-bool SettingsHelper::followingSystemLocale() const { return !m_s.contains("appearance/locale"); }
+bool SettingsHelper::followingSystemLocale() const {
+    return !SettingsInstance().contains("appearance/locale");
+}
 void SettingsHelper::restartApp() const {
     QProcess::startDetached(QCoreApplication::applicationFilePath(), QCoreApplication::arguments());
     QCoreApplication::quit();
