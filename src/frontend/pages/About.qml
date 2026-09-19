@@ -63,20 +63,26 @@ Flickable {
             }
         }
 
-        // Title
-        Text {
+        ColumnLayout {
+            Layout.fillWidth: true
             Layout.alignment: Qt.AlignHCenter
-            text: "Craftive"
-            font: Typofont.displayMedium
-            color: Theme.color.onSurfaceColor
-        }
+            spacing: 2
 
-        // Version
-        Text {
-            Layout.alignment: Qt.AlignHCenter
-            text: "Developing..."
-            font: Typofont.titleMedium
-            color: Theme.color.onSurfaceColor
+            // Title
+            Text {
+                Layout.alignment: Qt.AlignHCenter
+                text: "Craftive"
+                font: Typofont.displayMedium
+                color: Theme.color.onSurfaceColor
+            }
+
+            // Version
+            Text {
+                Layout.alignment: Qt.AlignHCenter
+                text: "Developing..."
+                font: Typofont.titleMedium
+                color: Theme.color.onSurfaceColor
+            }
         }
 
         ColumnLayout {

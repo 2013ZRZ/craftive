@@ -210,7 +210,7 @@ target_include_directories(craftive
 )
 
 # buildInfoBuildTime
-string(TIMESTAMP BUILDINFO_BUILDTIME "%Y-%m-%d %H:%M:%S" UTC)
+string(TIMESTAMP BUILDINFO_BUILDTIME "%Y-%m-%dT%H:%M:%SZ" UTC)
 
 # buildInfoCommitHash
 execute_process(
@@ -230,11 +230,27 @@ target_compile_definitions(craftive
         BUILDINFO_COMMITHASH="${BUILDINFO_COMMITHASH}"
 )
 
-# Force rebuild main.cpp to update buildinfo
-add_custom_target(force_rebuild
-    COMMAND ${CMAKE_COMMAND} -E touch ${CMAKE_CURRENT_SOURCE_DIR}/src/frontend/main.cpp
+# Refresh BUILDINFO_BUILDTIME / BUILDINFO_COMMITHASH on every build.
+#
+# Ninja computes which edges are up-to-date from mtimes before running any
+# command, so a same-build "touch main.cpp" can never force its recompile.
+# Instead: every build touches a configure-dependency file; the next `ninja`
+# invocation sees it newer than build.ninja, re-runs configure, which rewrites
+# the BUILDINFO_* compile definitions and thus invalidates main.cpp.o.
+set(BUILDINFO_RECONFIG_DEP "${CMAKE_CURRENT_BINARY_DIR}/buildinfo.reconfig")
+# Must exist at configure time so CMake registers it as a regenerate-rule dep.
+file(TOUCH "${BUILDINFO_RECONFIG_DEP}")
+
+add_custom_target(force_buildinfo
+    COMMAND ${CMAKE_COMMAND} -E touch "${BUILDINFO_RECONFIG_DEP}"
+    COMMENT "Refresh buildinfo trigger"
+    VERBATIM
 )
-add_dependencies(craftive force_rebuild)
+add_dependencies(craftive force_buildinfo)
+
+set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS
+    "${BUILDINFO_RECONFIG_DEP}"
+)
 
 if(MSVC)
     target_link_libraries(craftive
