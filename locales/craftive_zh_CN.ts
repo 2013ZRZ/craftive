@@ -62,7 +62,7 @@
 <context>
     <name>CoreStatus</name>
     <message>
-        <location filename="../src/core/status.cpp" line="39"/>
+        <location filename="../src/common/status.cpp" line="41"/>
         <source>From CoreStatus::getKit(); no one&apos;s ID is %1 in all loaded kits, please load this kit and try again</source>
         <translation>来自 CoreStatus::getKit()；所有已加载的锦囊中没有 ID 为 %1 的，请加载相应锦囊后重试</translation>
     </message>
@@ -204,27 +204,27 @@
 <context>
     <name>Main</name>
     <message>
-        <location filename="../src/frontend/Main.qml" line="71"/>
+        <location filename="../src/frontend/Main.qml" line="72"/>
         <source>Home</source>
         <translation>主页</translation>
     </message>
     <message>
-        <location filename="../src/frontend/Main.qml" line="75"/>
+        <location filename="../src/frontend/Main.qml" line="76"/>
         <source>Store</source>
         <translation>商店</translation>
     </message>
     <message>
-        <location filename="../src/frontend/Main.qml" line="79"/>
+        <location filename="../src/frontend/Main.qml" line="80"/>
         <source>Play</source>
         <translation>开局</translation>
     </message>
     <message>
-        <location filename="../src/frontend/Main.qml" line="83"/>
+        <location filename="../src/frontend/Main.qml" line="84"/>
         <source>Craftboard</source>
         <translation>工作台</translation>
     </message>
     <message>
-        <location filename="../src/frontend/Main.qml" line="87"/>
+        <location filename="../src/frontend/Main.qml" line="88"/>
         <source>Myself</source>
         <translation>我</translation>
     </message>
@@ -300,12 +300,35 @@
 <context>
     <name>Myself</name>
     <message>
-        <location filename="../src/frontend/pages/Myself.qml" line="42"/>
+        <location filename="../src/frontend/pages/Myself.qml" line="36"/>
+        <location filename="../src/frontend/pages/Myself.qml" line="54"/>
+        <location filename="../src/frontend/pages/Myself.qml" line="54"/>
+        <location filename="../src/frontend/pages/Myself.qml" line="54"/>
+        <source>Manage the loaded kits</source>
+        <translation>管理已加载的锦囊</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/pages/Myself.qml" line="56"/>
+        <source>Close</source>
+        <translation>关闭</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/pages/Myself.qml" line="71"/>
+        <source>No kit is loaded yet.</source>
+        <translation>没有已加载的锦囊。</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/pages/Myself.qml" line="124"/>
+        <source>Remove</source>
+        <translation>删除</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/pages/Myself.qml" line="155"/>
         <source>Settings</source>
         <translation>设置</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Myself.qml" line="76"/>
+        <location filename="../src/frontend/pages/Myself.qml" line="189"/>
         <source>About</source>
         <translation>关于</translation>
     </message>
@@ -539,16 +562,16 @@
         <translation>此地图中的位置无效</translation>
     </message>
     <message>
-        <location filename="../src/common/err.hpp" line="84"/>
-        <location filename="../src/common/err.hpp" line="110"/>
-        <location filename="../src/common/err.hpp" line="110"/>
+        <location filename="../src/common/err.hpp" line="87"/>
+        <location filename="../src/common/err.hpp" line="116"/>
+        <location filename="../src/common/err.hpp" line="116"/>
         <source>From %1; the original error message is &quot;%2&quot;</source>
         <translation>来自 %1；原错误消息为“%2”</translation>
     </message>
     <message>
-        <location filename="../src/common/err.hpp" line="94"/>
-        <location filename="../src/common/err.hpp" line="118"/>
-        <location filename="../src/common/err.hpp" line="118"/>
+        <location filename="../src/common/err.hpp" line="98"/>
+        <location filename="../src/common/err.hpp" line="125"/>
+        <location filename="../src/common/err.hpp" line="125"/>
         <source>From %1; unknown exception type, neither CrtExcept nor std::exception</source>
         <translation>来自 %1；未知的异常类型，既非 CrtExcept 也非 std::exception</translation>
     </message>

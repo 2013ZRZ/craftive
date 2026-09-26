@@ -34,9 +34,15 @@ bool CrtExcept::isReported() const noexcept { return reported; }
 void CrtExcept::markReported() const noexcept { reported = true; }
 
 void CrtExcept::report(const CrtExcept &e) {
-    if (e.isReported())
+    if (e.isReported()) {
+        qDebug() << QString{"CrtExcept::report() has reported an reported exception %1 (%2)"}
+                        .arg(e.which())
+                        .arg(e.how());
         return;
-    else {
+    } else {
+        qDebug() << QString{"CrtExcept::report() has reported an unreported exception %1 (%2)"}
+                        .arg(e.which())
+                        .arg(e.how());
         e.markReported();
         QCoreApplication::postEvent(CrtExceptReceiver::instance(), new CrtExceptEvent{e});
     }
@@ -52,6 +58,9 @@ bool CrtExceptReceiver::event(QEvent *event) {
     if (event->type() == CrtExceptEvent::EventType) {
         auto *ee = static_cast<CrtExceptEvent *>(event);
         emit  exceptionOccurred(ee->which(), ee->what(), ee->how());
+        qDebug() << QString{"CrtExceptReceiver has received a CrtExceptEvent %1 (%2)"}
+                        .arg(ee->which())
+                        .arg(ee->how());
         return true;
     }
     return QObject::event(event);

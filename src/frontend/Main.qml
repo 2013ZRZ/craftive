@@ -43,6 +43,7 @@ Window {
     Connections {
         target: CrtExceptReceiver
         function onExceptionOccurred(which, what, how) {
+            console.log(`onExceptionOccurred: Exception Occurred: ${which} ${what}; detail: ${how}`);
             ErrDialog.show(which, what, how);
         }
     }

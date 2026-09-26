@@ -199,6 +199,8 @@ qt_add_qml_module(craftive
         ${CMAKE_CURRENT_SOURCE_DIR}/src/common/err.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/common/settings.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/common/settings.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/common/status.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/common/status.cpp
 )
 
 target_sources(craftive PRIVATE src/res.qrc)

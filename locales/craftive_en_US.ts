@@ -62,7 +62,7 @@
 <context>
     <name>CoreStatus</name>
     <message>
-        <location filename="../src/core/status.cpp" line="39"/>
+        <location filename="../src/common/status.cpp" line="41"/>
         <source>From CoreStatus::getKit(); no one&apos;s ID is %1 in all loaded kits, please load this kit and try again</source>
         <translation>from CoreStatus::getKit(); no one&apos;s ID is %1 in all loaded kits, please load this kit and try again</translation>
     </message>
@@ -205,27 +205,27 @@
 <context>
     <name>Main</name>
     <message>
-        <location filename="../src/frontend/Main.qml" line="71"/>
+        <location filename="../src/frontend/Main.qml" line="72"/>
         <source>Home</source>
         <translation>Home</translation>
     </message>
     <message>
-        <location filename="../src/frontend/Main.qml" line="75"/>
+        <location filename="../src/frontend/Main.qml" line="76"/>
         <source>Store</source>
         <translation>Store</translation>
     </message>
     <message>
-        <location filename="../src/frontend/Main.qml" line="79"/>
+        <location filename="../src/frontend/Main.qml" line="80"/>
         <source>Play</source>
         <translation>Play</translation>
     </message>
     <message>
-        <location filename="../src/frontend/Main.qml" line="83"/>
+        <location filename="../src/frontend/Main.qml" line="84"/>
         <source>Craftboard</source>
         <translation>Craftboard</translation>
     </message>
     <message>
-        <location filename="../src/frontend/Main.qml" line="87"/>
+        <location filename="../src/frontend/Main.qml" line="88"/>
         <source>Myself</source>
         <translation>Myself</translation>
     </message>
@@ -301,12 +301,35 @@
 <context>
     <name>Myself</name>
     <message>
-        <location filename="../src/frontend/pages/Myself.qml" line="42"/>
+        <location filename="../src/frontend/pages/Myself.qml" line="36"/>
+        <location filename="../src/frontend/pages/Myself.qml" line="54"/>
+        <location filename="../src/frontend/pages/Myself.qml" line="54"/>
+        <location filename="../src/frontend/pages/Myself.qml" line="54"/>
+        <source>Manage the loaded kits</source>
+        <translation>Manage the loaded kits</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/pages/Myself.qml" line="56"/>
+        <source>Close</source>
+        <translation>Close</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/pages/Myself.qml" line="71"/>
+        <source>No kit is loaded yet.</source>
+        <translation>No kit is loaded yet.</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/pages/Myself.qml" line="124"/>
+        <source>Remove</source>
+        <translation>Remove</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/pages/Myself.qml" line="155"/>
         <source>Settings</source>
         <translation>Settings</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Myself.qml" line="76"/>
+        <location filename="../src/frontend/pages/Myself.qml" line="189"/>
         <source>About</source>
         <translation>About</translation>
     </message>
@@ -540,16 +563,16 @@
         <translation>Invalid location in this map</translation>
     </message>
     <message>
-        <location filename="../src/common/err.hpp" line="84"/>
-        <location filename="../src/common/err.hpp" line="110"/>
-        <location filename="../src/common/err.hpp" line="110"/>
+        <location filename="../src/common/err.hpp" line="87"/>
+        <location filename="../src/common/err.hpp" line="116"/>
+        <location filename="../src/common/err.hpp" line="116"/>
         <source>From %1; the original error message is &quot;%2&quot;</source>
         <translation>From %1; the original error message is &quot;%2&quot;</translation>
     </message>
     <message>
-        <location filename="../src/common/err.hpp" line="94"/>
-        <location filename="../src/common/err.hpp" line="118"/>
-        <location filename="../src/common/err.hpp" line="118"/>
+        <location filename="../src/common/err.hpp" line="98"/>
+        <location filename="../src/common/err.hpp" line="125"/>
+        <location filename="../src/common/err.hpp" line="125"/>
         <source>From %1; unknown exception type, neither CrtExcept nor std::exception</source>
         <translation>From %1; unknown exception type, neither CrtExcept nor std::exception</translation>
     </message>
