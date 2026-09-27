@@ -313,22 +313,27 @@
         <translation>关闭</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Myself.qml" line="71"/>
+        <location filename="../src/frontend/pages/Myself.qml" line="72"/>
         <source>No kit is loaded yet.</source>
         <translation>没有已加载的锦囊。</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Myself.qml" line="124"/>
+        <location filename="../src/frontend/pages/Myself.qml" line="113"/>
+        <source>Empty</source>
+        <translation>空</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/pages/Myself.qml" line="131"/>
         <source>Remove</source>
         <translation>删除</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Myself.qml" line="155"/>
+        <location filename="../src/frontend/pages/Myself.qml" line="162"/>
         <source>Settings</source>
         <translation>设置</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Myself.qml" line="189"/>
+        <location filename="../src/frontend/pages/Myself.qml" line="196"/>
         <source>About</source>
         <translation>关于</translation>
     </message>

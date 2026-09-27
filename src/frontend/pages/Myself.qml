@@ -60,6 +60,7 @@ Flickable {
                 width: parent.width
                 // Note: contentHeight is -1 while the model is empty
                 height: count === 0 ? 72 : Math.min(contentHeight, 320)
+                spacing: 2
                 clip: true
                 boundsBehavior: Flickable.StopAtBounds
                 model: QmlStatus.loadedKits
@@ -83,7 +84,7 @@ Flickable {
                     anchors.bottom: parent.bottom
                 }
 
-                delegate: Card {
+                delegate: Rectangle {
                     id: kitCard
 
                     required property string name
@@ -92,10 +93,16 @@ Flickable {
 
                     width: manageLoadedKitsList.width
                     height: 72
-                    radius: 36
+                    topLeftRadius: index == 0 ? 16 : 2
+                    topRightRadius: index == 0 ? 16 : 2
+                    bottomRightRadius: (index == manageLoadedKitsList.count - 1) ? 16 : 2
+                    bottomLeftRadius: (index == manageLoadedKitsList.count - 1) ? 16 : 2
+                    color: Theme.color.surfaceContainer
 
                     RowLayout {
                         anchors.fill: parent
+                        anchors.leftMargin: 16
+                        anchors.rightMargin: 16
                         spacing: 16
 
                         ColumnLayout {
@@ -103,7 +110,7 @@ Flickable {
                             spacing: 2
                             Text {
                                 Layout.fillWidth: true
-                                text: kitCard.name
+                                text: kitCard.name.trim() === "" ? qsTr("Empty") : kitCard.name
                                 elide: Text.ElideRight
                                 font: Typofont.titleSmall
                                 color: Theme.color.onSurfaceColor

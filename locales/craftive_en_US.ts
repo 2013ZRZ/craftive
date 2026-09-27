@@ -314,22 +314,27 @@
         <translation>Close</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Myself.qml" line="71"/>
+        <location filename="../src/frontend/pages/Myself.qml" line="72"/>
         <source>No kit is loaded yet.</source>
         <translation>No kit is loaded yet.</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Myself.qml" line="124"/>
+        <location filename="../src/frontend/pages/Myself.qml" line="113"/>
+        <source>Empty</source>
+        <translation>Empty</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/pages/Myself.qml" line="131"/>
         <source>Remove</source>
         <translation>Remove</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Myself.qml" line="155"/>
+        <location filename="../src/frontend/pages/Myself.qml" line="162"/>
         <source>Settings</source>
         <translation>Settings</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Myself.qml" line="189"/>
+        <location filename="../src/frontend/pages/Myself.qml" line="196"/>
         <source>About</source>
         <translation>About</translation>
     </message>

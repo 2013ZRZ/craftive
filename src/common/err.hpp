@@ -77,12 +77,12 @@ signals:
 
 #define CATCH_THROW(context)                                                               \
     catch (const CrtExcept &e) {                                                           \
-        qDebug() << "CATCH_THROW caught an CrtExcept from" #context;                       \
+        qDebug() << "CATCH_THROW has caught an CrtExcept from " #context;                  \
         CrtExcept::report(e);                                                              \
         throw;                                                                             \
     }                                                                                      \
     catch (const std::exception &e) {                                                      \
-        qDebug() << "CATCH_THROW caught an std::exception from" #context;                  \
+        qDebug() << "CATCH_THROW has caught an std::exception from " #context;             \
         CrtExcept wrapped{0x0000,                                                          \
                           QCoreApplication::translate(                                     \
                               "errmsgs", "From %1; the original error message is \"%2\""), \
@@ -92,7 +92,7 @@ signals:
         throw wrapped;                                                                     \
     }                                                                                      \
     catch (...) {                                                                          \
-        qDebug() << "CATCH_THROW caught an unknown exception from" #context;               \
+        qDebug() << "CATCH_THROW has caught an unknown exception from " #context;          \
         CrtExcept wrapped{                                                                 \
             0x0000,                                                                        \
             QCoreApplication::translate(                                                   \
@@ -106,11 +106,11 @@ signals:
 // Only for QML callees
 #define CATCH_AT_ENTRY(context)                                                           \
     catch (const CrtExcept &e) {                                                          \
-        qDebug() << "CATCH_AT_ENTRY caught an CrtExcept from" #context;                   \
+        qDebug() << "CATCH_AT_ENTRY has caught an CrtExcept from " #context;              \
         CrtExcept::report(e);                                                             \
     }                                                                                     \
     catch (const std::exception &e) {                                                     \
-        qDebug() << "CATCH_AT_ENTRY caught an std::exception from" #context;              \
+        qDebug() << "CATCH_AT_ENTRY has caught an std::exception from " #context;         \
         CrtExcept::report(                                                                \
             CrtExcept{0x0000,                                                             \
                       QCoreApplication::translate(                                        \
@@ -119,7 +119,7 @@ signals:
                       e.what()});                                                         \
     }                                                                                     \
     catch (...) {                                                                         \
-        qDebug() << "CATCH_AT_ENTRY caught an unknown exception from" #context;           \
+        qDebug() << "CATCH_AT_ENTRY has caught an unknown exception from " #context;      \
         CrtExcept::report(CrtExcept{                                                      \
             0x0000,                                                                       \
             QCoreApplication::translate(                                                  \
