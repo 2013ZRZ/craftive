@@ -204,27 +204,27 @@
 <context>
     <name>Main</name>
     <message>
-        <location filename="../src/frontend/Main.qml" line="72"/>
+        <location filename="../src/frontend/Main.qml" line="69"/>
         <source>Home</source>
         <translation>主页</translation>
     </message>
     <message>
-        <location filename="../src/frontend/Main.qml" line="76"/>
+        <location filename="../src/frontend/Main.qml" line="73"/>
         <source>Store</source>
         <translation>商店</translation>
     </message>
     <message>
-        <location filename="../src/frontend/Main.qml" line="80"/>
+        <location filename="../src/frontend/Main.qml" line="77"/>
         <source>Play</source>
         <translation>开局</translation>
     </message>
     <message>
-        <location filename="../src/frontend/Main.qml" line="84"/>
+        <location filename="../src/frontend/Main.qml" line="81"/>
         <source>Craftboard</source>
         <translation>工作台</translation>
     </message>
     <message>
-        <location filename="../src/frontend/Main.qml" line="88"/>
+        <location filename="../src/frontend/Main.qml" line="85"/>
         <source>Myself</source>
         <translation>我</translation>
     </message>
@@ -313,27 +313,27 @@
         <translation>关闭</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Myself.qml" line="72"/>
+        <location filename="../src/frontend/pages/Myself.qml" line="86"/>
         <source>No kit is loaded yet.</source>
         <translation>没有已加载的锦囊。</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Myself.qml" line="113"/>
+        <location filename="../src/frontend/pages/Myself.qml" line="128"/>
         <source>Empty</source>
         <translation>空</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Myself.qml" line="131"/>
+        <location filename="../src/frontend/pages/Myself.qml" line="146"/>
         <source>Remove</source>
         <translation>删除</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Myself.qml" line="162"/>
+        <location filename="../src/frontend/pages/Myself.qml" line="177"/>
         <source>Settings</source>
         <translation>设置</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Myself.qml" line="196"/>
+        <location filename="../src/frontend/pages/Myself.qml" line="211"/>
         <source>About</source>
         <translation>关于</translation>
     </message>
@@ -440,6 +440,11 @@
         <location filename="../src/frontend/pages/Settings.qml" line="326"/>
         <source>Tone</source>
         <translation>色调</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/pages/Settings.qml" line="333"/>
+        <source>Save</source>
+        <translation>保存</translation>
     </message>
 </context>
 <context>

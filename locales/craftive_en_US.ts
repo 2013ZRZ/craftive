@@ -205,27 +205,27 @@
 <context>
     <name>Main</name>
     <message>
-        <location filename="../src/frontend/Main.qml" line="72"/>
+        <location filename="../src/frontend/Main.qml" line="69"/>
         <source>Home</source>
         <translation>Home</translation>
     </message>
     <message>
-        <location filename="../src/frontend/Main.qml" line="76"/>
+        <location filename="../src/frontend/Main.qml" line="73"/>
         <source>Store</source>
         <translation>Store</translation>
     </message>
     <message>
-        <location filename="../src/frontend/Main.qml" line="80"/>
+        <location filename="../src/frontend/Main.qml" line="77"/>
         <source>Play</source>
         <translation>Play</translation>
     </message>
     <message>
-        <location filename="../src/frontend/Main.qml" line="84"/>
+        <location filename="../src/frontend/Main.qml" line="81"/>
         <source>Craftboard</source>
         <translation>Craftboard</translation>
     </message>
     <message>
-        <location filename="../src/frontend/Main.qml" line="88"/>
+        <location filename="../src/frontend/Main.qml" line="85"/>
         <source>Myself</source>
         <translation>Myself</translation>
     </message>
@@ -314,27 +314,27 @@
         <translation>Close</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Myself.qml" line="72"/>
+        <location filename="../src/frontend/pages/Myself.qml" line="86"/>
         <source>No kit is loaded yet.</source>
         <translation>No kit is loaded yet.</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Myself.qml" line="113"/>
+        <location filename="../src/frontend/pages/Myself.qml" line="128"/>
         <source>Empty</source>
         <translation>Empty</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Myself.qml" line="131"/>
+        <location filename="../src/frontend/pages/Myself.qml" line="146"/>
         <source>Remove</source>
         <translation>Remove</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Myself.qml" line="162"/>
+        <location filename="../src/frontend/pages/Myself.qml" line="177"/>
         <source>Settings</source>
         <translation>Settings</translation>
     </message>
     <message>
-        <location filename="../src/frontend/pages/Myself.qml" line="196"/>
+        <location filename="../src/frontend/pages/Myself.qml" line="211"/>
         <source>About</source>
         <translation>About</translation>
     </message>
@@ -441,6 +441,11 @@
         <location filename="../src/frontend/pages/Settings.qml" line="326"/>
         <source>Tone</source>
         <translation>Tone</translation>
+    </message>
+    <message>
+        <location filename="../src/frontend/pages/Settings.qml" line="333"/>
+        <source>Save</source>
+        <translation>Save</translation>
     </message>
 </context>
 <context>

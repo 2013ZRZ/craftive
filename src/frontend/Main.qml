@@ -30,10 +30,7 @@ Window {
 
     function navigatePageTo(newPage: int) {
         prevPage = currentPage;
-        if (newPage < 5)  // in navigation rail
-            currentPage = newPage;
-        else
-            currentPage = newPage;
+        currentPage = newPage;
     }
 
     function navigatePageBack() {
@@ -164,5 +161,12 @@ Window {
                 }
             }
         }
+    }
+
+    Component.onCompleted: {
+        if (SettingsHelper.contains("appearance/isDarkTheme"))
+            StyleManager.isDarkTheme = SettingsHelper.appearance_isDarkTheme;
+        if (SettingsHelper.contains("appearance/seedColor"))
+            StyleManager.seedColor = SettingsHelper.appearance_seedColor;
     }
 }

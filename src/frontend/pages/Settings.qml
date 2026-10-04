@@ -325,6 +325,14 @@ Flickable {
                         chromaText: qsTr("Chroma")
                         toneText: qsTr("Tone")
                     }
+
+                    Button {
+                        Layout.alignment: Qt.AlignRight
+                        type: "filled"
+                        icon: "save"
+                        text: qsTr("Save")
+                        onClicked: SettingsHelper.appearance_seedColor = StyleManager.seedColor
+                    }
                 }
             }
         }
