@@ -59,21 +59,36 @@ Flickable {
                 id: manageLoadedKitsList
                 width: parent.width
                 // Note: contentHeight is -1 while the model is empty
-                height: count === 0 ? 72 : Math.min(contentHeight, 320)
+                height: count === 0 ? 144 : Math.min(contentHeight, 320)
                 spacing: 2
                 clip: true
                 boundsBehavior: Flickable.StopAtBounds
                 model: QmlStatus.loadedKits
 
-                Text {
+                ColumnLayout {
                     anchors.centerIn: manageLoadedKitsList
-                    width: manageLoadedKitsList.width - 32
-                    visible: manageLoadedKitsList.count === 0
-                    text: qsTr("No kit is loaded yet.")
-                    horizontalAlignment: Text.AlignHCenter
-                    wrapMode: Text.Wrap
-                    font: Typofont.bodyMedium
-                    color: Theme.color.onSurfaceVariantColor
+                    spacing: 8
+
+                    Text {
+                        Layout.alignment: Qt.AlignHCenter
+                        text: "error_outline"
+                        visible: manageLoadedKitsList.count === 0
+                        horizontalAlignment: Text.AlignHCenter
+                        font.pixelSize: 72
+                        font.family: Theme.iconFont.name
+                        color: Theme.color.onSurfaceVariantColor
+                    }
+
+                    Text {
+                        Layout.alignment: Qt.AlignHCenter
+                        width: manageLoadedKitsList.width - 32
+                        visible: manageLoadedKitsList.count === 0
+                        text: qsTr("No kit is loaded yet.")
+                        horizontalAlignment: Text.AlignHCenter
+                        wrapMode: Text.Wrap
+                        font: Typofont.bodyMedium
+                        color: Theme.color.onSurfaceVariantColor
+                    }
                 }
 
                 ScrollBar {
